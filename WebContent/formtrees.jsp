@@ -240,7 +240,7 @@
                                 <select class="form-control">
                                     <option value="value1">distribución 1</option>
                                     <option value="value2">distribución 2</option>
-                                    <option value="value3">distribución 3</option>
+                                    <option value="value3">distribución 3dd</option>
                                 </select>
                             </div>
                             <div class="form-group">

@@ -6,6 +6,7 @@ public class Region {
 	private String descripcion;
 	private int idPais;
 	private int estado;
+	
 	public Region() {
 		super();
 	}

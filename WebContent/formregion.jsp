@@ -1,4 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="entidades.*" %>
+<%@page import="datos.*" %>
+<%@page import="java.util.*" %>
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -187,20 +191,32 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form role="form">
+                        <form action="./SLGuardarRegion" method="Post">
                             <div class="form-group">
                                 <label>Nombre de la región:</label>
-                                <input class="form-control">
-
+                                <input id="nombreR" name="nombreR" class="form-control">
                             </div>
                             <div class="form-group">
+                            	<label>Descripción: </label>
+                            	<textarea id="descripcionR" name="descripcionR" class="form-control" rows="3"></textarea>
+                            </div>
+                            
+                            <%
+	                            DTPais dtp = new DTPais();
+								ArrayList<Pais> listaPaises = new ArrayList<Pais>();
+	
+								listaPaises = dtp.listarPaises();
+                            %>
+                            <div class="form-group">
                                 <label>País:</label>
-                                <select class="form-control">
-                                    <option value="value1">país 1</option>
-                                    <option value="value2">país 2</option>
-                                    <option value="value3">país 3</option>
+                                <select id="pais" name="pais" class="form-control">
+                                
+                                <%for (Pais p : listaPaises) { %>
+                                    <option value=" <%= p.getIdPais() %> "><%= p.getNombre()%></option>
+                                <% } %>
                                 </select>
                             </div>
+                               
 
                             <div class="mb-3">
                                 <button class="btn btn-primary" style="width: 100%;">Guardar</button>
@@ -209,6 +225,7 @@
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
 
                         </form>
+
                     </div>
                 </div>
             </div>

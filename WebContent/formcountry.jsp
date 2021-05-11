@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -188,17 +189,18 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form role="form">
+                        <form action="./SLGuardarPais" method="Post">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input class="form-control">
+                                <input id="nombre" name="nombre" class="form-control">
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" >
                                 <button class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
                             <div style="text-align:center;"><a href="countrygestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
+
                     </div>
                 </div>
             </div>

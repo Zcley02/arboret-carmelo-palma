@@ -23,6 +23,7 @@
             crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
     </head>
 
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -174,12 +175,12 @@
                 </nav>
             </div>
         </div>
-        
 
         </div>
         </div>
 
-		</body>
+
+    </body>
 
     </html>
     <div class="container py-1">
@@ -228,7 +229,7 @@
                                         <td><%=u.getHipervinculo() %></td>
                                         <td><img alt="ejemplo" src="<%=u.getMultimedia() %>" width="100px" height="100px"></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SLEliminarPublicacion?id=<%=u.getIdPublicacion() %>"
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="myDeletePub(<%=u.getIdPublicacion()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
                                     </tr>
                                 	<%
@@ -282,6 +283,27 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js "
             crossorigin="anonymous "></script>
         <script src="assets/demo/datatables-demo.js "></script>
+        
+        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    
+	    
+	    <script>
+	
+	        function myDeletePub(idPublicacion)
+	        {
+	        	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+	            confirm(function(e, btn){
+	                e.preventDefault();
+	                window.location.href = "SLEliminarPublicacion?id="+idPublicacion
+	            },
+	            function(e,btn){
+	                e.preventDefault();
+	            });
+	        }
+	
+	    </script>
+        
     </body>
 
     </html>

@@ -21,6 +21,7 @@
             crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
     </head>
 
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -220,7 +221,7 @@
                                         <td><%=u.getDescripcion() %></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
+                                                    a="" onclick="myDeleteFam(<%=u.getIdFamilia()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                             		<%
                             			}
@@ -256,4 +257,24 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
+    <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+    
+    
+    <script>
+
+        function myDeleteFam(idMoneda)
+        {
+        	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+            confirm(function(e, btn){
+                e.preventDefault();
+                window.location.href = "SLEliminarFamilia?id="+idMoneda
+            },
+            function(e,btn){
+                e.preventDefault();
+            });
+        }
+
+    </script>
+    
     </body>

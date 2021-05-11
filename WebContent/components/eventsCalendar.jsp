@@ -5,11 +5,11 @@
 	listarEventos = dt.listarEventos();
 %>
 <script>
-  	//var fecha = "02-04-2021";
+  	var fecha = "05/11/2021";
   	$("#calendar").evoCalendar({
   	  theme: "Royal Navy",
   	  language: "es",
-  	  format: "dd/mm/yyyy",
+  	  format:"mm/dd/yyyy",
   	  titleFormat: "MM yyyy",
   	  firstDayOfWeek: "1",
   	  calendarEvents: [
@@ -28,8 +28,8 @@
  		  <%
  		  	}
  		  %>
-  	    /*{
-  	      //id: "bHay68s", // Event's ID (required)
+  	    {
+  	      id: "bHay68s", // Event's ID (required)
   	      name: "Conferencia 1", // Event name (required)
   	      date: fecha, // Event date (required)
   	      type: "holiday", // Event type (required)
@@ -38,12 +38,12 @@
   	    {
   	      name: "Siembra de rosas",
   	      badge: "Plantas", // Event badge (optional)
-  	      date: ["April/13/2021", "April/15/2021"], // Date range
+  	      date: ["04/13/2021", "04/15/2021"], // Date range
   	      description: "Siembra de rosas en el arboreto Carmelo Palma", // Event description (optional)
   	      type: "event",
   	      color: "#a8a8a8", // Event custom color (optional)
   	      link: "https://google.com",
-  	    },*/
+  	    },
   	  ],
   	});
 </script>

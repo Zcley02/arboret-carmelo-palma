@@ -84,4 +84,27 @@ public class DTFamilia {
 		return guardado;
 	}
 	
+	public boolean eliminarFamilia(Familiar fa) {
+		boolean eliminado = false;
+		
+		PreparedStatement ps;
+		String sql = "Update familia set estado = 3 where idFamilia = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setInt(1, fa.getIdFamilia());
+			
+			ps.executeUpdate();
+			
+			eliminado = true;
+			
+		} catch (Exception e) {
+			System.out.println("Error en eliminar la familia");
+			e.printStackTrace();
+		}
+		
+		return eliminado;
+	}
 }

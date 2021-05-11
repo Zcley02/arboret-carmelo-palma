@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="entidades.*, datos.*, java.util.*" %>
+<%
+
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -43,9 +46,9 @@
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <!-- <a class="dropdown-item" href="#">Settings</a> -->
-                        <a class="dropdown-item" href="password.jsp">Cambiar contrase帽a</a>
+                        <a class="dropdown-item" href="password.jsp">Cambiar contrase馻</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.jsp">Cerrar Sesi贸n</a>
+                        <a class="dropdown-item" href="login.jsp">Cerrar Sesi髇</a>
                     </div>
                 </li>
             </ul>
@@ -64,9 +67,9 @@
                             </a>
                             <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="bannergestions.jsp">Gesti贸n Banner</a>
-                                    <a class="nav-link" href="formstart.jsp">Gesti贸n Inicio </a>
-                                    <a class="nav-link" href="formfooter.jsp">Gesti贸n Pie P谩gina</a>
+                                    <a class="nav-link" href="bannergestions.jsp">Gesti髇 Banner</a>
+                                    <a class="nav-link" href="formstart.jsp">Gesti髇 Inicio </a>
+                                    <a class="nav-link" href="formfooter.jsp">Gesti髇 Pie P醙ina</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
@@ -77,7 +80,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="usergestion.jsp">Gesti贸n Usuario</a>
+                                    <a class="nav-link" href="usergestion.jsp">Gesti髇 Usuario</a>
                                 </nav>
                             </div>
 
@@ -89,25 +92,25 @@
                             </a>
                             <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="eventgestion.jsp">Gesti贸n Evento</a>
-                                    <a class="nav-link" href="publicagend.jsp">Agenda P煤blica</a>
+                                    <a class="nav-link" href="eventgestion.jsp">Gesti髇 Evento</a>
+                                    <a class="nav-link" href="publicagend.jsp">Agenda P鷅lica</a>
                                     <a class="nav-link" href="privateagend.jsp">Agenda Privada</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
                                 data-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts6">
                                 <div class="sb-nav-link-icon">
-                                </div><i class="fas fa-tree"></i>&nbsp; 脕rbol
+                                </div><i class="fas fa-tree"></i>&nbsp; 羠bol
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="treegestion.jsp">脕rbol</a>
-                                    <a class="nav-link" href="gendergestion.jsp">G茅nero</a>
+                                    <a class="nav-link" href="treegestion.jsp">羠bol</a>
+                                    <a class="nav-link" href="gendergestion.jsp">G閚ero</a>
                                     <a class="nav-link" href="familygestion.jsp">Familia</a>
-                                    <a class="nav-link" href="distributiongestion.jsp">Distribuci贸n</a>
-                                    <a class="nav-link" href="regiongestion.jsp">Regi贸n</a>
-                                    <a class="nav-link" href="countrygestion.jsp">Pa铆s</a>
+                                    <a class="nav-link" href="distributiongestion.jsp">Distribuci髇</a>
+                                    <a class="nav-link" href="regiongestion.jsp">Regi髇</a>
+                                    <a class="nav-link" href="countrygestion.jsp">Pa韘</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
@@ -118,7 +121,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="mapgestion.jsp">Gesti贸n Mapa Interactivo</a>
+                                    <a class="nav-link" href="mapgestion.jsp">Gesti髇 Mapa Interactivo</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
@@ -129,7 +132,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="servicegestion.jsp">Gesti贸n Servicios</a>
+                                    <a class="nav-link" href="servicegestion.jsp">Gesti髇 Servicios</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
@@ -140,19 +143,19 @@
                             </a>
                             <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="productgestion.jsp">Gesti贸n Productos</a>
-                                    <a class="nav-link" href="typeproductgestion.jsp">Gesti贸n Tipos de Productos</a>
+                                    <a class="nav-link" href="productgestion.jsp">Gesti髇 Productos</a>
+                                    <a class="nav-link" href="typeproductgestion.jsp">Gesti髇 Tipos de Productos</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
                                 data-target="#collapseLayouts9" aria-expanded="false" aria-controls="collapseLayouts9">
                                 <div class="sb-nav-link-icon">
-                                </div><i class="fas fa-bullhorn"></i>&nbsp; Publicaci贸n
+                                </div><i class="fas fa-bullhorn"></i>&nbsp; Publicaci髇
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts9" aria-labelledby="headingOne">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="publicationgestion.jsp">Gesti贸n Publicaciones</a>
+                                    <a class="nav-link" href="publicationgestion.jsp">Gesti髇 Publicaciones</a>
                                 </nav>
                             </div>
                         </div>
@@ -183,31 +186,31 @@
 
                     <div class="card-header">
                         <h2>
-                            Cat谩logo del 谩rbol
+                            Cat醠ogo del 醨bol
                         </h2>
 
                     </div>
                     <div class="card-body bg-white rounded">
 
 
-                        <form>
+                        <form action="SLGuardarArbol" method="Post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Nombre com煤n:</label>
+                                <label>Nombre com鷑:</label>
                                 <input class="form-control">
 
                             </div>
                             <div class="form-group">
-                                <label>Nombre cient铆fico:</label>
+                                <label>Nombre cient韋ico:</label>
                                 <input class="form-control">
 
                             </div>
 
                             <div class="form-group">
-                                <label>Descripci贸n:</label>
+                                <label>Descripci髇:</label>
                                 <textarea class="form-control" rows="3"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>G茅nero del 谩rbol:</label>
+                                <label>G閚ero del 醨bol:</label>
                                 <select class="form-control">
                                     <option value="value1">genero 1</option>
                                     <option value="value2">genero 2</option>
@@ -215,7 +218,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Familia del 谩rbol:</label>
+                                <label>Familia del 醨bol:</label>
                                 <select class="form-control">
                                     <option value="value1">familia 1</option>
                                     <option value="value2">familia 2</option>
@@ -223,30 +226,35 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Floracion del 谩rbol:</label>
+                                <label>Floracion del 醨bol:</label>
                                 <select class="form-control">
-                                    <option value="value1">floraci贸n 1</option>
-                                    <option value="value2">floraci贸n 2</option>
-                                    <option value="value3">floraci贸n 3</option>
+                                    <option value="value1">floraci髇 1</option>
+                                    <option value="value2">floraci髇 2</option>
+                                    <option value="value3">floraci髇 3</option>
                                 </select>
                             </div>
 
 
                             <div class="form-group">
-                                <label>Distribuci贸n del 谩rbol:</label>
+                                <label>Distribuci髇 del 醨bol:</label>
                                 <select class="form-control">
-                                    <option value="value1">distribuci贸n 1</option>
-                                    <option value="value2">distribuci贸n 2</option>
-                                    <option value="value3">distribuci贸n 3</option>
+                                    <option value="value1">distribuci髇 1</option>
+                                    <option value="value2">distribuci髇 2</option>
+                                    <option value="value3">distribuci髇 3</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Ubicaci贸n en el mapa:</label>
-                                <select class="form-control">
-                                    <option value="value1">sector 1</option>
-                                    <option value="value2">sector 2</option>
-                                    <option value="value3">sector 3</option>
-                                </select>
+                                <label for="custom-file">Imagen:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Subir</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input name="imagen" type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
+                                            archivo</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <button class="btn btn-primary" style="width: 100%;">Guardar</button>

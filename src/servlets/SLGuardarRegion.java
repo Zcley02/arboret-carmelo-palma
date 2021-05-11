@@ -46,16 +46,18 @@ public class SLGuardarRegion extends HttpServlet {
 			DTRegion dt = new DTRegion();
 			
 			String nombre, descripcion;
-			int estado = 1, idpais = 0;
+			int estado = 1;
+			String idpais;
 			
 			nombre = request.getParameter("nombreR");
 			descripcion = request.getParameter("descripcionR");
-			idpais= Integer.parseInt(request.getParameter("pais"));
+			idpais = request.getParameter("pais").trim();
+			int id = Integer.parseInt(idpais);
 		
 			r.setNombre(nombre);
 			r.setDescripcion(descripcion);
 			r.setEstado(estado);
-			r.setIdPais(idpais);
+			r.setIdPais(id);
 
 			if(dt.guardarRegion(r))
 			{

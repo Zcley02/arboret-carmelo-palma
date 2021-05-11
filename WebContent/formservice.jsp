@@ -167,72 +167,82 @@
                 </nav>
             </div>
         </div>
-        
-        <!--Table-->
+
+        </div>
+        </div>
+
+    </body>
+
+    </html>
+
+    <!--Form-->
     <div class="container py-1">
         <div class="row py-5">
-
             <div class="col-lg-10 mx-auto mt-5">
                 <div class="card rounded shadow border-0">
+
                     <div class="card-header">
-                        <h3>Servicios</h3>
+                        <h2>
+                            Servicios
+                        </h2>
+
                     </div>
                     <div class="card-body bg-white rounded">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <div style="text-align:right;"><a href="formservice.jsp"><i
-                                            class="fas fa-plus-square"></i>&nbsp; Nuevo servicio</div>
 
-                                <thead>
-                                    <tr>
-                                        <th>Nombre del servicio</th>
-                                        <th>Descripción</th>
-                                        <th>Foto</th>
-                                        <th>Opciones</th>
 
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Nombre del servicio</th>
-                                        <th>Descripción</th>
-                                        <th>Foto</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-										<tr>
-											<td>p.getNombre()</td>
-											<td>p.getNombre()</td>
-											<td>p.getNombre()</td>
-											<td>
-													&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i>
-                                            </td>
-										</tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <form  action="/SLGuardarServicio" method="Post">
+                            <div class="form-group">
+                                <label>Título:</label>
+                                <input id="nombreS" name="nombreS" class="form-control">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Descripción:</label>
+                                <textarea id="descripcionS" name="descripcionS" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="custom-file">Imagen:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Subir</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input id="foto" name="foto" type="file" class="custom-file-input">
+                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
+                                            archivo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
+                            </div>
+                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                                        class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--table ends-->
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "
-            crossorigin="anonymous "></script>
-        <script src="js/scripts.js "></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js "
-            crossorigin="anonymous "></script>
-        <script src="assets/demo/chart-area-demo.js "></script>
-        <script src="assets/demo/chart-bar-demo.js "></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js "
-            crossorigin="anonymous "></script>
-        <script src="assets/demo/datatables-demo.js "></script>
+    <!--ends form-->
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "
+        crossorigin="anonymous "></script>
+    <script src="js/scripts.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js " crossorigin="anonymous "></script>
+    <script src="assets/demo/chart-area-demo.js "></script>
+    <script src="assets/demo/chart-bar-demo.js "></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
+    <script src="assets/demo/datatables-demo.js "></script>
     </body>
-
-    </html>
+    <script src="assets/demo/chart-bar-demo.js ">
+    </script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
+    <script src="assets/demo/datatables-demo.js "></script>
+    </body>

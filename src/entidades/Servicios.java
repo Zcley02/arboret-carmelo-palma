@@ -1,6 +1,7 @@
 package entidades;
 
 public class Servicios {
+	
 	private int idServicio;
 	private String nombre;
 	private String descripcion;

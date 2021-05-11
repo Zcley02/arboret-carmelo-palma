@@ -1,12 +1,13 @@
 package datos;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import entidades.*;
+import entidades.Servicios;
 
 public class DTServicio {
 	
@@ -33,7 +34,7 @@ public class DTServicio {
 			}
 		}
 		catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			System.out.println("DT Servicio: ERROR EN LISTAR LOS SERVICIOS "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -55,5 +56,58 @@ public class DTServicio {
 			
 		}
 		return listaServicios;
+	}
+	
+	public boolean guardarServicio(Servicios s, FileInputStream fis, int longitud)
+	{
+		boolean guardado = false;
+		PreparedStatement ps;
+		String sql = "INSERT INTO public.servicios (nombre, descripcion, foto, estado) VALUES (?,?,?,?)";
+		try 
+		{
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			ps.setString(1, s.getNombre());
+			ps.setString(2, s.getDescripcion());
+			ps.setBinaryStream(3, fis, longitud);;
+			ps.setInt(4, s.getEstado());
+			
+			int i = ps.executeUpdate();
+			
+			if(i==1) {
+				guardado = true;
+			}else {
+				guardado = false;
+			}
+			
+			ps.close();
+
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("DT Servicio: Error al guardar un servicio " + e.getMessage());
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rsServicios != null)
+				{
+					rsServicios.close();
+				}
+				if(c != null)
+				{
+					c.close();
+				}
+			} 
+			catch (Exception e2) 
+			{
+				System.err.println("DT Servicio: Error al cerrar conexion " + e2.getMessage());
+				e2.printStackTrace();
+			}
+		}
+		
+		return guardado;
 	}
 }

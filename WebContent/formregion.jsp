@@ -191,7 +191,7 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="./SLGuardarRegion" method="Post">
+                        <form action="SLGuardarRegion" method="Post">
                             <div class="form-group">
                                 <label>Nombre de la región:</label>
                                 <input id="nombreR" name="nombreR" class="form-control">

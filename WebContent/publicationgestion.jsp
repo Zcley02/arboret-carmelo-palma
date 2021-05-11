@@ -1,6 +1,13 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="entidades.*, datos.*, java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	ArrayList<Publicacion> listarPu = new ArrayList<Publicacion>();
+	DTPublicacion dt = new DTPublicacion();
+	listarPu = dt.listarPublicacion();
+%>   
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
 
     <head>
         <meta charset="UTF-8">
@@ -180,7 +187,7 @@
             <div class="col-lg-12 ml-lg-5 mx-auto mt-5">
                 <div class="card rounded shadow border-0">
                     <div class="card-header">
-                        <h3>Gestión Árbol</h3>
+                        <h3>Gestión Publicación</h3>
                     </div>
                     <div class="card-body bg-white rounded">
                     
@@ -193,6 +200,8 @@
                                     <tr>
                                         <th>Título</th>    
                                         <th>Descripción</th>
+                                        <th>Fecha Publicacion</th>
+                                        <th>Hipervinculo</th>
                                         <th>Imagen</th>  
                                         <th>Opciones</th>              
                                     </tr>
@@ -201,21 +210,30 @@
                                     <tr>
                                         <th>Título</th>    
                                         <th>Descripción</th>
-                                        <th>Imagen</th> 
-                                        <th>Opciones</th> 
+                                        <th>Fecha Publicacion</th>
+                                        <th>Hipervinculo</th>
+                                        <th>Imagen</th>  
+                                        <th>Opciones</th>              
+                                    </tr> 
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                
+                                	<%
+					            		for(Publicacion u: listarPu){
+					            	%>
                                     <tr>
-                                        <td>Nose</td>
-                                        <td>nose</td>
-                                        <td><img alt="ejemplo" src="img/1.jpg" width="100px" height="100px"></td>
+                                        <td><%=u.getTitulo() %></td>
+                                        <td><%=u.getDescripcion() %></td>
+                                        <td><%=u.getFechaPublicacion() %></td>
+                                        <td><%=u.getHipervinculo() %></td>
+                                        <td><img alt="ejemplo" src="<%=u.getMultimedia() %>" width="100px" height="100px"></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                href="#"><i class="far fa-trash-alt"></i></td>
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SLEliminarPublicacion?id=<%=u.getIdPublicacion() %>"
+                                                ><i class="far fa-trash-alt"></i></td>
                                     </tr>
-                                
+                                	<%
+					            		}
+                                	%>
                                 
                                 </tbody>
                             </table>
@@ -241,6 +259,15 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
+    
+    <<script type="text/javascript">
+		
+    	function eliminarPost(id){
+    		window.open("SLEliminarPublicacion?id="+id);
+    	}
+    
+	</script>
+    
     </body>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>

@@ -93,5 +93,31 @@ public class DTPublicacion {
 		
 		return resp;
 	}
+	
+	public boolean eliminarPublicacion(Publicacion p) {
+		boolean eliminado = false;
+		
+		
+		PreparedStatement ps;
+		
+		String sql = "Update public.publicaciones set estado = 3 where idPublicaciones = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setInt(1, p.getIdPublicacion());
+			ps.executeUpdate();
+			
+			eliminado = true;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error en eliminar la publicacion");
+			e.printStackTrace();
+		}
+		
+		return eliminado;
+	}
 
 }

@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="entidades.*, datos.*, java.util.*"%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -201,16 +202,27 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                
+                                <%
+									ArrayList<Servicios> listarS = new ArrayList<Servicios>();
+									DTServicio dt = new DTServicio();
+									listarS = dt.listarServicios();
+					            	   for(Servicios s: listarS){
+					             %>
 										<tr>
-											<td>p.getNombre()</td>
-											<td>p.getNombre()</td>
-											<td>p.getNombre()</td>
+	                                        <td><%=s.getNombre()%></td>
+	                                        <td><%=s.getDescripcion()%></td>
+	                                        <td><img alt="ejemplo" src="<%=s.getFoto() %>" width="100px" height="100px"></td>
 											<td>
 													&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
                                                     href="#"><i class="far fa-trash-alt"></i>
                                             </td>
 										</tr>
+										
+									<%
+					            		}
+                                	%>
                                 </tbody>
                             </table>
                         </div>

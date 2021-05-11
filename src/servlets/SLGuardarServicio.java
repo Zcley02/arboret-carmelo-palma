@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,8 @@ import entidades.Servicios;
 /**
  * Servlet implementation class SLGuardarServicio
  */
-@WebServlet("/SLGuardarServicio")
+@WebServlet(name="SLGuardarServicio", urlPatterns="/SLGuardarServicio")
+@MultipartConfig
 public class SLGuardarServicio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,27 +53,25 @@ public class SLGuardarServicio extends HttpServlet {
 		
 		
 		try {
-			
-			
 			String nombre = request.getParameter("nombreS");
 			String descripcion = request.getParameter("descripcionS");
-			File file = new File(request.getParameter("foto"));
-			FileInputStream fis = new FileInputStream(file);
-			int estado = 1;
-			int longitud  = (int) file.length();
+			Part part = request.getPart("foto");
 			
+			InputStream fin = part.getInputStream();
+			
+			int estado = 1;
 			boolean resp = false;
 			
 			Servicios s = new Servicios();
 			
 			s.setNombre(nombre);
-		    s.setDescripcion(descripcion);
-			s.setFoto(null);
+			s.setDescripcion(descripcion);
+			//pu.setImgBytea(imgBytea);
 			s.setEstado(estado);
 			
 			DTServicio dt = new DTServicio();
 			
-			resp = dt.guardarServicio(s,fis, longitud);
+			resp = dt.guardarServicio(s,fin);
 			
 			if(resp == true) {
 				response.sendRedirect("servicegestion.jsp");
@@ -83,6 +83,7 @@ public class SLGuardarServicio extends HttpServlet {
 		}catch (Exception e) {
 			System.out.println(e);
 		}
+		
 	}
 
 }

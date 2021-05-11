@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import= "vistas.Vista_distribucion_region" %>
+<%@page import= "datos.DTVista_distribucion_region"%>
+<%@page import= "java.util.*"%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -190,12 +193,12 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <div style="text-align:right;"><a href="formdistribution.jsp"><i
                                             class="fas fa-plus-square"></i>&nbsp; Nueva distribución</div>
+
                                 <thead>
                                     <tr>
                                         <th>Distribución</th>
                                         <th>Descripción</th>
-
-                                        <th>Regíon</th>
+                                        <th>Región</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -203,60 +206,30 @@
                                     <tr>
                                         <th>Distribución</th>
                                         <th>Descripción</th>
-
-                                        <th>Regíon</th>
+                                        <th>Región</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                    <%
+										DTVista_distribucion_region dt = new DTVista_distribucion_region();
+										ArrayList<Vista_distribucion_region> listaRP = new ArrayList<Vista_distribucion_region>();
+
+										listaRP = dt.listarRP();
+
+										for (Vista_distribucion_region vrp : listaRP) {
+									 %>
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-
-
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+											<td><%=vrp.getNombre()%></td>
+											<td><%=vrp.getDescripcion() %></td>
+											<td><%=vrp.getNombre_region() %></td>
+											<td>
+													&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
+                                                    href="#"><i class="far fa-trash-alt"></i>
+                                            </td>
+									</tr>
+                                     <%  } %>
                                 </tbody>
                             </table>
                         </div>
@@ -265,7 +238,8 @@
             </div>
         </div>
     </div>
-    <!--table ends-->
+
+    <!--ends table-->
     </div>
     </div>
 

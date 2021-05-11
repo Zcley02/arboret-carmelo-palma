@@ -1,4 +1,9 @@
-!DOCTYPE html>
+
+<%@page import="entidades.*" %>
+<%@page import="datos.*" %>
+<%@page import="java.util.*" %>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -173,53 +178,60 @@
 </body>
 
 </html>
-<!--Form-->
+<!--Formulario-->
+    <div class="container py-1">
+        <div class="row py-5">
+            <div class="col-lg-10 mx-auto mt-5">
+                <div class="card rounded shadow border-0">
 
-<div class="container py-1">
-    <div class="row py-5">
-        <div class="col-lg-10 mx-auto mt-5">
-            <div class="card rounded shadow border-0">
+                    <div class="card-header">
+                        <h2>
+                            Distribuci髇
+                        </h2>
 
-                <div class="card-header">
-                    <h2>
-                        Distribuci贸n del 谩rbol
-                    </h2>
+                    </div>
+                    <div class="card-body bg-white rounded">
+                        <form action="SLGuardarDistribucion" method="Post">
+                            <div class="form-group">
+                                <label>Nombre de la distribuci髇:</label>
+                                <input id="nombreD" name="nombreD" class="form-control">
+                            </div>
+                            <div class="form-group">
+                            	<label>Descripci髇: </label>
+                            	<textarea id="descripcionD" name="descripcionD" class="form-control" rows="3"></textarea>
+                            </div>
+                            
+                            <%
+	                            DTRegion dtp = new DTRegion();
+								ArrayList<Region> listaRegiones = new ArrayList<Region>();
+	
+								listaRegiones = dtp.listarRegiones();
+                            %>
+                            <div class="form-group">
+                                <label>Regi髇:</label>
+                                <select id="region" name="region" class="form-control">
+                                
+                                <%for (Region r : listaRegiones) { %>
+                                    <option value=" <%= r.getIdRegion() %> "><%= r.getNombre()%></option>
+                                <% } %>
+                                </select>
+                            </div>
+                               
 
-                </div>
-                <div class="card-body bg-white rounded">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>Distribuci贸n:</label>
-                            <input class="form-control">
+                            <div class="mb-3">
+                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
+                            </div>
+                            <div style="text-align:center;"><a href="regiongestion.jsp"><i
+                                        class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
 
-                        </div>
-                        <div class="form-group">
-                            <label>Descripci贸n:</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Regi贸n:</label>
-                            <select class="form-control">
-                                <option value="value1">regi贸n 1</option>
-                                <option value="value2">regi贸n 2</option>
-                                <option value="value3">regi贸n 3</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <button class="btn btn-primary" style="width: 100%;">Guardar</button>
-                        </div>
-                        <div style="text-align:center;"><a href="distributiongestion.jsp"><i
-                                    class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
+                        </form>
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-<!--ends form-->
+    <!--termona formulario-->
 
 </div>
 </div>

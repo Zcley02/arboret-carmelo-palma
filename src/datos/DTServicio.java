@@ -1,11 +1,12 @@
 package datos;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import entidades.Servicios;
 
@@ -23,18 +24,19 @@ public class DTServicio {
 			c = PoolConexion.getConnection();
 			ps = c.prepareStatement("select * from public.servicios where estado<>3", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rs = ps.executeQuery();
+			
 			while(rs.next()){
-				Servicios servicios = new Servicios();
-				servicios.setIdServicio(rs.getInt("idServicios")); 
-				servicios.setNombre(rs.getString("nombre"));
-				servicios.setDescripcion(rs.getString("descripcion"));
-				servicios.setFoto(rs.getString("foto"));
-				servicios.setEstado(rs.getInt("estado"));
-				listaServicios.add(servicios);
+				Servicios s = new Servicios();
+				s.setNombre(rs.getString("nombre"));
+				s.setDescripcion(rs.getString("descripcion"));
+				s.setFoto("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
+				s.setEstado(Integer.parseInt(rs.getString("estado")));
+				
+				listaServicios.add(s);
 			}
 		}
 		catch (Exception e){
-			System.out.println("DT Servicio: ERROR EN LISTAR LOS SERVICIOS "+ e.getMessage());
+			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -58,7 +60,7 @@ public class DTServicio {
 		return listaServicios;
 	}
 	
-	public boolean guardarServicio(Servicios s, FileInputStream fis, int longitud)
+	public boolean guardarServicio(Servicios s, InputStream fis)
 	{
 		boolean guardado = false;
 		PreparedStatement ps;
@@ -69,7 +71,7 @@ public class DTServicio {
 			ps = c.prepareStatement(sql);
 			ps.setString(1, s.getNombre());
 			ps.setString(2, s.getDescripcion());
-			ps.setBinaryStream(3, fis, longitud);;
+			ps.setBinaryStream(3, fis);;
 			ps.setInt(4, s.getEstado());
 			
 			int i = ps.executeUpdate();

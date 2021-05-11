@@ -87,7 +87,7 @@ public class DTPublicacion {
 			ps.close();
 			
 		} catch (Exception e) {
-			System.out.println("Error al insertar: ");
+			System.out.println("Error al insertar: " + e.getMessage());
 			e.printStackTrace();
 		}
 		

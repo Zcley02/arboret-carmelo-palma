@@ -1,4 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*" %>
+<%
+	ArrayList<TipoProducto> listarTP = new ArrayList<TipoProducto>();
+	DTTipo_producto dt = new DTTipo_producto();
+	listarTP = dt.listarTipoP();
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -22,6 +27,65 @@
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
+
+		<!--Formulario-->
+	    <div class="container py-1">
+        <div class="row py-5">
+
+            <div class="col-lg-10 mx-auto mt-5">
+                <div class="card rounded shadow border-0">
+                    <div class="card-header">
+                        <h3>Tipo Producto</h3>
+                    </div>
+                    <div class="card-body bg-white rounded">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <div style="text-align:right;"><a href="formtypeproduct.jsp"><i
+                                            class="fas fa-plus-square"></i>&nbsp; Agregar Tipo Producto</div>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                	<%
+                                		for(TipoProducto tp: listarTP){
+                                	%>
+                                    <tr>
+                                        <td><%=tp.getNombreTipo() %></td>
+                                        <td><%=tp.getDescripcion() %></td>
+                                        <td>&nbsp;&nbsp;<a href="#"><i
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                                                href="#"><i class="far fa-trash-alt"></i></td>
+                                    </tr>
+                                    <%
+                                		}
+                                    %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--termina tabla-->
+    </div>
+    </div>
+    </div>
+
+
+    </div>
+    </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "

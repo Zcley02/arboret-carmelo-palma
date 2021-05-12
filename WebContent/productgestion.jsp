@@ -1,4 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*" %>
+<%
+	ArrayList<Producto> listarPr = new ArrayList<Producto>();
+	DTProducto dtp = new DTProducto();
+	listarPr = dtp.listarProducto();
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -22,6 +27,80 @@
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
+
+		<!--Formulario-->
+    <div class="container py-1">
+       
+        <div class="row py-5">
+            <div class="col-lg-12 mx-auto mt-5">
+                <div class="card rounded shadow border-0">
+                    <div class="card-header">
+                        <h3>Gestión de eventos</h3>
+                    </div>
+                    <div class="card-body bg-white rounded">
+                        <div style="text-align: right;"><a href="formproduct.jsp"><i class="fas fa-plus-square"></i>&nbsp;
+                                Nuevo Producto</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="example" style="width:100%" class="table table-striped table-bordered">
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Descripción</th>
+                                                <th>Tipo Producto</th>
+                                                <th>Precio</th>
+                                                <th>Imagen</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Descripción</th>
+                                                <th>Tipo Producto</th>
+                                                <th>Precio</th>
+                                                <th>Imagen</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        	<%
+                                        		for(Producto p: listarPr){
+                                        	%>
+                                            <tr>
+                                                <td><%=p.getNombre() %></td>
+                                                <td><%=p.getDescripcion() %></td>
+                                                <td><%=p.getIdProducto() %></td>
+                                                <td>C$<%=p.getPrecio() %></td>
+                                                <td><img src="<%=p.getFoto() %>" width="100px" height="100px"></td>
+                                                <td>
+                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                    <a href="#"><i class="far fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                         	<%
+                                        		}
+                                         	%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--termona formulario-->
+    </div>
+
+
+    </div>
+    </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "

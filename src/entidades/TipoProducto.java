@@ -4,14 +4,16 @@ public class TipoProducto {
 	private int idTipoProducto;
 	private String nombreTipo;
 	private String descripcion;
+	private int estado;
 	public TipoProducto() {
 		super();
 	}
-	public TipoProducto(int idTipoProducto, String nombreTipo, String descripcion) {
+	public TipoProducto(int idTipoProducto, String nombreTipo, String descripcion, int estado) {
 		super();
 		this.idTipoProducto = idTipoProducto;
 		this.nombreTipo = nombreTipo;
 		this.descripcion = descripcion;
+		this.estado = estado;
 	}
 	public int getIdTipoProducto() {
 		return idTipoProducto;
@@ -30,6 +32,12 @@ public class TipoProducto {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	
 	

@@ -1,6 +1,12 @@
-
-    <!DOCTYPE html>
-    <html lang="en">
+ <%@page import="entidades.*, datos.*, java.util.*" %>
+ <%
+ 	ArrayList<TipoProducto> listarP = new ArrayList<TipoProducto>();
+ 	DTTipo_producto dtd = new DTTipo_producto();
+ 	listarP = dtd.listarTipoP();
+ 
+ %>
+ <!DOCTYPE html>
+    <html lang="es">
 
     <head>
         <meta charset="UTF-8">
@@ -35,23 +41,39 @@
 
                     <div class="card-header">
                         <h2>
-                            Servicios
+                            Producto
                         </h2>
 
                     </div>
                     <div class="card-body bg-white rounded">
 
 
-                        <form  action="SLGuardarServicio" method="Post" enctype="multipart/form-data">
+                        <form  action="SLGuardarProducto" method="Post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Título:</label>
-                                <input id="nombreS" name="nombreS" class="form-control">
+                                <label>Nombre:</label>
+                                <input id="nombre" name="nombre" class="form-control">
 
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcionS" name="descripcionS" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Precio:</label>
+                                <input type="number" id="precio" name="precio" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo Producto:</label>
+                                <select name="tipoP" id="tipoP" class="form-control">
+                                	<%
+                                		for(TipoProducto tp: listarP){
+                                	%>
+                                    <option value="<%=tp.getIdTipoProducto()%>"><%=tp.getNombreTipo()%> </option>
+                                    <%
+                                		}
+                                	%>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -69,7 +91,7 @@
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                            <div style="text-align:center;"><a href="productgestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>

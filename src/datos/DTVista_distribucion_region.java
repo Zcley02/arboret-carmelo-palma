@@ -31,7 +31,7 @@ public class DTVista_distribucion_region {
 				vw.setIdDistribucion(Integer.parseInt(rs.getString("idDistribucion")));
 				vw.setNombre(rs.getString("nombre"));
 				vw.setDescripcion(rs.getString("descripcion"));
-				vw.setNombre_region(rs.getString("nombre_pais"));
+				vw.setNombre_region(rs.getString("nombre_region"));
 				
 				listaRegion_Pais.add(vw);
 				

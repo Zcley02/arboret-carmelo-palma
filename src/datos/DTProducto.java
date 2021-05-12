@@ -1,5 +1,6 @@
 package datos;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,5 +58,32 @@ public class DTProducto {
 			
 		}
 		return listaProducto;
+	}
+	
+	public boolean guardarProducto(Producto p, InputStream fin) {
+		boolean guardado =false;
+		PreparedStatement ps;
+		String sql = "Insert into productos(nombre, descripcion, foto, precio, idtipo_producto, estado) Values(?,?,?,?,?,1)";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, p.getNombre());
+			ps.setString(2, p.getDescripcion());
+			ps.setBinaryStream(3, fin);
+			
+			ps.setDouble(4, p.getPrecio());
+			ps.setInt(5, p.getIdTipoProducto());
+			
+			ps.executeUpdate();
+			
+			guardado = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return guardado;
 	}
 }

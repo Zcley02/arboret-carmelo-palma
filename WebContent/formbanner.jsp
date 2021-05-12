@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -26,6 +26,10 @@
     </body>
 
     </html>
+    <%
+               	String pos = "";
+				pos = request.getParameter("posicion")==null?"0":request.getParameter("posicion");                           															
+    %>
 
     <!--Form-->
     <div class="container py-1">
@@ -40,10 +44,15 @@
                         <h3 class="card-title text-left">Banner</h3>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="SLGuardarBanner" method="Post" enctype="multipart/form-data">
+                        <input name="posicion"  type = "hidden" value="<%=pos%>" />
+                             <div class="mb-3">
+                                <label class="form-label fw-bolder">Título:</label>
+                                <input id="nombre" name="txtTitulo" class="form-control">
+                            </div>
                             <div class="mb-3">
-                                <label for="nombreCP" class="form-label fw-bolder">DescripciÃ³n:</label>
-                                <textarea id="descripciÃ³nCP" rows="4" class="form-control"></textarea>
+                                <label class="form-label fw-bolder">Descripción:</label>
+                                <textarea name="txtDescripcion" rows="4" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -52,7 +61,7 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <input name="foto" type="file" class="custom-file-input" id="inputGroupFile01">
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>

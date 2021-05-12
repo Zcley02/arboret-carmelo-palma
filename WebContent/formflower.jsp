@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="es">
 
     <head>
@@ -26,58 +26,45 @@
 
     </html>
 
+    </html>
     <!--Form-->
     <div class="container py-1">
         <div class="row py-5">
             <div class="col-lg-10 mx-auto mt-5">
                 <div class="card rounded shadow border-0">
-
                     <div class="card-header">
                         <h2>
-                            Publicaciones
+                            Flor
                         </h2>
-
                     </div>
                     <div class="card-body bg-white rounded">
-
-
-                        <form  action="SLPublicacion" method="Post" enctype="multipart/form-data">
+                        <form action="SLGuardarFlor" method="Post" role="form">
                             <div class="form-group">
-                                <label>Título:</label>
-                                <input name="titulo" class="form-control">
-
+                                <label>Nombre Común:</label>
+                                <input name="nombreCo" class="form-control">
                             </div>
-
+                            <div class="form-group">
+                                <label>Nombre Cientifico:</label>
+                                <textarea name="nombreCi" class="form-control" rows="3"></textarea>
+                            </div>
                             <div class="form-group">
                                 <label>Descripción:</label>
                                 <textarea name="descripcion" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="custom-file">Imagen:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Subir</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input name="imagen" type="file" class="custom-file-input" id="inputGroupFile01">
-                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
-                                            archivo</label>
-                                    </div>
-                                </div>
+                                <label>Temporada de Floración:</label>
+                                <textarea name="temporadaF" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                            <div style="text-align:center;"><a href="familygestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--ends form-->
-    </div>
     </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
@@ -91,9 +78,5 @@
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
     </body>
-    <script src="assets/demo/chart-bar-demo.js ">
-    </script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/datatables-demo.js "></script>
-    </body>
+
+    </html>

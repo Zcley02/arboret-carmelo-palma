@@ -1,4 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import= "vistas.Vista_region_pais" %>
+<%@page import= "datos.DTVista_region_pais"%>
+<%@page import= "java.util.*"%>
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -175,7 +179,7 @@
     </body>
 
     </html>
-    <!--Table-->
+   <!--Table-->
     <div class="container py-1">
         <div class="row py-5">
 
@@ -194,53 +198,39 @@
                                 <thead>
                                     <tr>
                                         <th>Región</th>
-                                        <th>país</th>
+                                        <th>Descripción</th>
+                                        <th>País</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Región</th>
+                                        <th>Descripción</th>
                                         <th>país</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                    <%
+										DTVista_region_pais dt = new DTVista_region_pais();
+										ArrayList<Vista_region_pais> listaRP = new ArrayList<Vista_region_pais>();
+
+										listaRP = dt.listarRP();
+
+										for (Vista_region_pais vrp : listaRP) {
+									 %>
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+											<td><%=vrp.getNombre()%></td>
+											<td><%=vrp.getDescripcion() %></td>
+											<td><%=vrp.getNombre_pais() %></td>
+											<td>
+													&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
+                                                    href="#"><i class="far fa-trash-alt"></i>
+                                            </td>
+									</tr>
+                                     <%  } %>
                                 </tbody>
                             </table>
                         </div>
@@ -251,9 +241,7 @@
     </div>
 
     <!--ends table-->
-    </div>
-    </div>
-    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "

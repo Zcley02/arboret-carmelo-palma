@@ -1,4 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import= "entidades.Pais" %>
+<%@page import= "datos.*"%>
+<%@page import= "java.util.*"%>
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -187,7 +191,7 @@
                     <div class="card-body bg-white rounded">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <div style="text-align:right;"><a href="FormPais.jsp"><i
+                                <div style="text-align:right;"><a href="formcountry.jsp"><i
                                             class="fas fa-plus-square"></i>&nbsp; Nuevo país</div>
 
                                 <thead>
@@ -204,41 +208,26 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
+                                     <%
+										DTPais dtp = new DTPais();
+										ArrayList<Pais> listaPaises = new ArrayList<Pais>();
 
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
+										listaPaises = dtp.listarPaises();
 
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+										for (Pais p : listaPaises) {
+									 %>
+										<tr>
+											<td><%=p.getNombre()%></td>
+											<td>
+													&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
+                                                    href="#"><i class="far fa-trash-alt"></i>
+                                            </td>
+										</tr>
+									 <%
+										}
+									  %>
 
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-
-                                        <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -248,6 +237,7 @@
         </div>
     </div>
     <!--table ends-->
+
     </div>
     </div>
     </div>

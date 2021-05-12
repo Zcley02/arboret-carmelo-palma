@@ -1,8 +1,4 @@
 
-<%@page import="entidades.*" %>
-<%@page import="datos.*" %>
-<%@page import="java.util.*" %>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -112,7 +108,6 @@
                                     <a class="nav-link" href="distributiongestion.jsp">Distribución</a>
                                     <a class="nav-link" href="regiongestion.jsp">Región</a>
                                     <a class="nav-link" href="countrygestion.jsp">País</a>
-                                    <a class="nav-link" href="regiongestion.jsp">Floración</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
@@ -179,7 +174,8 @@
     </body>
 
     </html>
-    <!--Formulario-->
+
+    <!--Form-->
     <div class="container py-1">
         <div class="row py-5">
             <div class="col-lg-10 mx-auto mt-5">
@@ -187,59 +183,52 @@
 
                     <div class="card-header">
                         <h2>
-                            Región
+                            Servicios
                         </h2>
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="SLGuardarRegion" method="Post">
-                            <div class="form-group">
-                                <label>Nombre de la región:</label>
-                                <input id="nombreR" name="nombreR" class="form-control">
-                            </div>
-                            <div class="form-group">
-                            	<label>Descripción: </label>
-                            	<textarea id="descripcionR" name="descripcionR" class="form-control" rows="3"></textarea>
-                            </div>
-                            
-                            <%
-	                            DTPais dtp = new DTPais();
-								ArrayList<Pais> listaPaises = new ArrayList<Pais>();
-	
-								listaPaises = dtp.listarPaises();
-                            %>
-                            <div class="form-group">
-                                <label>País:</label>
-                                <select id="pais" name="pais" class="form-control">
-                                
-                                <%for (Pais p : listaPaises) { %>
-                                    <option value=" <%= p.getIdPais() %> "><%= p.getNombre()%></option>
-                                <% } %>
-                                </select>
-                            </div>
-                               
 
+
+                        <form  action="SLGuardarServicio" method="Post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>Título:</label>
+                                <input id="nombreS" name="nombreS" class="form-control">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Descripción:</label>
+                                <textarea id="descripcionS" name="descripcionS" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="custom-file">Imagen:</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Subir</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input id="foto" name="foto" type="file" class="custom-file-input">
+                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
+                                            archivo</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="regiongestion.jsp"><i
+                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
-
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--termona formulario-->
-    </div>
-
-
+    <!--ends form-->
     </div>
     </div>
-
-
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "
         crossorigin="anonymous "></script>

@@ -54,4 +54,28 @@ public class DTGenero {
 		}
 		return listaGenero;
 	}
+	
+	
+	public boolean guardarGenero(Genero g) {
+		boolean guardado = false;
+		PreparedStatement ps;
+		String sql = "Insert into public.genero(nombre, descripcion, estado) Values(?,?,1)";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, g.getNombre());
+			ps.setString(2, g.getDescripcion());
+			
+			ps.executeUpdate();
+			
+			guardado = true;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+				
+		return guardado;
+	}
 }

@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="entidades.*, datos.*, java.util.*"%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -167,9 +168,70 @@
                 </nav>
             </div>
         </div>
+        
+        <!--Table-->
+    <div class="container py-1">
+        <div class="row py-5">
 
+            <div class="col-lg-10 mx-auto mt-5">
+                <div class="card rounded shadow border-0">
+                    <div class="card-header">
+                        <h3>Servicios</h3>
+                    </div>
+                    <div class="card-body bg-white rounded">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <div style="text-align:right;"><a href="formservice.jsp"><i
+                                            class="fas fa-plus-square"></i>&nbsp; Nuevo servicio</div>
+
+                                <thead>
+                                    <tr>
+                                        <th>Nombre del servicio</th>
+                                        <th>Descripción</th>
+                                        <th>Foto</th>
+                                        <th>Opciones</th>
+
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Nombre del servicio</th>
+                                        <th>Descripción</th>
+                                        <th>Foto</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                
+                                <%
+									ArrayList<Servicios> listarS = new ArrayList<Servicios>();
+									DTServicio dt = new DTServicio();
+									listarS = dt.listarServicios();
+					            	   for(Servicios s: listarS){
+					             %>
+										<tr>
+	                                        <td><%=s.getNombre()%></td>
+	                                        <td><%=s.getDescripcion()%></td>
+	                                        <td><img alt="ejemplo" src="<%=s.getFoto() %>" width="100px" height="100px"></td>
+											<td>
+													&nbsp;&nbsp;<a href="#"><i
+                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                                                    href="#"><i class="far fa-trash-alt"></i>
+                                            </td>
+										</tr>
+										
+									<%
+					            		}
+                                	%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
+    </div>
+    <!--table ends-->
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "

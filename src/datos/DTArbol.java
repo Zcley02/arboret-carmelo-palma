@@ -1,5 +1,6 @@
 package datos;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -72,5 +73,44 @@ public class DTArbol {
 			
 		}
 		return listaArbol;
+	}
+	
+	public boolean guardarArbol(Arbol ar, InputStream fi) {
+		boolean resp = false;
+		PreparedStatement ps;
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("INSERT INTO arbol(nombreComun, nombreCientifico, descripcion, idFamilia, idGenero, idDistribucion, idFlor, foto) "
+									+ "VALUES(?,?,?,?,?,?,?,?)");
+			
+			ps.setString(1, ar.getNombreComun());
+			ps.setString(2, ar.getNombreCientifico());
+			ps.setString(3, ar.getDescripcion());
+			ps.setInt(4, ar.getIdFamilia());
+			ps.setInt(5, ar.getIdGenero());
+			ps.setInt(6, ar.getIdDistribucion());
+			ps.setInt(7, ar.getIdFlor());
+			ps.setBinaryStream(8, fi);
+			
+			int i = ps.executeUpdate();
+			
+			if(i==1) {
+				resp = true;
+			}else {
+				resp = false;
+			}
+			
+			ps.close();
+
+						
+		}	catch (Exception e) {
+			System.out.println("Error al insertar: ");
+			e.printStackTrace();
+		}
+		
+		return resp;
+
 	}
 }

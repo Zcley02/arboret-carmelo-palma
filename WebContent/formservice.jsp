@@ -16,6 +16,7 @@
             crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
     </head>
 
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -45,13 +46,13 @@
                         <form  action="SLGuardarServicio" method="Post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Título:</label>
-                                <input id="nombreS" name="nombreS" class="form-control">
+                                <input id="nombreS" name="nombreS" class="form-control" requerid>
 
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcionS" name="descripcionS" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcionS" name="descripcionS" class="form-control" rows="3" requerid></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -60,7 +61,7 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="custom-file-input">
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" requerid>
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
@@ -69,7 +70,7 @@
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                            <div style="text-align:center;"><a href="servicegestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>
@@ -91,10 +92,11 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
-    </body>
-    <script src="assets/demo/chart-bar-demo.js ">
-    </script>
+    <script src="assets/demo/chart-bar-demo.js "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
+
+    
+   
     </body>

@@ -27,6 +27,7 @@ public class DTVista_region_pais {
 			while(rs.next())
 			{
 				Vista_region_pais vrp = new Vista_region_pais();
+				vrp.setIdRegion(Integer.parseInt(rs.getString("idRegion")));
 				vrp.setNombre(rs.getString("nombre"));
 				vrp.setDescripcion(rs.getString("descripcion"));
 				vrp.setNombre_pais(rs.getString("nombre_pais"));

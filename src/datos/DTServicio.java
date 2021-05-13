@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 
+import entidades.Pais;
 import entidades.Servicios;
 
 public class DTServicio {
@@ -18,6 +19,17 @@ public class DTServicio {
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
 	
+	public void llenarRsServicio(Connection c){
+		try{
+			ps = c.prepareStatement("select * from public.servicios", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsServicios = ps.executeQuery();
+		}
+		catch (Exception e){
+			System.out.println("DATOS: Error al listar elementos del Servicio "+ e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<Servicios> listarServicios(){
 		ArrayList<Servicios> listaServicios = new ArrayList<Servicios>();
 		try{
@@ -27,6 +39,7 @@ public class DTServicio {
 			
 			while(rs.next()){
 				Servicios s = new Servicios();
+				s.setIdServicio(Integer.parseInt(rs.getString("idServicio")));
 				s.setNombre(rs.getString("nombre"));
 				s.setDescripcion(rs.getString("descripcion"));
 				s.setFoto("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
@@ -111,5 +124,46 @@ public class DTServicio {
 		}
 		
 		return guardado;
+	}
+	
+	public boolean eliminarServicio(int id)
+	{
+		boolean eliminado=false;	
+		try
+		{
+			c = PoolConexion.getConnection();
+			this.llenarRsServicio(c);;
+			rsServicios.beforeFirst();
+			while (rsServicios.next())
+			{
+				if(rsServicios.getInt(1)==id)
+				{
+					rsServicios.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error al eliminar el Servicio "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				if(rsServicios != null){
+					rsServicios.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return eliminado;
 	}
 }

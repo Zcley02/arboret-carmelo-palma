@@ -74,9 +74,9 @@ public class SLGuardarServicio extends HttpServlet {
 			resp = dt.guardarServicio(s,fin);
 			
 			if(resp == true) {
-				response.sendRedirect("servicegestion.jsp");
+				response.sendRedirect("servicegestion.jsp?msj=3");
 			}else{
-				response.sendRedirect("management.jsp");
+				response.sendRedirect("servicegestion.jsp?msj=2");
 			};
 		} catch (NotFoundException e) {
 			System.out.println(e);

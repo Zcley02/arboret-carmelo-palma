@@ -5,6 +5,8 @@
 
     <!DOCTYPE html>
     <html lang="en">
+    
+    <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
 
     <head>
         <meta charset="UTF-8">
@@ -20,6 +22,7 @@
             crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
     </head>
 
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -218,11 +221,9 @@
 									 %>
 										<tr>
 											<td><%=p.getNombre()%></td>
-											<td>
-													&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#"><i class="far fa-trash-alt"></i>
-                                            </td>
+											<td>&nbsp;&nbsp;<a href="#"><i
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="myDeletePub(<%=p.getIdPais()%>)"
+                                                ><i class="far fa-trash-alt"></i></td>
 										</tr>
 									 <%
 										}
@@ -259,4 +260,38 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
+    <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+	<script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+    
+     <script>
+	
+	        function myDeletePub(idPais)
+	        {
+	        	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+	            confirm(function(e, btn){
+	                e.preventDefault();
+	                window.location.href = "SLEliminarPais?id="+idPais
+	            },
+	            function(e,btn){
+	                e.preventDefault();
+	            });
+	        }
+	        
+	        $(document).ready(function ()
+	        	    {
+	        	        var mensaje = "";
+	        	        mensaje = "<%=varMsj%>";
+	        	        
+	        	        if(mensaje == "5")
+	        	        {
+	        	            successAlert('Exito', 'Los datos del País han sido eliminados exitosamente');
+	        	        }
+	        	        if(mensaje == "6")
+	        	        {
+	        	            errorAlert('Error', 'Los datos de este País estan siendo utilizados por una Región. Por favor revise');
+	        	        }
+	        	       
+	        	    });
+	
+	    </script>
     </body>

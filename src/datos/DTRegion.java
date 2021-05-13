@@ -3,6 +3,7 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Pais;
@@ -209,60 +210,49 @@ public class DTRegion {
 		
 		return modificado;
 	}
-	
-	public boolean eliminarUsuario(int idusuario)
-	{
-		boolean eliminado = false;
-		
-		
-		try 
+	*/
+	public boolean eliminarRegion(int id)
 		{
-			c = PoolConexion.getConnection();
-			this.llenarRsUsuario(c);
-			rsUsuario.beforeFirst();
-			while(rsUsuario.next())
+			boolean eliminado=false;	
+			try
 			{
-				
-				if(rsUsuario.getInt(1) == idusuario) 
+				c = PoolConexion.getConnection();
+				this.llenarRsRegion(c);;
+				rsRegion.beforeFirst();
+				while (rsRegion.next())
 				{
-					rsUsuario.updateInt("estado", 3);	
-					rsUsuario.updateRow();
+					if(rsRegion.getInt(1)==id)
+					{
+						rsRegion.deleteRow();
+						eliminado=true;
+						break;
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				System.err.println("DT Region: Error al eliminar una Región "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally
+			{
+				try {
+					if(rsRegion != null){
+						rsRegion.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
 					
-					eliminado = true;
-					break;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
 			}
-			
-		} 
-		catch (SQLException e) 
-		{
-			System.err.println("DTUSUARIO: Error al eliminar usuario " + e.getMessage());
-			e.printStackTrace();
-			System.err.println(e.getSQLState());
+			return eliminado;
 		}
-		finally 
-		{
-			try 
-			{
-				if(rsUsuario != null)
-				{
-					rsUsuario.close();
-				}
-				if(c != null)
-				{
-					c.close();
-				}
-			} 
-			catch (Exception e2) 
-			{
-				System.err.println("DTUSUARIO: Error al cerrar conexion " + e2.getMessage());
-				e2.printStackTrace();
-			}
-		}
-		
-		return eliminado;
-	}
+	
+	/*
 	
 	//Método para encriptar con MD5
 	public String md5(String input)

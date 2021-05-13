@@ -46,25 +46,25 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="fname">Nombres:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="fname" placeholder="" name="fname">
+                                <input type="text" class="form-control" id="fname" placeholder="" name="fname" requerid>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="lname">Apellidos:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="lname" placeholder="" name="lname">
+                                <input type="text" class="form-control" id="lname" placeholder="" name="lname" requerid>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Correo:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" placeholder="" name="email">
+                                <input type="email" class="form-control" id="email" placeholder="" name="email" requerid>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Descripción">Mensaje:</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment"></textarea>
+                                <textarea class="form-control" rows="5" id="comment" requerid></textarea>
                             </div>
                         </div>
                         <div class="form-group"><br>

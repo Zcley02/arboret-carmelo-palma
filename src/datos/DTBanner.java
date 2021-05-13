@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 import entidades.Banner;
+import entidades.Servicios;
 
 public class DTBanner {
 	PoolConexion pc = PoolConexion.getInstance(); 
@@ -162,7 +163,7 @@ public class DTBanner {
 			
 			return bnG;
 		}
-
+		
 		/*
 		
 		// Metodo para modificar Banner
@@ -209,11 +210,9 @@ public class DTBanner {
 				}
 			}
 			return modificado;
-		}
+		}*/
 		
-	
-		// Metodo para eliminar Banner
-		public boolean eliminaBanner(int idB)
+		public boolean eliminaBanner(int id)
 		{
 			boolean eliminado=false;	
 			try
@@ -223,7 +222,7 @@ public class DTBanner {
 				rsBanner.beforeFirst();
 				while (rsBanner.next())
 				{
-					if(rsBanner.getInt(1)==idB)
+					if(rsBanner.getInt(1)==id)
 					{
 						rsBanner.deleteRow();
 						eliminado=true;
@@ -252,5 +251,5 @@ public class DTBanner {
 				}
 			}
 			return eliminado;
-		}*/
+		}
 }

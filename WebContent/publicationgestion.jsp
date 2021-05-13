@@ -81,8 +81,8 @@
                                         <td><%=u.getHipervinculo() %></td>
                                         <td><img alt="ejemplo" src="<%=u.getMultimedia() %>" width="100px" height="100px"></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="myDeletePub(<%=u.getIdPublicacion()%>)"
-                                                ><i class="far fa-trash-alt"></i></td>
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a onclick="myDeletePub(<%=u.getIdPublicacion()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                                 	<%
 					            		}

@@ -3,6 +3,7 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Distribucion;
@@ -15,7 +16,7 @@ public class DTDistribucion {
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
 	
-	public void llenarRsRegion(Connection c)
+	public void llenarRsDistri(Connection c)
 	{
 		String sql = "SELECT * FROM public.distribucion where estado <> 3";
 		try 
@@ -206,59 +207,46 @@ public class DTDistribucion {
 		}
 		
 		return modificado;
-	}
-	
-	public boolean eliminarUsuario(int idusuario)
-	{
-		boolean eliminado = false;
-		
-		
-		try 
-		{
-			c = PoolConexion.getConnection();
-			this.llenarRsUsuario(c);
-			rsUsuario.beforeFirst();
-			while(rsUsuario.next())
-			{
-				
-				if(rsUsuario.getInt(1) == idusuario) 
-				{
-					rsUsuario.updateInt("estado", 3);	
-					rsUsuario.updateRow();
-					
-					eliminado = true;
-					break;
-				}
-				
-			}
-			
-		} 
-		catch (SQLException e) 
-		{
-			System.err.println("DTUSUARIO: Error al eliminar usuario " + e.getMessage());
-			e.printStackTrace();
-			System.err.println(e.getSQLState());
-		}
-		finally 
-		{
-			try 
-			{
-				if(rsUsuario != null)
-				{
-					rsUsuario.close();
-				}
-				if(c != null)
-				{
-					c.close();
-				}
-			} 
-			catch (Exception e2) 
-			{
-				System.err.println("DTUSUARIO: Error al cerrar conexion " + e2.getMessage());
-				e2.printStackTrace();
-			}
-		}
-		
-		return eliminado;
 	}*/
+	
+	public boolean eliminarDistri(int id)
+		{
+			boolean eliminado=false;	
+			try
+			{
+				c = PoolConexion.getConnection();
+				this.llenarRsDistri(c);;
+				rsDistribucion.beforeFirst();
+				while (rsDistribucion.next())
+				{
+					if(rsDistribucion.getInt(1)==id)
+					{
+						rsDistribucion.deleteRow();
+						eliminado=true;
+						break;
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				System.err.println("DT Distribucion: Error al eliminar una distribución "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally
+			{
+				try {
+					if(rsDistribucion != null){
+						rsDistribucion.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return eliminado;
+		}
 }

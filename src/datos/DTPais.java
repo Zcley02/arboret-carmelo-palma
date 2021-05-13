@@ -3,6 +3,7 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Pais;
@@ -203,61 +204,78 @@ public class DTPais {
 		
 		return modificado;
 	}
+	*/
 	
-	public boolean eliminarUsuario(int idusuario)
+	public boolean eliminarPais(int id)
 	{
-		boolean eliminado = false;
-		
-		
-		try 
+		boolean eliminado=false;	
+		try
 		{
 			c = PoolConexion.getConnection();
-			this.llenarRsUsuario(c);
-			rsUsuario.beforeFirst();
-			while(rsUsuario.next())
+			this.llenarRsPais(c);;
+			rsPais.beforeFirst();
+			while (rsPais.next())
 			{
-				
-				if(rsUsuario.getInt(1) == idusuario) 
+				if(rsPais.getInt(1)==id)
 				{
-					rsUsuario.updateInt("estado", 3);	
-					rsUsuario.updateRow();
-					
-					eliminado = true;
+					rsPais.deleteRow();
+					eliminado=true;
 					break;
 				}
-				
 			}
-			
-		} 
-		catch (SQLException e) 
+		}
+		catch (Exception e)
 		{
-			System.err.println("DTUSUARIO: Error al eliminar usuario " + e.getMessage());
+			System.err.println("Erro al eliminar el País "+e.getMessage());
 			e.printStackTrace();
-			System.err.println(e.getSQLState());
 		}
-		finally 
+		finally
 		{
-			try 
-			{
-				if(rsUsuario != null)
-				{
-					rsUsuario.close();
+			try {
+				if(rsPais != null){
+					rsPais.close();
 				}
-				if(c != null)
-				{
-					c.close();
+				if(c != null){
+					PoolConexion.closeConnection(c);
 				}
-			} 
-			catch (Exception e2) 
-			{
-				System.err.println("DTUSUARIO: Error al cerrar conexion " + e2.getMessage());
-				e2.printStackTrace();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-		
 		return eliminado;
 	}
 	
+	/*
+	public boolean eliminarPais(Pais p)
+	{
+			boolean eliminado = false;
+			
+			
+			PreparedStatement ps;
+			
+			String sql = "Update public.pais set estado = 3 where idPais = ?";
+			
+			try {
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql);
+				
+				ps.setInt(1, p.getIdPais());
+				ps.executeUpdate();
+				
+				eliminado = true;
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("Error en eliminar el País");
+				e.printStackTrace();
+			}
+			
+			return eliminado;
+	}*/
+	
+	/*
 	//Método para encriptar con MD5
 	public String md5(String input)
 	{

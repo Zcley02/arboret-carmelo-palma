@@ -221,7 +221,7 @@
                             <div class="mb-3">
                                 <button class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="regiongestion.jsp"><i
+                            <div style="text-align:center;"><a href="distributiongestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
 
                         </form>

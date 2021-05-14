@@ -5,7 +5,9 @@
 	listarTP = dt.listarTipoP();
 %>
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
+
+	<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
 
     <head>
         <meta charset="UTF-8">
@@ -21,6 +23,7 @@
             crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
     </head>
 
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -65,7 +68,7 @@
                                         <td><%=tp.getDescripcion() %></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                href="#"><i class="far fa-trash-alt"></i></td>
+                                                href="#" onclick="myDeleteTP(<%=tp.getIdTipoProducto()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                                     <%
                                 		}
@@ -99,6 +102,40 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js "
             crossorigin="anonymous "></script>
         <script src="assets/demo/datatables-demo.js "></script>
+        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+	<script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+    <script>
+	
+       function myDeleteTP(idTp)
+       {
+       	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+       	$.fn.jAlert.defaults.confirmBtnText = 'Si';
+           confirm(function(e, btn){
+               e.preventDefault();
+               window.location.href = "SLEliminarTipoProducto?id="+idTp
+           },
+           function(e,btn){
+               e.preventDefault();
+           });
+       }
+       
+       $(document).ready(function ()
+       	    {
+       	        var mensaje = "";
+       	        mensaje = "<%=varMsj%>";
+       	        
+       	        if(mensaje == "5")
+       	        {
+       	            successAlert('Exito', 'Los datos del Tipo de Producto han sido eliminados exitosamente');
+       	        }
+       	        if(mensaje == "6")
+       	        {
+       	            errorAlert('Error', 'Los datos estan siendo usados en otros elemento. Por favor revisar');
+       	        }
+       	       
+       	    });
+
+   </script>
     </body>
 
     </html>

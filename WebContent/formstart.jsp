@@ -101,7 +101,6 @@
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary" style="width: 49%;">Guardar</button>
-                                <button class="btn btn-primary" style="width: 48%;">Previsualizar</button>
                             </div>
                         </form>
                     </div>

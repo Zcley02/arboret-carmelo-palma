@@ -13,9 +13,24 @@ import entidades.*;
 public class DTProducto {
 	PoolConexion pc = PoolConexion.getInstance();
 	Connection c = null;
-	private ResultSet rsServicios = null;
+	private ResultSet rsProducto = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
+	
+	public void llenarRsProducto(Connection c) {
+		String sql = "SELECT * FROM public.productos where estado <> 3";
+		try 
+		{
+			//c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsProducto = ps.executeQuery();
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("DT USUARIO: Error en listar los productos " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<Producto> listarProducto(){
 		ArrayList<Producto> listaProducto = new ArrayList<Producto>();
@@ -86,4 +101,30 @@ public class DTProducto {
 		
 		return guardado;
 	}
+	
+	public boolean eliminarProducto(int id) {
+		boolean eliminado = false;
+		
+		try {
+			c = PoolConexion.getConnection();
+			this.llenarRsProducto(c);
+			rsProducto.beforeFirst();
+			while (rsProducto.next())
+			{
+				if(rsProducto.getInt(1)==id)
+				{
+					rsProducto.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error en eliminar el producto");
+			e.printStackTrace();
+		}
+		
+		return eliminado;
+	}
+	
 }

@@ -11,8 +11,24 @@ import entidades.*;
 public class DTGenero {
 	PoolConexion pc = PoolConexion.getInstance();
 	Connection c = null;
+	private ResultSet rsGenero = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
+	
+	public void llenarRsGenero(Connection c) {
+		String sql = "SELECT * FROM public.genero where estado <> 3";
+		try 
+		{
+			//c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsGenero = ps.executeQuery();
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("DT USUARIO: Error en listar los generos " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<Genero> listarGenero(){
 		ArrayList<Genero> listaGenero = new ArrayList<Genero>();
@@ -26,7 +42,6 @@ public class DTGenero {
 				genero.setNombre(rs.getString("nombre"));
 				genero.setDescripcion(rs.getString("descripcion"));
 				genero.setEstado(rs.getInt("estado"));
-				//System.out.println(rs.getString("fechaInicio"));
 				listaGenero.add(genero);
 			}
 		}
@@ -77,5 +92,30 @@ public class DTGenero {
 		}
 				
 		return guardado;
+	}
+	
+	public boolean eliminarGenero(int id) {
+		boolean eliminado = false;
+		
+		try {
+			c = PoolConexion.getConnection();
+			this.llenarRsGenero(c);;
+			rsGenero.beforeFirst();
+			while (rsGenero.next())
+			{
+				if(rsGenero.getInt(1)==id)
+				{
+					rsGenero.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error en eliminar el genero");
+			e.printStackTrace();
+		}
+		
+		return eliminado;
 	}
 }

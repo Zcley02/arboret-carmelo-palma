@@ -33,7 +33,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.jsp">Contactos</a>
                     </li>
-                    <li class="nav-item hidden">
+                    <li class="nav-item">
                         <a class="nav-link" href="login.jsp"><i class="fas fa-user-circle"></i></a>
                     </li>
                     <div class="hidden">

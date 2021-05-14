@@ -16,8 +16,24 @@ public class DTPublicacion {
 	
 	PoolConexion pc = PoolConexion.getInstance();
 	Connection c = null;
+	private ResultSet rsPu = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
+	
+	public void llenarRsFamilia(Connection c) {
+		String sql = "SELECT * FROM public.publicaciones where estado <> 3";
+		try 
+		{
+			//c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPu = ps.executeQuery();
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("DT USUARIO: Error en listar las publicaciones " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<Publicacion> listarPublicacion(){
 		ArrayList<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
@@ -94,25 +110,24 @@ public class DTPublicacion {
 		return resp;
 	}
 	
-	public boolean eliminarPublicacion(Publicacion p) {
+	public boolean eliminarPublicacion(int id) {
 		boolean eliminado = false;
-		
-		
-		PreparedStatement ps;
-		
-		String sql = "Update public.publicaciones set estado = 3 where idPublicaciones = ?";
 		
 		try {
 			c = PoolConexion.getConnection();
-			ps = c.prepareStatement(sql);
-			
-			ps.setInt(1, p.getIdPublicacion());
-			ps.executeUpdate();
-			
-			eliminado = true;
+			this.llenarRsFamilia(c);;
+			rsPu.beforeFirst();
+			while (rsPu.next())
+			{
+				if(rsPu.getInt(1)==id)
+				{
+					rsPu.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("Error en eliminar la publicacion");
 			e.printStackTrace();
 		}

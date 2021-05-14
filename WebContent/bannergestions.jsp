@@ -87,7 +87,7 @@
 	                                        <td><%=bn.getDescripcion()%></td>
 	                                        <td><img alt="ejemplo" src="<%=bn.getFoto() %>" onClick="getValue()" width="100px" height="100px"></td>
 											<td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="myDeletePub(<%=bn.getIdBanner()%>)"
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=bn.getIdBanner()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 										</tr>
 										
@@ -159,6 +159,7 @@
         function myDeletePub(idBanner)
         {
         	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+        	$.fn.jAlert.defaults.confirmBtnText = 'Si';
             confirm(function(e, btn){
                 e.preventDefault();
                 window.location.href = "SLEliminarBanner?id="+idBanner

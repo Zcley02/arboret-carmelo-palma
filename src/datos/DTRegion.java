@@ -217,7 +217,7 @@ public class DTRegion {
 			try
 			{
 				c = PoolConexion.getConnection();
-				this.llenarRsRegion(c);;
+				this.llenarRsRegion(c);
 				rsRegion.beforeFirst();
 				while (rsRegion.next())
 				{

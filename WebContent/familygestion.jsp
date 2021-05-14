@@ -7,6 +7,8 @@
     <!DOCTYPE html>
     <html lang="es">
 
+	<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -74,7 +76,7 @@
                                         <td><%=u.getDescripcion() %></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    a="" onclick="myDeleteFam(<%=u.getIdFamilia()%>)"><i class="far fa-trash-alt"></i></td>
+                                                    href="#" onclick="myDeleteFam(<%=u.getIdFamilia()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                             		<%
                             			}
@@ -116,17 +118,34 @@
     
     <script>
 
-        function myDeleteFam(idMoneda)
+        function myDeleteFam(idFamilia)
         {
         	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+        	$.fn.jAlert.defaults.confirmBtnText = 'Si';
             confirm(function(e, btn){
                 e.preventDefault();
-                window.location.href = "SLEliminarFamilia?id="+idMoneda
+                window.location.href = "SLEliminarFamilia?id="+idFamilia
             },
             function(e,btn){
                 e.preventDefault();
             });
         }
+        
+        $(document).ready(function ()
+   	    {
+   	        var mensaje = "";
+   	        mensaje = "<%=varMsj%>";
+   	        
+   	        if(mensaje == "5")
+   	        {
+   	            successAlert('Exito', 'Los datos han sido eliminado exitosamente');
+   	        }
+   	        if(mensaje == "6")
+   	        {
+   	            errorAlert('Error', 'Los datos estan siendo usados en otros elemento. Por favor revisar');
+   	        }
+   	       
+   	    });
 
     </script>
     

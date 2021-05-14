@@ -18,9 +18,9 @@ public class DTPiePagina {
 		
 		try {
 			c = PoolConexion.getConnection();
-			ps = c.prepareStatement("select * from public.piepagina where id = 1", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("select * from public.piepagina", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rs = ps.executeQuery();
-			if(rs.first()) {
+			if(rs.last()) {
 				pp.setDireccion(rs.getString("direccion"));
 				pp.setIdPiePagina(rs.getInt("id"));
 				pp.setTelefono(rs.getString("telefono"));
@@ -52,5 +52,33 @@ public class DTPiePagina {
 		}
 		
 		return pp;
+	}
+	
+	public boolean guardarPP(PiePagina pp) {
+		boolean guardado = false;
+		PreparedStatement ps;
+		String sql = "Insert into public.piepagina(direccion, telefono, email, ext) Values(?,?,?,?)";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, pp.getDireccion());
+			ps.setString(2, pp.getTelefono());
+			ps.setString(3, pp.getEmail());
+			ps.setString(4, pp.getExt());
+			
+			ps.executeUpdate();
+			
+			guardado = true;
+			
+			ps.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return guardado;
 	}
 }

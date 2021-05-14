@@ -12,8 +12,24 @@ public class DTFlor {
 
 	PoolConexion pc = PoolConexion.getInstance();
 	Connection c = null;
+	private ResultSet rsFlor = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
+	
+	public void llenarRsFlor(Connection c) {
+		String sql = "SELECT * FROM public.flor where estado <> 3";
+		try 
+		{
+			//c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsFlor = ps.executeQuery();
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("DT USUARIO: Error en listar las flores " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<Flor> listarFlor(){
 		ArrayList<Flor> listaFlor = new ArrayList<Flor>();
@@ -91,5 +107,30 @@ public class DTFlor {
 		}
 		
 		return guardado;
+	}
+	
+	public boolean eliminarFlor(int id) {
+		boolean eliminado = false;
+		
+		try {
+			c = PoolConexion.getConnection();
+			this.llenarRsFlor(c);;
+			rsFlor.beforeFirst();
+			while (rsFlor.next())
+			{
+				if(rsFlor.getInt(1)==id)
+				{
+					rsFlor.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error en eliminar la flor");
+			e.printStackTrace();
+		}
+		
+		return eliminado;
 	}
 }

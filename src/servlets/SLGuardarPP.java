@@ -7,21 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.*;
-import entidades.*;
-
+import datos.DTPiePagina;
+import entidades.PiePagina;
 
 /**
- * Servlet implementation class SLEliminarPublicacion
+ * Servlet implementation class SLGuardarPP
  */
-@WebServlet(name="SLEliminarPublicacion", urlPatterns="/SLEliminarPublicacion")
-public class SLEliminarPublicacion extends HttpServlet {
+@WebServlet("/SLGuardarPP")
+public class SLGuardarPP extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SLEliminarPublicacion() {
+    public SLGuardarPP() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +30,7 @@ public class SLEliminarPublicacion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int id = Integer.parseInt(request.getParameter("id"));
-		DTPublicacion dt = new DTPublicacion();
-		
-		if(dt.eliminarPublicacion(id)) {
-			response.sendRedirect("publicaciongestion.jsp?msj=5");
-		}else {
-			response.sendRedirect("publicaciongestion.jsp?msj=6");
-		}
-		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -47,7 +38,31 @@ public class SLEliminarPublicacion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			PiePagina pp = new PiePagina();
+			DTPiePagina dt = new DTPiePagina();
+			
+			String direccion = request.getParameter("direccion");
+			String telefono = request.getParameter("telefono");
+			String email = request.getParameter("email");
+			String ext = request.getParameter("ext");
+			
+			pp.setDireccion(direccion);
+			pp.setEmail(email);
+			pp.setTelefono(telefono);
+			pp.setExt(ext);
+			
+			if(dt.guardarPP(pp)) {
+				response.sendRedirect("index.jsp");
+			}else {
+				response.sendRedirect("management.jsp");
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 }

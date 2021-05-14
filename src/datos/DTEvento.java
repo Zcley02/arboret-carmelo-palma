@@ -12,8 +12,24 @@ public class DTEvento {
 	
 	PoolConexion pc = PoolConexion.getInstance();
 	Connection c = null;
+	private ResultSet rsEvento = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
+	
+	public void llenarRsEvento(Connection c) {
+		String sql = "SELECT * FROM public.eventos where estado <> 3";
+		try 
+		{
+			//c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsEvento = ps.executeQuery();
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("DT USUARIO: Error en listar los eventos " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<Eventos> listarEventos(){
 		ArrayList<Eventos> listaEventos = new ArrayList<Eventos>();
@@ -95,4 +111,30 @@ public class DTEvento {
 		
 		return guardado;
 	}
+	
+	public boolean eliminarEvento(int id) {
+		boolean eliminado = false;
+		
+		try {
+			c = PoolConexion.getConnection();
+			this.llenarRsEvento(c);;
+			rsEvento.beforeFirst();
+			while (rsEvento.next())
+			{
+				if(rsEvento.getInt(1)==id)
+				{
+					rsEvento.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error en eliminar el evento");
+			e.printStackTrace();
+		}
+		
+		return eliminado;
+	}
+	
 }

@@ -78,7 +78,7 @@
 											<td><%=vrp.getDescripcion() %></td>
 											<td><%=vrp.getNombre_region() %></td>
 											<td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="myDeletePub(<%=vrp.getIdDistribucion()%>)"
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=vrp.getIdDistribucion()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 									</tr>
                                      <%  } %>

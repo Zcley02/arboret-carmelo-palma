@@ -8,6 +8,8 @@
 %>   
     <!DOCTYPE html>
     <html lang="es">
+    
+    <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
 
     <head>
         <meta charset="UTF-8">
@@ -82,7 +84,7 @@
                                         <td><img alt="ejemplo" src="<%=u.getMultimedia() %>" width="100px" height="100px"></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a onclick="myDeletePub(<%=u.getIdPublicacion()%>)"><i class="far fa-trash-alt"></i></td>
+                                                    <a href="#" onclick="myDeletePub(<%=u.getIdPublicacion()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                                 	<%
 					            		}
@@ -138,6 +140,7 @@
 	        function myDeletePub(idPublicacion)
 	        {
 	        	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+	        	$.fn.jAlert.defaults.confirmBtnText = 'Si';
 	            confirm(function(e, btn){
 	                e.preventDefault();
 	                window.location.href = "SLEliminarPublicacion?id="+idPublicacion
@@ -146,6 +149,22 @@
 	                e.preventDefault();
 	            });
 	        }
+	        
+	        $(document).ready(function ()
+       	    {
+       	        var mensaje = "";
+       	        mensaje = "<%=varMsj%>";
+       	        
+       	        if(mensaje == "5")
+       	        {
+       	            successAlert('Exito', 'Los datos han sido eliminado exitosamente');
+       	        }
+       	        if(mensaje == "6")
+       	        {
+       	            errorAlert('Error', 'No se han podido eliminar los datos correctamente');
+       	        }
+       	       
+       	    });
 	
 	    </script>
         

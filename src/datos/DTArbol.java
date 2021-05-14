@@ -18,9 +18,9 @@ public class DTArbol {
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
 	
-	public void llenarArbol() {
+	public void llenarArbol(Connection c) {
 		try {
-			ps = c.prepareStatement("select * from arbol", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("select * from arbol where idArbol <> 3", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsArbol = ps.executeQuery();
 		} catch (Exception e) {
 			System.out.println("Error en listar arbol "+ e.getMessage());
@@ -112,5 +112,30 @@ public class DTArbol {
 		
 		return resp;
 
+	}
+	
+	public boolean eliminarArbol(int id) {
+		boolean eliminado = false;
+		
+		
+		try {
+			c = PoolConexion.getConnection();
+			this.llenarArbol(c);
+			rsArbol.beforeFirst();
+			while (rsArbol.next())
+			{
+				if(rsArbol.getInt(1)==id)
+				{
+					rsArbol.deleteRow();
+					eliminado=true;
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error en eliminar el arbol");
+			e.printStackTrace();
+		}
+		
+		return eliminado;
 	}
 }

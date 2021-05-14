@@ -122,6 +122,7 @@
 	        function myDeletePub(idU)
 	        {
 	        	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+	        	$.fn.jAlert.defaults.confirmBtnText = 'Si';
 	            confirm(function(e, btn){
 	                e.preventDefault();
 	                window.location.href = "SLEliminarUsuario?id="+idU

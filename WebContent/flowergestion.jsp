@@ -8,6 +8,8 @@
 <!DOCTYPE html>
     <html lang="es">
 
+	<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,7 +38,7 @@
             <div class="col-lg-10 mx-auto mt-5">
                 <div class="card rounded shadow border-0">
                     <div class="card-header">
-                        <h3>Familia</h3>
+                        <h3>Flor</h3>
                     </div>
                     <div class="card-body bg-white rounded">
                         <div class="table-responsive">
@@ -74,7 +76,7 @@
                                         <td><%=fl.getTemporadaFloracion() %></td>          
                                         <td>&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    a=""><i class="far fa-trash-alt"></i></td>
+                                                    href="#" onclick="myDeleteFlower(<%=fl.getIdFlor()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                             		<%
                                 		}
@@ -123,17 +125,34 @@
     
     <script>
 
-        function myDeleteFam(idMoneda)
+        function myDeleteFlower(idFlor)
         {
         	$.fn.jAlert.defaults.confirmQuestion = '¿Estás Seguro?';
+        	$.fn.jAlert.defaults.confirmBtnText = 'Si';
             confirm(function(e, btn){
                 e.preventDefault();
-                window.location.href = "SLEliminarFamilia?id="+idMoneda
+                window.location.href = "SLEliminarFlor?id="+idFlor
             },
             function(e,btn){
                 e.preventDefault();
             });
         }
+        
+        $(document).ready(function ()
+   	    {
+   	        var mensaje = "";
+   	        mensaje = "<%=varMsj%>";
+   	        
+   	        if(mensaje == "5")
+   	        {
+   	            successAlert('Exito', 'Los datos han sido eliminado exitosamente');
+   	        }
+   	        if(mensaje == "6")
+   	        {
+   	            errorAlert('Error', 'Los datos estan siendo usados en otros elemento. Por favor revisar');
+   	        }
+   	       
+   	    });
 
     </script>
     

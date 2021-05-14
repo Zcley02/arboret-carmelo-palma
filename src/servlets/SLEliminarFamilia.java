@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datos.DTFamilia;
-import entidades.Familiar;
 
 /**
  * Servlet implementation class SLEliminarFamilia
@@ -30,27 +29,16 @@ public class SLEliminarFamilia extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String idFamilia = "";
-		idFamilia = request.getParameter("id");
+		int id =0;
+		id = Integer.parseInt(request.getParameter("id"));
+		DTFamilia dtb = new DTFamilia(); 
 		
-		try {
-			
-			DTFamilia dt = new DTFamilia();
-			Familiar fa = new Familiar();
-			
-			fa.setIdFamilia(Integer.parseInt(idFamilia));
-			
-			if(dt.eliminarFamilia(fa)) {
-				response.sendRedirect("familygestion.jsp");
-			}else {
-				response.sendRedirect("familygestion.jsp?error");
-			}
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		if(dtb.eliminarFamilia(id)) {
+        	response.sendRedirect("familygestion.jsp?msj=5");
+        }
+        else {
+        	response.sendRedirect("familygestion.jsp?msj=6");
+        }
 	}
 
 	/**

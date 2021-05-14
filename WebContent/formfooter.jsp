@@ -1,6 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
 
     <head>
         <meta charset="UTF-8">
@@ -37,30 +36,29 @@
 
                     <div class="card-header">
                         <h2>
-                            Pie de PÃ¡gina
+                            Pie de Página
                         </h2>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form role="form">
+                        <form action="SLGuardarPP" role="form" method="post">
                             <div class="form-group">
-                                <label>DirecciÃ³n:</label>
-                                <input class="form-control">
+                                <label>Dirección:</label>
+                                <input name="direccion" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Correo:</label>
-                                <input class="form-control">
+                                <input name="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Telefono:</label>
-                                <input class="form-control">
+                                <input name="telefono" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>ExtensiÃ³n:</label>
-                                <input class="form-control">
+                                <label>Extensión:</label>
+                                <input name="ext" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 50%;">Guardar</button>
-                                <button class="btn btn-primary" style="width: 48%;">Visualizar</button>
+                                <button type="submit" class="btn btn-primary" style="width: 50%;">Guardar</button>
                             </div>
 
                         </form>

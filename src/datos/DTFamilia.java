@@ -12,8 +12,24 @@ public class DTFamilia {
 
 	PoolConexion pc = PoolConexion.getInstance();
 	Connection c = null;
+	private ResultSet rsFamilia = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
+	
+	public void llenarRsFamilia(Connection c) {
+		String sql = "SELECT * FROM public.familia where estado <> 3";
+		try 
+		{
+			//c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsFamilia = ps.executeQuery();
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("DT USUARIO: Error en listar las familias " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<Familiar> listarFamilia(){
 		ArrayList<Familiar> listarFamiliar = new ArrayList<Familiar>();
@@ -84,21 +100,22 @@ public class DTFamilia {
 		return guardado;
 	}
 	
-	public boolean eliminarFamilia(Familiar fa) {
+	public boolean eliminarFamilia(int id) {
 		boolean eliminado = false;
-		
-		PreparedStatement ps;
-		String sql = "Update familia set estado = 3 where idFamilia = ?";
 		
 		try {
 			c = PoolConexion.getConnection();
-			ps = c.prepareStatement(sql);
-			
-			ps.setInt(1, fa.getIdFamilia());
-			
-			ps.executeUpdate();
-			
-			eliminado = true;
+			this.llenarRsFamilia(c);;
+			rsFamilia.beforeFirst();
+			while (rsFamilia.next())
+			{
+				if(rsFamilia.getInt(1)==id)
+				{
+					rsFamilia.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
 			
 		} catch (Exception e) {
 			System.out.println("Error en eliminar la familia");

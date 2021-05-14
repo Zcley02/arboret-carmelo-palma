@@ -60,4 +60,39 @@ public class DTEvento {
 		}
 		return listaEventos;
 	}
+	
+	
+	public boolean guardarEvento(Eventos ev) {
+		boolean guardado = false;
+		
+		PreparedStatement ps;
+		String sql = "Insert into public.eventos(nombre, descripcion, fechaInicio, fechaFin, tipoEvento, ubicacion, hipervinculo, estado) Values(?,?,?,?,?,?,?,1)";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, ev.getNombre());
+			ps.setString(2, ev.getDescripcion());
+			ps.setString(3, ev.getFechaInicio());
+			ps.setString(4, ev.getFechaFin());
+			ps.setString(5, ev.getTipoEvento());
+			ps.setString(6, ev.getUbicacion());
+			ps.setString(7, ev.getHipervinculo());
+			
+			ps.executeUpdate();
+			
+			guardado = true;
+			
+			ps.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		return guardado;
+	}
 }

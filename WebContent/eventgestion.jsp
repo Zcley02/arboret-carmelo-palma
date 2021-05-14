@@ -36,29 +36,27 @@
 
 
     <!--Formulario-->
-    <div class="container py-1">
+     <div class="container py-1">
        
+        <div class="container py-1">
         <div class="row py-5">
-            <div class="col-lg-12 mx-auto mt-5">
+            <div class="col-lg-12 ml-lg-5 mx-auto mt-5">
                 <div class="card rounded shadow border-0">
                     <div class="card-header">
-                        <h3>Gestión de eventos</h3>
+                        <h3>Gestión Eventos</h3>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <div style="text-align: right;"><a href="formevent.jsp"><i class="fas fa-plus-square"></i>&nbsp;
-                                Nuevo evento</a>
-                        </div>
+                    
                         <div class="table-responsive">
-                            <table id="example" style="width:100%" class="table table-striped table-bordered">
-
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <div style="text-align:right;"><a href="formevent.jsp"><i
+                                            class="fas fa-plus-square"></i>&nbsp; Nueva Evento</div>
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
                                                 <th>Descripción</th>
-                                                <th>Fecha de Inicio</th>
-                                                <th>Fecha Final</th>
+                                                <th>Fecha de Inicio (Mes/Día/Año)</th>
+                                                <th>Fecha Final (Mes/Día/Año)</th>
                                                 <th>Tipo de Evento</th>
                                                 <th>Ubicación</th>
                                                 <th>Hipervinculo</th>
@@ -69,8 +67,8 @@
                                             <tr>
                                                 <th>Nombre</th>
                                                 <th>Descripción</th>
-                                                <th>Fecha de Inicio (Año/Mes/Día)</th>
-                                                <th>Fecha Final(Año/Mes/Día)</th>
+                                                <th>Fecha de Inicio (Mes/Día/Año)</th>
+                                                <th>Fecha Final (Mes/Día/Año)</th>
                                                 <th>Tipo de Evento</th>
                                                 <th>Ubicación</th>
                                                 <th>Hipervinculo</th>
@@ -98,17 +96,12 @@
                                         	}
                                          %>
                                         </tbody>
-                                    </table>
-                                </div>
-                                </tbody>
-                            </table>
+                           </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--termona formulario-->
     </div>
 
 

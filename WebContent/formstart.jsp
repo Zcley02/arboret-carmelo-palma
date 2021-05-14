@@ -100,7 +100,7 @@
                                 <textarea name="vision" id="descripciónCP" rows="4" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 49%;">Guardar</button>
+                                <button type="submit" class="btn btn-primary" style="width: 49%;">Guardar</button>
                                 <button class="btn btn-primary" style="width: 48%;">Previsualizar</button>
                             </div>
                         </form>

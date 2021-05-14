@@ -1,6 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
 
     <head>
         <meta charset="UTF-8">
@@ -52,36 +51,36 @@
                         <h2>Evento</h2>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form>
+                        <form action="SLGuardarEvento" method="post">
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Nombre:</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput">
+                                <input name="nombre" type="text" class="form-control" id="formGroupExampleInput">
                             </div>
 
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label>DescripciÃ³n:</label>
-                                    <textarea class="form-control" rows="3"></textarea>
+                                    <label>Descripción:</label>
+                                    <textarea name="descripcion" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Fecha Inicio:</label>
-                                <input type="datetime-local" class="form-control" id="formGroupExampleInput">
+                                <input name="fechaInicio" type="date" class="form-control" id="formGroupExampleInput">
                             </div>
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Fecha Final:</label>
-                                <input type="datetime-local" class="form-control" id="formGroupExampleInput">
+                                <input name="fechaFin" type="date" class="form-control" id="formGroupExampleInput">
                             </div>
 
                             <div class="form-group">
 
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Tipo de Evento</label>
-                                    <select class="form-control">
-                                        <option value="value1 ">Agenda PÃºblica</option>
-                                        <option value="value2 ">Agenda Privada</option>
+                                    <select name="tipoEvento" class="form-control">
+                                        <option value="Agenda Pública ">Agenda Pública</option>
+                                        <option value="Agenda Privada ">Agenda Privada</option>
                                     </select>
                                 </div>
 
@@ -89,20 +88,20 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="formGroupExampleInput ">UbicaciÃ³n</label>
-                                <input type="text " class="form-control " id="formGroupExampleInput ">
+                                <label for="formGroupExampleInput ">Ubicación</label>
+                                <input name="ubicacion" type="text" class="form-control " id="formGroupExampleInput ">
                             </div>
 
                             <div class="form-group ">
                                 <label for="formGroupExampleInput ">Hipervinculo</label>
-                                <input type="text " class="form-control " id="formGroupExampleInput ">
+                                <input name="hipervinculo" type="text" class="form-control " id="formGroupExampleInput ">
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
                         </form>
 
-                        <div style="text-align: center; "><a href="GestionEvento.jsp"><i
+                        <div style="text-align: center; "><a href="eventgestion.jsp"><i
                                     class="fas fa-undo "></i>&nbsp;Volver a la tabla</div>
                     </div>
                 </div>

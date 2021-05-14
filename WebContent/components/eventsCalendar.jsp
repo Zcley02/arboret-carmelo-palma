@@ -28,6 +28,7 @@
  		  <%
  		  	}
  		  %>
+ 		  /*
   	    {
   	      id: "bHay68s", // Event's ID (required)
   	      name: "Conferencia 1", // Event name (required)
@@ -43,7 +44,7 @@
   	      type: "event",
   	      color: "#a8a8a8", // Event custom color (optional)
   	      link: "https://google.com",
-  	    },
+  	    },*/
   	  ],
   	});
 </script>

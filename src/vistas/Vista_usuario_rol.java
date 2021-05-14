@@ -1,97 +1,71 @@
-package entidades;
+package vistas;
 
-public class Usuario {
-	private int idUsuario;
+public class Vista_usuario_rol {
+	private int idusuario;
 	private String nombres;
 	private String apellidos;
 	private String usuario;
 	private String email;
 	private String contrasenia;
-	private int idRol;
-	private int estado;
+	private String rol;
 	
-	public Usuario() {
+	public Vista_usuario_rol() {
 		super();
 	}
-
-	
-	public Usuario(int idUsuario, String nombres, String apellidos, String usuario, String email, String contrasenia,
-			int idRol, int estado) {
+	public Vista_usuario_rol(int idusuario, String nombres, String apellidos, String usuario, String email,
+			String contrasenia, String rol) {
 		super();
-		this.idUsuario = idUsuario;
+		this.idusuario = idusuario;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.usuario = usuario;
 		this.email = email;
 		this.contrasenia = contrasenia;
-		this.idRol = idRol;
-		this.estado = estado;
+		this.rol = rol;
 	}
-
-
-	public int getIdUsuario() {
-		return idUsuario;
+	public int getIdusuario() {
+		return idusuario;
 	}
-
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdusuario(int idusuario) {
+		this.idusuario = idusuario;
 	}
-
 	public String getNombres() {
 		return nombres;
 	}
-
 	public void setNombres(String nombres) {
 		this.nombres = nombres;
 	}
-
 	public String getApellidos() {
 		return apellidos;
 	}
-
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-
 	public String getUsuario() {
 		return usuario;
 	}
-
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getContrasenia() {
 		return contrasenia;
 	}
-
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-
-	public int getIdRol() {
-		return idRol;
+	public String getRol() {
+		return rol;
 	}
-	
-	public void setIdRol(int idRol) {
-		this.idRol = idRol;
-	}
-
-	public int getEstado() {
-		return estado;
-	}
-
-	public void setEstado(int estado) {
-		this.estado = estado;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 	
 	
 }
+

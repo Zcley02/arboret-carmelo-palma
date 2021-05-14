@@ -1,16 +1,16 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, vistas.*, java.util.*"%>
 <%
-	ArrayList<Arbol> listarArbol = new ArrayList<Arbol>();
-	DTArbol dt = new DTArbol();
-	listarArbol = dt.listarArbol();
+	ArrayList<Vista_arbol> listarArbol = new ArrayList<Vista_arbol>();
+	DTVista_arbol dt = new DTVista_arbol();
+	listarArbol = dt.listarAR();
 
-    for(Arbol u: listarArbol){
+    for(Vista_arbol u: listarArbol){
 %>
     <div class="col-lg-4 mb-4">
         <div class="card border-dark rounded-3">
             <div class="figure">
                 <img class="card-img-top"
-                    src="<%=u.getImg()%>"
+                    src="<%=u.getFoto() %>"
                     alt="Abies alba">
             </div>
 
@@ -26,16 +26,10 @@
                 </p>
                 <div class="details">
 	                <ul class="list-group list-group-flush rounded-3">
-	                    <li class="list-group-item"><b>Otros nombres: </b>Abeto, abeto común, pinabete (cast.);
-	                        avet
-	                        (cat.);...</li>
-	                    <li class="list-group-item"><b>Ecología: </b>Se cría formando bosques mixtos con hayas o
-	                        pinos,...</li>
-	                    <li class="list-group-item"><b>Distribución: </b>El abeto es natural de Europa y ocupa
-	                        las
-	                        montañas...
-	                    </li>
-	                    <li class="list-group-item"><b>Autóctona: </b>Sí</li>
+	                    <li class="list-group-item"><b>Género: </b><%=u.getNombre_Genero() %></li>
+	                    <li class="list-group-item"><b>Flor: </b><%=u.getNombre_Flor() %></li>
+	                    <li class="list-group-item"><b>Familia: </b><%=u.getNombre_Familia() %></li>
+	                    <li class="list-group-item"><b>Distribución: </b><%=u.getNombre_Distribucion() %></li>
 	                </ul>
 	            </div>
                 <a href="" class="btn btn-outline-primary">

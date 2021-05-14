@@ -1,8 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, vistas.*, java.util.*" %>
 <%
-	ArrayList<Arbol> listarArbol = new ArrayList<Arbol>();
-	DTArbol dt = new DTArbol();
-	listarArbol = dt.listarArbol();
+	ArrayList<Vista_arbol> listarArbol = new ArrayList<Vista_arbol>();
+	DTVista_arbol dt = new DTVista_arbol();
+	listarArbol = dt.listarAR();
 %>
     <!DOCTYPE html>
     <html lang="en">
@@ -73,17 +73,17 @@
                                 </tfoot>
                                 <tbody>
                                 <%
-					           		for(Arbol u: listarArbol){
+					           		for(Vista_arbol u: listarArbol){
 					           	%>
                                     <tr>
                                         <td><%=u.getNombreComun() %></td>
                                         <td><%=u.getNombreCientifico() %></td>
                                         <td><%=u.getDescripcion() %></td>
-                                        <td><%=u.getIdGenero() %></td>
-                                        <td><%=u.getIdFamilia() %></td>
-                                        <td><%=u.getIdFlor() %></td>
-                                        <td><%=u.getIdDistribucion() %></td>
-                                        <td><img alt="Arbol" src="<%=u.getImg()%>" width="100px" height="100px"></td>
+                                        <td><%=u.getNombre_Genero() %></td>
+                                        <td><%=u.getNombre_Familia() %></td>
+                                        <td><%=u.getNombre_Flor() %></td>
+                                        <td><%=u.getNombre_Distribucion() %></td>
+                                        <td><img alt="Arbol" src="<%=u.getFoto()%>" width="100px" height="100px"></td>
                                         <td>&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
                                                 href="#"><i class="far fa-trash-alt"></i></td>

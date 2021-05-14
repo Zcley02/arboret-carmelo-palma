@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@page import="entidades.*, datos.*, java.util.*"%>
+<%@page import="entidades.Banner, datos.DTBanner, java.util.*"%>
     <!DOCTYPE html>
     <html lang="en">
     

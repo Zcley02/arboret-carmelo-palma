@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -41,7 +40,7 @@
                         <h2 class="card-title text-center">Inicio</h2>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="SLGuardarInicio" method="Post" enctype="multipart/form-data">
                             <h3>Historia</h3>
                             <hr class="bg-dark w-auto">
                             <div class="form-group">
@@ -51,17 +50,17 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <input name="hFoto" type="file" class="custom-file-input" id="inputGroupFile01">
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="nombreCP" class="form-label fw-bolder">Descripci贸n:</label>
-                                <textarea id="descripci贸nCP" rows="4" class="form-control"></textarea>
+                                <label for="nombreCP" class="form-label fw-bolder">Descripci髇:</label>
+                                <textarea name="historia" id="descripci髇CP" rows="4" class="form-control"></textarea>
                             </div>
-                            <h3>Misi贸n</h3>
+                            <h3>Misi髇</h3>
                             <hr class="bg-dark w-auto">
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -70,18 +69,18 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                        <input name="mFoto" type="file" class="custom-file-input" id="inputGroupFile02">
                                         <label class="custom-file-label" for="inputGroupFile02">Seleccionar el
                                             archivo</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="nombreCP" class="form-label fw-bolder">Descripci贸n:</label>
-                                <textarea id="descripci贸nCP" rows="4" class="form-control"></textarea>
+                                <label for="nombreCP" class="form-label fw-bolder">Descripci髇:</label>
+                                <textarea name="mision" id="descripci髇CP" rows="4" class="form-control"></textarea>
                             </div>
 
-                            <h3>Visi贸n</h3>
+                            <h3>Visi髇</h3>
                             <hr class="bg-dark w-auto">
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -90,15 +89,15 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile03">
+                                        <input name="vFoto" type="file" class="custom-file-input" id="inputGroupFile03">
                                         <label class="custom-file-label" for="inputGroupFile03">Seleccionar el
                                             archivo</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="nombreCP" class="form-label fw-bolder">Descripci贸n:</label>
-                                <textarea id="descripci贸nCP" rows="4" class="form-control"></textarea>
+                                <label for="nombreCP" class="form-label fw-bolder">Descripci髇:</label>
+                                <textarea name="vision" id="descripci髇CP" rows="4" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
                                 <button class="btn btn-primary" style="width: 49%;">Guardar</button>

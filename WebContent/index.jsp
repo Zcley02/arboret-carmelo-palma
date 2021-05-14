@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" import = "entidades.*, datos.*, java.util.*;"
     %>
+    
+    
     <!DOCTYPE html>
     <html lang="en">
 
@@ -85,28 +87,26 @@
         </div>
         <!-- End of Banner -->
 
+		<%
+			Inicio in = new Inicio();
+			DTInicio dt = new DTInicio();
+			
+			in = dt.llenarInicio();
+		%>
+
         <!-- Summary -->
-        <div class="container">
+        <div class="container mb-5">
             <h1 class="my-4">Nuestra historia</h1>
             <hr class="bg-dark w-25 ml-0">
             <div class="row">
-                <div class="col-md-8 border-success">
+                <div class="col-md-5 mt-7">
                     <img class="img-fluid rounded-3"
-                        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"
+                        src="<%=in.getFotoHistoria() %>"
                         alt="trees">
                 </div>
-                <div class="col-md-4">
-                    <h2 class="my-3">Title</h2>
-                    <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Unde sapiente incidunt quisquam perspiciatis animi velit amet omnis dolores
-                        eius excepturi, obcaecati et quis quod, quos maxime eveniet qui laborum porro.</p>
-                    <h2 class="my-3">Subtitle</h2>
-                    <ul>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolor Sit Amet</li>
-                        <li>Consectetur</li>
-                        <li>Adipiscing Elit</li>
-                    </ul>
+                <div class="col-md-7">
+                    <h2 class="my-3">Historia</h2>
+                    <p class="paragraph"><%=in.getHistoria() %></p>
                 </div>
             </div>
         </div>
@@ -119,48 +119,12 @@
             <div class="row">
                 <div class="col-md-7">
                     <p class="paragraph">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati tempora consequuntur
-                        magnam ipsum id quo voluptatem vitae. Animi temporibus fugit quod laborum assumenda aliquid,
-                        itaque doloribus dicta nam cum explicabo!
+                        <%=in.getMision() %>
                     </p>
-                    <p class="paragraph">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis architecto ab magnam dolorum.
-                        Expedita suscipit labore quisquam tempora doloribus, blanditiis nobis maiores iusto harum
-                        tenetur
-                        eius ex a asperiores laboriosam? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Illo
-                        sed
-                        qui maiores officia unde? Repellat tenetur hic inventore molestiae? Vel sint neque enim
-                        quasi
-                        dolorum
-                        maxime tempora alias aspernatur adipisci. Lorem ipsum dolor sit, amet consectetur
-                        adipisicing
-                        elit.
-                        Atque, necessitatibus! Ducimus a sit consequuntur? Dolor optio rerum voluptatum sapiente,
-                        quia,
-                        adipisci
-                        ut hic, dolorem quos suscipit architecto consectetur laborum ducimus.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis architecto ab magnam dolorum.
-                        Expedita suscipit labore quisquam tempora doloribus, blanditiis nobis maiores iusto harum
-                        tenetur
-                        eius ex a asperiores laboriosam? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    </p>
-                    <ul class="list-unstyled pl-2">
-                        <li><i class="fa fa-check"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li><i class="fa fa-check"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li><i class="fa fa-check"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li><i class="fa fa-check"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li><i class="fa fa-check"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        </li>
-                    </ul>
                 </div>
                 <div class="col-md-5">
                     <img class="img-fluid rounded-3"
-                        src="https://images.unsplash.com/photo-1598100931767-979cdc7b0175?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                        src="<%=in.getFotoMision() %>"
                         alt="">
                 </div>
             </div>
@@ -174,36 +138,12 @@
             <div class="row">
                 <div class="col-md-5 mt-7">
                     <img class="img-fluid rounded-3"
-                        src="https://images.unsplash.com/photo-1598100931767-979cdc7b0175?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                        src="<%=in.getFotoVision() %>"
                         alt="Card image cap">
                 </div>
                 <div class="col-md-7">
                     <p class="paragraph">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati tempora consequuntur
-                        magnam ipsum id quo voluptatem vitae. Animi temporibus fugit quod laborum assumenda aliquid,
-                        itaque doloribus dicta nam cum explicabo!
-                    </p>
-                    <p class="paragraph">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis architecto ab magnam dolorum.
-                        Expedita suscipit labore quisquam tempora doloribus, blanditiis nobis maiores iusto harum
-                        tenetur
-                        eius ex a asperiores laboriosam? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Illo
-                        sed
-                        qui maiores officia unde? Repellat tenetur hic inventore molestiae? Vel sint neque enim
-                        quasi
-                        dolorum
-                        maxime tempora alias aspernatur adipisci. Lorem ipsum dolor sit, amet consectetur
-                        adipisicing
-                        elit.
-                        Atque, necessitatibus! Ducimus a sit consequuntur? Dolor optio rerum voluptatum sapiente,
-                        quia,
-                        adipisci
-                        ut hic, dolorem quos suscipit architecto consectetur laborum ducimus.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis architecto ab magnam dolorum.
-                        Expedita suscipit labore quisquam tempora doloribus, blanditiis nobis maiores iusto harum
-                        tenetur
-                        eius ex a asperiores laboriosam? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                        <%=in.getVision() %>
                     </p>
                 </div>
             </div>

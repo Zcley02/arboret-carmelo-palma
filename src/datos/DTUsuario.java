@@ -31,49 +31,83 @@ public class DTUsuario {
 		public boolean guardarUsuario(Usuario u){
 			boolean resp = false;
 			
-			try{
-				c = PoolConexion.getConnection();
-				ps = c.prepareStatement("INSERT INTO public.usuario(nombres, apellidos, usuario, email, contrasenia, idrol, estado) "
-										+ "VALUES(?,?,?,?,?,?,?)");
-				
-				ps.setString(1, u.getNombres());
-				ps.setString(2, u.getApellidos());
-				ps.setString(3, u.getUsuario());
-				ps.setString(4, u.getEmail());
-				ps.setString(5, u.getContrasenia());
-				ps.setInt(6, u.getIdRol());
-				ps.setInt(7, u.getEstado());
-				
-				int i = ps.executeUpdate();
-				
-				if(i==1) {
-					resp = true;
-				}else {
-					resp = false;
-				}
-				
-				ps.close();
-			}
-			catch (Exception e) {
-				System.err.println("Error al guardar usuario "+e.getMessage());
-				e.printStackTrace();
-			}
-			finally{
-				try {
-					if(rsUsuario != null){
-						rsUsuario.close();
-					}
-					if(c != null){
-						PoolConexion.closeConnection(c);
+			if(buscarUsuario(u.getUsuario())) {
+				resp = false;
+			}else {
+				try{
+					c = PoolConexion.getConnection();
+					ps = c.prepareStatement("INSERT INTO public.usuario(nombres, apellidos, usuario, email, contrasenia, idrol, estado) "
+											+ "VALUES(?,?,?,?,?,?,?)");
+					
+					ps.setString(1, u.getNombres());
+					ps.setString(2, u.getApellidos());
+					ps.setString(3, u.getUsuario());
+					ps.setString(4, u.getEmail());
+					ps.setString(5, u.getContrasenia());
+					ps.setInt(6, u.getIdRol());
+					ps.setInt(7, u.getEstado());
+					
+					int i = ps.executeUpdate();
+					
+					if(i==1) {
+						resp = true;
+					}else {
+						resp = false;
 					}
 					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+					ps.close();
+				}
+				catch (Exception e) {
+					System.err.println("Error al guardar usuario "+e.getMessage());
 					e.printStackTrace();
+				}
+				finally{
+					try {
+						if(rsUsuario != null){
+							rsUsuario.close();
+						}
+						if(c != null){
+							PoolConexion.closeConnection(c);
+						}
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 			
 			return resp;
+		}
+		
+		public boolean buscarUsuario(String usuario) {
+			boolean existe = false;
+			
+			PreparedStatement ps;
+			String sql = "Select * from public.usuario where usuario = ?";
+			
+			try {
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ps.setString(1, usuario);
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					existe = true;
+				}else {
+					existe = false;
+				}
+				
+				rs.close();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("DATOS: ERROR AL VERIFICAR EL LOGIN "+ e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return existe;
 		}
 		
 		/*
@@ -163,5 +197,34 @@ public class DTUsuario {
 				}
 			}
 			return eliminado;
+		}
+		
+		public boolean loginUsuario(Usuario u) {
+			boolean encontrado = false;
+			
+			PreparedStatement ps;
+			String sql = "Select * from public.usuario where usuario = ? and contrasenia = ?";
+			
+			try {
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ps.setString(1, u.getUsuario());
+				ps.setString(2, u.getContrasenia());
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					encontrado = true;
+				}else {
+					encontrado = false;
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("DATOS: ERROR AL VERIFICAR EL LOGIN "+ e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return encontrado;
 		}
 }

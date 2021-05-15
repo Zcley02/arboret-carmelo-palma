@@ -1,3 +1,20 @@
+<%
+    //Limpia la CACHE del navegador
+	    response.setHeader("Pragma", "no-cache");
+	    response.setHeader("Cache-Control", "no-store");
+	    response.setDateHeader("Expires", 0);
+	    response.setDateHeader("Expires", -1);
+	      
+		
+		String loginUser = "";
+		loginUser = (String)session.getAttribute("login");
+		loginUser = loginUser==null?"":loginUser;
+		
+		if(loginUser.equals(""))
+		{
+			response.sendRedirect("login.jsp");
+		}
+    %>
 <!DOCTYPE html>
     <html lang="es">
 

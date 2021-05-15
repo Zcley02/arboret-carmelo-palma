@@ -2,10 +2,30 @@
 <%@page import= "vistas.*" %>
 <%@page import= "datos.*"%>
 <%@page import= "java.util.*"%>
+<%
+    //Limpia la CACHE del navegador
+	    response.setHeader("Pragma", "no-cache");
+	    response.setHeader("Cache-Control", "no-store");
+	    response.setDateHeader("Expires", 0);
+	    response.setDateHeader("Expires", -1);
+	      
+		
+		String loginUser = "";
+		loginUser = (String)session.getAttribute("login");
+		loginUser = loginUser==null?"":loginUser;
+		
+		if(loginUser.equals(""))
+		{
+			response.sendRedirect("login.jsp");
+		}
+    %>
     <!DOCTYPE html>
     <html lang="en">
     
-     <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
+     <% 
+     	String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");
+     	String error = request.getParameter("error")==null?"":request.getParameter("error");
+     %>
 
     <head>
         <meta charset="UTF-8">
@@ -84,7 +104,7 @@
 											<td><%=vur.getContrasenia()%></td>
 											<td><%=vur.getRol()%></td>
 											<td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="myDeletePub(<%=vur.getIdusuario()%>)"
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=vur.getIdusuario()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 										</tr>
 									 <%
@@ -135,7 +155,9 @@
 	        $(document).ready(function ()
 	        	    {
 	        	        var mensaje = "";
+	        	        var error = "";
 	        	        mensaje = "<%=varMsj%>";
+	        	        error = "<%=error%>";
 	        	        
 	        	        if(mensaje == "5")
 	        	        {
@@ -145,7 +167,9 @@
 	        	        {
 	        	            errorAlert('Error', 'Los datos de este Usuario estan siendo utilizados. Por favor revise');
 	        	        }
-	        	       
+	        	       	if(error == "1"){
+	        	       		errorAlert('Error', 'Error al agregar el usuario, nombre de usuario ya existe');
+	        	       	}
 	        	    });
 	
 	    </script>

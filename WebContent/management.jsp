@@ -1,6 +1,24 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, vistas.*, java.util.*"%>
     <!DOCTYPE html>
     <html lang="en">
+
+	<%
+    //Limpia la CACHE del navegador
+	    response.setHeader("Pragma", "no-cache");
+	    response.setHeader("Cache-Control", "no-store");
+	    response.setDateHeader("Expires", 0);
+	    response.setDateHeader("Expires", -1);
+	      
+		
+		String loginUser = "";
+		loginUser = (String)session.getAttribute("login");
+		loginUser = loginUser==null?"":loginUser;
+		
+		if(loginUser.equals(""))
+		{
+			response.sendRedirect("login.jsp");
+		}
+    %>
 
     <head>
         <meta charset="UTF-8">

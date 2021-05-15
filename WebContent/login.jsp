@@ -1,4 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+
+<%
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setDateHeader("Expires", 0);
+	response.setDateHeader("Expires", -1);
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -14,6 +21,13 @@
             crossorigin="anonymous"></script>
     </head>
 
+	<%
+		//DESTRUYE LA SESIÓN
+		HttpSession hts = request.getSession(false);
+		hts.removeAttribute("login");
+		hts.invalidate();
+	%>
+
     <body class="">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
@@ -26,15 +40,15 @@
                                         <h3 class="text-center font-weight-light my-4">Iniciar sesión</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form>
+                                        <form action="SL_login" method="post">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputEmailAddress">Correo:</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email"
-                                                    placeholder="Ingresar correo electronico" />
+                                                <label class="small mb-1" for="inputEmailAddress">Usuario:</label>
+                                                <input name="usuario" class="form-control py-4" id="inputEmailAddress" type="text"
+                                                    placeholder="Ingresar usuario" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputPassword">Contraseña</label>
-                                                <input class="form-control py-4" id="inputPassword" type="password"
+                                                <input name="password" class="form-control py-4" id="inputPassword" type="password"
                                                     placeholder="Ingresar contraseña" />
                                             </div>
                                             <div class="form-group">
@@ -50,8 +64,8 @@
                                                 class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small text-dark" href="password.jsp">¿Olvidaste tu
                                                     contraseña?</a>
-                                                <a class="btn btn-outline-success" href="management.jsp">Iniciar
-                                                    sesión</a>
+                                                <input type="submit" class="btn btn-outline-success" value="Iniciar Sesión" />
+                                                
                                             </div>
                                         </form>
                                     </div>

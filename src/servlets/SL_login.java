@@ -6,23 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import datos.DTRegion;
 import datos.DTUsuario;
-import entidades.Region;
 import entidades.Usuario;
 
 /**
- * Servlet implementation class SLGuardarUsuario
+ * Servlet implementation class SL_login
  */
-@WebServlet("/SLGuardarUsuario")
-public class SLGuardarUsuario extends HttpServlet {
+@WebServlet("/SL_login")
+public class SL_login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SLGuardarUsuario() {
+    public SL_login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,44 +39,36 @@ public class SLGuardarUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try 
-		{
+		try {
+			
 			Usuario u = new Usuario();
 			DTUsuario dt = new DTUsuario();
 			
-			String nombres, apellidos, usuario, email, pass;
-			int estado = 1;
-			String idrol;
+			String usuario = request.getParameter("usuario");
+			String contrasenia = request.getParameter("password");
 			
-			nombres = request.getParameter("txtNombres");
-			apellidos = request.getParameter("txtApellidos");
-			usuario = request.getParameter("txtUsuario");
-			email = request.getParameter("txtCorreo");
-			pass = request.getParameter("txtPassword");
-			idrol = request.getParameter("cmbRol").trim();
-			int id = Integer.parseInt(idrol);
-		
-			u.setNombres(nombres);
-			u.setApellidos(apellidos);
+			System.out.println(usuario + contrasenia);
+			
 			u.setUsuario(usuario);
-			u.setEmail(email);
-			u.setContrasenia(pass);
-			u.setIdRol(id);
-			u.setEstado(estado);
-
-			if(dt.guardarUsuario(u))
-			{
-				response.sendRedirect("usergestion.jsp");
+			u.setContrasenia(contrasenia);
+			
+			if(dt.loginUsuario(u)) {
+				System.out.println("EL USUARIO ES CORRECTO");
+				HttpSession hts = request.getSession(true);
+				//HttpSession hts1 = request.getSession(true);
+				hts.setAttribute("login", usuario);
+				//hts1.setAttribute("loginRol", idrol);
+				response.sendRedirect("management.jsp");
+			}else {
+				System.err.println("ERROR AL AUTENTICAR EL USUARIO");
+				response.sendRedirect("login.jsp");
 			}
-			else
-			{
-				response.sendRedirect("usergestion.jsp?error=1");
-			}
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("SL Usuario: Error al guardar el usuario " +e.getMessage());
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
+			System.out.println("ERROR EN SL_LOGIN: "+e.getMessage());
 		}
 	}
 

@@ -3,7 +3,26 @@
     <!DOCTYPE html>
     <html lang="en">
     
+    
     <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
+
+	<%
+    //Limpia la CACHE del navegador
+	    response.setHeader("Pragma", "no-cache");
+	    response.setHeader("Cache-Control", "no-store");
+	    response.setDateHeader("Expires", 0);
+	    response.setDateHeader("Expires", -1);
+	      
+		
+		String loginUser = "";
+		loginUser = (String)session.getAttribute("login");
+		loginUser = loginUser==null?"":loginUser;
+		
+		if(loginUser.equals(""))
+		{
+			response.sendRedirect("login.jsp");
+		}
+    %>
 
     <head>
         <meta charset="UTF-8">

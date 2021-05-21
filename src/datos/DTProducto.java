@@ -127,4 +127,102 @@ public class DTProducto {
 		return eliminado;
 	}
 	
+	public Producto buscarProducto(int id) {
+		Producto pro = new Producto();
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.productos where idProductos = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				pro.setIdProducto(rs.getInt("idProductos"));
+				pro.setNombre(rs.getString("nombre"));
+				pro.setDescripcion(rs.getString("descripcion"));
+				pro.setFoto("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
+				pro.setPrecio(rs.getDouble("precio"));
+				pro.setEstado(rs.getInt("estado"));
+				pro.setIdTipoProducto(rs.getInt("idTipo_producto"));
+			}
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return pro;
+	}
+	
+	public boolean editarPrConImagen(Producto p, InputStream in) {
+		boolean editado = false;
+		PreparedStatement ps;
+		String sql = "Update productos set nombre = ?, descripcion = ?, foto = ?, precio = ?, idTipo_producto = ?, estado = 2 where idProductos = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, p.getNombre());
+			ps.setString(2, p.getDescripcion());
+			ps.setBinaryStream(3, in);
+			
+			ps.setDouble(4, p.getPrecio());
+			ps.setInt(5, p.getIdTipoProducto());
+			ps.setInt(6, p.getIdProducto());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return editado;
+	}
+	
+	public boolean editarPrSinImagen(Producto p) {
+		boolean editado = false;
+		PreparedStatement ps;
+		String sql = "Update productos set nombre = ?, descripcion = ?, precio = ?, idTipo_producto = ?, estado = 2 where idProductos = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, p.getNombre());
+			ps.setString(2, p.getDescripcion());
+			ps.setDouble(3, p.getPrecio());
+			ps.setInt(4, p.getIdTipoProducto());
+			ps.setInt(5, p.getIdProducto());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return editado;
+	}
 }

@@ -95,11 +95,11 @@
                                             <tr>
                                                 <td><%=p.getNombre() %></td>
                                                 <td><%=p.getDescripcion() %></td>
-                                                <td><%=p.getIdProducto() %></td>
+                                                <td><%=p.getIdTipoProducto() %></td>
                                                 <td>C$<%=p.getPrecio() %></td>
                                                 <td><img src="<%=p.getFoto() %>" width="100px" height="100px"></td>
                                                 <td>
-                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                    <a href="editproduct.jsp?id=<%=p.getIdProducto()%>"><i class="fas fa-edit"></i></a>
                                                     <a href="#" onclick="myDeletePr(<%=p.getIdProducto()%>)"><i class="far fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>

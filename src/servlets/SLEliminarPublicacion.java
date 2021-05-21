@@ -35,9 +35,9 @@ public class SLEliminarPublicacion extends HttpServlet {
 		DTPublicacion dt = new DTPublicacion();
 		
 		if(dt.eliminarPublicacion(id)) {
-			response.sendRedirect("publicaciongestion.jsp?msj=5");
+			response.sendRedirect("publicationngestion.jsp?msj=5");
 		}else {
-			response.sendRedirect("publicaciongestion.jsp?msj=6");
+			response.sendRedirect("publicationgestion.jsp?msj=6");
 		}
 		
 	}

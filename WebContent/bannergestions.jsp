@@ -105,7 +105,7 @@
 	                                        <td><%=bn.getTitulo() %></td>
 	                                        <td><%=bn.getDescripcion()%></td>
 	                                        <td><img alt="ejemplo" src="<%=bn.getFoto() %>" onClick="getValue()" width="100px" height="100px"></td>
-											<td>&nbsp;&nbsp;<a href="#"><i
+											<td>&nbsp;&nbsp;<a href="editbanner.jsp?id=<%=bn.getIdBanner()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=bn.getIdBanner()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 										</tr>
@@ -193,6 +193,14 @@
 	        var mensaje = "";
 	        mensaje = "<%=varMsj%>";
 	        
+	        if(mensaje == "1")
+	        {
+	            successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+	        }
+	        if(mensaje == "2")
+	        {
+	            errorAlert('Error', 'Revise los datos insertados');
+	        }
 	        if(mensaje == "5")
 	        {
 	            successAlert('Exito', 'Los datos han sido eliminado exitosamente');

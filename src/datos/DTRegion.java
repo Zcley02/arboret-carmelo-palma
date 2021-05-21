@@ -1,10 +1,12 @@
 package datos;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import entidades.Pais;
 import entidades.Region;
@@ -137,80 +139,6 @@ public class DTRegion {
 		return guardado;
 	}
 	
-	/*
-	public boolean modificarUsuario(Usuario u)
-	{
-		boolean modificado = false;
-		Date utilDate = new Date();
-		java.sql.Date sqlDate =  new java.sql.Date(utilDate.getTime());
-		
-		try 
-		{
-			c = PoolConexion.getConnection();
-			this.llenarRsUsuario(c);
-			rsUsuario.beforeFirst();
-			//rsUsuario.absolute(u.getIdUsuario());
-			//rsUsuario.updateInt("idusuario", u.getIdUsuario());
-//			rsUsuario.updateString("nombre", u.getNombre());
-//			rsUsuario.updateString("apellido", u.getApellido());
-//			rsUsuario.updateString("usuario", u.getUsuarioNombre());
-//			rsUsuario.updateString("pwd", md5(u.getPwd()));
-//			rsUsuario.updateDate("fechaCreacion", sqlDate);
-//			rsUsuario.updateInt("estado", 2);
-//			rsUsuario.updateRow();
-			modificado = true;
-			
-				
-			while(rsUsuario.next())
-			{
-				if(rsUsuario.getInt(1) == u.getIdUsuario()) 
-				{
-					System.out.println("Id del usuario: " + u.getIdUsuario());
-					
-					//rsUsuario.updateInt("idusuario", u.getIdUsuario());
-					rsUsuario.updateString("nombre", u.getNombre());
-					rsUsuario.updateString("apellido", u.getApellido());
-					rsUsuario.updateString("usuario", u.getUsuarioNombre());
-					rsUsuario.updateString("pwd", md5(u.getPwd()));
-					rsUsuario.updateDate("fechaCreacion", sqlDate);
-					rsUsuario.updateInt("estado", 2);
-					
-					rsUsuario.updateRow();
-					modificado = true;
-					break;
-				}
-				
-			}
-			
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("DTUSUARIO: Error al modificar usuario " + e.getMessage());
-			e.printStackTrace();
-		}
-		finally 
-		{
-			try 
-			{
-				if(rsUsuario != null)
-				{
-					rsUsuario.close();
-				}
-				if(c != null)
-				{
-					c.close();
-				}
-			} 
-			catch (Exception e2) 
-			{
-				System.err.println("DTUSUARIO: Error al cerrar conexion " + e2.getMessage());
-				e2.printStackTrace();
-			}
-		}
-		
-		return modificado;
-	}
-	*/
 	public boolean eliminarRegion(int id)
 		{
 			boolean eliminado=false;	
@@ -251,6 +179,75 @@ public class DTRegion {
 			}
 			return eliminado;
 		}
+	
+	public Region getRegion(int id) {
+		Region r = new Region();
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.region where idregion = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				r.setIdRegion(rs.getInt("idRegion"));
+				r.setNombre(rs.getString("nombre"));
+				r.setDescripcion(rs.getString("descripcion"));
+				r.setEstado(rs.getInt("estado"));
+				r.setIdPais(rs.getInt("idPais"));
+			}
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LA REGION "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return r;
+	}
+	
+	public boolean editarRegion(Region r) {
+		boolean editado = false;
+		PreparedStatement ps;
+		String sql = "Update region set nombre = ?, descripcion = ?, estado = 2, idpais = ? where idregion = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, r.getNombre());
+			ps.setString(2, r.getDescripcion());
+			ps.setInt(3, r.getIdPais());
+			ps.setInt(4, r.getIdRegion());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return editado;
+	}
+
 	
 	/*
 	

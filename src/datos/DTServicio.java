@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 import entidades.Pais;
+import entidades.Producto;
 import entidades.Servicios;
 
 public class DTServicio {
@@ -165,5 +166,99 @@ public class DTServicio {
 			}
 		}
 		return eliminado;
+	}
+	
+	public Servicios getServicio(int id) {
+		Servicios s = new Servicios();
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.servicios where idServicio = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				s.setIdServicio(rs.getInt("idServicio"));
+				s.setNombre(rs.getString("nombre"));
+				s.setDescripcion(rs.getString("descripcion"));
+				s.setFoto("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
+				s.setEstado(rs.getInt("estado"));
+			}
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LOS SERVICIOS "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return s;
+	}
+	
+	public boolean editarSerConImagen(Servicios s, InputStream in) {
+		boolean editado = false;
+		PreparedStatement ps;
+		String sql = "Update public.servicios set nombre = ?, descripcion = ?, foto = ?, estado = 2 where idServicio = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, s.getNombre());
+			ps.setString(2, s.getDescripcion());
+			ps.setBinaryStream(3, in);
+			ps.setInt(4, s.getIdServicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		
+		}
+			return editado;
+	}
+	
+	public boolean editarSerSinImagen(Servicios s) {
+		boolean editado = false;
+		PreparedStatement ps;
+		String sql = "Update public.servicios set nombre = ?, descripcion = ?, estado = 2 where idServicio = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, s.getNombre());
+			ps.setString(2, s.getDescripcion());
+			ps.setInt(3, s.getIdServicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return editado;
 	}
 }

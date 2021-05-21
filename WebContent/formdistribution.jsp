@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="entidades.*" %>
 <%@page import="datos.*" %>
 <%@page import="java.util.*" %>
@@ -122,7 +123,7 @@
                         </a>
                         <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="treegestion.jsp">脕rbol</a>
+                                <a class="nav-link" href="treegestion.jsp">脕聛rbol</a>
                                 <a class="nav-link" href="gendergestion.jsp">G茅nero</a>
                                 <a class="nav-link" href="familygestion.jsp">Familia</a>
                                 <a class="nav-link" href="distributiongestion.jsp">Distribuci贸n</a>
@@ -202,18 +203,18 @@
 
                     <div class="card-header">
                         <h2>
-                            Distribuci髇
+                            Distribuci贸n
                         </h2>
 
                     </div>
                     <div class="card-body bg-white rounded">
                         <form action="SLGuardarDistribucion" method="Post">
                             <div class="form-group">
-                                <label>Nombre de la distribuci髇:</label>
+                                <label>Nombre de la distribuci贸n:</label>
                                 <input id="nombreD" name="nombreD" class="form-control">
                             </div>
                             <div class="form-group">
-                            	<label>Descripci髇: </label>
+                            	<label>Descripci贸n: </label>
                             	<textarea id="descripcionD" name="descripcionD" class="form-control" rows="3"></textarea>
                             </div>
                             
@@ -224,7 +225,7 @@
 								listaRegiones = dtp.listarRegiones();
                             %>
                             <div class="form-group">
-                                <label>Regi髇:</label>
+                                <label>Regi贸n:</label>
                                 <select id="region" name="region" class="form-control">
                                 
                                 <%for (Region r : listaRegiones) { %>

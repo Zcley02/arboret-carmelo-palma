@@ -95,6 +95,8 @@ public class DTProducto {
 			
 			guardado = true;
 			
+			ps.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -193,8 +195,11 @@ public class DTProducto {
 			
 			editado = true;
 			
+			ps.close();
+			
 		}catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		return editado;
@@ -219,8 +224,10 @@ public class DTProducto {
 			
 			editado = true;
 			
+			ps.close();
 		}catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		return editado;

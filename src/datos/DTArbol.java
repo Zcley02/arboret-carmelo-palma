@@ -138,4 +138,117 @@ public class DTArbol {
 		
 		return eliminado;
 	}
+	
+	public Arbol buscarArbol(int id) {
+		Arbol arbol = new Arbol();
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.arbol where idArbol = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				arbol.setId(rs.getInt("idArbol")); 
+				arbol.setNombreComun(rs.getString("nombreComun"));
+				arbol.setNombreCientifico(rs.getString("nombreCientifico"));
+				arbol.setDescripcion(rs.getString("descripcion"));
+				arbol.setIdFamilia(rs.getInt("idFamilia"));
+				arbol.setIdGenero(rs.getInt("idGenero"));
+				arbol.setIdDistribucion(rs.getInt("idDistribucion"));
+				arbol.setIdFlor(rs.getInt("idFlor"));
+				arbol.setImg("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
+			}
+			
+		} 
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return arbol;
+	}
+	
+	public boolean editarArConImg(Arbol ar, InputStream fi) {
+		boolean editado = false;
+		
+		PreparedStatement ps;
+		String sql = "Update arbol set nombreComun = ?, nombreCientifico = ?, descripcion = ?, idFamilia = ?, idGenero = ?, idDistribucion = ?, idFlor = ?, foto = ?, estado = 2 where idArbol = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, ar.getNombreComun());
+			ps.setString(2, ar.getNombreCientifico());
+			ps.setString(3, ar.getDescripcion());
+			ps.setInt(4, ar.getIdFamilia());
+			ps.setInt(5, ar.getIdGenero());
+			ps.setInt(6, ar.getIdDistribucion());
+			ps.setInt(7, ar.getIdFlor());
+			ps.setBinaryStream(8, fi);
+			ps.setInt(9, ar.getId());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+			ps.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return editado;
+	}
+	
+	public boolean editarArSinImg(Arbol ar) {
+		boolean editado = false;
+		
+		PreparedStatement ps;
+		String sql = "Update arbol set nombreComun = ?, nombreCientifico = ?, descripcion = ?, idFamilia = ?, idGenero = ?, idDistribucion = ?, idFlor = ?, estado = 2 where idArbol = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, ar.getNombreComun());
+			ps.setString(2, ar.getNombreCientifico());
+			ps.setString(3, ar.getDescripcion());
+			ps.setInt(4, ar.getIdFamilia());
+			ps.setInt(5, ar.getIdGenero());
+			ps.setInt(6, ar.getIdDistribucion());
+			ps.setInt(7, ar.getIdFlor());
+			ps.setInt(8, ar.getId());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+			ps.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return editado;
+	}
 }

@@ -16,6 +16,11 @@
 	DTFlor dtf = new DTFlor();
 	listarFl = dtf.listarFlor();
 	
+	String id = request.getParameter("id")==null?"":request.getParameter("id");
+	int idT = Integer.parseInt(id);
+	
+	DTArbol dtt = new DTArbol();
+	Arbol a = dtt.buscarArbol(idT);
 	
 %>
 <%
@@ -71,39 +76,47 @@
 
                     <div class="card-header">
                         <h2>
-                            Catálogo del árbol
+                            Editar árbol
                         </h2>
 
                     </div>
                     <div class="card-body bg-white rounded">
 
 
-                        <form action="SLGuardarArbol" method="Post" enctype="multipart/form-data">
+                        <form action="SLEditarArbol" method="Post" enctype="multipart/form-data">
+                            <input hidden="true" name="id" id="id" value="<%=a.getId()%>">
+                            <input hidden="true" value="false" id="cambio" name="cambio">
                             <div class="form-group">
                                 <label>Nombre común:</label>
-                                <input name="nombreCo" id="nombreCo" class="form-control">
+                                <input value="<%=a.getNombreComun() %>" name="nombreCo" id="nombreCo" class="form-control">
 
                             </div>
                             <div class="form-group">
                                 <label>Nombre científico:</label>
-                                <input name="nombreCi" id="nombreCi" class="form-control">
+                                <input value="<%=a.getNombreCientifico() %>" name="nombreCi" id="nombreCi" class="form-control">
 
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"></textarea>
+                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"><%=a.getDescripcion() %></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Género del árbol:</label>
                                 <select name="genero" id="genero" class="form-control">
                                 	<%
                                 		for(Genero g: listarG){
+                                			if(a.getIdGenero()==g.getIdGenero()){
                                 	%>
-                                    <option value="<%=g.getIdGenero()%>"><%=g.getNombre() %></option>
-                                    <%
+                                    			<option selected="true" value="<%=g.getIdGenero()%>"><%=g.getNombre() %></option>
+                                    	<%
+                                			}else{
+                                    	%>
+                                    			<option value="<%=g.getIdGenero()%>"><%=g.getNombre() %></option>
+                                   	<%
+                                			}
                                 		}
-                                    %>
+                                   	%>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -111,9 +124,15 @@
                                 <select name="familia" id="familia" class="form-control">
                                 	<%
                                 		for(Familiar f: listarFa){
+                                			if(a.getIdFamilia()==f.getIdFamilia()){
                                 	%>
-                                    <option value="<%=f.getIdFamilia()%>"><%=f.getNombre() %></option>
+                                    			<option selected="true" value="<%=f.getIdFamilia()%>"><%=f.getNombre() %></option>
+                                    	<%
+                                			}else{
+                                    	%>
+                                    			<option value="<%=f.getIdFamilia()%>"><%=f.getNombre() %></option>
                                     <%
+                                			}
                                 		}
                                     %>
                                 </select>
@@ -123,9 +142,15 @@
                                 <select name="flor" id="flor" class="form-control">
                                 	<%
                                 		for(Flor fl: listarFl){
+                                			if(a.getIdFlor()==fl.getIdFlor()){
                                 	%>
-                                    <option value="<%=fl.getIdFlor()%>"><%=fl.getNombreComun() %> : <%=fl.getTemporadaFloracion() %> </option>
+                                    			<option selected="true" value="<%=fl.getIdFlor()%>"><%=fl.getNombreComun() %> : <%=fl.getTemporadaFloracion() %> </option>
+                                    	<%
+                                			}else{
+                                    	%>
+                                    			<option value="<%=fl.getIdFlor()%>"><%=fl.getNombreComun() %> : <%=fl.getTemporadaFloracion() %> </option>
                                     <%
+                                			}
                                 		}
                                 	%>
                                 </select>
@@ -137,9 +162,15 @@
                                 <select name="distribucion" id="distribucion" class="form-control">
                                 	<%
                                 		for(Distribucion d: listarD){
+                                			if(a.getIdDistribucion()==d.getIdDistribucion()){
                                 	%>
-                                    <option value="<%=d.getIdDistribucion()%>"><%=d.getNombre() %></option>
+                                				<option selected="true" value="<%=d.getIdDistribucion()%>"><%=d.getNombre() %></option>
+                                		<%
+                                			}else{
+                                    	%>
+                                    			<option value="<%=d.getIdDistribucion()%>"><%=d.getNombre() %></option>
                                     <%
+                                			}
                                 		}
                                     %>
                                 </select>
@@ -157,11 +188,11 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                	<img class="rounded img-fluid" alt="Seleccione una imagen" src="" name="foto" id="foto">
+                                	<img class="rounded img-fluid" alt="nose" src="<%=a.getImg() %>" name="foto" id="foto">
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button class="btn btn-primary" style="width: 100%;">Editar</button>
                             </div>
                             <div style="text-align:center;"><a href="GestionArbol.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
@@ -196,6 +227,8 @@
 						.attr('src', e.target.result);
 				};
 				reader.readAsDataURL(input.files[0]);
+				var inputNombre = document.getElementById('cambio');
+	    	    inputNombre.value = "true";
 			}
 		}	
 	</script>

@@ -104,6 +104,9 @@
                                             archivo</label>
                                     </div>
                                 </div>
+                                <div class="text-center">
+                                	<img class="rounded img-fluid" alt="Seleccione una imagen" src="" name="imagen" id="imagen">
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
@@ -130,6 +133,20 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
+    <script type="text/javascript">
+		
+    	function readUrl(input) {
+			if(input.files && input.files[0]){
+				var reader = new FileReader();
+				
+				reader.onload = function (e) {
+					$('#imagen')
+						.attr('src', e.target.result);
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}	
+	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">
     </script>

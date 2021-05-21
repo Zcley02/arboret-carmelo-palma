@@ -25,7 +25,6 @@
                 </a>
                 <div class="price-wrap h5 my-4">
                     <span class="price-new">C$100.00</span>
-                    <del class="price-old text-secondary">C$150.00</del>
                 </div>
             </div>
 

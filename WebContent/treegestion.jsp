@@ -103,8 +103,8 @@
                                         <td><%=u.getNombre_Familia() %></td>
                                         <td><%=u.getNombre_Flor() %></td>
                                         <td><%=u.getNombre_Distribucion() %></td>
-                                        <td><img alt="Arbol" src="<%=u.getFoto()%>" width="100px" height="100px"></td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+                                        <td><img alt="Arbol" src="<%=u.getFoto()%>" width="200px" height="200px" class="img-thumbnail"></td>
+                                        <td>&nbsp;&nbsp;<a href="edittree.jsp?id=<%=u.getId()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
                                                  href="#" onclick="myDeleteTree(<%=u.getId() %>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>

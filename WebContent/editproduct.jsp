@@ -8,7 +8,6 @@
  	
  	DTProducto dtp = new DTProducto();
  	Producto p = dtp.buscarProducto(idP);
- 	String file = "false";
  	
  %>
 <%
@@ -64,7 +63,7 @@
 
                     <div class="card-header">
                         <h2>
-                            Producto
+                            Editar Producto
                         </h2>
 
                     </div>

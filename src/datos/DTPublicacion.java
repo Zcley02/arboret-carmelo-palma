@@ -90,7 +90,7 @@ public class DTPublicacion {
 			ps.setString(2, pu.getDescripcion());
 			ps.setBinaryStream(3, fi);
 			ps.setInt(4, pu.getEstado());
-			ps.setString(5, "https://www.google.com");
+			ps.setString(5, pu.getHipervinculo());
 			
 			int i = ps.executeUpdate();
 			
@@ -135,4 +135,109 @@ public class DTPublicacion {
 		return eliminado;
 	}
 
+	public Publicacion buscarPublicacion(int id) {
+		Publicacion pu = new Publicacion();
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.publicaciones where idPublicaciones = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				pu.setIdPublicacion(rs.getInt("idPublicaciones"));
+				pu.setTitulo(rs.getString("titulo"));
+				pu.setDescripcion(rs.getString("descripcion"));
+				pu.setMultimedia("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("multimedia")));
+				pu.setFechaPublicacion(rs.getDate("fechaPublicacion").toString());
+				pu.setHipervinculo(rs.getString("hipervinculo"));
+				pu.setEstado(rs.getInt("estado"));
+			}
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+				
+		return pu;
+	}
+	
+	public boolean modificarPuConImg(Publicacion pu, InputStream fi) {
+		boolean modificado = false;
+		
+		PreparedStatement ps;
+		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, multimedia = ?, fechaPublicacion = current_date, estado = 2 where idPublicaciones = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, pu.getTitulo());
+			ps.setString(2, pu.getDescripcion());
+			ps.setString(3, pu.getHipervinculo());
+			ps.setBinaryStream(4, fi);
+			ps.setInt(5, pu.getIdPublicacion());
+			
+			ps.executeUpdate();
+			
+			modificado = true;
+			
+			ps.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		
+		return modificado;
+	}
+	
+	public boolean modificarPuSinImg(Publicacion pu) {
+		boolean modificado = false;
+		
+		PreparedStatement ps;
+		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, fechaPublicacion = current_date, estado = 2 where idPublicaciones = ?";
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, pu.getTitulo());
+			ps.setString(2, pu.getDescripcion());
+			ps.setString(3, pu.getHipervinculo());
+			ps.setInt(4, pu.getIdPublicacion());
+			
+			ps.executeUpdate();
+			
+			modificado = true;
+			
+			ps.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		
+		return modificado;
+	}
+	
 }

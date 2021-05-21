@@ -98,8 +98,8 @@
                                         <td><%=u.getDescripcion() %></td>
                                         <td><%=u.getFechaPublicacion() %></td>
                                         <td><%=u.getHipervinculo() %></td>
-                                        <td><img alt="ejemplo" src="<%=u.getMultimedia() %>" width="100px" height="100px"></td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+                                        <td><img alt="ejemplo" src="<%=u.getMultimedia() %>" width="200px" height="200px" class="img-thumbnail"></td>
+                                        <td>&nbsp;&nbsp;<a href="editpost.jsp?id=<%=u.getIdPublicacion()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <a href="#" onclick="myDeletePub(<%=u.getIdPublicacion()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>

@@ -1,3 +1,11 @@
+<%@page import="entidades.*, datos.*" %>
+<%
+	String id = request.getParameter("id")==null?"":request.getParameter("id");
+	int idP = Integer.parseInt(id);
+	
+	DTPublicacion dtp = new DTPublicacion();
+	Publicacion p = dtp.buscarPublicacion(idP);
+%>
 <%
     //Limpia la CACHE del navegador
 	    response.setHeader("Pragma", "no-cache");
@@ -51,27 +59,29 @@
 
                     <div class="card-header">
                         <h2>
-                            Publicaciones
+                            Editar Publicacion
                         </h2>
 
                     </div>
                     <div class="card-body bg-white rounded">
 
 
-                        <form  action="SLPublicacion" method="Post" enctype="multipart/form-data">
+                        <form  action="SLEditarPublicacion" method="Post" enctype="multipart/form-data">
+                        	<input hidden="true" value="false" id="cambio" name="cambio">
+                        	<input hidden="true" value="<%=p.getIdPublicacion() %>" name="id">
                             <div class="form-group">
                                 <label>Título:</label>
-                                <input name="titulo" class="form-control">
+                                <input value="<%=p.getTitulo() %>" name="titulo" class="form-control">
 
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea name="descripcion" class="form-control" rows="3"></textarea>
+                                <textarea name="descripcion" class="form-control" rows="3"><%=p.getDescripcion() %></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Hipervinculo:</label>
-                                <input name="hipervinculo" class="form-control">
+                                <input value="<%=p.getHipervinculo() %>" name="hipervinculo" class="form-control">
 
                             </div>
                             <div class="form-group">
@@ -87,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                	<img class="rounded img-fluid" alt="Seleccione la imagen" src="" name="foto" id="foto" onchange="readUrl(this);">
+                                	<img class="rounded img-fluid" alt="nose" src="<%=p.getMultimedia() %>" name="foto" id="foto">
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -126,6 +136,8 @@
 						.attr('src', e.target.result);
 				};
 				reader.readAsDataURL(input.files[0]);
+				var inputNombre = document.getElementById('cambio');
+	    	    inputNombre.value = "true";
 			}
 		}	
 	</script>

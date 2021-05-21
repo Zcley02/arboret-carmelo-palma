@@ -20,6 +20,9 @@
                             <p class="card-text paragraph">
                                 <%=u.getDescripcion() %>
                             </p>
+                            <p class="card-text paragraph">
+                                <a href="<%=u.getHipervinculo()%>" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Hipervinculo</a>
+                            </p>
                             <a href="" class="btn btn-outline-primary">
                                 Ver más
                             </a>

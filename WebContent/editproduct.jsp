@@ -92,7 +92,7 @@
                                 <select name="tipoP" id="tipoP" class="form-control">
                                 	<%
                                 		for(TipoProducto tp: listarP){
-                                			if(tp.getIdTipoProducto()==p.getIdProducto()){
+                                			if(tp.getIdTipoProducto()==p.getIdTipoProducto()){
                                 		%>
                                 			<option selected="true" value="<%=tp.getIdTipoProducto()%>"><%=tp.getNombreTipo()%> </option>
                                 			

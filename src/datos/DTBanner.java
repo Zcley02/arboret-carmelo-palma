@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 import entidades.Banner;
+import entidades.Producto;
 import entidades.Servicios;
 
 public class DTBanner {
@@ -119,99 +120,6 @@ public class DTBanner {
 			return resp;
 		}
 		
-		public Banner getBanner(int idBanner)
-		{
-			Banner bnG = new Banner();
-			try
-			{
-				c = PoolConexion.getConnection();
-				ps = c.prepareStatement("select * from public.banner where estado <> 3 and idbanner = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-				ps.setInt(1, idBanner);
-				rs = ps.executeQuery();
-				if(rs.next())
-				{
-					bnG.setIdBanner(idBanner);
-					bnG.setTitulo(rs.getString("titulobanner"));
-					bnG.setDescripcion(rs.getString("descripcion"));
-					bnG.setPosicion(rs.getInt("posicion"));
-					bnG.setEstado(rs.getInt("estado"));
-				}
-			}
-			catch (Exception e)
-			{
-				System.out.println("DATOS ERROR BANNER: "+ e.getMessage());
-				e.printStackTrace();
-			}
-			finally
-			{
-				try {
-					if(rs != null){
-						rs.close();
-					}
-					if(ps != null){
-						ps.close();
-					}
-					if(c != null){
-						PoolConexion.closeConnection(c);
-					}
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			return bnG;
-		}
-		
-		/*
-		
-		// Metodo para modificar Banner
-		public boolean modificarInfoBanner(Banner bn)
-		{
-			boolean modificado=false;	
-			try
-			{
-				c = PoolConexion.getConnection();
-				this.llenarBanner(c);
-				rsBanner.beforeFirst();
-				while (rsBanner.next())
-				{
-					if(rsBanner.getInt(1)==bn.getBannerID())
-					{
-						rsBanner.updateString("titulobanner", bn.getTitulobanner());
-						rsBanner.updateString("descripcion", bn.getDescripcion());
-						rsBanner.updateTimestamp("fmodificacion", bn.getFmodificacion());								
-						rsBanner.updateInt("estado", 2);
-						rsBanner.updateRow();
-						modificado=true;
-						break;
-					}
-				}
-			}
-			catch (Exception e)
-			{
-				System.err.println("ERROR AL ACTUALIZAR BANNER "+e.getMessage());
-				e.printStackTrace();
-			}
-			finally
-			{
-				try {
-					if(rsBanner != null){
-						rsBanner.close();
-					}
-					if(c != null){
-						PoolConexion.closeConnection(c);
-					}
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return modificado;
-		}*/
-		
 		public boolean eliminaBanner(int id)
 		{
 			boolean eliminado=false;	
@@ -251,5 +159,100 @@ public class DTBanner {
 				}
 			}
 			return eliminado;
+		}
+		
+		public Banner getBanner(int id) {
+			Banner b = new Banner();
+			
+			try {
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement("select * from public.banner where idbanner = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setInt(1, id);
+				rs = ps.executeQuery();
+				
+				if(rs.first()) {
+					b.setIdBanner(rs.getInt("idbanner"));
+					b.setTitulo(rs.getString("titulo"));
+					b.setDescripcion(rs.getString("descripcion"));
+					b.setFoto("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
+					b.setPosicion(rs.getInt("posicion"));
+					b.setEstado(rs.getInt("estado"));
+				}
+				
+			} catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR EL BANNER "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			return b;
+		}
+		
+		public boolean editarBaConImagen(Banner b, InputStream in) {
+			boolean editado = false;
+			PreparedStatement ps;
+			String sql = "Update banner set titulo = ?, descripcion = ?, foto = ?, posicion = ?, estado = 2 where idbanner = ?";
+			
+			try {
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql);
+				
+				ps.setString(1, b.getTitulo());
+				ps.setString(2, b.getDescripcion());
+				ps.setBinaryStream(3, in);				
+				ps.setInt(4, b.getPosicion());
+				ps.setInt(5, b.getIdBanner());
+				
+				ps.executeUpdate();
+				
+				editado = true;
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return editado;
+		}
+		
+		public boolean editarBaSinImagen(Banner b) {
+			boolean editado = false;
+			PreparedStatement ps;
+			String sql = "Update banner set titulo = ?, descripcion = ?, posicion = ?, estado = 2 where idbanner = ?";
+			
+			try {
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql);
+				
+				ps.setString(1, b.getTitulo());
+				ps.setString(2, b.getDescripcion());
+				ps.setDouble(3, b.getPosicion());
+				ps.setInt(4, b.getIdBanner());
+				
+				ps.executeUpdate();
+				
+				editado = true;
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return editado;
 		}
 }

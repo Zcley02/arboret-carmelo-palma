@@ -91,7 +91,7 @@
 									 %>
 										<tr>
 											<td><%=p.getNombre()%></td>
-											<td>&nbsp;&nbsp;<a href="#"><i
+											<td>&nbsp;&nbsp;<a href="editcountry.jsp?id=<%=p.getIdPais()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=p.getIdPais()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 										</tr>
@@ -153,6 +153,14 @@
 	        	        var mensaje = "";
 	        	        mensaje = "<%=varMsj%>";
 	        	        
+	        	        if(mensaje == "1")
+	        	        {
+	        	            successAlert('Exito', 'Los datos del País han sido actualizados exitosamente');
+	        	        }
+	        	        if(mensaje == "2")
+	        	        {
+	        	            errorAlert('Error', 'Revise los datos insertados');
+	        	        }
 	        	        if(mensaje == "5")
 	        	        {
 	        	            successAlert('Exito', 'Los datos del País han sido eliminados exitosamente');

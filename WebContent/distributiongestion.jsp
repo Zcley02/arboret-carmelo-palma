@@ -93,7 +93,7 @@
 											<td><%=vrp.getNombre()%></td>
 											<td><%=vrp.getDescripcion() %></td>
 											<td><%=vrp.getNombre_region() %></td>
-											<td>&nbsp;&nbsp;<a href="#"><i
+											<td>&nbsp;&nbsp;<a href="editdistribution.jsp?id=<%=vrp.getIdDistribucion() %>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=vrp.getIdDistribucion()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 									</tr>
@@ -151,6 +151,14 @@
 	        var mensaje = "";
 	        mensaje = "<%=varMsj%>";
 	        
+	        if(mensaje == "1")
+	        {
+	            successAlert('Exito', 'Los datos de la Distribución han sido actualizados exitosamente');
+	        }
+	        if(mensaje == "2")
+	        {
+	            errorAlert('Error', 'Revise los datos insertados');
+	        }
 	        if(mensaje == "5")
 	        {
 	            successAlert('Exito', 'Los datos de la Distribución han sido eliminado exitosamente');

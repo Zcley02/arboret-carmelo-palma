@@ -96,9 +96,9 @@
 											<td><%=vrp.getNombre()%></td>
 											<td><%=vrp.getDescripcion() %></td>
 											<td><%=vrp.getNombre_pais() %></td>
-											<td>&nbsp;&nbsp;<a href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=vrp.getIdRegion()%>)"
-                                                ><i class="far fa-trash-alt"></i></td>
+											<td>&nbsp;&nbsp;<a href="editregion.jsp?id=<%=vrp.getIdRegion()%>"><i
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a href="#" onclick="myDeletePub(<%=vrp.getIdRegion()%>)"><i class="far fa-trash-alt"></i></td>
 									</tr>
                                      <%  } %>
                                 </tbody>
@@ -153,6 +153,14 @@
 	        var mensaje = "";
 	        mensaje = "<%=varMsj%>";
 	        
+	        if(mensaje == "1")
+	        {
+	            successAlert('Exito', 'Los datos de la Región han sido actualizados exitosamente');
+	        }
+	        if(mensaje == "2")
+	        {
+	            errorAlert('Error', 'Revise los datos insertados');
+	        }
 	        if(mensaje == "5")
 	        {
 	            successAlert('Exito', 'Los datos de la Región han sido eliminados exitosamente');

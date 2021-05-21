@@ -88,7 +88,7 @@
 	                                        <td><%=s.getNombre()%></td>
 	                                        <td><%=s.getDescripcion()%></td>
 	                                        <td><img alt="ejemplo" src="<%=s.getFoto() %>" width="100px" height="100px"></td>
-											<td>&nbsp;&nbsp;<a href="#"><i
+											<td>&nbsp;&nbsp;<a href="editservice.jsp?id=<%=s.getIdServicio()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=s.getIdServicio()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 										</tr>
@@ -141,6 +141,14 @@
 	        	        var mensaje = "";
 	        	        mensaje = "<%=varMsj%>";
 	        	        
+	        	        if(mensaje == "1")
+	        	        {
+	        	            successAlert('Exito', 'Los datos del Servicio han sido modificados exitosamente');
+	        	        }
+	        	        if(mensaje == "2")
+	        	        {
+	        	            errorAlert('Error', 'No se logro modificar, revise los campos en blanco');
+	        	        }
 	        	        if(mensaje == "5")
 	        	        {
 	        	            successAlert('Exito', 'Los datos del Servicio han sido eliminados exitosamente');

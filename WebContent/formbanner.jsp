@@ -80,10 +80,13 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input name="foto" type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <input name="foto" type="file" class="custom-file-input" id="inputGroupFile01" onchange="readUrl(this);">
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
+                                </div>
+                                <div class="text-center">
+                                	<img class="rounded img-fluid" alt="Seleccione la imagen" src="" name="imagen" id="imagen" onchange="readUrl(this);">
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -120,6 +123,20 @@
 	    			$("#descripcion").html(textarea_line);
 	   			});
 			});
+	</script>
+	<script type="text/javascript">
+		
+    	function readUrl(input) {
+			if(input.files && input.files[0]){
+				var reader = new FileReader();
+				
+				reader.onload = function (e) {
+					$('#imagen')
+						.attr('src', e.target.result);
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}	
 	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">

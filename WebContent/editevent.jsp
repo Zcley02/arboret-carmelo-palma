@@ -1,3 +1,31 @@
+<%@page import="entidades.*, datos.*, java.util.*, java.text.*" %>
+ <%
+ 	String id = request.getParameter("id")==null?"":request.getParameter("id");	
+ 
+ 	int idE = Integer.parseInt(id);
+ 
+ 	DTEvento dt = new DTEvento();
+ 	Eventos ev = dt.obtenerEvento(idE);
+ 
+ 	String fechaIn = "";
+ 	String fechaFin = "";
+ 	
+ 	try{
+ 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+ 		Date date = sdf.parse(ev.getFechaInicio());
+ 		Date date1 = sdf.parse(ev.getFechaFin());
+ 		
+ 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+ 		fechaIn = format.format(date);
+ 		fechaFin = format.format(date1);
+ 		
+ 		
+ 	}catch (ParseException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}
+ 	
+ %>
 <%
     //Limpia la CACHE del navegador
     response.setHeader("Pragma", "no-cache");
@@ -34,7 +62,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-    <body class="sb-nav-fixed" style="background: #39603D;">
+    <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
@@ -68,10 +96,11 @@
                         <h2>Evento</h2>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="SLGuardarEvento" method="post">
+                        <form action="SLEditarEvento" method="post">
+                        	<input value="<%=ev.getIdEvento() %>" hidden="true" name="id">
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Nombre:</label>
-                                <input name="nombre" type="text" class="form-control" id="formGroupExampleInput">
+                                <input value="<%=ev.getNombre() %>" name="nombre" type="text" class="form-control" id="formGroupExampleInput">
                             </div>
 
                             <div class="form-group">
@@ -84,12 +113,12 @@
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Fecha Inicio:</label>
-                                <input name="fechaInicio" type="date" class="form-control" id="formGroupExampleInput">
+                                <input value="<%=fechaIn %>" name="fechaInicio" type="date" class="form-control" id="formGroupExampleInput">
                             </div>
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Fecha Final:</label>
-                                <input name="fechaFin" type="date" class="form-control" id="formGroupExampleInput">
+                                <input value="<%=fechaFin %>" name="fechaFin" type="date" class="form-control" id="formGroupExampleInput">
                             </div>
 
                             <div class="form-group">
@@ -97,8 +126,22 @@
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Tipo de Evento</label>
                                     <select name="tipoEvento" class="form-control">
-                                        <option value="Agenda Pública">Agenda Pública</option>
-                                        <option value="Agenda Privada">Agenda Privada</option>
+                                    	<%
+                                    		if(ev.getTipoEvento().equals("Agenda Privada")){
+                                    		
+                                    	%>
+                                    		<option value="Agenda Pública">Agenda Pública</option>
+                                        	<option value="Agenda Privada" selected>Agenda Privada</option>
+                                    	<%
+                                    	
+                                    		}else{
+                                    	%>
+                                    		<option value="Agenda Pública" selected>Agenda Pública</option>
+                                        	<option value="Agenda Privada" selected>Agenda Privada</option>
+                                    	<%
+                                    		}
+                                    	%>
+                                        
                                     </select>
                                 </div>
 
@@ -107,15 +150,15 @@
 
                             <div class="form-group ">
                                 <label for="formGroupExampleInput ">Ubicación</label>
-                                <input name="ubicacion" type="text" class="form-control " id="formGroupExampleInput ">
+                                <input value="<%=ev.getUbicacion() %>" name="ubicacion" type="text" class="form-control " id="formGroupExampleInput ">
                             </div>
 
                             <div class="form-group ">
                                 <label for="formGroupExampleInput ">Hipervinculo</label>
-                                <input name="hipervinculo" type="text" class="form-control " id="formGroupExampleInput ">
+                                <input value="<%=ev.getHipervinculo() %>" name="hipervinculo" type="text" class="form-control " id="formGroupExampleInput ">
                             </div>
                             <div class="mb-3">
-                                <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
                             </div>
                         </form>
 
@@ -151,6 +194,12 @@
 	    			$("#descripcion").html(textarea_line);
 	   			});
 			});
+	
+	function load(){
+		var descripcion = "<%=ev.getDescripcion()%>";
+		var desp = descripcion.replaceAll("<br>", ("\n"));
+		$("#descripcion1").html(desp);
+	}
 	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">

@@ -107,7 +107,7 @@
                                                 <td><%=u.getUbicacion() %></td>
                                                 <td><%=u.getHipervinculo() %></td>
                                                 <td>
-                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                    <a href="editevent.jsp?id=<%=u.getIdEvento()%>"><i class="fas fa-edit"></i></a>
                                                     <a href="#" onclick="myDeleteEvent(<%=u.getIdEvento()%>)"><i class="far fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>

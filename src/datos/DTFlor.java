@@ -211,4 +211,50 @@ public class DTFlor {
 		
 		return fl;
 	}
+	
+	public boolean editarFlor(Flor fl) {
+		boolean editado = false;
+		
+		String sql = "Update flor set nombreComun = ?, nombreCientifico = ?, descripcion = ?, temporadaFloracion = ?, estado = 2 where idFlor = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, fl.getNombreComun());
+			ps.setString(2, fl.getNombreCientifico());
+			ps.setString(3, fl.getDescripcion());
+			ps.setString(4, fl.getTemporadaFloracion());
+			ps.setInt(5, fl.getIdFlor());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
 }

@@ -219,4 +219,52 @@ public class DTEvento {
 		
 		return evento;
 	}
+	
+	public boolean editarEvento(Eventos ev) {
+		boolean editado = false;
+		String sql = "Update eventos set nombre = ?, descripcion = ?, fechaInicio = ?, fechaFin = ?, tipoEvento = ?, ubicacion = ?, hipervinculo = ?, estado = 2 where idEventos = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, ev.getNombre());
+			ps.setString(2, ev.getDescripcion());
+			ps.setString(3, ev.getFechaInicio());
+			ps.setString(4, ev.getFechaFin());
+			ps.setString(5, ev.getTipoEvento());
+			ps.setString(6, ev.getUbicacion());
+			ps.setString(7, ev.getHipervinculo());
+			ps.setInt(8, ev.getIdEvento());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
 }

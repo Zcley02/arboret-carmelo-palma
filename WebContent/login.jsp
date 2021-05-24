@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-
+<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
 <%
 	response.setHeader("Pragma", "no-cache");
 	response.setHeader("Cache-Control", "no-store");
@@ -93,6 +93,17 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
             crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
+        <script type="text/javascript">
+	        $(document).ready(function ()
+	        	    {
+	        	        var mensaje = "";
+	        	        mensaje = "<%=varMsj%>";
+	        	        
+	        	        if(mensaje == "1")
+	        	        {
+	        	            errorAlert( null , 'Los datos de usuario son incorrectos');
+	        	        }
+        </script>
     </body>
 
     </html>

@@ -110,4 +110,258 @@ public class DTInicio {
 		return guardado;
 	}
 	
+	public boolean editarConImgHistoria(Inicio in, InputStream inH) {
+		boolean editado = false;
+		String sql = "Update inicio set historia = ?, historiaFoto = ? where idInicio = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1,in.getHistoria());
+			ps.setBinaryStream(2, inH);
+			ps.setInt(3, in.getIdInicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
+	
+	public boolean editarSinImgHistoria(Inicio in) {
+		boolean editado = false;
+		String sql = "Update inicio set historia = ? where idInicio = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1,in.getHistoria());
+			ps.setInt(2, in.getIdInicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
+	
+	public boolean editarConImgMision(Inicio in, InputStream inH) {
+		boolean editado = false;
+		String sql = "Update inicio set mision = ?, misionFoto = ? where idInicio = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1,in.getMision());
+			ps.setBinaryStream(2, inH);
+			ps.setInt(3, in.getIdInicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
+	
+	public boolean editarSinImgMision(Inicio in) {
+		boolean editado = false;
+		String sql = "Update inicio set mision = ? where idInicio = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1,in.getMision());
+			ps.setInt(2, in.getIdInicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
+	
+	public boolean editarConImgVision(Inicio in, InputStream inH) {
+		boolean editado = false;
+		String sql = "Update inicio set vision = ?, visionFoto = ? where idInicio = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1,in.getVision());
+			ps.setBinaryStream(2, inH);
+			ps.setInt(3, in.getIdInicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
+	
+	public boolean editarSinImgVision(Inicio in) {
+		boolean editado = false;
+		String sql = "Update inicio set vision = ? where idInicio = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1,in.getVision());
+			ps.setInt(2, in.getIdInicio());
+			
+			ps.executeUpdate();
+			
+			editado = true;
+			
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return editado;
+	}
 }

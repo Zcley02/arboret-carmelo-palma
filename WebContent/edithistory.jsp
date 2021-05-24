@@ -66,14 +66,14 @@
 
 
 
-                        <form  action="SLEditarBanner" method="Post" enctype="multipart/form-data">
+                        <form  action="SLEditarHistoria" method="Post" enctype="multipart/form-data">
                         	<input hidden="true" value="false" id="cambio" name="cambio">
                         	<input hidden="true" value="<%=in.getIdInicio() %>" name="id">
                         	
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"><%=in.getHistoria() %></textarea>
                             </div>
                             <textarea id="descripcion1" name="descripcion1" hidden="true" ></textarea>
                             <div class="form-group">

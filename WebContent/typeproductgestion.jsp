@@ -83,7 +83,7 @@
                                     <tr>
                                         <td><%=tp.getNombreTipo() %></td>
                                         <td><%=tp.getDescripcion() %></td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+                                        <td>&nbsp;&nbsp;<a href="edittypeproduct.jsp?id=<%=tp.getIdTipoProducto()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
                                                 href="#" onclick="myDeleteTP(<%=tp.getIdTipoProducto()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>

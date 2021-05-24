@@ -1,9 +1,9 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +15,16 @@ import datos.DTEvento;
 import entidades.Eventos;
 
 /**
- * Servlet implementation class SLGuardarEvento
+ * Servlet implementation class SLEditarEvento
  */
-@WebServlet(name="SLGuardarEvento", urlPatterns="/SLGuardarEvento")
-public class SLGuardarEvento extends HttpServlet {
+@WebServlet("/SLEditarEvento")
+public class SLEditarEvento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SLGuardarEvento() {
+    public SLEditarEvento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,48 +42,41 @@ public class SLGuardarEvento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		try {
-			
-			
-			Eventos ev = new Eventos();
-			DTEvento dt = new DTEvento();
-			
-			String fechaIn = fechaIn(request.getParameter("fechaInicio"));
-			String fechaFin = fechaFin(request.getParameter("fechaFin"));
-			String nombre = request.getParameter("nombre");
-			String descripcion = request.getParameter("descripcion");
-			String tipoEvento = request.getParameter("tipoEvento");
-			String ubicacion = request.getParameter("ubicacion");
-			String hipervinculo = request.getParameter("hipervinculo");
-			
-			ev.setNombre(nombre);
-			ev.setDescripcion(descripcion);
-			ev.setFechaInicio(fechaIn);
-			ev.setFechaFin(fechaFin);
-			ev.setTipoEvento(tipoEvento);
-			ev.setUbicacion(ubicacion);
-			ev.setHipervinculo(hipervinculo);
-			
-			if(validarFechas(fechaIn, fechaFin)) {
-				if(dt.guardarEvento(ev)) {
-					response.sendRedirect("eventgestion.jsp");
-				}else {
-					response.sendRedirect("eventgestion.jsp?error");
-				}
+		int id = Integer.parseInt(request.getParameter("id").trim());
+		
+		Eventos ev = new Eventos();
+		DTEvento dt = new DTEvento();
+		
+		String fechaIn = fechaIn(request.getParameter("fechaInicio"));
+		String fechaFin = fechaFin(request.getParameter("fechaFin"));
+		String nombre = request.getParameter("nombre");
+		String descripcion = request.getParameter("descripcion");
+		String tipoEvento = request.getParameter("tipoEvento");
+		String ubicacion = request.getParameter("ubicacion");
+		String hipervinculo = request.getParameter("hipervinculo");
+		
+		ev.setIdEvento(id);
+		ev.setNombre(nombre);
+		ev.setDescripcion(descripcion);
+		ev.setFechaInicio(fechaIn);
+		ev.setFechaFin(fechaFin);
+		ev.setTipoEvento(tipoEvento);
+		ev.setUbicacion(ubicacion);
+		ev.setHipervinculo(hipervinculo);
+		
+		if(validarFechas(fechaIn, fechaFin)) {
+			if(dt.editarEvento(ev)) {
+				response.sendRedirect("eventgestion.jsp");
 			}else {
-				System.out.println("nose");
 				response.sendRedirect("eventgestion.jsp?error");
 			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+		}else {
+			System.out.println("nose");
+			response.sendRedirect("eventgestion.jsp?error");
 		}
 		
-		
 	}
-	
+
 	private String fechaIn(String fecha) {
 		
 		String fechaIn = "";
@@ -155,4 +148,5 @@ public class SLGuardarEvento extends HttpServlet {
 		
 		return correcto;
 	}
+	
 }

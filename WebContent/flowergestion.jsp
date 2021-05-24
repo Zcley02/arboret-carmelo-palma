@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
     </head>
 
-    <body class="sb-nav-fixed" style="background: #39603D;">
+    <body  class="sb-nav-fixed" style="background: #39603D;">
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
@@ -92,7 +92,7 @@
                                         <td><%=fl.getNombreCientifico() %></td>
                                         <td><%=fl.getDescripcion() %></td>
                                         <td><%=fl.getTemporadaFloracion() %></td>          
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+                                        <td>&nbsp;&nbsp;<a href="editflower.jsp?id=<%=fl.getIdFlor()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
                                                     href="#" onclick="myDeleteFlower(<%=fl.getIdFlor()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>

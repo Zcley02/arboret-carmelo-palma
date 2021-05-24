@@ -52,7 +52,7 @@ public class SLEditarBanner extends HttpServlet {
 		Banner b = new Banner();
 		DTBanner dt = new DTBanner();
 		String titulo = request.getParameter("titulo");
-		String descripcion = request.getParameter("descripcion");
+		String descripcion = request.getParameter("descripcion1");
 		int posicion = Integer.parseInt(request.getParameter("posicion").trim());
 		
 		b.setIdBanner(idB);

@@ -51,9 +51,11 @@ public class SLEditarProducto extends HttpServlet {
 		Producto p = new Producto();
 		DTProducto dt = new DTProducto();
 		String nombre = request.getParameter("nombre");
-		String descripcion = request.getParameter("descripcion");
+		String descripcion = request.getParameter("descripcion1");
 		Double precio = Double.parseDouble(request.getParameter("precio"));
 		int idTipoP = Integer.parseInt(request.getParameter("tipoP").trim());
+		
+		System.out.println(descripcion);
 		
 		p.setIdProducto(idP);
 		p.setNombre(nombre);

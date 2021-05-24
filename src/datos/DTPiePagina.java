@@ -56,7 +56,7 @@ public class DTPiePagina {
 	
 	public boolean guardarPP(PiePagina pp) {
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Insert into public.piepagina(direccion, telefono, email, ext) Values(?,?,?,?)";
 		
 		try {
@@ -74,9 +74,27 @@ public class DTPiePagina {
 			
 			ps.close();
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return guardado;

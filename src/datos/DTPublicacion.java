@@ -82,7 +82,7 @@ public class DTPublicacion {
 	
 	public boolean guardarPublicacion(Publicacion pu, InputStream fi) {
 		boolean resp = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		try {
 			c = PoolConexion.getConnection();
 			ps = c.prepareStatement("INSERT INTO publicaciones(titulo, descripcion, multimedia, estado, hipervinculo, fechapublicacion) VALUES(?,?,?,?,?,current_date)");
@@ -102,9 +102,27 @@ public class DTPublicacion {
 			
 			ps.close();
 			
-		} catch (Exception e) {
-			System.out.println("Error al insertar: ");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return resp;
@@ -127,9 +145,27 @@ public class DTPublicacion {
 				}
 			}
 			
-		} catch (Exception e) {
-			System.out.println("Error en eliminar la publicacion");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsPu != null){
+					rsPu.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return eliminado;
@@ -184,7 +220,7 @@ public class DTPublicacion {
 	public boolean modificarPuConImg(Publicacion pu, InputStream fi) {
 		boolean modificado = false;
 		
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, multimedia = ?, fechaPublicacion = current_date, estado = 2 where idPublicaciones = ?";
 		
 		try {
@@ -201,11 +237,28 @@ public class DTPublicacion {
 			
 			modificado = true;
 			
-			ps.close();
 			
-		} catch (Exception e) {
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
-			// TODO: handle exception
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return modificado;
@@ -214,7 +267,7 @@ public class DTPublicacion {
 	public boolean modificarPuSinImg(Publicacion pu) {
 		boolean modificado = false;
 		
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, fechaPublicacion = current_date, estado = 2 where idPublicaciones = ?";
 		
 		try {
@@ -232,9 +285,27 @@ public class DTPublicacion {
 			
 			ps.close();
 			
-		} catch (Exception e) {
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
-			// TODO: handle exception
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return modificado;

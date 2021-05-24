@@ -79,7 +79,7 @@ public class DTTipo_producto {
 	
 	public boolean guardarTipoProducto(TipoProducto tp) {
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		
 		try {
 			c = PoolConexion.getConnection();
@@ -96,11 +96,27 @@ public class DTTipo_producto {
 				guardado = false;
 			}
 			
-			ps.close();
-			
-		} catch (Exception e) {
-			System.out.println("Error al insertar: ");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return guardado;
@@ -123,11 +139,72 @@ public class DTTipo_producto {
 				}
 			}
 			
-		} catch (Exception e) {
-			System.out.println("Error en eliminar el tipo de producto");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsTp != null){
+					rsTp.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return eliminado;
+	}
+	
+	public TipoProducto buscarTP(int id) {
+		TipoProducto tp = new TipoProducto();
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.tipo_producto where idTipo_producto = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				tp.setIdTipoProducto(rs.getInt("idTipo_producto"));
+				tp.setNombreTipo(rs.getString("nombretipo"));
+				tp.setDescripcion(rs.getString("descripcion"));
+				tp.setEstado(rs.getInt("estado"));
+			}
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return tp;
 	}
 }

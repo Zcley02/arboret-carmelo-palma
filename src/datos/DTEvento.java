@@ -81,7 +81,7 @@ public class DTEvento {
 	public boolean guardarEvento(Eventos ev) {
 		boolean guardado = false;
 		
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Insert into public.eventos(nombre, descripcion, fechaInicio, fechaFin, tipoEvento, ubicacion, hipervinculo, estado) Values(?,?,?,?,?,?,?,1)";
 		
 		try {
@@ -101,11 +101,28 @@ public class DTEvento {
 			
 			guardado = true;
 			
-			ps.close();
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		
@@ -129,12 +146,77 @@ public class DTEvento {
 				}
 			}
 			
-		} catch (Exception e) {
-			System.out.println("Error en eliminar el evento");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsEvento != null){
+					rsEvento.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return eliminado;
 	}
 	
+	public Eventos obtenerEvento(int id) {
+		Eventos evento = new Eventos();
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.eventos where idEventos = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				evento.setIdEvento(rs.getInt("idEventos")); 
+				evento.setNombre(rs.getString("nombre"));
+				evento.setDescripcion(rs.getString("descripcion"));
+				evento.setTipoEvento(rs.getString("tipoEvento"));
+				evento.setHipervinculo(rs.getString("hipervinculo"));
+				evento.setFechaInicio(rs.getString("fechaInicio"));
+				evento.setFechaFin(rs.getString("fechaFin"));
+				evento.setUbicacion(rs.getString("ubicacion"));
+				evento.setEstado(rs.getInt("estado"));
+			}
+			
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return evento;
+	}
 }

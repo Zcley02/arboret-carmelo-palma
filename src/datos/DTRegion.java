@@ -89,7 +89,7 @@ public class DTRegion {
 	public boolean guardarRegion(Region r)
 	{
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "INSERT INTO public.region (nombre, descripcion, estado, idpais) VALUES (?,?,?,?);";
 		try 
 		{
@@ -107,33 +107,28 @@ public class DTRegion {
 			}else {
 				guardado = false;
 			}
-			
-			ps.close();
 
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("DT Region: Error al guardar una region " + e.getMessage());
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
 		}
-		finally 
-		{
-			try 
-			{
-				if(rsRegion != null)
-				{
-					rsRegion.close();
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
 				}
-				if(c != null)
-				{
-					c.close();
+				if(ps != null){
+					ps.close();
 				}
-			} 
-			catch (Exception e2) 
-			{
-				System.err.println("DT Region: Error al cerrar conexion " + e2.getMessage());
-				e2.printStackTrace();
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
 		}
 		
 		return guardado;
@@ -225,7 +220,7 @@ public class DTRegion {
 	
 	public boolean editarRegion(Region r) {
 		boolean editado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update region set nombre = ?, descripcion = ?, estado = 2, idpais = ? where idregion = ?";
 		
 		try {
@@ -241,8 +236,27 @@ public class DTRegion {
 			
 			editado = true;
 			
-		}catch (Exception e) {
-			// TODO: handle exception
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return editado;

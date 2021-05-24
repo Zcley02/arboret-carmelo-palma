@@ -92,7 +92,7 @@
                                     <tr>
                                         <td><%=u.getNombre() %></td>
                                         <td><%=u.getDescripcion() %></td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+                                        <td>&nbsp;&nbsp;<a href="editfamily.jsp?id=<%=u.getIdFamilia()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
                                                     href="#" onclick="myDeleteFam(<%=u.getIdFamilia()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>

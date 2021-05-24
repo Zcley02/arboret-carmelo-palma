@@ -215,7 +215,8 @@
                             </div>
                             <div class="form-group">
                             	<label>Descripción: </label>
-                            	<textarea id="descripcionD" name="descripcionD" class="form-control" rows="3"></textarea>
+                            	<textarea id="descripcion1" name="descripcionD1" class="form-control" rows="3"></textarea>
+                            	<textarea id="descripcion" name="descripcionD" class="form-control" rows="3" hidden="true"></textarea>
                             </div>
                             
                             <%
@@ -236,7 +237,7 @@
                                
 
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button id="btn" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
                             <div style="text-align:center;"><a href="distributiongestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
@@ -262,6 +263,16 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
 <script src="assets/demo/datatables-demo.js "></script>
+<script type="text/javascript">
+	$(function()
+			{
+				$("#btn").click(function(){
+	    			textarea = $("#descripcion1").val();
+	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+	    			$("#descripcion").html(textarea_line);
+	   			});
+			});
+	</script>
 </body>
 <script src="assets/demo/chart-bar-demo.js ">
 </script>

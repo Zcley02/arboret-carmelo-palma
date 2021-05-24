@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-    <body class="sb-nav-fixed" style="background: #39603D;">
+    <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
@@ -70,7 +70,8 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bolder">Descripción:</label>
-                                <textarea name="txtDescripcion" rows="4" class="form-control"></textarea>
+                                <textarea id="descripcion" name="txtDescripcion" rows="4" class="form-control" hidden="trues"></textarea>
+                                <textarea id="descripcion1" name="txtDescripcion1" rows="4" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -86,7 +87,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button id="btn" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
                             <div style="text-align:center;"><a href="bannergestions.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
@@ -110,6 +111,16 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
     <script src="assets/demo/datatables-demo.js "></script>
+    <script type="text/javascript">
+	$(function()
+			{
+				$("#btn").click(function(){
+	    			textarea = $("#descripcion1").val();
+	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+	    			$("#descripcion").html(textarea_line);
+	   			});
+			});
+	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">
     </script>

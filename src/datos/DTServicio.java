@@ -213,7 +213,7 @@ public class DTServicio {
 	
 	public boolean editarSerConImagen(Servicios s, InputStream in) {
 		boolean editado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update public.servicios set nombre = ?, descripcion = ?, foto = ?, estado = 2 where idServicio = ?";
 		
 		try {
@@ -229,17 +229,34 @@ public class DTServicio {
 			
 			editado = true;
 			
-		}catch (Exception e) {
-			// TODO: handle exception
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
-		
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 			return editado;
 	}
 	
 	public boolean editarSerSinImagen(Servicios s) {
 		boolean editado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update public.servicios set nombre = ?, descripcion = ?, estado = 2 where idServicio = ?";
 		
 		try {
@@ -254,9 +271,27 @@ public class DTServicio {
 			
 			editado = true;
 			
-		}catch (Exception e) {
-			// TODO: handle exception
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return editado;

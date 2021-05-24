@@ -95,17 +95,18 @@ public class DTBanner {
 				}else {
 					resp = false;
 				}
-				
-				ps.close();
 			}
-			catch (Exception e) {
-				System.err.println("Error al guardar Banner "+e.getMessage());
+			catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
 				try {
-					if(rsBanner != null){
-						rsBanner.close();
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
 					}
 					if(c != null){
 						PoolConexion.closeConnection(c);
@@ -115,8 +116,8 @@ public class DTBanner {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 			}
-			
 			return resp;
 		}
 		
@@ -207,7 +208,7 @@ public class DTBanner {
 		
 		public boolean editarBaConImagen(Banner b, InputStream in) {
 			boolean editado = false;
-			PreparedStatement ps;
+			//PreparedStatement ps;
 			String sql = "Update banner set titulo = ?, descripcion = ?, foto = ?, posicion = ?, estado = 2 where idbanner = ?";
 			
 			try {
@@ -224,8 +225,27 @@ public class DTBanner {
 				
 				editado = true;
 				
-			}catch (Exception e) {
-				// TODO: handle exception
+			}catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 			return editado;
@@ -233,7 +253,7 @@ public class DTBanner {
 		
 		public boolean editarBaSinImagen(Banner b) {
 			boolean editado = false;
-			PreparedStatement ps;
+			//PreparedStatement ps;
 			String sql = "Update banner set titulo = ?, descripcion = ?, posicion = ?, estado = 2 where idbanner = ?";
 			
 			try {
@@ -249,8 +269,27 @@ public class DTBanner {
 				
 				editado = true;
 				
-			}catch (Exception e) {
-				// TODO: handle exception
+			}catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 			return editado;

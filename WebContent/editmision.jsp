@@ -1,3 +1,4 @@
+ <%@page import="entidades.*, datos.*, java.util.*" %>
 <%
     //Limpia la CACHE del navegador
 	    response.setHeader("Pragma", "no-cache");
@@ -15,7 +16,7 @@
 			response.sendRedirect("login.jsp");
 		}
     %>
-    <!DOCTYPE html>
+ <!DOCTYPE html>
     <html lang="es">
 
     <head>
@@ -34,7 +35,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-    <body class="sb-nav-fixed" style="background: #39603D;">
+    <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
@@ -51,30 +52,30 @@
 
                     <div class="card-header">
                         <h2>
-                            Publicaciones
+                            Mision
                         </h2>
 
                     </div>
                     <div class="card-body bg-white rounded">
+                     <%
+						Inicio in = new Inicio();
+						DTInicio dt = new DTInicio();
+						
+						in = dt.llenarInicio();
+					%>
 
 
-                        <form  action="SLPublicacion" method="Post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label>Título:</label>
-                                <input name="titulo" class="form-control">
 
-                            </div>
+                        <form  action="SLEditarBanner" method="Post" enctype="multipart/form-data">
+                        	<input hidden="true" value="false" id="cambio" name="cambio">
+                        	<input hidden="true" value="<%=in.getIdInicio() %>" name="id">
+                        	
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label>Hipervinculo:</label>
-                                <input name="hipervinculo" class="form-control">
-
-                            </div>
+                            <textarea id="descripcion1" name="descripcion1" hidden="true" ></textarea>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
                                 <div class="input-group mb-3">
@@ -82,19 +83,21 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input name="imagen" type="file" class="custom-file-input" id="inputGroupFile01" onchange="readUrl(this);">
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" onchange="readUrl(this);">
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                	<img class="rounded img-fluid" alt="Seleccione la imagen" src="" name="foto" id="foto" onchange="readUrl(this);">
+                                	<img class="rounded img-fluid" alt="nose" src="<%=in.getFotoMision() %>" name="imagen" id="imagen">
                                 </div>
+                                
                             </div>
+                            
                             <div class="mb-3">
-                                <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
                             </div>
-                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                            <div style="text-align:center;"><a href="bannergestions.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>
@@ -123,22 +126,32 @@
 				var reader = new FileReader();
 				
 				reader.onload = function (e) {
-					$('#foto')
+					$('#imagen')
 						.attr('src', e.target.result);
 				};
 				reader.readAsDataURL(input.files[0]);
+				var inputNombre = document.getElementById('cambio');
+	    	    inputNombre.value = "true";
 			}
 		}	
+    	
+    	
 	</script>
 	<script type="text/javascript">
 	$(function()
 			{
 				$("#btn").click(function(){
-	    			textarea = $("#descripcion1").val();
+	    			textarea = $("#descripcion").val();
 	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
-	    			$("#descripcion").html(textarea_line);
+	    			$("#descripcion1").html(textarea_line);
 	   			});
 			});
+	    	
+	    	function load(){
+	    		var descripcion = "<%=in.getMision()%>";
+				var desp = descripcion.replaceAll("<br>", ("\n"));
+				$("#descripcion").html(desp);
+	    	}
 	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">

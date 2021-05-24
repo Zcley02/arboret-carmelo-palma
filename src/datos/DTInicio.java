@@ -64,7 +64,7 @@ public class DTInicio {
 	
 	public boolean guardarInicio(Inicio in, InputStream inH, InputStream inM, InputStream inV) {
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql  = "Insert into public.inicio(historia, historiaFoto, mision, misionFoto, vision, visionFoto, estado) Values(?,?,?,?,?,?,1)";
 		
 		try {
@@ -83,12 +83,28 @@ public class DTInicio {
 			
 			guardado = true;
 			
-			ps.close();
 			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return guardado;

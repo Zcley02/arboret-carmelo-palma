@@ -92,7 +92,8 @@
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"></textarea>
+                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3" hidden="true"></textarea>
+                                <textarea name="descripcion1" id="descripcion1" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Género del árbol:</label>
@@ -161,7 +162,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button id="btn" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
                             <div style="text-align:center;"><a href="GestionArbol.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
@@ -198,6 +199,16 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 		}	
+	</script>
+	<script type="text/javascript">
+	$(function()
+			{
+				$("#btn").click(function(){
+	    			textarea = $("#descripcion1").val();
+	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+	    			$("#descripcion").html(textarea_line);
+	   			});
+			});
 	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">

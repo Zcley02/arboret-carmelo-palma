@@ -77,7 +77,7 @@ public class DTArbol {
 	
 	public boolean guardarArbol(Arbol ar, InputStream fi) {
 		boolean resp = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		
 		try {
 			
@@ -102,12 +102,28 @@ public class DTArbol {
 				resp = false;
 			}
 			
-			ps.close();
-
 						
-		}	catch (Exception e) {
-			System.out.println("Error al insertar: ");
+		}	catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return resp;
@@ -130,10 +146,24 @@ public class DTArbol {
 					eliminado=true;
 				}
 			}
-			
-		} catch (Exception e) {
-			System.out.println("Error en eliminar el arbol");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rsArbol.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return eliminado;
@@ -190,7 +220,7 @@ public class DTArbol {
 	public boolean editarArConImg(Arbol ar, InputStream fi) {
 		boolean editado = false;
 		
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update arbol set nombreComun = ?, nombreCientifico = ?, descripcion = ?, idFamilia = ?, idGenero = ?, idDistribucion = ?, idFlor = ?, foto = ?, estado = 2 where idArbol = ?";
 		
 		try {
@@ -211,10 +241,28 @@ public class DTArbol {
 			
 			editado = true;
 			
-			ps.close();
-		} catch (Exception e) {
-			// TODO: handle exception
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return editado;
@@ -223,7 +271,7 @@ public class DTArbol {
 	public boolean editarArSinImg(Arbol ar) {
 		boolean editado = false;
 		
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update arbol set nombreComun = ?, nombreCientifico = ?, descripcion = ?, idFamilia = ?, idGenero = ?, idDistribucion = ?, idFlor = ?, estado = 2 where idArbol = ?";
 		
 		try {
@@ -240,13 +288,28 @@ public class DTArbol {
 			ps.setInt(8, ar.getId());
 			
 			ps.executeUpdate();
-			
 			editado = true;
-			
-			ps.close();
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return editado;

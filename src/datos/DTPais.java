@@ -87,7 +87,7 @@ public class DTPais {
 	public boolean guardarPais(Pais p)
 	{
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "INSERT INTO public.pais (nombre, estado) VALUES (?,?);";
 		try 
 		{
@@ -102,33 +102,28 @@ public class DTPais {
 			}else {
 				guardado = false;
 			}
-			
-			ps.close();
 
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("DT Pais: Error al guardar un pais " + e.getMessage());
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
 		}
-		finally 
-		{
-			try 
-			{
-				if(rsPais != null)
-				{
-					rsPais.close();
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
 				}
-				if(c != null)
-				{
-					c.close();
+				if(ps != null){
+					ps.close();
 				}
-			} 
-			catch (Exception e2) 
-			{
-				System.err.println("DT Pais: Error al cerrar conexion " + e2.getMessage());
-				e2.printStackTrace();
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
 		}
 		
 		return guardado;
@@ -218,7 +213,7 @@ public class DTPais {
 	
 	public boolean editarPais(Pais p) {
 		boolean editado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update public.pais set nombre = ?, estado = 2 where idpais = ?";
 		
 		try {
@@ -232,8 +227,27 @@ public class DTPais {
 			
 			editado = true;
 			
-		}catch (Exception e) {
-			// TODO: handle exception
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return editado;

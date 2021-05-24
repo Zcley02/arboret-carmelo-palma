@@ -77,7 +77,7 @@ public class DTProducto {
 	
 	public boolean guardarProducto(Producto p, InputStream fin) {
 		boolean guardado =false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Insert into productos(nombre, descripcion, foto, precio, idtipo_producto, estado) Values(?,?,?,?,?,1)";
 		
 		try {
@@ -95,10 +95,27 @@ public class DTProducto {
 			
 			guardado = true;
 			
-			ps.close();
-			
-		} catch (Exception e) {
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return guardado;
@@ -120,10 +137,27 @@ public class DTProducto {
 					break;
 				}
 			}
-			
-		} catch (Exception e) {
-			System.out.println("Error en eliminar el producto");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsProducto != null){
+					rsProducto.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return eliminado;
@@ -176,7 +210,7 @@ public class DTProducto {
 	
 	public boolean editarPrConImagen(Producto p, InputStream in) {
 		boolean editado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update productos set nombre = ?, descripcion = ?, foto = ?, precio = ?, idTipo_producto = ?, estado = 2 where idProductos = ?";
 		
 		try {
@@ -195,11 +229,28 @@ public class DTProducto {
 			
 			editado = true;
 			
-			ps.close();
 			
-		}catch (Exception e) {
-			// TODO: handle exception
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return editado;
@@ -207,7 +258,7 @@ public class DTProducto {
 	
 	public boolean editarPrSinImagen(Producto p) {
 		boolean editado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Update productos set nombre = ?, descripcion = ?, precio = ?, idTipo_producto = ?, estado = 2 where idProductos = ?";
 		
 		try {
@@ -223,11 +274,27 @@ public class DTProducto {
 			ps.executeUpdate();
 			
 			editado = true;
-			
-			ps.close();
-		}catch (Exception e) {
-			// TODO: handle exception
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return editado;

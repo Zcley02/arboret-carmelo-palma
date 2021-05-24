@@ -73,7 +73,7 @@ public class DTGenero {
 	
 	public boolean guardarGenero(Genero g) {
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Insert into public.genero(nombre, descripcion, estado) Values(?,?,1)";
 		
 		try {
@@ -87,8 +87,27 @@ public class DTGenero {
 			
 			guardado = true;
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 				
 		return guardado;
@@ -111,11 +130,72 @@ public class DTGenero {
 				}
 			}
 			
-		} catch (Exception e) {
-			System.out.println("Error en eliminar el genero");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsGenero != null){
+					rsGenero.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return eliminado;
+	}
+	
+	public Genero obtenerGenero(int id) {
+		Genero genero = new Genero();
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.genero where idGenero = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				genero.setIdGenero(rs.getInt("idGenero"));
+				genero.setNombre(rs.getString("nombre"));
+				genero.setDescripcion(rs.getString("descripcion"));
+				genero.setEstado(rs.getInt("estado"));
+			}
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return genero;
 	}
 }

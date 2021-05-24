@@ -54,17 +54,18 @@ public class DTUsuario {
 					}else {
 						resp = false;
 					}
-					
-					ps.close();
 				}
-				catch (Exception e) {
-					System.err.println("Error al guardar usuario "+e.getMessage());
+				catch (Exception e){
+					System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 					e.printStackTrace();
 				}
 				finally{
 					try {
-						if(rsUsuario != null){
-							rsUsuario.close();
+						if(rs != null){
+							rs.close();
+						}
+						if(ps != null){
+							ps.close();
 						}
 						if(c != null){
 							PoolConexion.closeConnection(c);
@@ -74,6 +75,7 @@ public class DTUsuario {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
 				}
 			}
 			
@@ -83,7 +85,7 @@ public class DTUsuario {
 		public boolean buscarUsuario(String usuario) {
 			boolean existe = false;
 			
-			PreparedStatement ps;
+			//PreparedStatement ps;
 			String sql = "Select * from public.usuario where usuario = ?";
 			
 			try {
@@ -101,10 +103,27 @@ public class DTUsuario {
 				
 				rs.close();
 				
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println("DATOS: ERROR AL VERIFICAR EL LOGIN "+ e.getMessage());
+			} catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 			return existe;
@@ -202,7 +221,7 @@ public class DTUsuario {
 		public boolean loginUsuario(Usuario u) {
 			boolean encontrado = false;
 			
-			PreparedStatement ps;
+			//PreparedStatement ps;
 			String sql = "Select * from public.usuario where usuario = ? and contrasenia = ?";
 			
 			try {
@@ -219,10 +238,27 @@ public class DTUsuario {
 					encontrado = false;
 				}
 				
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println("DATOS: ERROR AL VERIFICAR EL LOGIN "+ e.getMessage());
+			} catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 			return encontrado;

@@ -7,21 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.*;
-import entidades.*;
-
+import datos.DTFamilia;
+import entidades.Familiar;
 
 /**
- * Servlet implementation class SLGuardarFamilia
+ * Servlet implementation class SLEditarFamilia
  */
-@WebServlet(name="SLGuardarFamilia", urlPatterns="/SLGuardarFamilia")
-public class SLGuardarFamilia extends HttpServlet {
+@WebServlet("/SLEditarFamilia")
+public class SLEditarFamilia extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SLGuardarFamilia() {
+    public SLEditarFamilia() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,20 +38,19 @@ public class SLGuardarFamilia extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int id = Integer.parseInt(request.getParameter("id").trim());
+		
+		Familiar f = new Familiar();
+		DTFamilia dt = new DTFamilia();
 		
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
-		boolean resp = false;
 		
-		Familiar fa = new Familiar();
-		DTFamilia dt = new DTFamilia();
+		f.setIdFamilia(id);
+		f.setNombre(nombre);
+		f.setDescripcion(descripcion);
 		
-		fa.setNombre(nombre);
-		fa.setDescripcion(descripcion);
-		
-		resp = dt.guardarFamiliar(fa);
-		
-		if(resp==true) {
+		if(dt.editarFamilia(f)) {
 			response.sendRedirect("familygestion.jsp");
 		}else {
 			response.sendRedirect("familygestion.jsp?error");

@@ -15,7 +15,7 @@
             </div>
             <div class="card-body">
                 <h2 class="card-title my-2">
-                    <%=u.getNombre() %>
+                    <%=u.getNombre() %> 
                 </h2>
                 <p class="card-text paragraph">
                     <%=u.getDescripcion() %>

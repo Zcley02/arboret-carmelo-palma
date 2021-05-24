@@ -88,7 +88,7 @@ public class DTDistribucion {
 	public boolean guardarDistribucion(Distribucion d)
 	{
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "INSERT INTO public.distribucion (nombre, descripcion, estado, idregion) VALUES (?,?,?,?);";
 		try 
 		{
@@ -106,33 +106,28 @@ public class DTDistribucion {
 			}else {
 				guardado = false;
 			}
-			
-			ps.close();
 
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("DT Distribucion: Error al guardar una distribucion " + e.getMessage());
+		}catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
 		}
-		finally 
-		{
-			try 
-			{
-				if(rsDistribucion != null)
-				{
-					rsDistribucion.close();
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
 				}
-				if(c != null)
-				{
-					c.close();
+				if(ps != null){
+					ps.close();
 				}
-			} 
-			catch (Exception e2) 
-			{
-				System.err.println("DT Distribucion: Error al cerrar conexion " + e2.getMessage());
-				e2.printStackTrace();
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
 		}
 		
 		return guardado;
@@ -224,7 +219,7 @@ public class DTDistribucion {
 		
 		public boolean editarDistribucion(Distribucion d) {
 			boolean editado = false;
-			PreparedStatement ps;
+			//PreparedStatement ps;
 			String sql = "Update distribucion set nombre = ?, descripcion = ?, estado = 2, idregion = ? where iddistribucion = ?";
 			
 			try {
@@ -240,8 +235,27 @@ public class DTDistribucion {
 				
 				editado = true;
 				
-			}catch (Exception e) {
-				// TODO: handle exception
+			}catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 			return editado;

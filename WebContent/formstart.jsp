@@ -1,3 +1,4 @@
+<%@page import = "entidades.*, datos.*, java.util.*;"%>
 <%
     //Limpia la CACHE del navegador
 	    response.setHeader("Pragma", "no-cache");
@@ -43,89 +44,83 @@
     </body>
 
     </html>
+    
+    <%
+			Inicio in = new Inicio();
+			DTInicio dt = new DTInicio();
+			
+			in = dt.llenarInicio();
+		%>
+
+        <!-- Summary -->
+        
 
     <!--Form-->
     <div class="container py-1">
         <header class="text-center text-white">
             <script src="https://kit.fontawesome.com/a41f4b8198.js" crossorigin="anonymous"></script>
         </header>
+        
         <div class="row py-5">
             <div class="col-lg-10 mx-auto mt-5">
                 <div class="card rounded shadow border-0">
-
-                    <div class="card-header">
-                        <h2 class="card-title text-center">Inicio</h2>
-                    </div>
-                    <div class="card-body">
-                        <form action="SLGuardarInicio" method="Post" enctype="multipart/form-data">
-                            <h3>Historia</h3>
-                            <hr class="bg-dark w-auto">
-                            <div class="form-group">
-                                <label for="custom-file">Imagen:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Subir</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input name="hFoto" type="file" class="custom-file-input" id="inputGroupFile01">
-                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
-                                            archivo</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nombreCP" class="form-label fw-bolder">Descripción:</label>
-                                <textarea name="historia" id="descripciónCP" rows="4" class="form-control"></textarea>
-                            </div>
-                            <h3>Misión</h3>
-                            <hr class="bg-dark w-auto">
-                            <div class="form-group">
-                                <label for="custom-file">Imagen:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Subir</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input name="mFoto" type="file" class="custom-file-input" id="inputGroupFile02">
-                                        <label class="custom-file-label" for="inputGroupFile02">Seleccionar el
-                                            archivo</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nombreCP" class="form-label fw-bolder">Descripción:</label>
-                                <textarea name="mision" id="descripciónCP" rows="4" class="form-control"></textarea>
-                            </div>
-
-                            <h3>Visión</h3>
-                            <hr class="bg-dark w-auto">
-                            <div class="form-group">
-                                <label for="custom-file">Imagen:</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Subir</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input name="vFoto" type="file" class="custom-file-input" id="inputGroupFile03">
-                                        <label class="custom-file-label" for="inputGroupFile03">Seleccionar el
-                                            archivo</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nombreCP" class="form-label fw-bolder">Descripción:</label>
-                                <textarea name="vision" id="descripciónCP" rows="4" class="form-control"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary" style="width: 49%;">Guardar</button>
-                            </div>
-                        </form>
-                    </div>
+					<div class="container mb-5">
+            <h1 class="my-4">Nuestra historia</h1>
+            <hr class="bg-dark w-25 ml-0">
+            <div class="row">
+                <div class="col-md-5 mt-7">
+                    <img class="img-fluid rounded-3"
+                        src="<%=in.getFotoHistoria() %>"
+                        alt="trees">
+                </div>
+                <div class="col-md-7">
+                    <h2 class="my-3">Historia</h2>
+                    <p class="paragraph"><%=in.getHistoria() %></p>
                 </div>
             </div>
-            <!--termina formulario-->
         </div>
+        <!-- End of Summary -->
+
+        <!-- Mision -->
+        <div class="container mb-5">
+            <h1 class="my-4">Misión</h1>
+            <hr class="bg-dark w-25 ml-0">
+            <div class="row">
+                <div class="col-md-7">
+                    <p class="paragraph">
+                        <%=in.getMision() %>
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <img class="img-fluid rounded-3"
+                        src="<%=in.getFotoMision() %>"
+                        alt="">
+                </div>
+            </div>
+        </div>
+        
+        <div class="container mb-5">
+            <h1 class="my-4">Visión</h1>
+            <hr class="bg-dark w-25 ml-0">
+            <div class="row">
+                <div class="col-md-5 mt-7">
+                    <img class="img-fluid rounded-3"
+                        src="<%=in.getFotoVision() %>"
+                        alt="Card image cap">
+                </div>
+                <div class="col-md-7">
+                    <p class="paragraph">
+                        <%=in.getVision() %>
+                    </p>
+                </div>
+            </div>
+            
     </div>
+    <div class="mb-3">
+                <a href="edithistory.jsp" type="button" class="btn btn-primary" style="width: 33%;">Editar Historia</a>
+                <a href="editmision.jsp" type="button" class="btn btn-primary" style="width: 33%;">Editar Misión</a>
+                <a href="editvision.jsp" type="button" class="btn btn-primary" style="width: 33%;">Editar Visión</a>
+            </div>
     </div>
 
 

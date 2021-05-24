@@ -45,6 +45,8 @@ public class SLGuardarEvento extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		try {
+			
+			
 			Eventos ev = new Eventos();
 			DTEvento dt = new DTEvento();
 			
@@ -64,12 +66,16 @@ public class SLGuardarEvento extends HttpServlet {
 			ev.setUbicacion(ubicacion);
 			ev.setHipervinculo(hipervinculo);
 			
-			if(dt.guardarEvento(ev)) {
-				response.sendRedirect("eventgestion.jsp");
+			if(validarFechas(fechaIn, fechaFin)) {
+				if(dt.guardarEvento(ev)) {
+					response.sendRedirect("eventgestion.jsp");
+				}else {
+					response.sendRedirect("eventgestion.jsp?error");
+				}
 			}else {
-				response.sendRedirect("event.gestion.jsp?error");
+				System.out.println("nose");
+				response.sendRedirect("eventgestion.jsp?error");
 			}
-			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -121,4 +127,33 @@ public class SLGuardarEvento extends HttpServlet {
 		return fechaFin;
 	}
 
+	private boolean validarFechas(String fechaIn, String fechaFin) {
+		boolean correcto = false;
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
+			Date fechain = sdf.parse(fechaIn);
+			Date fechafin = sdf1.parse(fechaFin);
+			
+			if(fechain.compareTo(fechafin) < 0) {
+				System.out.println("start is before end");
+				correcto = true;
+			}if(fechain.compareTo(fechafin)==0) {
+				System.out.println("start is befd1");
+				correcto = true;
+				
+			}if(fechain.compareTo(fechafin) > 0) {
+				System.out.println("start is before endddd");
+				correcto = false;
+			}
+			
+			
+		} catch (ParseException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return correcto;
+	}
 }

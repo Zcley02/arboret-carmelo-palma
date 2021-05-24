@@ -1,21 +1,30 @@
+<%@page import="entidades.*, datos.*" %>
 <%
-    //Limpia la CACHE del navegador
-	    response.setHeader("Pragma", "no-cache");
-	    response.setHeader("Cache-Control", "no-store");
-	    response.setDateHeader("Expires", 0);
-	    response.setDateHeader("Expires", -1);
-	      
-		
-		String loginUser = "";
-		loginUser = (String)session.getAttribute("login");
-		loginUser = loginUser==null?"":loginUser;
-		
-		if(loginUser.equals(""))
-		{
-			response.sendRedirect("login.jsp");
-		}
-    %>
-<!DOCTYPE html>
+ 	
+	String id = request.getParameter("id")==null?"":request.getParameter("id");
+	int idP = Integer.parseInt(id);
+ 	
+	DTFamilia dt = new DTFamilia();
+	Familiar f = dt.buscarFamilia(idP);
+ %>
+<%
+   //Limpia la CACHE del navegador
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    response.setDateHeader("Expires", -1);
+      
+	
+	String loginUser = "";
+	loginUser = (String)session.getAttribute("login");
+	loginUser = loginUser==null?"":loginUser;
+	
+	if(loginUser.equals(""))
+	{
+		response.sendRedirect("login.jsp");
+	}
+%>
+    <!DOCTYPE html>
     <html lang="es">
 
     <head>
@@ -34,7 +43,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-    <body class="sb-nav-fixed" style="background: #39603D;">
+    <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
@@ -51,27 +60,20 @@
                 <div class="card rounded shadow border-0">
                     <div class="card-header">
                         <h2>
-                            Flor
+                            Familia
                         </h2>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="SLGuardarFlor" method="Post" role="form">
+                        <form action="SLEditarFamilia" method="Post" role="form">
                             <div class="form-group">
-                                <label>Nombre Común:</label>
-                                <input name="nombreCo" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Nombre Cientifico:</label>
-                                <textarea name="nombreCi" class="form-control" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Descripción:</label>
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
-                            </div> 
-                            <div class="form-group">
-                                <label>Temporada de Floración:</label>
-                                <textarea name="temporadaF" class="form-control" rows="3"></textarea>
+                                <label>Nombre de la familia:</label>
+                                <input value="<%=f.getNombre() %>" name="nombre" class="form-control">
+								<input value="<%=f.getIdFamilia() %>" name="id" class="form-control" hidden>
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
+                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <button id="btn" class="btn btn-primary" style="width: 100%;">Guardar</button>
@@ -104,6 +106,12 @@
 	    			$("#descripcion").html(textarea_line);
 	   			});
 			});
+	
+			function load(){
+				var descripcion = "<%=f.getDescripcion()%>";
+				var desp = descripcion.replaceAll("<br>", ("\n"));
+				$("#descripcion1").html(desp);
+			}
 	</script>
     </body>
 

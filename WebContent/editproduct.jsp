@@ -9,6 +9,8 @@
  	DTProducto dtp = new DTProducto();
  	Producto p = dtp.buscarProducto(idP);
  	
+ 	String descripcion = "";
+ 	
  %>
 <%
     //Limpia la CACHE del navegador
@@ -46,7 +48,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-    <body class="sb-nav-fixed" style="background: #39603D;">
+    <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
@@ -81,8 +83,9 @@
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"><%=p.getDescripcion() %></textarea>
+                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
                             </div>
+                            <textarea rows="3" name="descripcion1" id="descripcion1" hidden="true"></textarea>
                             <div class="form-group">
                                 <label>Precio:</label>
                                 <input value="<%=p.getPrecio() %>" type="number" id="precio" name="precio" class="form-control">
@@ -124,7 +127,7 @@
                                 
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
+                                <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
                             </div>
                             <div style="text-align:center;"><a href="productgestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
@@ -163,6 +166,24 @@
 	    	    inputNombre.value = "true";
 			}
 		}	
+    	
+    	
+	</script>
+	<script type="text/javascript">
+	$(function()
+			{
+				$("#btn").click(function(){
+	    			textarea = $("#descripcion").val();
+	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+	    			$("#descripcion1").html(textarea_line);
+	   			});
+			});
+	    	
+	    	function load(){
+	    		var descripcion = "<%=p.getDescripcion()%>";
+				var desp = descripcion.replaceAll("<br>", ("\n"));
+				$("#descripcion").html(desp);
+	    	}
 	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">

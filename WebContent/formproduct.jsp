@@ -74,7 +74,8 @@
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
+                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Precio:</label>
@@ -99,7 +100,7 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="custom-file-input">
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" onchange="readUrl(this);">
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
@@ -109,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
+                                <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
                             <div style="text-align:center;"><a href="productgestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
@@ -146,6 +147,16 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 		}	
+	</script>
+	<script type="text/javascript">
+	$(function()
+			{
+				$("#btn").click(function(){
+	    			textarea = $("#descripcion1").val();
+	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+	    			$("#descripcion").html(textarea_line);
+	   			});
+			});
 	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">

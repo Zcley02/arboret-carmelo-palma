@@ -59,7 +59,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-    <body class="sb-nav-fixed" style="background: #39603D;">
+    <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>
@@ -99,7 +99,8 @@
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"><%=a.getDescripcion() %></textarea>
+                                <textarea name="descripcion1" id="descripcion1" class="form-control" rows="3"></textarea>
+                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3" hidden="true"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Género del árbol:</label>
@@ -192,7 +193,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" style="width: 100%;">Editar</button>
+                                <button id="btn" class="btn btn-primary" style="width: 100%;">Editar</button>
                             </div>
                             <div style="text-align:center;"><a href="GestionArbol.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
@@ -231,6 +232,22 @@
 	    	    inputNombre.value = "true";
 			}
 		}	
+	</script>
+	<script type="text/javascript">
+	$(function()
+			{
+				$("#btn").click(function(){
+	    			textarea = $("#descripcion1").val();
+	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+	    			$("#descripcion").html(textarea_line);
+	   			});
+			});
+	    	
+	    	function load(){
+	    		var descripcion = "<%=a.getDescripcion()%>";
+				var desp = descripcion.replaceAll("<br>", ("\n"));
+				$("#descripcion1").html(desp);
+	    	}
 	</script>
     </body>
     <script src="assets/demo/chart-bar-demo.js ">

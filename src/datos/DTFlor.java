@@ -82,7 +82,7 @@ public class DTFlor {
 	
 	public boolean guardarFlor(Flor fl) {
 		boolean guardado = false;
-		PreparedStatement ps;
+		//PreparedStatement ps;
 		String sql = "Insert into public.Flor(nombreComun, nombreCientifico, descripcion, temporadaFloracion, estado) Values(?,?,?,?,1)";
 		
 		try {
@@ -99,11 +99,27 @@ public class DTFlor {
 			
 			guardado = true;
 			
-			ps.close();
-			
-		} catch (Exception e) {
-			System.out.println("Error al insertar: ");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return guardado;
@@ -126,11 +142,73 @@ public class DTFlor {
 				}
 			}
 			
-		} catch (Exception e) {
-			System.out.println("Error en eliminar la flor");
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
 			e.printStackTrace();
 		}
-		
+		finally{
+			try {
+				if(rsFlor != null){
+					rsFlor.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		return eliminado;
+	}
+	
+	public Flor obtenerFlor(int id) {
+		Flor fl = new Flor();
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.flor where idFlor = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				fl.setIdFlor(rs.getInt("idFlor"));
+				fl.setNombreComun(rs.getString("nombreComun"));
+				fl.setNombreCientifico(rs.getString("nombreCientifico"));
+				fl.setDescripcion(rs.getString("descripcion"));
+				fl.setTemporadaFloracion(rs.getString("temporadaFloracion"));
+				fl.setEstado(rs.getInt("estado"));
+			}
+			
+		} catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return fl;
 	}
 }

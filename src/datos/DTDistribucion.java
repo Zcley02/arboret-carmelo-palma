@@ -108,7 +108,7 @@ public class DTDistribucion {
 			}
 
 		}catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT DISTRIBUCION: ERROR EN GUARDAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -153,7 +153,7 @@ public class DTDistribucion {
 			}
 			catch (Exception e)
 			{
-				System.err.println("DT Distribucion: Error al eliminar una distribución "+e.getMessage());
+				System.err.println("DT DISTRIBUCION: ERROR EN ELIMINAR"+e.getMessage());
 				e.printStackTrace();
 			}
 			finally
@@ -192,7 +192,7 @@ public class DTDistribucion {
 				}
 				
 			} catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR LAS DISTRIBUCIONES "+ e.getMessage());
+				System.out.println("DT DISTRIBUCION: ERROR EN OBTENER"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
@@ -236,7 +236,7 @@ public class DTDistribucion {
 				editado = true;
 				
 			}catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				System.out.println("DT DISTRIBUCION: ERROR EN ACTUALIZAR"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{

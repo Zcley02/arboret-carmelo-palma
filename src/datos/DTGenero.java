@@ -25,7 +25,7 @@ public class DTGenero {
 		} 
 		catch (Exception e) 
 		{
-			System.err.println("DT USUARIO: Error en listar los generos " + e.getMessage());
+			System.err.println("DT FAMILIA: Error en listar los género " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -46,7 +46,7 @@ public class DTGenero {
 			}
 		}
 		catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			System.out.println("DT GENERO: ERROR EN LISTAR EL GENERO "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -88,7 +88,7 @@ public class DTGenero {
 			guardado = true;
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT GENERO: ERROR EN GUARDAR "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -131,7 +131,7 @@ public class DTGenero {
 			}
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT GENERO: ERROR EN ELIMINAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -156,25 +156,24 @@ public class DTGenero {
 		return eliminado;
 	}
 	
-	public Genero obtenerGenero(int id) {
-		Genero genero = new Genero();
+	public Genero getGenero(int id) {
+		Genero g = new Genero();
 		
 		try {
-			
 			c = PoolConexion.getConnection();
-			ps = c.prepareStatement("select * from public.genero where idGenero = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("select * from public.genero where idgenero = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			
 			if(rs.first()) {
-				genero.setIdGenero(rs.getInt("idGenero"));
-				genero.setNombre(rs.getString("nombre"));
-				genero.setDescripcion(rs.getString("descripcion"));
-				genero.setEstado(rs.getInt("estado"));
+				g.setIdGenero(rs.getInt("idgenero"));
+				g.setNombre(rs.getString("nombre"));
+				g.setDescripcion(rs.getString("descripcion"));
+				g.setEstado(rs.getInt("estado"));
 			}
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT GENERO: ERROR EN OBTENER GENERO"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -196,6 +195,49 @@ public class DTGenero {
 			
 		}
 		
-		return genero;
+		return g;
+	}
+	
+	public boolean editarGenero(Genero g) {
+		boolean modificado = false;
+		String sql = "Update genero set nombre = ?, descripcion = ?, estado = 2 where idgenero = ?";
+		
+		try {
+			
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(sql);
+			
+			ps.setString(1, g.getNombre());
+			ps.setString(2, g.getDescripcion());
+			ps.setInt(3, g.getIdGenero());
+			
+			ps.executeUpdate();
+			
+			modificado = true;
+			
+		} catch (Exception e){
+			System.out.println("DT GENERO: ERROR EN ACTUALIZAR"+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return modificado;
 	}
 }

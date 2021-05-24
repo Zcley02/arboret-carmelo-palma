@@ -26,7 +26,7 @@ public class DTServicio {
 			rsServicios = ps.executeQuery();
 		}
 		catch (Exception e){
-			System.out.println("DATOS: Error al listar elementos del Servicio "+ e.getMessage());
+			System.out.println("DT SERVICIO: ERROR LISTAR RS"+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -50,7 +50,7 @@ public class DTServicio {
 			}
 		}
 		catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			System.out.println("DT SERVICIO: ERROR EN LISTAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -147,7 +147,7 @@ public class DTServicio {
 		}
 		catch (Exception e)
 		{
-			System.err.println("Error al eliminar el Servicio "+e.getMessage());
+			System.err.println("DT SERVICIO: ERROR EN ELIMINAR"+e.getMessage());
 			e.printStackTrace();
 		}
 		finally
@@ -186,7 +186,7 @@ public class DTServicio {
 			}
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR LOS SERVICIOS "+ e.getMessage());
+			System.out.println("DT SERVICIO: ERROR EN OBTENER"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -230,7 +230,7 @@ public class DTServicio {
 			editado = true;
 			
 		}catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT REGION: ERROR EN ACTUALIZAR CON IMAGEN"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -272,7 +272,7 @@ public class DTServicio {
 			editado = true;
 			
 		}catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT SERVICIO: ERROR EN ACTUALIZAR SIN IMAGEN"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{

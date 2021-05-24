@@ -78,12 +78,16 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="custom-file-input" requerid>
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" onchange="readUrl(this);" requerid>
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
                                 </div>
+                                 <div class="text-center">
+                                	<img class="rounded img-fluid" alt="Seleccione la imagen" src="" name="imagen" id="imagen" onchange="readUrl(this);">
+                                </div>
                             </div>
+                            
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
@@ -115,6 +119,20 @@
 	    			$("#descripcion").html(textarea_line);
 	   			});
 			});
+	</script>
+	<script type="text/javascript">
+		
+    	function readUrl(input) {
+			if(input.files && input.files[0]){
+				var reader = new FileReader();
+				
+				reader.onload = function (e) {
+					$('#imagen')
+						.attr('src', e.target.result);
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}	
 	</script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>

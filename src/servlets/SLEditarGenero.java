@@ -8,19 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datos.DTFamilia;
+import datos.DTGenero;
 import entidades.Familiar;
+import entidades.Genero;
 
 /**
- * Servlet implementation class SLEditarFamilia
+ * Servlet implementation class SLEditarGenero
  */
-@WebServlet("/SLEditarFamilia")
-public class SLEditarFamilia extends HttpServlet {
+@WebServlet("/SLEditarGenero")
+public class SLEditarGenero extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SLEditarFamilia() {
+    public SLEditarGenero() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,22 +42,21 @@ public class SLEditarFamilia extends HttpServlet {
 		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id").trim());
 		
-		Familiar f = new Familiar();
-		DTFamilia dt = new DTFamilia();
+		Genero g = new Genero();
+		DTGenero dt = new DTGenero();
 		
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
 		
-		f.setIdFamilia(id);
-		f.setNombre(nombre);
-		f.setDescripcion(descripcion);
+		g.setIdGenero(id);
+		g.setNombre(nombre);
+		g.setDescripcion(descripcion);
 		
-		if(dt.editarFamilia(f)) {
-			response.sendRedirect("familygestion.jsp?msj=1");
+		if(dt.editarGenero(g)) {
+			response.sendRedirect("gendergestion.jsp?msj=1");
 		}else {
-			response.sendRedirect("familygestion.jsp?msj=2");
+			response.sendRedirect("gendergestion.jsp?msj=2");
 		}
-		
 	}
 
 }

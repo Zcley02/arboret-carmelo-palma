@@ -97,8 +97,8 @@
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
                             </div>
-                            <div style="text-align:center;"><a href="bannergestions.jsp"><i
-                                        class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
+                            <div style="text-align:center;"><a href="formstart.jsp"><i
+                                        class="fas fa-undo"></i>&nbsp;Volver a gestión inicio</a></div>
                         </form>
                     </div>
                 </div>

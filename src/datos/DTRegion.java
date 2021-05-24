@@ -109,7 +109,7 @@ public class DTRegion {
 			}
 
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DR REGION: ERROR EN GUARDAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -193,7 +193,7 @@ public class DTRegion {
 			}
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR LA REGION "+ e.getMessage());
+			System.out.println("DT REGION: ERROR EN OBTENER"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -237,7 +237,7 @@ public class DTRegion {
 			editado = true;
 			
 		}catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT REGION: ERROR EN ACTUALIZAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{

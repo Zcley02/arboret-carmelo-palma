@@ -88,7 +88,7 @@
                                     <tr>
                                         <td><%=u.getNombre() %></td>
                                         <td><%=u.getDescripcion() %></td>
-                                        <td>&nbsp;&nbsp;<a href="#"><i
+                                        <td>&nbsp;&nbsp;<a href="editgender.jsp?id=<%=u.getIdGenero()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
                                                 href="#" onclick="myDeleteGender(<%=u.getIdGenero()%>)"><i class="far fa-trash-alt"></i></td>
                                <%
@@ -147,6 +147,14 @@
    	        var mensaje = "";
    	        mensaje = "<%=varMsj%>";
    	        
+   	        if(mensaje == "1")
+   	        {
+   	            successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+   	        }
+   	        if(mensaje == "2")
+   	        {
+   	            errorAlert('Error', 'Revise los datos insertados');
+   	        }
    	        if(mensaje == "5")
    	        {
    	            successAlert('Exito', 'Los datos han sido eliminado exitosamente');

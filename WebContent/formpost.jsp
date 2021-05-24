@@ -94,7 +94,7 @@
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                            <div style="text-align:center;"><a href="publicationgestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>

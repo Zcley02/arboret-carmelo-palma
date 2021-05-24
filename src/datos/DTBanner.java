@@ -25,7 +25,7 @@ public class DTBanner {
 				rsBanner = ps.executeQuery();
 			}
 			catch (Exception e){
-				System.out.println("DATOS: Error al listar elementos del Banner "+ e.getMessage());
+				System.out.println("DT BANNER: ERROR EN LISTAR RS"+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -50,7 +50,7 @@ public class DTBanner {
 				}
 			}
 			catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				System.out.println("DT BANNER: ERROR EN LISTAR"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
@@ -97,7 +97,7 @@ public class DTBanner {
 				}
 			}
 			catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				System.out.println("DT BANNER: ERROR EN GUARDAR"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
@@ -141,7 +141,7 @@ public class DTBanner {
 			}
 			catch (Exception e)
 			{
-				System.err.println("ERROR AL ELIMINAR BANNER "+e.getMessage());
+				System.err.println("DTBANNER: ERROR EN ELIMINAR"+e.getMessage());
 				e.printStackTrace();
 			}
 			finally
@@ -181,7 +181,7 @@ public class DTBanner {
 				}
 				
 			} catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR EL BANNER "+ e.getMessage());
+				System.out.println("DT BANNER: ERROR EN OBTENER"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
@@ -226,7 +226,7 @@ public class DTBanner {
 				editado = true;
 				
 			}catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				System.out.println("DT BANNER: ERROR EN ACTUALIZAR CON IMAGEN"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
@@ -270,7 +270,7 @@ public class DTBanner {
 				editado = true;
 				
 			}catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				System.out.println("DT BANER: ERROR EN ACTUALIZAR SIN IMAGEN"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{

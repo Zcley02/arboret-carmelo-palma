@@ -154,6 +154,14 @@
    	        var mensaje = "";
    	        mensaje = "<%=varMsj%>";
    	        
+   	        if(mensaje == "1")
+   	        {
+   	            successAlert('Exito', 'Los datos de la familia han sido actualizados exitosamente');
+   	        }
+   	        if(mensaje == "2")
+   	        {
+   	            errorAlert('Error', 'Revise los datos insertados');
+   	        }
    	        if(mensaje == "5")
    	        {
    	            successAlert('Exito', 'Los datos han sido eliminado exitosamente');

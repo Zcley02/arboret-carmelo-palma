@@ -26,7 +26,7 @@ public class DTFamilia {
 		} 
 		catch (Exception e) 
 		{
-			System.err.println("DT USUARIO: Error en listar las familias " + e.getMessage());
+			System.err.println("DT FAMILIA: ERROR EN LISTAR FAMILIAS" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -47,7 +47,7 @@ public class DTFamilia {
 				listarFamiliar.add(fa);
 			}
 		} catch (Exception e) {
-			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			System.out.println("DT FAMILIA: ERROR EN LISTAR"+ e.getMessage());
 			e.printStackTrace();
 		}finally {
 			try {
@@ -92,7 +92,7 @@ public class DTFamilia {
 			
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT FAMILIA: ERROR EN GUARDAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -135,7 +135,7 @@ public class DTFamilia {
 			}
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT FAMILIA: ERROR EN ELIMINAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -177,7 +177,7 @@ public class DTFamilia {
 			}
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT FAMILIA: ERROR EN OBTENER FAMILIA"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -220,7 +220,7 @@ public class DTFamilia {
 			modificado = true;
 			
 		} catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DT FAMILIA: ERROR EN ACTUALIZAR"+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{

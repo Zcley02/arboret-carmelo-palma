@@ -70,7 +70,6 @@
                                         <th>Apellidos</th>
                                         <th>Usuario</th>
                                         <th>Correo electrónico</th>
-                                        <th>Contraseña</th>
                                         <th>Rol</th>
                                         <th>Opciones</th>
 
@@ -82,7 +81,6 @@
                                         <th>Apellidos</th>
                                         <th>Usuario</th>
                                         <th>Correo electrónico</th>
-                                        <th>Contraseña</th>
                                         <th>Rol</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -101,7 +99,6 @@
 											<td><%=vur.getApellidos()%></td>
 											<td><%=vur.getUsuario()%></td>
 											<td><%=vur.getEmail()%></td>
-											<td><%=vur.getContrasenia()%></td>
 											<td><%=vur.getRol()%></td>
 											<td>&nbsp;&nbsp;<a href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=vur.getIdusuario()%>)"

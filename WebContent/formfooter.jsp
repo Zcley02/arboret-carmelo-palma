@@ -14,7 +14,8 @@
 		{
 			response.sendRedirect("login.jsp");
 		}
-    %>
+%>
+<%@page import="entidades.*, datos.*"%>
     <!DOCTYPE html>
     <html lang="es">
 
@@ -56,26 +57,31 @@
                             Pie de Página
                         </h2>
                     </div>
+                    
+                    <%
+						DTPiePagina dt = new DTPiePagina();
+						PiePagina pp = dt.obtenerPP();
+					%>
                     <div class="card-body bg-white rounded">
                         <form action="SLGuardarPP" role="form" method="post">
                             <div class="form-group">
                                 <label>Dirección:</label>
-                                <input name="direccion" class="form-control">
+                                <input name="direccion" class="form-control" value="<%=pp.getDireccion() %>">
                             </div>
                             <div class="form-group">
                                 <label>Correo:</label>
-                                <input name="email" class="form-control">
+                                <input name="email" class="form-control" value="<%=pp.getEmail() %>">
                             </div>
                             <div class="form-group">
                                 <label>Telefono:</label>
-                                <input name="telefono" class="form-control">
+                                <input name="telefono" class="form-control" value="<%=pp.getTelefono() %>">
                             </div>
                             <div class="form-group">
                                 <label>Extensión:</label>
-                                <input name="ext" class="form-control">
+                                <input name="ext" class="form-control" value="<%=pp.getExt() %>">
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary" style="width: 50%;">Guardar</button>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
 
                         </form>

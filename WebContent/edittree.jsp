@@ -195,7 +195,7 @@
                             <div class="mb-3">
                                 <button id="btn" class="btn btn-primary" style="width: 100%;">Editar</button>
                             </div>
-                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                            <div style="text-align:center;"><a href="treegestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>

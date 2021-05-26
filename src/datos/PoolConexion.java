@@ -58,7 +58,6 @@ public class PoolConexion {
 		
 		try 
 		{
-			con = PoolConexion.dataSource.getConnection();
 			if((con == null) || (con.isClosed()))
 			{
 				resp = false;

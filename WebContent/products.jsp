@@ -1,4 +1,20 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*"%>
+<%
+	ArrayList<Producto> listarPro = new ArrayList<Producto>();
+	DTProducto dt = new DTProducto();
+	listarPro = dt.listarProducto();
+	String msj = "hidden";
+	
+	if(listarPro.isEmpty()){
+		msj = "";
+		System.out.println("El ArrayList de Productos esta vacio");
+		
+	}else{
+		msj= "hidden";
+		System.out.println("El ArrayList de Productos esta lleno");
+		
+	}
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -34,6 +50,9 @@
                 <hr class="bg-dark">
             </h1>
 
+			<div class="col-md-7">
+                  <h5 class="<%=msj%>">En este momento el catálogo de productos se encuentra vacío.</h5>
+            </div>
             <div class="card-group">
             
                 <jsp:include page="components/productCard.jsp" />

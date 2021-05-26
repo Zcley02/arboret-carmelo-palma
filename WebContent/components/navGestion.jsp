@@ -23,7 +23,7 @@
                         <!-- <a class="dropdown-item" href="#">Settings</a> -->
                         <a class="dropdown-item" href="password.jsp">Cambiar contraseña</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="index.jsp">Cerrar Sesión</a>
+                        <a class="dropdown-item" href="login.jsp">Cerrar Sesión</a>
                     </div>
                 </li>
             </ul>

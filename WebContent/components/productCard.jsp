@@ -20,12 +20,12 @@
                 <p class="card-text paragraph">
                     <%=u.getDescripcion() %>
                 </p>
-                <a href="./contact.jsp" class="btn btn-outline-primary">
+                <div class="price-wrap h5 my-4">
+                    <p class="price-new">C$ <%=u.getPrecio()%></p>
+                </div>
+                    <a href="./contact.jsp" class="btn btn-outline-primary">
                     Contactar
                 </a>
-                <div class="price-wrap h5 my-4">
-                    <span class="price-new">C$100.00</span>
-                </div>
             </div>
 
         </div>

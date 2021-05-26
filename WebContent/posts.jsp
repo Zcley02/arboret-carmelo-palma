@@ -1,4 +1,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*" %>
+<%
+	ArrayList<Publicacion> listarPu = new ArrayList<Publicacion>();
+	DTPublicacion dt = new DTPublicacion();
+	listarPu = dt.listarPublicacion();
+	
+	String msj = "hidden";
+	
+	if(listarPu.isEmpty()){
+		msj = "";
+		System.out.println("El ArrayList de Publicacion esta vacio");
+		
+	}else{
+		msj= "hidden";
+		System.out.println("El ArrayList de Publicacion esta lleno");
+		
+	}
+%>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -35,6 +52,9 @@
             </h1>
             <!-- End of Header -->
 
+			<div class="col-md-7">
+                  <h5 class="<%=msj%>">En este momento el catálogo de publicaciones se encuentra vacío.</h5>
+            </div>
             <!-- Posts Cards-->
             <jsp:include page="components/postCard.jsp"></jsp:include>
             <!-- End of Posts Cards-->

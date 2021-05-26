@@ -91,9 +91,10 @@
 									 %>
 										<tr>
 											<td><%=p.getNombre()%></td>
-											<td>&nbsp;&nbsp;<a href="editcountry.jsp?id=<%=p.getIdPais()%>"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=p.getIdPais()%>)"
-                                                ><i class="far fa-trash-alt"></i></td>
+											<td>&nbsp;&nbsp;<span title="Editar"><a href="editcountry.jsp?id=<%=p.getIdPais()%>"><i
+                                                    class="fas fa-edit"></i></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span title="Eliminar"><a href="#" onclick="myDeletePub(<%=p.getIdPais()%>)"
+                                                    ><i class="far fa-trash-alt"></i></span></td>
 										</tr>
 									 <%
 										}

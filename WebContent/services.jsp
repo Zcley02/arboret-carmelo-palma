@@ -1,4 +1,20 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*"%>
+<%
+	ArrayList<Servicios> listarServicios = new ArrayList<Servicios>();
+	DTServicio dt = new DTServicio();
+	listarServicios = dt.listarServicios();
+	String msj = "hidden";
+	
+	if(listarServicios.isEmpty()){
+		msj = "";
+		System.out.println("El ArrayList de Servicio esta vacio");
+		
+	}else{
+		msj= "hidden";
+		System.out.println("El ArrayList de Servicio esta lleno");
+		
+	}
+%>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -33,6 +49,10 @@
                 Servicios
             </h1>
             <hr class="bg-dark">
+            
+            <div class="col-md-7">
+                  <h5 class="<%=msj%>">En este momento el catálogo de servicios se encuentra vacío.</h5>
+            </div>
             <!-- End of Header -->
             <jsp:include page="components/serviceCard.jsp" />
             

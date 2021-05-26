@@ -65,15 +65,20 @@
                                                 <a class="small text-dark" href="password.jsp">¿Olvidaste tu
                                                     contraseña?</a>
                                                 <input type="submit" class="btn btn-outline-success" value="Iniciar Sesión" />
-                                                
-                                            </div>
+                                              
+                                            </div>&nbsp;
+                                            <div style="text-align:center;"><a href="index.jsp"><i
+                                        		class="fas fa-undo"></i>&nbsp;Regresar</a></div>
                                         </form>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 </main>
+                
             </div>
             <div id="layoutAuthentication_footer">
                 <footer class="py-4 bg-light mt-auto">

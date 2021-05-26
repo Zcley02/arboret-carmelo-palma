@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="entidades.Banner, datos.DTBanner, java.util.*"%>
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
     
     
     <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
@@ -105,9 +105,10 @@
 	                                        <td><%=bn.getTitulo() %></td>
 	                                        <td><%=bn.getDescripcion()%></td>
 	                                        <td><img alt="ejemplo" src="<%=bn.getFoto() %>" onClick="getValue()" width="100px" height="100px"></td>
-											<td>&nbsp;&nbsp;<a href="editbanner.jsp?id=<%=bn.getIdBanner()%>"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="myDeletePub(<%=bn.getIdBanner()%>)"
-                                                ><i class="far fa-trash-alt"></i></td>
+											<td>&nbsp;&nbsp;<span title="Editar"><a href="editbanner.jsp?id=<%=bn.getIdBanner()%>"><i
+                                                    class="fas fa-edit"></i></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span title="Eliminar"><a href="#" onclick="myDeletePub(<%=bn.getIdBanner()%>)"
+                                                ><i class="far fa-trash-alt"></i></a></span></td>
 										</tr>
 										
 									 <%

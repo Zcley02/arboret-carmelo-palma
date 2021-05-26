@@ -1,4 +1,20 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, vistas.*, datos.*, java.util.*" %>
+<%
+	ArrayList<Vista_arbol> listarArbol = new ArrayList<Vista_arbol>();
+	DTVista_arbol dt = new DTVista_arbol();
+	listarArbol = dt.listarAR();
+	String msj = "hidden";
+	
+	if(listarArbol.isEmpty()){
+		msj = "";
+		System.out.println("El ArrayList de Arboles esta vacio");
+		
+	}else{
+		msj= "hidden";
+		System.out.println("El ArrayList de Arboles esta lleno");
+		
+	}
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -40,7 +56,11 @@
             <hr class="bg-dark">
             <!-- End of Header -->
             
+            
 
+			<div class="col-md-7">
+                  <h5 class="<%=msj%>">En este momento el catálogo de árboles se encuentra vacío.</h5>
+            </div>
             <!-- Trees Cards -->
             <div id="cards-container" class="card-group">
            		<jsp:include page="components/treeCard.jsp"></jsp:include>

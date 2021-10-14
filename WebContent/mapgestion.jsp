@@ -1,21 +1,26 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-  <%
-    //Limpia la CACHE del navegador
-	    response.setHeader("Pragma", "no-cache");
-	    response.setHeader("Cache-Control", "no-store");
-	    response.setDateHeader("Expires", 0);
-	    response.setDateHeader("Expires", -1);
-	      
-		
-		String loginUser = "";
-		loginUser = (String)session.getAttribute("login");
-		loginUser = loginUser==null?"":loginUser;
-		
-		if(loginUser.equals(""))
-		{
-			response.sendRedirect("login.jsp");
-		}
-    %>
+<%@page import="java.util.*, vistas.Vista_coordenada_arbol, datos.DTVista_coordenada_arbol" %>
+<%
+	ArrayList<Vista_coordenada_arbol> listarCoord = new ArrayList<Vista_coordenada_arbol>();
+	DTVista_coordenada_arbol dtVisCA = new DTVista_coordenada_arbol();
+	listarCoord = dtVisCA.listarCA();
+%>
+<%
+  //Limpia la CACHE del navegador
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setDateHeader("Expires", 0);
+	response.setDateHeader("Expires", -1);
+     
+
+	String loginUser = "";
+	loginUser = (String)session.getAttribute("login");
+	loginUser = loginUser==null?"":loginUser;
+	
+	if(loginUser.equals(""))
+	{
+		response.sendRedirect("login.jsp");
+	}
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -36,6 +41,68 @@
     </head>
 
     <body class="sb-nav-fixed" style="background: #39603D;">
+    
+    	<div class="container py-1">
+       
+        <div class="container py-1">
+        <div class="row py-5">
+            <div class="col-lg-12 ml-lg-5 mx-auto mt-5">
+                <div class="card rounded shadow border-0">
+                    <div class="card-header">
+                        <h3>Gestión Coordenada de árboles</h3>
+                    </div>
+                    <div class="card-body bg-white rounded">
+                    
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <div style="text-align:right;"><a href="formcoordtree.jsp"><i
+                                            class="fas fa-plus-square"></i>&nbsp; Nueva Coordenada de árbol</div>
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre Común</th>
+                                                <th>Nombre Científico</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
+                                                <th>Imagen</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Nombre Común</th>
+                                                <th>Nombre Científico</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
+                                                <th>Imagen</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        	<%
+                                        		for(Vista_coordenada_arbol va: listarCoord){
+                                        	%>
+                                            <tr>
+                                                <td><%=va.getNombreComun() %></td>
+                                                <td><%=va.getNombreCientifico() %></td>
+                                                <td><%=va.getLatitud() %></td>
+                                                <td><%=va.getLongitud() %></td>
+                                                <td><img src="<%=va.getFoto() %>" width="200px" height="200px" class="img-thumbnail"></td>
+                                                <td>
+                                                    <a href="editproduct.jsp?id=<%=va.getIdCoordenadaArbol()%>"><i class="fas fa-edit"></i></a>
+                                                    <a href="#" onclick="myDeletePr(<%=va.getIdCoordenadaArbol()%>)"><i class="far fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                         	<%
+                                        		}
+                                         	%>
+                                        </tbody>
+	                            </table>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
 
         <!-- Here starts the menu-->
         <jsp:include page="components/navGestion.jsp"></jsp:include>

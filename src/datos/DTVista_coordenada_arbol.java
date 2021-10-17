@@ -29,11 +29,11 @@ public class DTVista_coordenada_arbol {
 			while(rs.next())
 			{
 				Vista_coordenada_arbol vw = new Vista_coordenada_arbol();
-				vw.setIdCoordenadaArbol(Integer.parseInt(rs.getString("idcoordenada_arbol")));
+				vw.setIdCoordenadaArbol(rs.getInt("idcoordenada_arbol"));
 				vw.setNombreComun(rs.getString("nombrecomun"));
 				vw.setNombreCientifico(rs.getString("nombrecientifico"));
-				vw.setLatitud(Double.parseDouble("latitud"));
-				vw.setLongitud(Double.parseDouble("longitud"));
+				vw.setLatitud(rs.getDouble("latitud"));
+				vw.setLongitud(rs.getDouble("longitud"));
 				vw.setFoto("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
 				
 				listaVC.add(vw);

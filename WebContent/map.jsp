@@ -50,6 +50,7 @@
         <!-- Javascript -->
         <link rel="stylesheet" href="js/bootstrap.min.js">
         <script defer src="./js/index.js"></script>
+        <script src="js/page/leaflet.ajax.min.js"></script>
 
         <!-- BOOTSTRAP V.4 -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"

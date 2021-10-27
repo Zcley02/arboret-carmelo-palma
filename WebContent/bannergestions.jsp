@@ -1,7 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="entidades.Banner, datos.DTBanner, java.util.*"%>
-    <!DOCTYPE html>
-    <html lang="es">
     
     
     <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
@@ -23,63 +21,52 @@
 			response.sendRedirect("login.jsp");
 		}
     %>
+    <%
+            	ArrayList<Banner> listBanner = new ArrayList<Banner>();
+            	DTBanner dtb = new DTBanner();
+            	listBanner = dtb.listarBanner();
+            	
+            	Banner ban = new Banner();
+           	
+            	int posicion = 0;
+            	if(listBanner.size() == 0){
+            		posicion= 1;	
+            	}	
+            	else{			
+            		ban = listBanner.get(listBanner.size() - 1);
+            		posicion = ban.getPosicion();		
+            	}    
+      %>
 
+<!DOCTYPE html>
+<html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Arboreto Carmelo Palma</title>
+        <title>Banner</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-            crossorigin="anonymous" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-            crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-
     <body class="sb-nav-fixed" style="background: #39603D;">
-
-        <!-- Here starts the menu-->
-        <jsp:include page="components/navGestion.jsp"></jsp:include>
-
-
-    </body>
-
-    </html>
-
-    <!--Table-->
-    <div class="container py-1">
-        <div class="row py-5">
-
-            <div class="col-lg-10 mx-auto mt-5">
-                <div class="card rounded shadow border-0">
-                    <div class="card-header">
-                        <h3>Banner</h3>
-                        <%
-                                	ArrayList<Banner> listBanner = new ArrayList<Banner>();
-                                	DTBanner dtb = new DTBanner();
-                                	listBanner = dtb.listarBanner();
-                                	
-                                	Banner ban = new Banner();
-                               	
-                                	int posicion = 0;
-                                	if(listBanner.size() == 0){
-                                		posicion= 1;	
-                                	}	
-                                	else{			
-                                		ban = listBanner.get(listBanner.size() - 1);
-                                		posicion = ban.getPosicion();		
-                                	}    
-                          %>
-                    </div>
-                    <div class="card-body bg-white rounded">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <div style="text-align:right;"><a href="formbanner.jsp?posicion=<%=ban.getPosicion()%>"><i
+        <jsp:include page="components/mainMenu.jsp"></jsp:include>
+        <jsp:include page="components/navBar.jsp"></jsp:include>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4 mb-4" style="color:white">Banner</h1>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                
+                                <h3>Tabla Banner</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered" id="datatablesSimple">
+                                	<div style="text-align:right;"><a href="formbanner.jsp?posicion=<%=ban.getPosicion()%>"><i
                                             class="fas fa-plus-square"></i>&nbsp; Agregar banner</div>
                                 <thead>
                                     <tr>
@@ -115,66 +102,55 @@
 					            		}
                                 	 %>
                                 </tbody>
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-    </div>
-    <!--termina tabla-->
-    
-    <!-- MODAL VISUALIZAR IMAGEN -->					
-					<div class="modal fade" id="modalVisualizarImagen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					       <h5 class="modal-title">Visualizar Imagen</h5>				
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					    	<div align="center">
-									<img id="preview" src="" name="preview"  alt="Imagen Banner"
-										class = "img-fluid"; border-bottom-color: white; margin: 2px;" />
-								</div>								
-					      </div>					 
-					    </div>
-					  </div>
-					</div>					
-					<!-- FIN Modal -->
-     
-     <script type="text/javascript">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    
+	    <script>
+         window.addEventListener('DOMContentLoaded', event => {
 
-     function getValue()
-    {   	
-        var a= event.srcElement.title;
-        document.getElementById("preview").src = a;
-    }  
-	</script>
+            // Toggle the side navigation
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                // Uncomment Below to persist sidebar toggle between refreshes
+                // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                //     document.body.classList.toggle('sb-sidenav-toggled');
+                // }
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.classList.toggle('sb-sidenav-toggled');
+                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                });
+            }
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "
-        crossorigin="anonymous "></script>
-    <script src="js/scripts.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/chart-area-demo.js "></script>
-    <script src="assets/demo/chart-bar-demo.js "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/datatables-demo.js "></script>
-    </body>
-    <script src="assets/demo/chart-bar-demo.js ">
-    </script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/datatables-demo.js "></script>
-    
-    <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	<script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
-
-   <script>
+        })
+         </script>
+         <script>
    
         function myDeletePub(idBanner)
         {
@@ -214,4 +190,3 @@
 	    });
  
 	</script>
-    </body>

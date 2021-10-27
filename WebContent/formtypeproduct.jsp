@@ -16,37 +16,25 @@
 		}
     %>
 <!DOCTYPE html>
-    <html lang="es">
-
+<html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Arboreto Carmelo Palma</title>
+        <title>Crear Tipo de Producto</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-            crossorigin="anonymous" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-            crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" href="css/styles.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-
     <body class="sb-nav-fixed" style="background: #39603D;">
-
-        <!-- Here starts the menu-->
-        <jsp:include page="components/navGestion.jsp"></jsp:include>
-
-    </body>
-
-    </html>
-
-    </html>
-    <!--Form-->
-    <div class="container py-1">
-        <div class="row py-5">
+        <jsp:include page="components/mainMenu.jsp"></jsp:include>
+        <jsp:include page="components/navBar.jsp"></jsp:include>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container">
+        <div class="row py-3">
             <div class="col-lg-10 mx-auto mt-5">
                 <div class="card rounded shadow border-0">
                     <div class="card-header">
@@ -77,27 +65,57 @@
             </div>
         </div>
     </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "
-        crossorigin="anonymous "></script>
-    <script src="js/scripts.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/chart-area-demo.js "></script>
-    <script src="assets/demo/chart-bar-demo.js "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/datatables-demo.js "></script>
-    <script type="text/javascript">
-	$(function()
-			{
-				$("#btn").click(function(){
-	    			textarea = $("#descripcion1").val();
-	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
-	    			$("#descripcion").html(textarea_line);
-	   			});
-			});
-	</script>
-    </body>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    
+	    <script>
+         window.addEventListener('DOMContentLoaded', event => {
 
-    </html>
+            // Toggle the side navigation
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                // Uncomment Below to persist sidebar toggle between refreshes
+                // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                //     document.body.classList.toggle('sb-sidenav-toggled');
+                // }
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.classList.toggle('sb-sidenav-toggled');
+                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                });
+            }
+
+        })
+         </script>
+         <script type="text/javascript">
+			$(function()
+					{
+						$("#btn").click(function(){
+			    			textarea = $("#descripcion1").val();
+			    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+			    			$("#descripcion").html(textarea_line);
+			   			});
+					});
+		</script>

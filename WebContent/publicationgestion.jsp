@@ -1,6 +1,5 @@
 <%@page import="entidades.*, datos.*, java.util.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <%
 	ArrayList<Publicacion> listarPu = new ArrayList<Publicacion>();
 	DTPublicacion dt = new DTPublicacion();
@@ -22,56 +21,42 @@
 		{
 			response.sendRedirect("login.jsp");
 		}
-    %>   
-    <!DOCTYPE html>
-    <html lang="es">
-    
-    <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
-
+%>  
+<!DOCTYPE html>
+<html lang="es">
+<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Arboreto Carmelo Palma</title>
+        <title>Publicaci髇</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-            crossorigin="anonymous" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-            crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-
     <body class="sb-nav-fixed" style="background: #39603D;">
-
-        <!-- Here starts the menu-->
-        <jsp:include page="components/navGestion.jsp"></jsp:include>
-
-
-    </body>
-
-    </html>
-    <div class="container py-1">
-        <div class="row py-5">
-            <div class="col-lg-12 ml-lg-5 mx-auto mt-5">
-                <div class="card rounded shadow border-0">
-                    <div class="card-header">
-                        <h3>Gesti贸n Publicaci贸n</h3>
-                    </div>
-                    <div class="card-body bg-white rounded">
-                    
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <div style="text-align:right;"><a href="formpost.jsp"><i
-                                            class="fas fa-plus-square"></i>&nbsp; Nueva Publicaci贸n</div>
-
-                                <thead>
+        <jsp:include page="components/mainMenu.jsp"></jsp:include>
+        <jsp:include page="components/navBar.jsp"></jsp:include>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4 mb-4" style="color:white">Publicaciones</h1>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                
+                                <h3>Tabla Publicaci髇</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered" id="datatablesSimple">
+                                	<div style="text-align:right;"><a href="formpost.jsp"><i
+                                            class="fas fa-plus-square"></i>&nbsp; Nueva Publicaci髇</div>
+                                    <thead>
                                     <tr>
-                                        <th>T铆tulo</th>    
-                                        <th>Descripci贸n</th>
+                                        <th>T韙ulo</th>    
+                                        <th>Descripci髇</th>
                                         <th>Fecha Publicacion</th>
                                         <th>Hipervinculo</th>
                                         <th>Imagen</th>  
@@ -80,13 +65,12 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>T铆tulo</th>    
-                                        <th>Descripci贸n</th>
+                                        <th>T韙ulo</th>    
+                                        <th>Descripci髇</th>
                                         <th>Fecha Publicacion</th>
                                         <th>Hipervinculo</th>
                                         <th>Imagen</th>  
                                         <th>Opciones</th>              
-                                    </tr> 
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -108,46 +92,51 @@
                                 	%>
                                 
                                 </tbody>
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-    </div>
-    <!--termina tabla-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script>
+         window.addEventListener('DOMContentLoaded', event => {
 
-    </div>
-    </div>
+            // Toggle the side navigation
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                // Uncomment Below to persist sidebar toggle between refreshes
+                // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                //     document.body.classList.toggle('sb-sidenav-toggled');
+                // }
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.classList.toggle('sb-sidenav-toggled');
+                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                });
+            }
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "
-        crossorigin="anonymous "></script>
-    <script src="js/scripts.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/chart-area-demo.js "></script>
-    <script src="assets/demo/chart-bar-demo.js "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js " crossorigin="anonymous "></script>
-    <script src="assets/demo/datatables-demo.js "></script>
-    
-    
-    </body>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js "
-            crossorigin="anonymous "></script>
-        <script src="js/scripts.js "></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js "
-            crossorigin="anonymous "></script>
-        <script src="assets/demo/chart-area-demo.js "></script>
-        <script src="assets/demo/chart-bar-demo.js "></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js " crossorigin="anonymous "></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js "
-            crossorigin="anonymous "></script>
-        <script src="assets/demo/datatables-demo.js "></script>
-        
+        });
+         </script>
+         <script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
 	    
@@ -156,7 +145,7 @@
 	
 	        function myDeletePub(idPublicacion)
 	        {
-	        	$.fn.jAlert.defaults.confirmQuestion = '驴Est谩s Seguro?';
+	        	$.fn.jAlert.defaults.confirmQuestion = '縀st醩 Seguro?';
 	        	$.fn.jAlert.defaults.confirmBtnText = 'Si';
 	            confirm(function(e, btn){
 	                e.preventDefault();
@@ -184,7 +173,5 @@
        	    });
 	
 	    </script>
-        
     </body>
-
-    </html>
+</html>

@@ -73,7 +73,7 @@
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center my-5">
-                <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                <li class="page-item"><a class="page-link" href="#" onclick="generarreporteArbol();">Anterior</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -101,6 +101,12 @@
 
         <!-- Scrollbar -->
         <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
+        
+        <script type="text/javascript">
+	        function generarreporteArbol(){
+	        	window.location.href = "SLArbolReport"  
+	        }
+	        	</script>
 
     </body>
 

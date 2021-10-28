@@ -1,6 +1,8 @@
 package datos;
 
 import java.io.InputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +32,7 @@ public class DTUsuario {
 	
 		public boolean guardarUsuario(Usuario u){
 			boolean resp = false;
+			String contrasenia = getMD5(u.getContrasenia());
 			
 			if(buscarUsuario(u.getUsuario())) {
 				resp = false;
@@ -43,7 +46,7 @@ public class DTUsuario {
 					ps.setString(2, u.getApellidos());
 					ps.setString(3, u.getUsuario());
 					ps.setString(4, u.getEmail());
-					ps.setString(5, u.getContrasenia());
+					ps.setString(5, contrasenia);
 					ps.setInt(6, u.getIdRol());
 					ps.setInt(7, u.getEstado());
 					
@@ -220,6 +223,7 @@ public class DTUsuario {
 		
 		public boolean loginUsuario(Usuario u) {
 			boolean encontrado = false;
+			String contrasenia = getMD5(u.getContrasenia());
 			
 			//PreparedStatement ps;
 			String sql = "Select * from public.usuario where usuario = ? and contrasenia = ?";
@@ -228,7 +232,7 @@ public class DTUsuario {
 				c = PoolConexion.getConnection();
 				ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 				ps.setString(1, u.getUsuario());
-				ps.setString(2, u.getContrasenia());
+				ps.setString(2, contrasenia);
 				
 				rs = ps.executeQuery();
 				
@@ -263,4 +267,19 @@ public class DTUsuario {
 			
 			return encontrado;
 		}
+		
+		public String getMD5(String input) {
+	        try {
+	            MessageDigest md = MessageDigest.getInstance("MD5");
+	            byte[] encBytes = md.digest(input.getBytes());
+	            BigInteger numero = new BigInteger(1, encBytes);
+	            String encString = numero.toString(16);
+	            while (encString.length() < 32) {
+	                encString = "0" + encString;
+	            }
+	            return encString;
+	        } catch (Exception e) {
+	            throw new RuntimeException(e);
+	        }
+	    }
 }

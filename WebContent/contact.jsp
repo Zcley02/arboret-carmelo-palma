@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
 
     <head>
         <meta charset="UTF-8">
@@ -39,32 +39,33 @@
             <hr class="bg-dark">
             <!-- End of Header -->
 
-            <div class="card-group">
+            <div class="container contact">
+            <form class = "Contacto"  method="post" action="./SLEnviarCorreoContact"> 
 
                 <div class="col-md-12">
                     <div class="contact-form">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="fname">Nombres:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="fname" placeholder="" name="fname" requerid>
+                                <input type="text" class="form-control" id="nombre" placeholder="" name="nombre" minlength="3" maxlength="80" requerid>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="lname">Apellidos:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="lname" placeholder="" name="lname" requerid>
+                                <input type="text" class="form-control" id="apellido" placeholder="" name="apellido" minlength="3" maxlength="80" requerid>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Correo:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" placeholder="" name="email" requerid>
+                                <input type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" name="correo" minlength="3" maxlength="100" requerid>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Descripción">Mensaje:</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" requerid></textarea>
+                                <textarea class="form-control" rows="5" id="mensaje" name="mensaje" minlength="3" maxlength="500" requerid></textarea>
                             </div>
                         </div>
                         <div class="form-group"><br>
@@ -74,6 +75,7 @@
                         </div>
                     </div>
                 </div>
+               </form>
             </div>
         </div>
         <!-- End of Contact -->
@@ -95,5 +97,6 @@
         <!-- Scrollbar -->
         <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
     </body>
+
 
     </html>

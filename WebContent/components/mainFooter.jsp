@@ -1,8 +1,12 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidades.*, datos.*, java.util.*"%>
 <%
 	DTPiePagina dt = new DTPiePagina();
 	PiePagina pp = dt.obtenerPP();
 %>
+    <%
+    Calendar cal=Calendar.getInstance();
+    int year=cal.get(Calendar.YEAR);
+    %>
 <!-- Footer -->
 <div id="footer" class="footer-clean">
     <footer>
@@ -36,7 +40,7 @@
         </div>
         <div>
             <p class="copyright">
-                Arboreto Carmelo Palma © 2021
+                Arboreto Carmelo Palma © <%=year %>
             </p>
         </div>
     </footer>

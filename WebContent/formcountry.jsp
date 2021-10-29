@@ -27,6 +27,8 @@
         <title>Crear País</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -46,10 +48,11 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="./SLGuardarPais" method="Post">
+                        <form name="formPais" action="./SLGuardarPais" method="Post" onsubmit="return validar_pais()">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input id="nombre" name="nombre" class="form-control">
+                                <input id="nombre" name="nombre" onkeypress="return validarTexto(event)" class="form-control" minlength="5" maxlength="150" requerid>
+                                <small id="mensaje"></small>
                             </div>
                             <div class="mb-3" >
                                 <button class="btn btn-primary" style="width: 100%;">Guardar</button>
@@ -78,6 +81,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -97,4 +101,49 @@
             }
 
         })
+        
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 150;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 150;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
          </script>
+         
+         <script>
+         	function validar_pais(){
+         		nom = document.formPais.nombre.value;
+         		if (nom.length == 0){
+         			alertify.alert("Error", "Los campos estan vacios").set('label', 'Ok');
+         			return false;
+         		}else{
+         			alertify.success("País registrado correctamente");
+         			return true;
+         		}
+         	}
+         	function validarTexto(){
+         		tecla = e.keyCode;
+         		teclado = String.fromCharCode(tecla);
+         		
+         		if ((teclado < 'A' || teclado > 'z') && teclado != ""){
+         			return false;
+         		}
+         	}
+         </script>
+         
+         
+         
+         

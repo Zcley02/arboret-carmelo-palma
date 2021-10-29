@@ -52,14 +52,14 @@ public class SLGuardarPais extends HttpServlet {
 			p.setNombre(nombre);
 			p.setEstado(estado);
 
-			if(dtp.guardarPais(p))
-			{
-				response.sendRedirect("countrygestion.jsp");
-			}
-			else
-			{
-				response.sendRedirect("countrygestion.jsp?error");
-			}
+			
+			if(dtp.guardarPais(p)) { 
+				
+			response.sendRedirect("countrygestion.jsp");
+				
+			} else {
+			response.sendRedirect("countrygestion.jsp?error"); }
+			
 		} 
 		catch (Exception e) 
 		{

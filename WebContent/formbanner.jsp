@@ -32,6 +32,8 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
         <jsp:include page="components/mainMenu.jsp"></jsp:include>
@@ -50,16 +52,18 @@
                         <h3 class="card-title text-left">Banner</h3>
                     </div>
                     <div class="card-body">
-                        <form action="SLGuardarBanner" method="Post" enctype="multipart/form-data">
+                        <form id="formBanner" name="formBanner" action="SLGuardarBanner" method="Post" enctype="multipart/form-data" onsubmit="return validar_campos()">
                         <input name="posicion"  type = "hidden" value="<%=pos%>" />
                              <div class="mb-3">
                                 <label class="form-label fw-bolder">Título:</label>
-                                <input id="nombre" name="txtTitulo" class="form-control">
+                                <input id="nombre" name="txtTitulo" class="form-control" minlength="5" maxlength="30" requerid>
+                            	<small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bolder">Descripción:</label>
-                                <textarea id="descripcion" name="txtDescripcion" rows="4" class="form-control" hidden="trues"></textarea>
+                                <textarea id="descripcion" name="txtDescripcion" rows="4" class="form-control" minlength="5" maxlength="100" hidden="trues" requerid></textarea>
                                 <textarea id="descripcion1" name="txtDescripcion1" rows="4" class="form-control"></textarea>
+                           		<small id= "mensaje1" style="color:red"></small>	
                             </div>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -68,7 +72,7 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input name="foto" type="file" class="custom-file-input" id="inputGroupFile01" onchange="readUrl(this);">
+                                        <input name="foto" type="file" class="custom-file-input" id="inputGroupFile01" onchange="readUrl(this);" accept="image/jpg" required>
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
@@ -105,6 +109,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -126,26 +131,90 @@
         })
          </script>
          <script type="text/javascript">
-	$(function()
-			{
-				$("#btn").click(function(){
-	    			textarea = $("#descripcion1").val();
-	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
-	    			$("#descripcion").html(textarea_line);
-	   			});
-			});
-	</script>
-	<script type="text/javascript">
-		
-    	function readUrl(input) {
-			if(input.files && input.files[0]){
-				var reader = new FileReader();
-				
-				reader.onload = function (e) {
-					$('#imagen')
-						.attr('src', e.target.result);
-				};
-				reader.readAsDataURL(input.files[0]);
+			$(function()
+				{
+					$("#btn").click(function(){
+		    			textarea = $("#descripcion1").val();
+		    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+		    			$("#descripcion").html(textarea_line);
+		   			});
+				});
+		</script>
+		<script type="text/javascript">
+			
+	    	function readUrl(input) {
+				if(input.files && input.files[0]){
+					var reader = new FileReader();
+					
+					reader.onload = function (e) {
+						$('#imagen')
+							.attr('src', e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
 			}
-		}	
-	</script>
+	    	
+	    	function validar_campos(){
+         		titulo = document.formBanner.txtTitulo.value;
+         		des = document.formBanner.txtDescripcion.value;
+         		
+         		if (titulo.length == 0 || des.length == 0){
+         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
+         			
+         			if (titulo.length == 0){
+         				$("#mensaje").text("Campo obligatorio *");
+         			}
+         			if (des.length == 0){
+         				$("#mensaje1").text("Campo obligatorio *");
+         			}
+         			return false;
+         		}else{
+         			return true;
+         		}
+	         }
+	    	
+	    	
+		</script>
+		
+		<script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 30;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 30;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion').on("keydown", function(e) {
+	        var textLength = $('#descripcion').val().replace(' ', '1').length + 1;
+	        var maxValue = 100;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion').on("keyup", function(e) {
+	        var textLength = $('#descripcion').val().replace(' ', '1').length;
+	        var maxValue = 100;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+		</script>

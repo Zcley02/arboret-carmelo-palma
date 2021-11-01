@@ -71,7 +71,7 @@ public class SLGuardarBanner extends HttpServlet {
 			resp = dt.guardarBanner(b,fin);
 			
 			if(resp == true) {
-				response.sendRedirect("bannergestions.jsp");
+				response.sendRedirect("bannergestions.jsp?msj=1");
 			}else{
 				response.sendRedirect("management.jsp");
 			};

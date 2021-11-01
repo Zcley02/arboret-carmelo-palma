@@ -15,6 +15,8 @@
 			response.sendRedirect("login.jsp");
 		}
     %>
+    
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -48,11 +50,11 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form name="formPais" action="./SLGuardarPais" method="Post" onsubmit="return validar_pais()">
+                        <form name="formPais" action="./SLGuardarPais" method="Post" onsubmit="return validar_campos()">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input id="nombre" name="nombre" onkeypress="return validarTexto(event)" class="form-control" minlength="5" maxlength="150" requerid>
-                                <small id="mensaje"></small>
+                                <input id="nombre" name="nombre" class="form-control" minlength="5" maxlength="150" requerid>
+                                <small id= "mensaje" style="color:red"></small>                   
                             </div>
                             <div class="mb-3" >
                                 <button class="btn btn-primary" style="width: 100%;">Guardar</button>
@@ -124,22 +126,15 @@
          </script>
          
          <script>
-         	function validar_pais(){
+         	function validar_campos(){
          		nom = document.formPais.nombre.value;
          		if (nom.length == 0){
-         			alertify.alert("Error", "Los campos estan vacios").set('label', 'Ok');
+         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
+         			$("#mensaje").text("Campo obligatorio *");
          			return false;
          		}else{
          			alertify.success("País registrado correctamente");
          			return true;
-         		}
-         	}
-         	function validarTexto(){
-         		tecla = e.keyCode;
-         		teclado = String.fromCharCode(tecla);
-         		
-         		if ((teclado < 'A' || teclado > 'z') && teclado != ""){
-         			return false;
          		}
          	}
          </script>

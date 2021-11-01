@@ -104,7 +104,7 @@ public class DTPais {
 			}
 
 		}catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+			System.out.println("DATOS: ERROR EN LISTAR Elementos del Pais "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{

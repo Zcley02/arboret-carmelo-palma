@@ -32,6 +32,8 @@
         <title>País</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -105,6 +107,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -140,6 +143,8 @@
 	            });
 	        }
 	        
+	    //Control de altertas
+	    
 	        $(document).ready(function ()
 	        	    {
 	        	        var mensaje = "";
@@ -147,19 +152,19 @@
 	        	        
 	        	        if(mensaje == "1")
 	        	        {
-	        	            successAlert('Exito', 'Los datos del País han sido actualizados exitosamente');
+	             			alertify.success("País registrado");
 	        	        }
-	        	        if(mensaje == "2")
+	        	        if(mensaje == "3")
 	        	        {
-	        	            errorAlert('Error', 'Revise los datos insertados');
+	             			alertify.success("País actualizado");
 	        	        }
 	        	        if(mensaje == "5")
 	        	        {
-	        	            successAlert('Exito', 'Los datos del País han sido eliminados exitosamente');
+	        	            alertify.error('Se elimino correctamente');
 	        	        }
 	        	        if(mensaje == "6")
 	        	        {
-	        	            errorAlert('Error', 'Los datos de este País estan siendo utilizados por una Región. Por favor revise');
+	        	            alertify.alert('Error','Los datos de este País estan siendo utilizados por una Región');
 	        	        }
 	        	       
 	        	    });

@@ -50,14 +50,15 @@
                         <form  action="SLGuardarServicio" method="Post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Título:</label>
-                                <input id="nombreS" name="nombreS" class="form-control" requerid>
-
+                                <input id="nombreS" name="nombreS" class="form-control" required>
+								<small id= "mensaje" style="color:red"></small>
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea hidden="true" id="descripcion" name="descripcionS" class="form-control" rows="3" requerid></textarea>
-                                <textarea id="descripcion1" name="descripcionS1" class="form-control" rows="3" requerid></textarea>
+                                <textarea hidden="true" id="descripcion" name="descripcionS" class="form-control" rows="3" required></textarea>
+                                <textarea id="descripcion1" name="descripcionS1" class="form-control" rows="3" required></textarea>
+                            	<small id= "mensaje1" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -66,7 +67,7 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="custom-file-input" onchange="readUrl(this);" requerid>
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" onchange="readUrl(this);" required>
                                         <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
                                             archivo</label>
                                     </div>
@@ -146,4 +147,48 @@
 					reader.readAsDataURL(input.files[0]);
 				}
 			}	
+		</script>
+		
+		
+		<script>
+        $('#nombreS').on("keydown", function(e) {
+	        var textLength = $('#nombreS').val().replace(' ', '1').length + 1;
+	        var maxValue = 30;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombreS').on("keyup", function(e) {
+	        var textLength = $('#nombreS').val().replace(' ', '1').length;
+	        var maxValue = 30;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 80;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 80;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
 		</script>

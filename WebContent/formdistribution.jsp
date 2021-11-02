@@ -31,6 +31,8 @@
         <title>Crear Distribución</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -50,15 +52,17 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="SLGuardarDistribucion" method="Post">
+                        <form name="formDistribution" action="SLGuardarDistribucion" method="Post" onsubmit="return validar_campos()">
                             <div class="form-group">
                                 <label>Nombre de la distribución:</label>
-                                <input id="nombreD" name="nombreD" class="form-control">
+                                <input id="nombreD" name="nombreD" class="form-control" minlength="1" maxlength="40" required>
+                                <small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="form-group">
                             	<label>Descripción: </label>
-                            	<textarea id="descripcion1" name="descripcionD1" class="form-control" rows="3"></textarea>
-                            	<textarea id="descripcion" name="descripcionD" class="form-control" rows="3" hidden="true"></textarea>
+                            	<textarea id="descripcion1" name="descripcionD1" class="form-control" rows="3" minlength="1" maxlength="180" required></textarea>
+                            	<textarea id="descripcion" name="descripcionD" class="form-control" rows="3" hidden="true" minlength="1" maxlength="200" required></textarea>
+                            	<small id= "mensaje1" style="color:red"></small>
                             </div>
                             
                             <%
@@ -69,12 +73,15 @@
                             %>
                             <div class="form-group">
                                 <label>Región:</label>
+                                <small id= "mensaje2" style="color:red"></small>
                                 <select id="region" name="region" class="form-control">
+                                <option value="0">Seleccionar...</option>
                                 
                                 <%for (Region r : listaRegiones) { %>
                                     <option value=" <%= r.getIdRegion() %> "><%= r.getNombre()%></option>
                                 <% } %>
                                 </select>
+                                
                             </div>
                                
 
@@ -106,6 +113,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -135,4 +143,63 @@
 		    			$("#descripcion").html(textarea_line);
 		   			});
 				});
+		</script>
+		
+		<script>
+		function validar_campos(){
+         		nom = document.formDistribution.nombreD.value;
+         		des = document.formDistribution.descripcionD1.value;
+         		reg = document.formDistribution.region.value;
+         		
+         		if (nom.length == 0 || des.length == 0 || reg == 0 || reg.value == ""){
+         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
+         			return false;
+         		}else{
+         			return true;
+         		}
+	         }
+
+		</script>
+		
+		<script>
+        $('#nombreD').on("keydown", function(e) {
+	        var textLength = $('#nombreD').val().replace(' ', '1').length + 1;
+	        var maxValue = 40;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombreD').on("keyup", function(e) {
+	        var textLength = $('#nombreD').val().replace(' ', '1').length;
+	        var maxValue = 40;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 180;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 180;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
 		</script>

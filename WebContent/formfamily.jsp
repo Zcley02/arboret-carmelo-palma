@@ -46,12 +46,14 @@
                         <form action="SLGuardarFamilia" method="Post" role="form">
                             <div class="form-group">
                                 <label>Nombre de la familia:</label>
-                                <input name="nombre" class="form-control">
+                                <input id="nombre" name="nombre" class="form-control" minlength="1" maxlength="40" required>
+                                <small id= "mensaje" style="color:red"></small>
 
                                 <div class="form-group">
                                     <label>Descripción:</label>
-                                    <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                    <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true" minlength="1" maxlength="180" required></textarea>
+                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="1" maxlength="180" required></textarea>
+                                    <small id= "mensaje1" style="color:red"></small>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -78,8 +80,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -110,3 +110,46 @@
 	   			});
 			});
 	</script>
+		
+		<script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 40;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 40;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 180;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 180;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+		</script>

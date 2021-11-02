@@ -32,6 +32,8 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -108,6 +110,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -150,21 +153,21 @@
 	        	        
 	        	        if(mensaje == "1")
 	        	        {
-	        	            successAlert('Exito', 'Los datos del Servicio han sido modificados exitosamente');
+	             			alertify.success("Servicio registrado");
 	        	        }
-	        	        if(mensaje == "2")
+	        	        if(mensaje == "3")
 	        	        {
-	        	            errorAlert('Error', 'No se logro modificar, revise los campos en blanco');
+	             			alertify.success("Servicio actualizado");
 	        	        }
 	        	        if(mensaje == "5")
 	        	        {
-	        	            successAlert('Exito', 'Los datos del Servicio han sido eliminados exitosamente');
+	        	            alertify.error('Se elimino correctamente');
 	        	        }
 	        	        if(mensaje == "6")
 	        	        {
-	        	            errorAlert('Error', 'Los datos estan siendo usados en otros elemento. Por favor revisar');
+	        	            alertify.alert('');
 	        	        }
-	        	       
+
 	        	    });
 	
 	    </script>

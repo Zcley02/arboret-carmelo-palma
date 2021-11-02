@@ -38,6 +38,7 @@ public class SLGuardarGenero extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
 		boolean resp = false;
@@ -45,15 +46,20 @@ public class SLGuardarGenero extends HttpServlet {
 		Genero g = new Genero();
 		DTGenero dtg = new DTGenero();
 		
-		g.setNombre(nombre);
-		g.setDescripcion(descripcion);
-		
-		resp = dtg.guardarGenero(g);
-		
-		if(resp==true) {
-			response.sendRedirect("gendergestion.jsp");
+		if(nombre.length()==0 || descripcion.length()==0) {
+			response.sendRedirect("gendergestion.jsp?error");	
 		}else {
-			response.sendRedirect("gendergestion.jsp?error");
+		
+			g.setNombre(nombre);
+			g.setDescripcion(descripcion);
+			
+			resp = dtg.guardarGenero(g);
+			
+			if(resp==true) {
+				response.sendRedirect("gendergestion.jsp?msj=1");
+			}else {
+				response.sendRedirect("gendergestion.jsp?msj=2");
+			}
 		}
 		
 	}

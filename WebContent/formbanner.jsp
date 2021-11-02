@@ -32,8 +32,6 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
         <jsp:include page="components/mainMenu.jsp"></jsp:include>
@@ -56,13 +54,13 @@
                         <input name="posicion"  type = "hidden" value="<%=pos%>" />
                              <div class="mb-3">
                                 <label class="form-label fw-bolder">Título:</label>
-                                <input id="nombre" name="txtTitulo" class="form-control" minlength="5" maxlength="30" requerid>
+                                <input id="nombre" name="txtTitulo" class="form-control" minlength="5" maxlength="30" required>
                             	<small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bolder">Descripción:</label>
-                                <textarea id="descripcion" name="txtDescripcion" rows="4" class="form-control" minlength="5" maxlength="100" hidden="trues" requerid></textarea>
-                                <textarea id="descripcion1" name="txtDescripcion1" rows="4" class="form-control"></textarea>
+                                <textarea id="descripcion" name="txtDescripcion" rows="4" class="form-control" minlength="5" maxlength="80" hidden="trues" required></textarea>
+                                <textarea id="descripcion1" name="txtDescripcion1" rows="4" class="form-control" minlength="5" maxlength="80" required></textarea>
                            		<small id= "mensaje1" style="color:red"></small>	
                             </div>
                             <div class="form-group">
@@ -107,10 +105,7 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
-	    <script src="js/alertify.min.js" type="text/javascript"></script>
-	    
+        
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
 
@@ -154,26 +149,6 @@
 				}
 			}
 	    	
-	    	function validar_campos(){
-         		titulo = document.formBanner.txtTitulo.value;
-         		des = document.formBanner.txtDescripcion.value;
-         		
-         		if (titulo.length == 0 || des.length == 0){
-         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
-         			
-         			if (titulo.length == 0){
-         				$("#mensaje").text("Campo obligatorio *");
-         			}
-         			if (des.length == 0){
-         				$("#mensaje1").text("Campo obligatorio *");
-         			}
-         			return false;
-         		}else{
-         			return true;
-         		}
-	         }
-	    	
-	    	
 		</script>
 		
 		<script>
@@ -197,9 +172,9 @@
 	       
 	    });
 	    
-        $('#descripcion').on("keydown", function(e) {
-	        var textLength = $('#descripcion').val().replace(' ', '1').length + 1;
-	        var maxValue = 100;
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 80;
 	        
 	        console.log(e.keyCode);
 	        if (textLength > maxValue) {
@@ -209,9 +184,9 @@
 	        }
 
 	     });
-	    $('#descripcion').on("keyup", function(e) {
-	        var textLength = $('#descripcion').val().replace(' ', '1').length;
-	        var maxValue = 100;
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 80;
 
 	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
 	       

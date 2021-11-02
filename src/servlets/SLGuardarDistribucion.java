@@ -42,39 +42,44 @@ public class SLGuardarDistribucion extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		
-		try 
-		{
 			Distribucion d = new Distribucion();
 			DTDistribucion dt = new DTDistribucion();
 			
 			String nombre, descripcion;
 			int estado = 1;
 			String idregion;
-			
+		
 			nombre = request.getParameter("nombreD");
 			descripcion = request.getParameter("descripcionD");
 			idregion = request.getParameter("region").trim();
 			int id = Integer.parseInt(idregion);
+				
+			if(nombre.length()==0 || descripcion.length()==0 || (idregion == null || id == 0) ) {
+				response.sendRedirect("distributiongestion.jsp?msj=error");
+			}else {
+				
+			   try 
+			   {
+					d.setNombre(nombre);
+					d.setDescripcion(descripcion);
+					d.setEstado(estado);
+					d.setIdRegion(id);
 		
-			d.setNombre(nombre);
-			d.setDescripcion(descripcion);
-			d.setEstado(estado);
-			d.setIdRegion(id);
-
-			if(dt.guardarDistribucion(d))
-			{
-				response.sendRedirect("distributiongestion.jsp");
+					if(dt.guardarDistribucion(d))
+					{
+						response.sendRedirect("distributiongestion.jsp?msj=1");
+					}
+					else
+					{
+						response.sendRedirect("distributiongestion.jsp?msj=2");
+					}
+				} 
+				catch (Exception e) 
+				{
+					System.err.println("SL Distribucion: Error al guardar la distribucion " +e.getMessage());
+					e.printStackTrace();
+				}
 			}
-			else
-			{
-				response.sendRedirect("distributiongestion.jsp?error");
-			}
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("SL Distribucion: Error al guardar la distribucion " +e.getMessage());
-			e.printStackTrace();
-		}
 	}
 
 }

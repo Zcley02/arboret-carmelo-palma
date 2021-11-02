@@ -56,9 +56,9 @@ public class SLEditarPais extends HttpServlet {
 		
 			
 		if(dt.editarPais(p)) {
-			response.sendRedirect("countrygestion.jsp?msj=1");
+			response.sendRedirect("countrygestion.jsp?msj=3");
 		}else {
-			response.sendRedirect("countrygestion.jsp?msj=2");
+			response.sendRedirect("countrygestion.jsp?msj=4");
 		}
 
 	}

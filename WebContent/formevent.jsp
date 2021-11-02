@@ -48,32 +48,32 @@
                         <form action="SLGuardarEvento" method="post">
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Nombre:</label>
-                                <input name="nombre" type="text" class="form-control" id="formGroupExampleInput">
+                                <input name="nombre" type="text" class="form-control" id="formGroupExampleInput" required>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>Descripción:</label>
-                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" required></textarea>
                                     <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Fecha Inicio:</label>
-                                <input name="fechaInicio" type="date" class="form-control" id="formGroupExampleInput">
+                                <input name="fechaInicio" type="date" class="form-control" id="formGroupExampleInput" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Fecha Final:</label>
-                                <input name="fechaFin" type="date" class="form-control" id="formGroupExampleInput">
+                                <input name="fechaFin" type="date" class="form-control" id="formGroupExampleInput" required>
                             </div>
 
                             <div class="form-group">
 
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Tipo de Evento</label>
-                                    <select name="tipoEvento" class="form-control">
+                                    <select name="tipoEvento" class="form-control" required>
                                         <option value="Agenda Pública">Agenda Pública</option>
                                         <option value="Agenda Privada">Agenda Privada</option>
                                     </select>
@@ -84,12 +84,12 @@
 
                             <div class="form-group ">
                                 <label for="formGroupExampleInput ">Ubicación</label>
-                                <input name="ubicacion" type="text" class="form-control " id="formGroupExampleInput ">
+                                <input name="ubicacion" type="text" class="form-control " id="formGroupExampleInput " required>
                             </div>
 
                             <div class="form-group ">
                                 <label for="formGroupExampleInput ">Hipervinculo</label>
-                                <input name="hipervinculo" type="text" class="form-control " id="formGroupExampleInput ">
+                                <input name="hipervinculo" type="url" class="form-control " id="formGroupExampleInput " required>
                             </div>
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>

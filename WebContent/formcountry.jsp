@@ -50,10 +50,10 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form name="formPais" action="./SLGuardarPais" method="Post" onsubmit="return validar_campos()">
+                        <form action="./SLGuardarPais" method="Post">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input id="nombre" name="nombre" class="form-control" minlength="5" maxlength="150" requerid>
+                                <input id="nombre" name="nombre" class="form-control" minlength="3" maxlength="40" required>
                                 <small id= "mensaje" style="color:red"></small>                   
                             </div>
                             <div class="mb-3" >
@@ -81,9 +81,7 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
-	    <script src="js/alertify.min.js" type="text/javascript"></script>
+
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -106,7 +104,7 @@
         
         $('#nombre').on("keydown", function(e) {
 	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
-	        var maxValue = 150;
+	        var maxValue = 40;
 	        
 	        console.log(e.keyCode);
 	        if (textLength > maxValue) {
@@ -118,26 +116,13 @@
 	     });
 	    $('#nombre').on("keyup", function(e) {
 	        var textLength = $('#nombre').val().replace(' ', '1').length;
-	        var maxValue = 150;
+	        var maxValue = 40;
 
 	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
 	       
 	    });
          </script>
          
-         <script>
-         	function validar_campos(){
-         		nom = document.formPais.nombre.value;
-         		if (nom.length == 0){
-         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
-         			$("#mensaje").text("Campo obligatorio *");
-         			return false;
-         		}else{
-         			alertify.success("País registrado correctamente");
-         			return true;
-         		}
-         	}
-         </script>
          
          
          

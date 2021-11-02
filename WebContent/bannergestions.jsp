@@ -160,28 +160,30 @@
             });
         }
     	
+	    //Control de altertas
+	    
         $(document).ready(function ()
-	    {
-	        var mensaje = "";
-	        mensaje = "<%=varMsj%>";
-	        
-	        if(mensaje == "1")
-	        {
-	        	alertify.success("Se guardo correctamente");
-	        }
-	        if(mensaje == "2")
-	        {
-	            errorAlert('Error', 'Revise los datos insertados');
-	        }
-	        if(mensaje == "5")
-	        {
-	            successAlert('Exito', 'Los datos han sido eliminado exitosamente');
-	        }
-	        if(mensaje == "6")
-	        {
-	            errorAlert('Error', 'Los datos estan siendo usados en otros elemento. Por favor revisar');
-	        }
-	       
-	    });
+        	    {
+        	        var mensaje = "";
+        	        mensaje = "<%=varMsj%>";
+        	        
+        	        if(mensaje == "1")
+        	        {
+             			alertify.success("Elemento banner registrado");
+        	        }
+        	        if(mensaje == "3")
+        	        {
+             			alertify.success("Elemento banner actualizado");
+        	        }
+        	        if(mensaje == "5")
+        	        {
+        	            alertify.error('Se elimino correctamente');
+        	        }
+        	        if(mensaje == "6")
+        	        {
+        	            alertify.alert('');
+        	        }
+        	       
+        	    });
  
 	</script>

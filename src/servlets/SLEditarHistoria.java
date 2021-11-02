@@ -53,28 +53,32 @@ public class SLEditarHistoria extends HttpServlet {
 		String historia = request.getParameter("descripcion1");
 		System.out.println("nose"+historia);
 		
-		in.setIdInicio(idInicio);
-		in.setHistoria(historia);
 		
-		if(cambio.equals(v)) {
-			Part partH = request.getPart("foto");
-			InputStream inH = partH.getInputStream();
-			
-			if(dt.editarConImgHistoria(in, inH)) {
-				response.sendRedirect("formstart.jsp");
-			}else {
-				response.sendRedirect("formstart.jsp?error");
-			}
-			
+		if(historia.length()==0 || (cambio.length()==0 && idInicio == 0)) {
+			response.sendRedirect("formstart.jsp?msj=error");	
 		}else {
-			if(dt.editarSinImgHistoria(in)) {
-				response.sendRedirect("formstart.jsp");
+			in.setIdInicio(idInicio);
+			in.setHistoria(historia);
+			
+			if(cambio.equals(v)) {
+				Part partH = request.getPart("foto");
+				InputStream inH = partH.getInputStream();
+				
+				if(dt.editarConImgHistoria(in, inH)) {
+					response.sendRedirect("formstart.jsp?msj=1");
+				}else {
+					response.sendRedirect("formstart.jsp?error");
+				}
+				
 			}else {
-				response.sendRedirect("formstart.jsp?error");
+				if(dt.editarSinImgHistoria(in)) {
+					response.sendRedirect("formstart.jsp?msj=1");
+				}else {
+					response.sendRedirect("formstart.jsp?error");
+				}
 			}
 		}
-		
-		
+			
 	}
 
 }

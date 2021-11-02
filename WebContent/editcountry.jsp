@@ -29,6 +29,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Editar País</title>
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -58,12 +60,12 @@
 					 	
 					 %>
 
-                        <form  action="SLEditarPais" method="Post" enctype="multipart/form-data">
+                        <form action="SLEditarPais" method="Post" enctype="multipart/form-data">
                         	<input hidden="true" value="<%=p.getIdPais()%>" name="id">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input value="<%=p.getNombre() %>" id="nombre" name="nombre" class="form-control">
-
+                                <input value="<%=p.getNombre() %>" id="nombre" name="nombre" class="form-control" minlength="3" maxlength="40" required>
+								<small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
@@ -89,8 +91,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -111,3 +111,26 @@
 
         })
          </script>
+         
+         <script>
+               $('#nombre').on("keydown", function(e) {
+	        	var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        	var maxValue = 40;
+	        
+		        console.log(e.keyCode);
+		        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+					}                     	
+	        	}
+
+	    	 });
+		    $('#nombre').on("keyup", function(e) {
+		        var textLength = $('#nombre').val().replace(' ', '1').length;
+		        var maxValue = 40;
+	
+		        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+		       
+		    });
+         </script>
+         

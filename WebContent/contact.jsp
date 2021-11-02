@@ -50,28 +50,28 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="fname">Nombres:</label>
                             <div class="col-sm-10">
-                                <input id="nombre" name="nombre" class="form-control" placeholder=""  minlength="3" maxlength="80" requerid>
-                            	<small id= "mensaje" style="color:red">Campo obligatorio *</small>
+                                <input id="nombre" name="nombre" class="form-control" placeholder=""  minlength="3" maxlength="80">
+                            	<small id= "mensaje" style="color:red"></small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="lname">Apellidos:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="apellido" placeholder="" name="apellido" minlength="3" maxlength="80" requerid>
+                                <input type="text" class="form-control" id="apellido" placeholder="" name="apellido" minlength="3" maxlength="80">
                             	<small id= "mensaje1" style="color:red"></small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Correo:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" name="correo" minlength="3" maxlength="100" requerid>
+                                <input type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" name="correo" minlength="3" maxlength="100">
                             	<small id= "mensaje2" style="color:red"></small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Descripción">Mensaje:</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="mensaje" name="mensaje" minlength="3" maxlength="500" requerid></textarea>
+                                <textarea class="form-control" rows="5" id="mensaje" name="mensaje" minlength="3" maxlength="500"></textarea>
                             	<small id= "mensaje3" style="color:red"></small>
                             </div>
                         </div>
@@ -118,18 +118,6 @@
          		if (nom.length == 0 || ape.length == 0 || email.length == 0 || men.length == 0){
          			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
          			return false;
-         			if (nom.length == 0){
-         				$("#mensaje").text("Campo obligatorio *");
-         			}
-         			if (ape.length == 0){
-         				$("#mensaje1").text("Campo obligatorio *");
-         			}
-         			if (email.length == 0){
-         				$("#mensaje2").text("Campo obligatorio *");
-         			}
-         			if (men.length == 0){
-         				$("#mensaje3").text("Campo obligatorio *");
-         			}
          			
          		}else{
          			alertify.success("Correo enviado exitosamente");

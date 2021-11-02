@@ -38,7 +38,7 @@ public class SLGuardarPP extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
+		
 			PiePagina pp = new PiePagina();
 			DTPiePagina dt = new DTPiePagina();
 			
@@ -47,22 +47,28 @@ public class SLGuardarPP extends HttpServlet {
 			String email = request.getParameter("email");
 			String ext = request.getParameter("ext");
 			
-			pp.setDireccion(direccion);
-			pp.setEmail(email);
-			pp.setTelefono(telefono);
-			pp.setExt(ext);
-			
-			if(dt.guardarPP(pp)) {
-				response.sendRedirect("index.jsp");
-			}else {
-				response.sendRedirect("management.jsp");
+			if(direccion.length()==0||telefono.length()==0||email.length()==0||ext.length()==0) {
+				response.sendRedirect("formfooter.jsp?msj=error");
 			}
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+			else {
+				try {
+					pp.setDireccion(direccion);
+					pp.setEmail(email);
+					pp.setTelefono(telefono);
+					pp.setExt(ext);
+					
+					if(dt.guardarPP(pp)) {
+						response.sendRedirect("formfooter.jsp?msj=1");
+					}else {
+						response.sendRedirect("formfooter.jsp?msj=error");
+					}
+					
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
 	}
 
 }

@@ -44,19 +44,27 @@ public class SLEditarFlor extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		String temporada = request.getParameter("temporadaF");
 		
-		Flor fl = new Flor();
-		DTFlor dt = new DTFlor();
 		
-		fl.setIdFlor(id);
-		fl.setNombreComun(nombreComun);
-		fl.setNombreCientifico(nombreCientifico);
-		fl.setDescripcion(descripcion);
-		fl.setTemporadaFloracion(temporada);
-		
-		if(dt.editarFlor(fl)){
-			response.sendRedirect("flowergestion.jsp");
+		if(id == 0 || nombreComun.length()==0 || nombreCientifico.length()==0 || descripcion.length()==0 || temporada.length()==0) {
+			
+			response.sendRedirect("editflower.jsp?id="+id);
+			
 		}else {
-			response.sendRedirect("flowergestion.jsp?error");
+		
+			Flor fl = new Flor();
+			DTFlor dt = new DTFlor();
+			
+			fl.setIdFlor(id);
+			fl.setNombreComun(nombreComun);
+			fl.setNombreCientifico(nombreCientifico);
+			fl.setDescripcion(descripcion);
+			fl.setTemporadaFloracion(temporada);
+			
+			if(dt.editarFlor(fl)){
+				response.sendRedirect("flowergestion.jsp?msj=3");
+			}else {
+				response.sendRedirect("flowergestion.jsp?msj=4");
+			}
 		}
 	}
 

@@ -66,16 +66,16 @@ public class SLEditarBanner extends HttpServlet {
 			InputStream in = part.getInputStream();
 			
 			if(dt.editarBaConImagen(b, in)) {
-				response.sendRedirect("bannergestions.jsp?msj=1");
+				response.sendRedirect("bannergestions.jsp?msj=3");
 			}else {
-				response.sendRedirect("bannergestions.jsp?msj=2");
+				response.sendRedirect("bannergestions.jsp?msj=4");
 			}
 			
 		}else {
 			if(dt.editarBaSinImagen(b)) {
-				response.sendRedirect("bannergestions.jsp?msj=1");
+				response.sendRedirect("bannergestions.jsp?msj=3");
 			}else {
-				response.sendRedirect("bannergestions.jsp?msj=2");
+				response.sendRedirect("bannergestions.jsp?msj=4");
 			}
 		}
 	}

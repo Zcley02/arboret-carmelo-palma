@@ -51,8 +51,6 @@ public class SLGuardarServicio extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		
-		
-		try {
 			String nombre = request.getParameter("nombreS");
 			String descripcion = request.getParameter("descripcionS");
 			Part part = request.getPart("foto");
@@ -64,25 +62,32 @@ public class SLGuardarServicio extends HttpServlet {
 			
 			Servicios s = new Servicios();
 			
-			s.setNombre(nombre);
-			s.setDescripcion(descripcion);
-			//pu.setImgBytea(imgBytea);
-			s.setEstado(estado);
-			
-			DTServicio dt = new DTServicio();
-			
-			resp = dt.guardarServicio(s,fin);
-			
-			if(resp == true) {
-				response.sendRedirect("servicegestion.jsp?msj=3");
-			}else{
-				response.sendRedirect("servicegestion.jsp?msj=2");
-			};
-		} catch (NotFoundException e) {
-			System.out.println(e);
-		}catch (Exception e) {
-			System.out.println(e);
-		}
+			if(nombre.length()==0 || descripcion.length() ==0) {
+				response.sendRedirect("servicegestion.jsp?msj=error");
+			}
+			else {
+				try {
+					
+					s.setNombre(nombre);
+					s.setDescripcion(descripcion);
+					//pu.setImgBytea(imgBytea);
+					s.setEstado(estado);
+					
+					DTServicio dt = new DTServicio();
+					
+					resp = dt.guardarServicio(s,fin);
+					
+					if(resp == true) {
+						response.sendRedirect("servicegestion.jsp?msj=1");
+					}else{
+						response.sendRedirect("servicegestion.jsp?msj=2");
+					};
+				} catch (NotFoundException e) {
+					System.out.println(e);
+				}catch (Exception e) {
+					System.out.println(e);
+				}
+			}
 		
 	}
 

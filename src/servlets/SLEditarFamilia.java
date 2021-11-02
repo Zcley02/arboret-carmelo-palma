@@ -46,14 +46,18 @@ public class SLEditarFamilia extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
 		
-		f.setIdFamilia(id);
-		f.setNombre(nombre);
-		f.setDescripcion(descripcion);
-		
-		if(dt.editarFamilia(f)) {
-			response.sendRedirect("familygestion.jsp?msj=1");
+		if(id == 0 || nombre.length()==0 || descripcion.length()==0) {
+			response.sendRedirect("familygestion.jsp?msj=error");
 		}else {
-			response.sendRedirect("familygestion.jsp?msj=2");
+			f.setIdFamilia(id);
+			f.setNombre(nombre);
+			f.setDescripcion(descripcion);
+			
+			if(dt.editarFamilia(f)) {
+				response.sendRedirect("familygestion.jsp?msj=3");
+			}else {
+				response.sendRedirect("familygestion.jsp?msj=4");
+			}
 		}
 		
 	}

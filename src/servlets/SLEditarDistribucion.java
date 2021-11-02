@@ -54,15 +54,20 @@ public class SLEditarDistribucion extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		int idRegion = Integer.parseInt(request.getParameter("idRegion").trim());
 		
-		d.setIdDistribucion(idD);
-		d.setNombre(nombre);
-		d.setDescripcion(descripcion);
-		d.setIdRegion(idRegion);
-				
-		if(dt.editarDistribucion(d)) {
-			response.sendRedirect("distributiongestion.jsp?msj=1");
+		if(nombre.length()==0 || descripcion.length()==0 || idRegion == 0 ) {
+			response.sendRedirect("distributiongestion.jsp?msj=error");
 		}else {
-			response.sendRedirect("distributiongestion.jsp?msj=2");
+		
+			d.setIdDistribucion(idD);
+			d.setNombre(nombre);
+			d.setDescripcion(descripcion);
+			d.setIdRegion(idRegion);
+					
+			if(dt.editarDistribucion(d)) {
+				response.sendRedirect("distributiongestion.jsp?msj=3");
+			}else {
+				response.sendRedirect("distributiongestion.jsp?msj=4");
+			}
 		}
 			
 		

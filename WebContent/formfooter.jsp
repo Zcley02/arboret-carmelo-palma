@@ -15,6 +15,9 @@
 			response.sendRedirect("login.jsp");
 		}
 %>
+
+    <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
+
 <%@page import="entidades.*, datos.*"%>
     <!DOCTYPE html>
 <html lang="es">
@@ -27,6 +30,8 @@
         <title>Pie de Página</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -53,19 +58,19 @@
                         <form action="SLGuardarPP" role="form" method="post">
                             <div class="form-group">
                                 <label>Dirección:</label>
-                                <input name="direccion" class="form-control" value="<%=pp.getDireccion() %>">
+                                <input name="direccion" class="form-control" value="<%=pp.getDireccion() %>" required>
                             </div>
                             <div class="form-group">
                                 <label>Correo:</label>
-                                <input name="email" class="form-control" value="<%=pp.getEmail() %>">
+                                <input name="email" class="form-control" value="<%=pp.getEmail() %>" required>
                             </div>
                             <div class="form-group">
                                 <label>Telefono:</label>
-                                <input name="telefono" class="form-control" value="<%=pp.getTelefono() %>">
+                                <input name="telefono" class="form-control" value="<%=pp.getTelefono() %>" required>
                             </div>
                             <div class="form-group">
                                 <label>Extensión:</label>
-                                <input name="ext" class="form-control" value="<%=pp.getExt() %>">
+                                <input name="ext" class="form-control" value="<%=pp.getExt() %>" required>
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
@@ -90,8 +95,7 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -111,4 +115,20 @@
             }
 
         })
+        
+        $(document).ready(function ()
+   	    {
+   	        var mensaje = "";
+   	        mensaje = "<%=varMsj%>";
+   	        
+   	        if(mensaje == "1")
+   	        {
+        			alertify.success("Pie de Página editado exitosamente");
+   	        }
+   	        if(mensaje == "error")
+   	        {
+   	            alertify.error('Ha ocurrido un error, intente nuevamente');
+   	        }
+   	       
+   	    });
          </script>

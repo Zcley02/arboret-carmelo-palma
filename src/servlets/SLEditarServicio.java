@@ -62,16 +62,16 @@ public class SLEditarServicio extends HttpServlet {
 				InputStream in = part.getInputStream();
 				
 				if(dt.editarSerConImagen(s, in)) {
-					response.sendRedirect("servicegestion.jsp?msj=1");
+					response.sendRedirect("servicegestion.jsp?msj=3");
 				}else {
-					response.sendRedirect("servicegestion.jsp?msj=2");
+					response.sendRedirect("servicegestion.jsp?msj=4");
 				}
 				
 			}else {
 				if(dt.editarSerSinImagen(s)) {
-					response.sendRedirect("servicegestion.jsp?msj=1");
+					response.sendRedirect("servicegestion.jsp?msj=3");
 				}else {
-					response.sendRedirect("servicegestion.jsp??msj=2");
+					response.sendRedirect("servicegestion.jsp??msj=4");
 				}
 			}
 

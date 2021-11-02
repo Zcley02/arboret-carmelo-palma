@@ -52,25 +52,29 @@ public class SLEditarVision extends HttpServlet {
 		int idInicio = Integer.parseInt(request.getParameter("id"));
 		String vision = request.getParameter("descripcion1");
 		
-		
-		in.setIdInicio(idInicio);
-		in.setVision(vision);;
-		
-		if(cambio.equals(v)) {
-			Part partH = request.getPart("foto");
-			InputStream inH = partH.getInputStream();
-			
-			if(dt.editarConImgVision(in, inH)) {
-				response.sendRedirect("formstart.jsp");
-			}else {
-				response.sendRedirect("formstart.jsp?error");
-			}
-			
+		if(vision.length()==0 || (cambio.length()==0 && idInicio == 0)) {
+			response.sendRedirect("formstart.jsp?msj=error");
 		}else {
-			if(dt.editarSinImgVision(in)) {
-				response.sendRedirect("formstart.jsp");
+		
+			in.setIdInicio(idInicio);
+			in.setVision(vision);;
+			
+			if(cambio.equals(v)) {
+				Part partH = request.getPart("foto");
+				InputStream inH = partH.getInputStream();
+				
+				if(dt.editarConImgVision(in, inH)) {
+					response.sendRedirect("formstart.jsp");
+				}else {
+					response.sendRedirect("formstart.jsp?error");
+				}
+				
 			}else {
-				response.sendRedirect("formstart.jsp?error");
+				if(dt.editarSinImgVision(in)) {
+					response.sendRedirect("formstart.jsp");
+				}else {
+					response.sendRedirect("formstart.jsp?error");
+				}
 			}
 		}
 	}

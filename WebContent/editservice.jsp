@@ -32,6 +32,8 @@
         <title>Editar Servicio</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
@@ -67,13 +69,13 @@
                         	<input hidden="true" value="<%=s.getIdServicio()%>" name="id">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input value="<%=s.getNombre() %>" id="nombre" name="nombre" class="form-control">
+                                <input value="<%=s.getNombre() %>" id="nombre" name="nombre" class="form-control" required>
 
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" required></textarea>
                                 <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
                             </div>
                             
@@ -90,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                	<img class="rounded img-fluid" alt="servicio.jpg" src="<%=s.getFoto() %>" name="imagen" id="imagen">
+                                	<img class="rounded img-fluid" alt="ColocarImagen.jpg" src="<%=s.getFoto() %>" name="imagen" id="imagen">
                                 </div>
                                 
                             </div>
@@ -120,6 +122,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -172,3 +175,46 @@
 				$("#descripcion1").html(desp);
 	    	}
 	</script>
+	
+	<script>
+        $('#nombreS').on("keydown", function(e) {
+	        var textLength = $('#nombreS').val().replace(' ', '1').length + 1;
+	        var maxValue = 30;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombreS').on("keyup", function(e) {
+	        var textLength = $('#nombreS').val().replace(' ', '1').length;
+	        var maxValue = 30;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 80;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 80;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+		</script>

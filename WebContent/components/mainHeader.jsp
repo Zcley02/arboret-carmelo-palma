@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@page import= "entidades.Pais" %>
+<%@page import= "entidades.*" %>
 <%@page import= "datos.*"%>
 <%@page import= "java.util.*"%>
     
@@ -14,14 +14,16 @@
 		String loginUser = "";
 		loginUser = (String)session.getAttribute("login");
 		loginUser = loginUser==null?"":loginUser;
-		String sesion, titulo, imagen = "";
+		String sesion, titulo, imagen = "", nombre = "";
 		
 		if(loginUser.equals(""))
 		{
 			sesion = "login.jsp";
 			titulo = "Inicio Sesión";
 			imagen = "fas fa-user-circle";
+			
 		}else{
+		
 			sesion = "management.jsp";
 			titulo = "Administración";
 			imagen = "fas fa-user-circle";
@@ -63,16 +65,8 @@
                         <a class="nav-link" href="contact.jsp">Contactos</a>
                     </li>
                     <li class="nav-item">
-                        <span title="<%=titulo%>"><a class="nav-link" href="<%=sesion%>"><i class="<%=imagen%>"></i></a></span>
+                        <span title="<%=titulo%>"><a class="nav-link" href="<%=sesion%>"><%=nombre %> <i class="<%=imagen%>"></i></a></span>
                     </li>
-                    <div class="hidden">
-                        <form class="d-flex">
-                            <input class="form-control me-2 d-none" id="inputSearch1" type="search" placeholder="Buscar"
-                                aria-label="Search">
-                            <button class="btn btn-outline-light" id="btnSearch" type="submit"><i
-                                    class="fas fa-search"></i></button>
-                        </form>
-                    </div>
 
             </div>
         </div>

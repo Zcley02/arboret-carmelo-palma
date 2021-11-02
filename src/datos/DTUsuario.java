@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 import entidades.Usuario;
+import vistas.Vista_usuario_rol;
 
 public class DTUsuario {
 	PoolConexion pc = PoolConexion.getInstance(); 
@@ -132,53 +133,6 @@ public class DTUsuario {
 			return existe;
 		}
 		
-		/*
-		
-		// Metodo para modificar Banner
-		public boolean modificarInfoBanner(Banner bn)
-		{
-			boolean modificado=false;	
-			try
-			{
-				c = PoolConexion.getConnection();
-				this.llenarBanner(c);
-				rsBanner.beforeFirst();
-				while (rsBanner.next())
-				{
-					if(rsBanner.getInt(1)==bn.getBannerID())
-					{
-						rsBanner.updateString("titulobanner", bn.getTitulobanner());
-						rsBanner.updateString("descripcion", bn.getDescripcion());
-						rsBanner.updateTimestamp("fmodificacion", bn.getFmodificacion());								
-						rsBanner.updateInt("estado", 2);
-						rsBanner.updateRow();
-						modificado=true;
-						break;
-					}
-				}
-			}
-			catch (Exception e)
-			{
-				System.err.println("ERROR AL ACTUALIZAR BANNER "+e.getMessage());
-				e.printStackTrace();
-			}
-			finally
-			{
-				try {
-					if(rsBanner != null){
-						rsBanner.close();
-					}
-					if(c != null){
-						PoolConexion.closeConnection(c);
-					}
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return modificado;
-		}*/
 		
 		public boolean eliminarUsuario(int id)
 		{
@@ -282,4 +236,59 @@ public class DTUsuario {
 	            throw new RuntimeException(e);
 	        }
 	    }
+		
+		
+		public ArrayList<Usuario> listarU()
+		{
+			ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+			
+			String sql = "SELECT * FROM PUBLIC.usurio";
+			
+			try 
+			{
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				rs = ps.executeQuery();
+				while(rs.next())
+				{
+					Usuario u = new Usuario();
+					u.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
+					u.setNombres(rs.getString("nombres"));
+					u.setApellidos(rs.getString("apellidos"));
+					u.setUsuario(rs.getString("usuario"));
+					u.setEmail(rs.getString("email"));
+					u.setContrasenia(rs.getString("contrasenia"));
+					u.setIdRol(Integer.parseInt(rs.getString("idRol")));
+					
+					listaUsuario.add(u);
+					
+				}
+			} 
+			catch (Exception e) 
+			{
+				System.err.println("DT Vista_Usuario_Rol: Error en listar los usuarios " + e.getMessage());
+				e.printStackTrace();
+			}
+			finally 
+			{
+				try 
+				{
+					if(rs != null)
+						rs.close();
+					
+					if(ps != null)
+						ps.close();
+					
+					if(c != null)
+						PoolConexion.closeConnection(c);
+				} 
+				catch (Exception e2) 
+				{
+					System.err.println("DT Vista_Usuario_Rol : Error en listar los usuarios" + e2.getMessage());
+					e2.printStackTrace();
+				}
+			}
+			
+			return listaUsuario;
+		}
 }

@@ -39,8 +39,7 @@ public class SLGuardarPais extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		try 
-		{
+
 			Pais p = new Pais();
 			DTPais dtp = new DTPais();
 			
@@ -48,24 +47,22 @@ public class SLGuardarPais extends HttpServlet {
 			int estado = 1;
 			
 			nombre = request.getParameter("nombre");
+			
+			if(nombre.length()==0) {
+				response.sendRedirect("countrygestion.jsp?msj=error");
+			}else {
 		
-			p.setNombre(nombre);
-			p.setEstado(estado);
-
-			
-			if(dtp.guardarPais(p)) { 
+				p.setNombre(nombre);
+				p.setEstado(estado);
+	
 				
-			response.sendRedirect("countrygestion.jsp");
-				
-			} else {
-			response.sendRedirect("countrygestion.jsp?error"); }
-			
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("SL Pais: Error al guardar el Pais " +e.getMessage());
-			e.printStackTrace();
-		}
+				if(dtp.guardarPais(p)) { 
+					
+				response.sendRedirect("countrygestion.jsp?msj=1");
+					
+				} else {
+				response.sendRedirect("countrygestion.jsp?msj=2"); }
+			}
 
 	}
 

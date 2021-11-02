@@ -48,14 +48,19 @@ public class SLEditarGenero extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
 		
-		g.setIdGenero(id);
-		g.setNombre(nombre);
-		g.setDescripcion(descripcion);
-		
-		if(dt.editarGenero(g)) {
-			response.sendRedirect("gendergestion.jsp?msj=1");
+		if(id == 0 || nombre.length()==0 || descripcion.length()==0) {	
+			response.sendRedirect("gendergestion.jsp?id="+id);
 		}else {
-			response.sendRedirect("gendergestion.jsp?msj=2");
+			
+			g.setIdGenero(id);
+			g.setNombre(nombre);
+			g.setDescripcion(descripcion);
+			
+			if(dt.editarGenero(g)) {
+				response.sendRedirect("gendergestion.jsp?msj=1");
+			}else {
+				response.sendRedirect("gendergestion.jsp?msj=2");
+			}
 		}
 	}
 

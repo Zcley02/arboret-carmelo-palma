@@ -30,6 +30,8 @@
         <title>Editar Distribución</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
@@ -62,18 +64,20 @@
 					 %>
 
 
-                        <form  action="SLEditarDistribucion" method="Post" enctype="multipart/form-data">
+                        <form  name="formDistribution" action="SLEditarDistribucion" method="Post" enctype="multipart/form-data" onsubmit="return validar_campos()">
                         	<input hidden="true" value="<%=d.getIdDistribucion() %>" name="idD">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input value="<%=d.getNombre() %>" id="nombre" name="nombre" class="form-control">
+                                <input value="<%=d.getNombre() %>" id="nombre" name="nombre" class="form-control" minlength="1" maxlength="40" required>
+                                <small id= "mensaje" style="color:red"></small>
 
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
+                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="1" maxlength="180" required></textarea>
+                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true" minlength="1" maxlength="180" required></textarea>
+                                <small id= "mensaje1" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Región:</label>
@@ -93,6 +97,7 @@
                                     		}
                                     	%>
                                 </select>
+                                <small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
@@ -120,6 +125,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -156,3 +162,61 @@
 					$("#descripcion1").html(desp);
 		    	}
 		</script>
+		
+		<script>
+			function validar_campos(){
+         		nom = document.formDistribution.nombre.value;
+         		des = document.formDistribution.descripcion1.value;
+         		reg = document.formDistribution.idRegion.value;
+         		
+         		if (nom.length == 0 || des.length == 0 || reg == 0 || reg.lengt == 0){
+         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
+         			return false;
+         		}else{
+         			return true;
+         		}
+	         }
+
+		</script>
+		
+		<script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 40;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 40;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 180;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 180;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    </script>

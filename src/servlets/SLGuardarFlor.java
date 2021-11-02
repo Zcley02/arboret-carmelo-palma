@@ -44,22 +44,30 @@ public class SLGuardarFlor extends HttpServlet {
 		String temporada = request.getParameter("temporadaF");
 		boolean resp = false;
 		
-		Flor fl = new Flor();
-		DTFlor dt = new DTFlor();
-		
-		fl.setNombreComun(nombreComun);
-		fl.setNombreCientifico(nombreCientifico);
-		fl.setDescripcion(descripcion);
-		fl.setTemporadaFloracion(temporada);
-		
-		resp = dt.guardarFlor(fl);
-		
-		if(resp==true) {
-			response.sendRedirect("flowergestion.jsp");
-		}else {
+		if(nombreComun.length()==0 || nombreCientifico.length()==0 || descripcion.length()==0 || temporada.length()==0) {
+			
 			response.sendRedirect("flowergestion.jsp?error");
+			
+		}else {
+			
+			Flor fl = new Flor();
+			DTFlor dt = new DTFlor();
+			
+			fl.setNombreComun(nombreComun);
+			fl.setNombreCientifico(nombreCientifico);
+			fl.setDescripcion(descripcion);
+			fl.setTemporadaFloracion(temporada);
+			
+			resp = dt.guardarFlor(fl);
+			
+			if(resp==true) {
+				response.sendRedirect("flowergestion.jsp?msj=1");
+			}else {
+				response.sendRedirect("flowergestion.jsp?msj=2");
+			}
+			
+			
 		}
-		
 		
 	}
 

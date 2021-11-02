@@ -52,25 +52,28 @@ public class SLEditarMision extends HttpServlet {
 		int idInicio = Integer.parseInt(request.getParameter("id"));
 		String mision = request.getParameter("descripcion1");
 		
-		
-		in.setIdInicio(idInicio);
-		in.setMision(mision);;
-		
-		if(cambio.equals(v)) {
-			Part partH = request.getPart("foto");
-			InputStream inH = partH.getInputStream();
-			
-			if(dt.editarConImgMision(in, inH)) {
-				response.sendRedirect("formstart.jsp");
-			}else {
-				response.sendRedirect("formstart.jsp?error");
-			}
-			
+		if(mision.length()==0 || (cambio.length()==0 && idInicio == 0)) {
+			response.sendRedirect("formstart.jsp?msj=error");
 		}else {
-			if(dt.editarSinImgMision(in)) {
-				response.sendRedirect("formstart.jsp");
+			in.setIdInicio(idInicio);
+			in.setMision(mision);;
+			
+			if(cambio.equals(v)) {
+				Part partH = request.getPart("foto");
+				InputStream inH = partH.getInputStream();
+				
+				if(dt.editarConImgMision(in, inH)) {
+					response.sendRedirect("formstart.jsp?msj=2");
+				}else {
+					response.sendRedirect("formstart.jsp?error");
+				}
+				
 			}else {
-				response.sendRedirect("formstart.jsp?error");
+				if(dt.editarSinImgMision(in)) {
+					response.sendRedirect("formstart.jsp?msj=2");
+				}else {
+					response.sendRedirect("formstart.jsp?error");
+				}
 			}
 		}
 	}

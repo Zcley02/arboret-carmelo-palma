@@ -24,7 +24,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Crear Publicación</title>
+        <title>Misión</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -62,7 +62,8 @@
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"><%=in.getMision() %></textarea>
+                                <textarea id="descripcion" name="descripcion" class="form-control" rows="5" minlength="50" maxlength="2500" required><%=in.getMision() %></textarea>
+                            	<small id= "mensaje" style="color:red"></small>
                             </div>
                             <textarea id="descripcion1" name="descripcion1" hidden="true" ></textarea>
                             <div class="form-group">
@@ -107,8 +108,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -163,3 +162,45 @@
 				$("#descripcion").html(desp);
 	    	}
 	</script>
+	
+	
+		<script type="text/javascript">
+	$(function()
+			{
+				$("#btn").click(function(){
+	    			textarea = $("#descripcion").val();
+	    			textarea_line = textarea.replace(new RegExp("\n","g"), "<br>");
+	    			$("#descripcion1").html(textarea_line);
+	   			});
+			});
+	    	
+	    	function load(){
+	    		var descripcion = "<%=in.getHistoria()%>";
+				var desp = descripcion.replaceAll("<br>", ("\n"));
+				$("#descripcion").html(desp);
+	    	}
+	</script>
+		
+		<script>
+	    
+        $('#descripcion').on("keydown", function(e) {
+	        var textLength = $('#descripcion').val().replace(' ', '1').length + 1;
+	        var maxValue = 2500;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion').on("keyup", function(e) {
+	        var textLength = $('#descripcion').val().replace(' ', '1').length;
+	        var maxValue = 2500;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+		</script>

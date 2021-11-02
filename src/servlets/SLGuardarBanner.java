@@ -46,42 +46,39 @@ public class SLGuardarBanner extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-		try {
+	
 			String titulo = request.getParameter("txtTitulo");
 			String descripcion = request.getParameter("txtDescripcion");
 			int posicion = Integer.parseInt(request.getParameter("posicion").trim());
 			Part part = request.getPart("foto");			
 			
-			InputStream fin = part.getInputStream();
+			InputStream fin = part.getInputStream(); //Como jodido validar esto xd
 			
 			int estado = 1;
 			boolean resp = false;
 			
 			Banner b = new Banner();
-			
-			b.setTitulo(titulo);
-			b.setDescripcion(descripcion);
-			//pu.setImgBytea(imgBytea);
-			b.setPosicion(posicion);
-			b.setEstado(estado);
-			
 			DTBanner dt = new DTBanner();
 			
-			resp = dt.guardarBanner(b,fin);
+			if(titulo.length()==0 || descripcion.length()==0 ) {
+				response.sendRedirect("bannergestions.jsp?msj=error");
+			}
+			else {
 			
-			if(resp == true) {
-				response.sendRedirect("bannergestions.jsp?msj=1");
-			}else{
-				response.sendRedirect("management.jsp");
-			};
-		} catch (NotFoundException e) {
-			System.out.println(e);
-		}catch (Exception e) {
-			System.out.println(e);
-		}
-			
-
+				b.setTitulo(titulo);
+				b.setDescripcion(descripcion);
+				//pu.setImgBytea(imgBytea);
+				b.setPosicion(posicion);
+				b.setEstado(estado);
+	
+				resp = dt.guardarBanner(b,fin);
+				
+				if(resp == true) {
+					response.sendRedirect("bannergestions.jsp?msj=1");
+				}else{
+					response.sendRedirect("bannergestions.jsp?msj=2");
+				};
+			}
 		
 	}
 

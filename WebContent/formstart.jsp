@@ -16,6 +16,8 @@
 			response.sendRedirect("login.jsp");
 		}
     %>
+ 
+ <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
     <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -27,6 +29,8 @@
         <title>Inicio</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -124,8 +128,7 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -145,4 +148,28 @@
             }
 
         })
+        
+        $(document).ready(function ()
+        	    {
+        	        var mensaje = "";
+        	        mensaje = "<%=varMsj%>";
+        	        
+        	        if(mensaje == "1")
+        	        {
+             			alertify.success("Se actualizó correctamente la Historia");
+        	        }
+        	        if(mensaje == "2")
+        	        {
+             			alertify.success("Se actualizó correctamente la Misión");
+        	        }
+        	        if(mensaje == "3")
+        	        {
+        	            alertify.success('Se actualizó correctamente la Visión');
+        	        }
+        	        if(mensaje == "error")
+        	        {
+        	            alertify.alert('Alerta','Se produjo un error. Intente nuevamente');
+        	        }
+        	       
+        	    });
          </script>

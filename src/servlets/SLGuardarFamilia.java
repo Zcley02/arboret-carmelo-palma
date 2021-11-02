@@ -44,18 +44,25 @@ public class SLGuardarFamilia extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		boolean resp = false;
 		
-		Familiar fa = new Familiar();
-		DTFamilia dt = new DTFamilia();
-		
-		fa.setNombre(nombre);
-		fa.setDescripcion(descripcion);
-		
-		resp = dt.guardarFamiliar(fa);
-		
-		if(resp==true) {
-			response.sendRedirect("familygestion.jsp");
+		if(nombre.length() == 0 || descripcion.length() == 0) {
+			
+			response.sendRedirect("formfamily.jsp?msj=error");
+			
 		}else {
-			response.sendRedirect("familygestion.jsp?error");
+			
+			Familiar fa = new Familiar();
+			DTFamilia dt = new DTFamilia();
+			
+			fa.setNombre(nombre);
+			fa.setDescripcion(descripcion);
+			
+			resp = dt.guardarFamiliar(fa);
+			
+			if(resp==true) {
+				response.sendRedirect("familygestion.jsp?msj=1");
+			}else {
+				response.sendRedirect("familygestion.jsp?msj=2");
+			}
 		}
 		
 	}

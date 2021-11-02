@@ -26,6 +26,8 @@
         <title>Crear Flor</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -43,28 +45,32 @@
                         </h2>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="SLGuardarFlor" method="Post" role="form">
+                        <form name="formFlower" action="SLGuardarFlor" method="Post" role="form" onsubmit="return validar_campos()">
                             <div class="form-group">
                                 <label>Nombre Común:</label>
-                                <input name="nombreCo" class="form-control">
+                                <input id="nombreCo" name="nombreCo" class="form-control" minlength="1" maxlength="50" requerid>
+                                <small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Nombre Cientifico:</label>
-                                <textarea name="nombreCi" class="form-control" rows="3"></textarea>
+                                <textarea id="nombreCi" name="nombreCi" class="form-control" rows="3" minlength="1" maxlength="50" requerid></textarea>
+                                <small id= "mensaje1" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Descripción:</label>
                                 <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="1" maxlength="180" requerid></textarea>
+                                <small id= "mensaje2" style="color:red"></small>
                             </div> 
                             <div class="form-group">
                                 <label>Temporada de Floración:</label>
-                                <textarea name="temporadaF" class="form-control" rows="3"></textarea>
+                                <textarea id="temporadaF" name="temporadaF" class="form-control" rows="3" minlength="1" maxlength="40" requerid></textarea>
+                                <small id= "mensaje3" style="color:red"></small>
                             </div>
                             <div class="mb-3">
                                 <button id="btn" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="familygestion.jsp"><i
+                            <div style="text-align:center;"><a href="flowergestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>
@@ -87,6 +93,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -117,3 +124,116 @@
 			   			});
 					});
 			</script>
+			
+	<script>
+		function validar_campos(){
+         		nomCo = document.formFlower.nombreCo.value;
+         		nomCi = document.formFlower.nombreCi.value;
+         		des = document.formFlower.descripcion1.value;
+         		temp = document.formFlower.temporadaF.value;
+         		
+         		if (temp.length == 0 || nomCo.length == 0 || nomCi.length == 0 || des.length == 0 ){
+         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
+         			
+         			if (nomCo.length == 0){
+         				$("#mensaje").text("Campo obligatorio *");
+         			}
+         			if (nomCi.length == 0){
+         				$("#mensaje1").text("Campo obligatorio *");
+         			}
+         			if (des.length == 0){
+         				$("#mensaje2").text("Campo obligatorio *");
+         			}
+         			if (temp.length == 0){
+         				$("#mensaje3").text("Campo obligatorio *");
+         			}
+         			return false;
+         		}else{
+         			return true;
+         		}
+	         }
+
+		</script>
+		
+		<script>
+        $('#nombreCo').on("keydown", function(e) {
+	        var textLength = $('#nombreCo').val().replace(' ', '1').length + 1;
+	        var maxValue = 50;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombreCo').on("keyup", function(e) {
+	        var textLength = $('#nombreCo').val().replace(' ', '1').length;
+	        var maxValue = 50;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#nombreCi').on("keydown", function(e) {
+	        var textLength = $('#nombreCi').val().replace(' ', '1').length + 1;
+	        var maxValue = 50;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombreCi').on("keyup", function(e) {
+	        var textLength = $('#nombreCi').val().replace(' ', '1').length;
+	        var maxValue = 50;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 180;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 180;
+
+	        $("#mensaje2").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#temporadaF').on("keydown", function(e) {
+	        var textLength = $('#temporadaF').val().replace(' ', '1').length + 1;
+	        var maxValue = 40;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#temporadaF').on("keyup", function(e) {
+	        var textLength = $('#temporadaF').val().replace(' ', '1').length;
+	        var maxValue = 40;
+
+	        $("#mensaje3").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+		</script>

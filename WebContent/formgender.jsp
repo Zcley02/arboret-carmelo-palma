@@ -26,6 +26,8 @@
         <title>Crear Género</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -43,15 +45,18 @@
                         </h2>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="SLGuardarGenero" method="Post" role="form">
+                        <form name="formGen" action="SLGuardarGenero" method="Post" role="form" onsubmit="return validar_campos()">
                             <div class="form-group">
                                 <label>Nombre del género:</label>
-                                <input name="nombre" id="nombre" class="form-control">
+                                <input name="nombre" id="nombre" class="form-control" minlength="1" maxlength="40" requerid>
+                                <small id= "mensaje" style="color:red"></small>
 
                                 <div class="form-group">
                                     <label>Descripción:</label>
                                     <textarea name="descripcion" id="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                    <textarea name="descripcion1" id="descripcion1" class="form-control" rows="3"></textarea>
+                                    <textarea name="descripcion1" id="descripcion1" class="form-control" rows="3" minlength="1" maxlength="180" requerid></textarea>
+                                	<small id= "mensaje1" style="color:red"></small>
+                                	
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -80,6 +85,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -109,4 +115,70 @@
 	    			$("#descripcion").html(textarea_line);
 	   			});
 			});
+		</script>
+
+		<script>
+		function validar_campos(){
+			
+         		nom = document.formGen.nombre.value;
+         		des = document.formGen.descripcion1.value;
+         		
+         		if (nom.length == 0 || des.length == 0){
+         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
+         			
+         			if (nom.length == 0){
+         				$("#mensaje").text("Campo obligatorio *");
+         			}
+         			if (des.length == 0){
+         				$("#mensaje1").text("Campo obligatorio *");
+         			}
+         			return false;
+         		}else{
+         			return true;
+         		}
+	         }
+
+		</script>
+		
+		<script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 40;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 40;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 180;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 180;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
 		</script>

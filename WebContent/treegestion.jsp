@@ -50,8 +50,23 @@
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered" id="datatablesSimple">
-                                	<div style="text-align:right;"><a href="formtrees.jsp"><i
-                                            class="fas fa-plus-square"></i>&nbsp; Nueva Árbol</div>
+                                <div class="dropdown" align="right">
+							        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+							            <span class="glyphicon glyphicon-download-alt" aria-hidden="true" style="float: left;  color: white"></span>
+							            &nbsp;
+							            Exportar a
+							            <span class="caret"></span>
+							        </button>
+							        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							            <li><a class="dropdown-item" href="#" onclick="exportTree('PDF');">PDF</a></li>
+							            <li><a class="dropdown-item" href="#">Excel</a></li>
+							            <li><a class="dropdown-item" href="#">Word</a></li>
+							
+							        </ul>
+							        
+							    </div>
+							    &nbsp;
+                                	<div style="text-align:right;"><a href="formtrees.jsp"><i class="fas fa-plus-square"></i>&nbsp; Nueva Árbol</div>
 
                                 <thead>
                                     <tr>
@@ -153,6 +168,11 @@
            function(e,btn){
                e.preventDefault();
            });
+       }
+       
+       function exportTree(typeExport){
+    	   console.log(typeExport);
+    	   window.location.href = "SLArbolReport?export="+typeExport
        }
        
        $(document).ready(function ()

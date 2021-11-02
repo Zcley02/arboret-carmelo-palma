@@ -91,3 +91,24 @@
   color: #999;
 }
 
+#single-product .tab-content {
+	padding: 10px;
+	border-left:1px solid #dedede;
+	border-right:1px solid #dedede;
+	border-bottom:1px solid #dedede;
+
+}
+#single-product .nav-tabs {
+	margin-top:30px; 
+}
+#single-product  .nav-tabs .active a {
+	background: #90c322;
+	color: #fff;
+}
+#single-product  .nav-tabs li a {
+	color: #333;
+	border-top:1px solid #dedede; 
+	border-left:1px solid #dedede; 
+	border-right:1px solid #dedede; 
+}
+

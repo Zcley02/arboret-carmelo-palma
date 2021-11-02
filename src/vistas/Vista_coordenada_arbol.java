@@ -3,6 +3,7 @@ package vistas;
 public class Vista_coordenada_arbol {
 	
 	private int idCoordenadaArbol;
+	private int idarbol;
 	private String nombreComun;
 	private String nombreCientifico;
 	private double latitud;
@@ -13,10 +14,11 @@ public class Vista_coordenada_arbol {
 		super();
 	}
 
-	public Vista_coordenada_arbol(int idCoordenadaArbol, String nombreComun, String nombreCientifico, double latitud,
+	public Vista_coordenada_arbol(int idCoordenadaArbol, int idarbol, String nombreComun, String nombreCientifico, double latitud,
 			double longitud, String foto) {
 		super();
 		this.idCoordenadaArbol = idCoordenadaArbol;
+		this.idarbol = idarbol;
 		this.nombreComun = nombreComun;
 		this.nombreCientifico = nombreCientifico;
 		this.latitud = latitud;
@@ -30,6 +32,14 @@ public class Vista_coordenada_arbol {
 
 	public void setIdCoordenadaArbol(int idCoordenadaArbol) {
 		this.idCoordenadaArbol = idCoordenadaArbol;
+	}
+	
+	public int getIdarbol() {
+		return idarbol;
+	}
+
+	public void setIdarbol(int idarbol) {
+		this.idarbol = idarbol;
 	}
 
 	public String getNombreComun() {

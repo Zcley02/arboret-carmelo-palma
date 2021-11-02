@@ -67,26 +67,12 @@
 		    <h5 class="card-subtitle my-2 mb-2">
 		        <%=ca.getNombreCientifico()%>
 		    </h5>
-		    <p class="card-text paragraph">
-		        Gran árbol robusto de corteza blanquecina y porte piramidal, que puede llegar
-		        excepcionalmente a los...
-		    </p>
-		    <a href="" class="btn btn-outline-primary">
-		        Ver más
+		    
+		    <a href="treeDetails.jsp?idArbol=<%=ca.getIdarbol()%>" class="btn btn-outline-primary">
+		        Ver m�s
 		    </a>
 		</div>
-		<div>
-		    <ul class="list-group list-group-flush rounded-3">
-		        <li class="list-group-item"><b>Otros nombres: </b>Abeto, abeto común, pinabete (cast.); avet
-		            (cat.);...</li>
-		        <li class="list-group-item"><b>Ecología: </b>Se cría formando bosques mixtos con hayas o
-		            pinos,...</li>
-		        <li class="list-group-item"><b>Distribución: </b>El abeto es natural de Europa y ocupa las
-		            montañas...
-		        </li>
-		        <li class="list-group-item"><b>Autóctona: </b>Sí</li>
-		    </ul>
-		</div>
+		
 		</div>`;
 	
 	

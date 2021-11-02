@@ -19,7 +19,7 @@ public class DTVista_coordenada_arbol {
 	{
 		ArrayList<Vista_coordenada_arbol> listaVC = new ArrayList<Vista_coordenada_arbol>();
 		
-		String sql = "SELECT ca.idcoordenada_arbol,a.nombrecomun,a.nombrecientifico,a.descripcion,a.foto,ca.latitud, ca.longitud FROM coordenada_arbol ca, arbol a WHERE (ca.idarbol = a.idarbol);";
+		String sql = "SELECT * FROM public.vista_coordenada_arbol";
 		
 		try 
 		{
@@ -30,6 +30,7 @@ public class DTVista_coordenada_arbol {
 			{
 				Vista_coordenada_arbol vw = new Vista_coordenada_arbol();
 				vw.setIdCoordenadaArbol(rs.getInt("idcoordenada_arbol"));
+				vw.setIdarbol(rs.getInt("idarbol"));
 				vw.setNombreComun(rs.getString("nombrecomun"));
 				vw.setNombreCientifico(rs.getString("nombrecientifico"));
 				vw.setLatitud(rs.getDouble("latitud"));

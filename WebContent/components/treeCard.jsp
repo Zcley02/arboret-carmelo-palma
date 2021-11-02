@@ -3,7 +3,7 @@
 	ArrayList<Vista_arbol> listarArbol = new ArrayList<Vista_arbol>();
 	DTVista_arbol dt = new DTVista_arbol();
 	listarArbol = dt.listarAR();
-
+	
     for(Vista_arbol u: listarArbol){
 %>
     <div class="col-lg-4 mb-4">
@@ -21,10 +21,11 @@
                 <h5 class="card-subtitle my-2 mb-2">
                     <%=u.getNombreCientifico()%>
                 </h5>
+                
+                <div class="details">
                 <p class="card-text paragraph">
                     <%=u.getDescripcion()%>
                 </p>
-                <div class="details">
 	                <ul class="list-group list-group-flush rounded-3">
 	                    <li class="list-group-item"><b>Género: </b><%=u.getNombre_Genero() %></li>
 	                    <li class="list-group-item"><b>Flor: </b><%=u.getNombre_Flor() %></li>
@@ -32,7 +33,7 @@
 	                    <li class="list-group-item"><b>Distribución: </b><%=u.getNombre_Distribucion() %></li>
 	                </ul>
 	            </div>
-                <a href="" class="btn btn-outline-primary">
+                <a href="treeDetails.jsp?idArbol=<%=u.getId() %>" class="btn btn-outline-primary">
                     Ver más
                 </a>
             </div>

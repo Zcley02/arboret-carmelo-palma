@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 import entidades.Usuario;
-import vistas.Vista_usuario_rol;
 
 public class DTUsuario {
 	PoolConexion pc = PoolConexion.getInstance(); 
@@ -20,7 +19,7 @@ public class DTUsuario {
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
 	
-		public void llenarBanner(Connection c){
+		public void llenarUsuario(Connection c){
 			try{
 				ps = c.prepareStatement("select * from public.usuario", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 				rsUsuario = ps.executeQuery();
@@ -33,23 +32,25 @@ public class DTUsuario {
 	
 		public boolean guardarUsuario(Usuario u){
 			boolean resp = false;
-			String contrasenia = getMD5(u.getContrasenia());
 			
 			if(buscarUsuario(u.getUsuario())) {
 				resp = false;
 			}else {
 				try{
 					c = PoolConexion.getConnection();
-					ps = c.prepareStatement("INSERT INTO public.usuario(nombres, apellidos, usuario, email, contrasenia, idrol, estado) "
-											+ "VALUES(?,?,?,?,?,?,?)");
+					ps = c.prepareStatement("INSERT INTO public.usuario(nombres, apellidos, usuario, email, contrasenia, idrol, estado, codv) "
+											+ "VALUES(?,?,?,?,?,?,?,?)");
 					
 					ps.setString(1, u.getNombres());
 					ps.setString(2, u.getApellidos());
 					ps.setString(3, u.getUsuario());
 					ps.setString(4, u.getEmail());
+					String contrasenia = getMD5(u.getContrasenia());
 					ps.setString(5, contrasenia);
 					ps.setInt(6, u.getIdRol());
 					ps.setInt(7, u.getEstado());
+					//GUARDAMOS EL CODIGO DE VERIFICACION
+					ps.setString(8, u.getCodV());
 					
 					int i = ps.executeUpdate();
 					
@@ -60,7 +61,7 @@ public class DTUsuario {
 					}
 				}
 				catch (Exception e){
-					System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+					System.out.println("DATOS: ERROR EN LISTAR Elementos del Usuario "+ e.getMessage());
 					e.printStackTrace();
 				}
 				finally{
@@ -108,7 +109,7 @@ public class DTUsuario {
 				rs.close();
 				
 			} catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Usuario "+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
@@ -140,7 +141,7 @@ public class DTUsuario {
 			try
 			{
 				c = PoolConexion.getConnection();
-				this.llenarBanner(c);;
+				this.llenarUsuario(c);;
 				rsUsuario.beforeFirst();
 				while (rsUsuario.next())
 				{
@@ -180,7 +181,7 @@ public class DTUsuario {
 			String contrasenia = getMD5(u.getContrasenia());
 			
 			//PreparedStatement ps;
-			String sql = "Select * from public.usuario where usuario = ? and contrasenia = ?";
+			String sql = "Select * from public.usuario where usuario = ? and contrasenia = ? and estado <> 0";
 			
 			try {
 				c = PoolConexion.getConnection();
@@ -197,7 +198,7 @@ public class DTUsuario {
 				}
 				
 			} catch (Exception e){
-				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				System.out.println("DATOS: ERROR AL VERIFICAR EL LOGIN"+ e.getMessage());
 				e.printStackTrace();
 			}
 			finally{
@@ -222,6 +223,93 @@ public class DTUsuario {
 			return encontrado;
 		}
 		
+		// Metodo para verificar usuario, contrasena, rol y codigo verificacion
+		public boolean loginUsuario2(String login, String clave, String codigo)
+		{
+			boolean existe=false;
+			String contrasenia = getMD5(clave);
+			String SQL = ("SELECT * FROM USUARIO WHERE usuario=? AND contrasenia=? AND codv=?");
+			try{
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(SQL);
+				ps.setString(1, login);
+				ps.setString(2, contrasenia);
+				ps.setString(3, codigo);
+				rs = ps.executeQuery();
+				if(rs.next()){
+					existe=true;
+					actualizarEstadoUsuario(login);
+				}
+			}
+			catch (Exception e){
+				System.out.println("DATOS: ERROR AL VERIFICAR EL LOGIN "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}		
+			return existe;
+		}
+
+			// Metodo para actualizar estado del Usuario
+		public boolean actualizarEstadoUsuario(String login)
+		{
+			boolean actualizado = false;
+			
+			try
+			{
+				c = PoolConexion.getConnection();
+				this.llenarUsuario(c);	
+				rsUsuario.beforeFirst();
+				while(rsUsuario.next())
+				{
+					if(rsUsuario.getString("usuario").equals(login))
+					{						
+						rsUsuario.updateInt("estado", 1);
+						rsUsuario.updateRow();
+						actualizado = true;
+						break;
+					}
+				}
+			}
+			catch (Exception e) 
+			{
+				System.err.println("ERROR AL ACTUALIZAR ESTADO USUARIO "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally
+			{
+				try {
+					if(rsUsuario != null){
+						rsUsuario.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return actualizado;
+		}
+				
 		public String getMD5(String input) {
 	        try {
 	            MessageDigest md = MessageDigest.getInstance("MD5");
@@ -290,5 +378,64 @@ public class DTUsuario {
 			}
 			
 			return listaUsuario;
+		}
+		
+		//Metodo para obtener un objeto de la vista rol usuario
+		public Usuario dtGetUsuario(String login)
+		{
+		Usuario u = new Usuario();
+		String SQL = ("SELECT * FROM usuario where usuario=?");
+		try{
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(SQL);
+			ps.setString(1, login);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				u.setIdUsuario(rs.getInt("idusuario"));
+				u.setNombres(rs.getString("nombres"));
+				u.setApellidos(rs.getString("apellidos"));
+				u.setUsuario(rs.getString("usuario"));
+				u.setEmail(rs.getString("email"));
+				u.setContrasenia(rs.getString("contrasenia"));
+				u.setIdRol(rs.getInt("idrol"));
+				u.setEstado(rs.getInt("estado"));
+				u.setCodV(rs.getString("codv"));
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN dtGetRU "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return u;
+	}
+		
+		//METODO PARA GENERAR UN CODIGO DE VERIFICACION //	
+		private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		public static String randomAlphaNumeric(int count) 
+		{
+			StringBuilder builder = new StringBuilder();
+			while (count-- != 0) 
+			{
+				int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+				builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+			}
+			return builder.toString();
 		}
 }

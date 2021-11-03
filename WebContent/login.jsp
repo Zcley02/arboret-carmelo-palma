@@ -1,5 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" import= "java.util.*;"%>
-<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
+<% 
+	String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");
+
+	String codigo = request.getParameter("codverif");
+	codigo=codigo==null?"":codigo;
+
+%>
     <%
     Calendar cal=Calendar.getInstance();
     int year=cal.get(Calendar.YEAR);
@@ -46,8 +52,9 @@
                                         <h3 class="text-center font-weight-light my-4">Iniciar sesión</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="SL_login" method="post">
+                                        <form action="SL_login" method="post" class="user">
                                             <div class="form-group">
+                                            <input type="hidden" name="codverificacion" value="<%=codigo%>">
                                                 <label class="small mb-1" for="inputEmailAddress">Usuario:</label>
                                                 <input name="usuario" class="form-control py-4" id="inputEmailAddress" type="text"
                                                     placeholder="Ingresar usuario" required/>

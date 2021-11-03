@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import datos.DTEnviarEmailUsuario;
 import datos.DTRegion;
 import datos.DTUsuario;
 import entidades.Region;
@@ -44,9 +45,10 @@ public class SLGuardarUsuario extends HttpServlet {
 		{
 			Usuario u = new Usuario();
 			DTUsuario dt = new DTUsuario();
+			DTEnviarEmailUsuario dte = new DTEnviarEmailUsuario();
 			
 			String nombres, apellidos, usuario, email, pass;
-			int estado = 1;
+			int estado = 0;
 			String idrol;
 			
 			nombres = request.getParameter("txtNombres");
@@ -64,10 +66,16 @@ public class SLGuardarUsuario extends HttpServlet {
 			u.setContrasenia(pass);
 			u.setIdRol(id);
 			u.setEstado(estado);
+			u.setCodV(dt.randomAlphaNumeric(10));
 
 			if(dt.guardarUsuario(u))
 			{
-				response.sendRedirect("usergestion.jsp");
+				if(dte.enviarEmailVerificacion(u.getUsuario(), u.getContrasenia(), u.getEmail(), u.getCodV())) {
+					response.sendRedirect("usergestion.jsp?msj=1");
+				}else {
+					response.sendRedirect("usergestion.jsp?msj=error");
+				}
+				
 			}
 			else
 			{

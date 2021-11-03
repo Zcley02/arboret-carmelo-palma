@@ -9,6 +9,7 @@ public class Usuario {
 	private String contrasenia;
 	private int idRol;
 	private int estado;
+	private String codV;
 	
 	public Usuario() {
 		super();
@@ -16,7 +17,7 @@ public class Usuario {
 
 	
 	public Usuario(int idUsuario, String nombres, String apellidos, String usuario, String email, String contrasenia,
-			int idRol, int estado) {
+			int idRol, int estado, String codV) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombres = nombres;
@@ -26,6 +27,7 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 		this.idRol = idRol;
 		this.estado = estado;
+		this.codV = codV;
 	}
 
 
@@ -91,6 +93,14 @@ public class Usuario {
 
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+	
+	public String getCodV() {
+		return codV;
+	}
+
+	public void setCodV(String codV) {
+		this.codV = codV;
 	}
 	
 	

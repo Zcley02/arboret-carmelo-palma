@@ -42,10 +42,12 @@ public class SL_login extends HttpServlet {
 		try {
 			
 			Usuario u = new Usuario();
+			Usuario u1 = new Usuario();
 			DTUsuario dt = new DTUsuario();
 			
 			String usuario = request.getParameter("usuario");
 			String contrasenia = request.getParameter("password");
+			String codigoV = request.getParameter("codverificacion");
 			
 			System.out.println(usuario + contrasenia);
 			
@@ -54,14 +56,23 @@ public class SL_login extends HttpServlet {
 			
 			if(dt.loginUsuario(u)) {
 				System.out.println("EL USUARIO ES CORRECTO");
+				u1 = dt.dtGetUsuario(usuario);
+				String user = u1.getUsuario();
 				HttpSession hts = request.getSession(true);
 				//HttpSession hts1 = request.getSession(true);
-				hts.setAttribute("login", usuario);
+				hts.setAttribute("login", user);
 				//hts1.setAttribute("loginRol", idrol);
 				response.sendRedirect("management.jsp?msj=1");
 			}else {
-				System.err.println("ERROR AL AUTENTICAR EL USUARIO");
-				response.sendRedirect("login.jsp?msj=2");
+				if(dt.loginUsuario2(usuario,contrasenia,codigoV)) {
+					u1 = dt.dtGetUsuario(usuario);
+					String user = u1.getUsuario();
+					HttpSession hts = request.getSession(true);
+					hts.setAttribute("login", user);
+					response.sendRedirect("management.jsp?msj=1");
+				}else {
+					response.sendRedirect("login.jsp?msj=2");
+				}
 			}
 			
 			

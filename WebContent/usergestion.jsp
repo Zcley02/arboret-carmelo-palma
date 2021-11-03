@@ -159,13 +159,13 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
 	        	        mensaje = "<%=varMsj%>";
 	        	        error = "<%=error%>";
 	        	        
-	        	        if(mensaje == "5")
+	        	        if(mensaje == "1")
 	        	        {
-	        	            successAlert('Exito', 'Los datos del Usuario han sido eliminados exitosamente');
+	        	            successAlert('Exito', 'Usuario registrado con éxito, se ha enviado un correo para el proceso de verificación al usuario');
 	        	        }
-	        	        if(mensaje == "6")
+	        	        if(mensaje == "error")
 	        	        {
-	        	            errorAlert('Error', 'Los datos de este Usuario estan siendo utilizados. Por favor revise');
+	        	            errorAlert('Error', 'Ha ocurrido un error. Intente nuevamente');
 	        	        }
 	        	       	if(error == "1"){
 	        	       		errorAlert('Error', 'Error al agregar el usuario, nombre de usuario ya existe');

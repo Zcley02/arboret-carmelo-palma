@@ -45,14 +45,19 @@ public class SLEditarTipoProducto extends HttpServlet {
 		TipoProducto tp = new TipoProducto();
 		DTTipo_producto dtp = new DTTipo_producto();
 		
-		tp.setIdTipoProducto(id);
-		tp.setNombreTipo(nombre);
-		tp.setDescripcion(descripcion);
-		
-		if(dtp.editarTP(tp)) {
-			response.sendRedirect("typeproductgestion.jsp");
+		if(nombre.length()==0||descripcion.length()==0 || id == 0) {
+			response.sendRedirect("typeproductgestion.jsp?msj=error");
 		}else {
-			response.sendRedirect("typeproductgestion.jsp?error");
+		
+			tp.setIdTipoProducto(id);
+			tp.setNombreTipo(nombre);
+			tp.setDescripcion(descripcion);
+			
+			if(dtp.editarTP(tp)) {
+				response.sendRedirect("typeproductgestion.jsp?msj=3");
+			}else {
+				response.sendRedirect("typeproductgestion.jsp?msj=error");
+			}
 		}
 	}
 

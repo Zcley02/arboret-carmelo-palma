@@ -45,26 +45,26 @@
                         </h2>
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form name="formFlower" action="SLGuardarFlor" method="Post" role="form" onsubmit="return validar_campos()">
+                        <form action="SLGuardarFlor" method="Post" role="form">
                             <div class="form-group">
                                 <label>Nombre Común:</label>
-                                <input id="nombreCo" name="nombreCo" class="form-control" minlength="1" maxlength="50" requerid>
+                                <input id="nombreCo" name="nombreCo" class="form-control" minlength="1" maxlength="50" required>
                                 <small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Nombre Cientifico:</label>
-                                <textarea id="nombreCi" name="nombreCi" class="form-control" rows="3" minlength="1" maxlength="50" requerid></textarea>
+                                <textarea id="nombreCi" name="nombreCi" class="form-control" rows="3" minlength="1" maxlength="50" required></textarea>
                                 <small id= "mensaje1" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Descripción:</label>
                                 <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="1" maxlength="180" requerid></textarea>
+                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="1" maxlength="180" required></textarea>
                                 <small id= "mensaje2" style="color:red"></small>
                             </div> 
                             <div class="form-group">
                                 <label>Temporada de Floración:</label>
-                                <textarea id="temporadaF" name="temporadaF" class="form-control" rows="3" minlength="1" maxlength="40" requerid></textarea>
+                                <textarea id="temporadaF" name="temporadaF" class="form-control" rows="3" minlength="1" maxlength="40" required></textarea>
                                 <small id= "mensaje3" style="color:red"></small>
                             </div>
                             <div class="mb-3">
@@ -124,36 +124,6 @@
 			   			});
 					});
 			</script>
-			
-	<script>
-		function validar_campos(){
-         		nomCo = document.formFlower.nombreCo.value;
-         		nomCi = document.formFlower.nombreCi.value;
-         		des = document.formFlower.descripcion1.value;
-         		temp = document.formFlower.temporadaF.value;
-         		
-         		if (temp.length == 0 || nomCo.length == 0 || nomCi.length == 0 || des.length == 0 ){
-         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
-         			
-         			if (nomCo.length == 0){
-         				$("#mensaje").text("Campo obligatorio *");
-         			}
-         			if (nomCi.length == 0){
-         				$("#mensaje1").text("Campo obligatorio *");
-         			}
-         			if (des.length == 0){
-         				$("#mensaje2").text("Campo obligatorio *");
-         			}
-         			if (temp.length == 0){
-         				$("#mensaje3").text("Campo obligatorio *");
-         			}
-         			return false;
-         		}else{
-         			return true;
-         		}
-	         }
-
-		</script>
 		
 		<script>
         $('#nombreCo').on("keydown", function(e) {

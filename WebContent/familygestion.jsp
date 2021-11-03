@@ -162,6 +162,10 @@
         	        {
         	            alertify.alert('Error','Los elementos de esta Familia estan siendo utilizados en un registro de Árbol');
         	        }
+        	        if(mensaje == "error")
+        	        {
+        	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
+        	        }
         	       
         	    });
 

@@ -54,17 +54,18 @@
                     <div class="card-body bg-white rounded">
 
 
-                        <form  action="SLGuardarProducto" method="Post" enctype="multipart/form-data">
+                        <form action="SLGuardarProducto" method="Post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input id="nombre" name="nombre" class="form-control">
-
+                                <input id="nombre" name="nombre" class="form-control" minlength="1" maxlength="100" required>
+								<small id= "mensaje" style="color:red"></small>
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
                                 <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="10" maxlength="260" required></textarea>
+                            	<small id= "mensaje1" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Precio:</label>
@@ -72,7 +73,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Tipo Producto:</label>
-                                <select name="tipoP" id="tipoP" class="form-control">
+                                <select name="tipoP" id="tipoP" class="form-control" required>
+                                	<option value="" selected disabled>Seleccionar...</option> 
                                 	<%
                                 		for(TipoProducto tp: listarP){
                                 	%>
@@ -89,9 +91,7 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="custom-file-input" onchange="readUrl(this);">
-                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
-                                            archivo</label>
+                                        <input id="foto" name="foto" type="file" class="form-control" id="inputGroupFile01" onchange="readUrl(this);" accept="image/jpeg" required> 
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -167,4 +167,48 @@
 		    			$("#descripcion").html(textarea_line);
 		   			});
 				});
+		</script>
+		
+				
+		<script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 100;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 100;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 260;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 260;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
 		</script>

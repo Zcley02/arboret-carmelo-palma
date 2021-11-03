@@ -54,7 +54,7 @@ public class SLGuardarDistribucion extends HttpServlet {
 			idregion = request.getParameter("region").trim();
 			int id = Integer.parseInt(idregion);
 				
-			if(nombre.length()==0 || descripcion.length()==0 || (idregion == null || id == 0) ) {
+			if(nombre.length()==0 || descripcion.length()==0 || idregion == null || id == 0 ) {
 				response.sendRedirect("distributiongestion.jsp?msj=error");
 			}else {
 				

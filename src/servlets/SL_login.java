@@ -58,10 +58,10 @@ public class SL_login extends HttpServlet {
 				//HttpSession hts1 = request.getSession(true);
 				hts.setAttribute("login", usuario);
 				//hts1.setAttribute("loginRol", idrol);
-				response.sendRedirect("management.jsp");
+				response.sendRedirect("management.jsp?msj=1");
 			}else {
 				System.err.println("ERROR AL AUTENTICAR EL USUARIO");
-				response.sendRedirect("login.jsp?msj=1");
+				response.sendRedirect("login.jsp?msj=2");
 			}
 			
 			

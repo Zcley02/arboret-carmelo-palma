@@ -60,19 +60,20 @@
                         	<input hidden="true" value="<%=p.getIdPublicacion() %>" name="id">
                             <div class="form-group">
                                 <label>Título:</label>
-                                <input value="<%=p.getTitulo() %>" name="titulo" class="form-control">
-
+                                <input id="titulo" value="<%=p.getTitulo() %>" name="titulo" class="form-control" minlength="5" maxlength="100" required>
+								<small id= "mensaje" style="color:red"></small>
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="5" maxlength="400" required></textarea>
+                            	<small id= "mensaje1" style="color:red"></small>
                             </div>
                             <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
                             <div class="form-group">
                                 <label>Hipervinculo:</label>
-                                <input value="<%=p.getHipervinculo() %>" name="hipervinculo" class="form-control">
-
+                                <input  id="hipervinculo" value="<%=p.getHipervinculo() %>" name="hipervinculo" class="form-control" minlength="5" maxlength="200" required>
+								<small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
@@ -81,19 +82,17 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input name="imagen" type="file" class="custom-file-input" id="inputGroupFile01" onchange="readUrl(this);">
-                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
-                                            archivo</label>
+                                        <input id="foto" name="foto" type="file" class="form-control" id="inputGroupFile01" onchange="readUrl(this);" accept="image/jpeg"> 
                                     </div>
-                                </div>
+                              	</div>
                                 <div class="text-center">
-                                	<img class="rounded img-fluid" alt="nose" src="<%=p.getMultimedia() %>" name="foto" id="foto">
+                                	<img class="rounded img-fluid" alt="Seleccione la imagen" src="" name="foto" id="foto" onchange="readUrl(this);">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>
-                            <div style="text-align:center;"><a href="GestionArbol.jsp"><i
+                            <div style="text-align:center;"><a href="publicationgestion.jsp"><i
                                         class="fas fa-undo"></i>&nbsp;Volver a la tabla</a></div>
                         </form>
                     </div>
@@ -168,6 +167,68 @@
 				$("#descripcion1").html(desp);
 	    	}
 	</script>
+	
+		<script>
+        $('#titulo').on("keydown", function(e) {
+	        var textLength = $('#titulo').val().replace(' ', '1').length + 1;
+	        var maxValue = 100;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#titulo').on("keyup", function(e) {
+	        var textLength = $('#titulo').val().replace(' ', '1').length;
+	        var maxValue = 100;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 400;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 400;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+        $('#hipervinculo').on("keydown", function(e) {
+	        var textLength = $('#hipervinculo').val().replace(' ', '1').length + 1;
+	        var maxValue = 200;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#hipervinculo').on("keyup", function(e) {
+	        var textLength = $('#hipervinculo').val().replace(' ', '1').length;
+	        var maxValue = 200;
+
+	        $("#mensaje2").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		</script>
 	   
     </body>
 </html>

@@ -179,9 +179,9 @@
         	        {
         	            alertify.error('Se elimino correctamente');
         	        }
-        	        if(mensaje == "6")
+        	        if(mensaje == "error")
         	        {
-        	            alertify.alert('');
+        	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
         	        }
         	       
         	    });

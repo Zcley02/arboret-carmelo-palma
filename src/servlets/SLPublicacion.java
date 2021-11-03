@@ -46,40 +46,43 @@ public class SLPublicacion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		String titulo = request.getParameter("titulo");
+		String descripcion = request.getParameter("descripcion");
+		String hipervinculo = request.getParameter("hipervinculo");
+		Part part = request.getPart("imagen");
 		
+		InputStream fin = part.getInputStream();
+		//byte [] imgBytea = Files.readAllBytes(file.toPath());
 		
-		try {
-			String titulo = request.getParameter("titulo");
-			String descripcion = request.getParameter("descripcion");
-			String hipervinculo = request.getParameter("hipervinculo");
-			Part part = request.getPart("imagen");
+		int estado = 1;
+		boolean resp = false;
+		
+		Publicacion pu = new Publicacion();
+		DTPublicacion dt = new DTPublicacion();
+		
+		if(titulo.length()==0||descripcion.length()==0||hipervinculo.length()==0 || fin.equals(null)) {
+			response.sendRedirect("publicationgestion.jsp?msj=error");
+		}else {
 			
-			InputStream fin = part.getInputStream();
-			//byte [] imgBytea = Files.readAllBytes(file.toPath());
-			
-			int estado = 1;
-			boolean resp = false;
-			
-			Publicacion pu = new Publicacion();
-			
-			pu.setTitulo(titulo);
-			pu.setDescripcion(descripcion);
-			pu.setHipervinculo(hipervinculo);
-			pu.setEstado(estado);
-			
-			DTPublicacion dt = new DTPublicacion();
-			
-			resp = dt.guardarPublicacion(pu,fin);
-			
-			if(resp == true) {
-				response.sendRedirect("publicationgestion.jsp");
-			}else{
-				response.sendRedirect("management.jsp");
-			};
-		} catch (NotFoundException e) {
-			System.out.println(e);
-		}catch (Exception e) {
-			System.out.println(e);
+			try {
+	
+				pu.setTitulo(titulo);
+				pu.setDescripcion(descripcion);
+				pu.setHipervinculo(hipervinculo);
+				pu.setEstado(estado);
+				
+				resp = dt.guardarPublicacion(pu,fin);
+				
+				if(resp == true) {
+					response.sendRedirect("publicationgestion.jsp?msj=1");
+				}else{
+					response.sendRedirect("publicationgestion.jsp?msj=error");
+				};
+			} catch (NotFoundException e) {
+				System.out.println(e);
+			}catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 		
 		

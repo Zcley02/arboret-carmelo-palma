@@ -55,24 +55,27 @@ public class SLEditarEvento extends HttpServlet {
 		String ubicacion = request.getParameter("ubicacion");
 		String hipervinculo = request.getParameter("hipervinculo");
 		
-		ev.setIdEvento(id);
-		ev.setNombre(nombre);
-		ev.setDescripcion(descripcion);
-		ev.setFechaInicio(fechaIn);
-		ev.setFechaFin(fechaFin);
-		ev.setTipoEvento(tipoEvento);
-		ev.setUbicacion(ubicacion);
-		ev.setHipervinculo(hipervinculo);
-		
-		if(validarFechas(fechaIn, fechaFin)) {
-			if(dt.editarEvento(ev)) {
-				response.sendRedirect("eventgestion.jsp");
+		if(fechaIn.length()==0 || fechaFin.length()==0 || nombre.length()==0 || descripcion.length()==0 || tipoEvento.length()==0 || ubicacion.length()==0 || hipervinculo.length()==0) {
+			response.sendRedirect("eventgestion.jsp?msj=error");
+		}else {
+			ev.setIdEvento(id);
+			ev.setNombre(nombre);
+			ev.setDescripcion(descripcion);
+			ev.setFechaInicio(fechaIn);
+			ev.setFechaFin(fechaFin);
+			ev.setTipoEvento(tipoEvento);
+			ev.setUbicacion(ubicacion);
+			ev.setHipervinculo(hipervinculo);
+			
+			if(validarFechas(fechaIn, fechaFin)) {
+				if(dt.editarEvento(ev)) {
+					response.sendRedirect("eventgestion.jsp?msj=3");
+				}else {
+					response.sendRedirect("eventgestion.jsp?msj=error");
+				}
 			}else {
 				response.sendRedirect("eventgestion.jsp?error");
 			}
-		}else {
-			System.out.println("nose");
-			response.sendRedirect("eventgestion.jsp?error");
 		}
 		
 	}

@@ -47,7 +47,7 @@ public class SLEditarFlor extends HttpServlet {
 		
 		if(id == 0 || nombreComun.length()==0 || nombreCientifico.length()==0 || descripcion.length()==0 || temporada.length()==0) {
 			
-			response.sendRedirect("editflower.jsp?id="+id);
+			response.sendRedirect("editflower.jsp?msj=error");
 			
 		}else {
 		
@@ -63,7 +63,7 @@ public class SLEditarFlor extends HttpServlet {
 			if(dt.editarFlor(fl)){
 				response.sendRedirect("flowergestion.jsp?msj=3");
 			}else {
-				response.sendRedirect("flowergestion.jsp?msj=4");
+				response.sendRedirect("flowergestion.jsp?msj=error");
 			}
 		}
 	}

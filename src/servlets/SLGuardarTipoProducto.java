@@ -44,13 +44,18 @@ public class SLGuardarTipoProducto extends HttpServlet {
 		TipoProducto tp = new TipoProducto();
 		DTTipo_producto dtp = new DTTipo_producto();
 		
-		tp.setNombreTipo(nombre);
-		tp.setDescripcion(descripcion);
-		
-		if(dtp.guardarTipoProducto(tp)) {
-			response.sendRedirect("typeproductgestion.jsp");
+		if(nombre.length()==0 || descripcion.length()==0) {
+			response.sendRedirect("typeproductgestion.jsp?msj=error");
 		}else {
-			response.sendRedirect("typeproductgestion.jsp?error");
+			
+			tp.setNombreTipo(nombre);
+			tp.setDescripcion(descripcion);
+			
+			if(dtp.guardarTipoProducto(tp)) {
+				response.sendRedirect("typeproductgestion.jsp?msj=1");
+			}else {
+				response.sendRedirect("typeproductgestion.jsp?msj=error");
+			}
 		}
 	}
 

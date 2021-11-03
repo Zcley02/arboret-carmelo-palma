@@ -164,6 +164,10 @@
         	        {
         	            alertify.alert('Error','Los elementos de esta Distribución estan siendo utilizados en un registro de Árbol');
         	        }
+        	        if(mensaje == "error")
+        	        {
+        	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
+        	        }
         	       
         	    });
  

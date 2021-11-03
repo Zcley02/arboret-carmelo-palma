@@ -63,6 +63,7 @@
                                 <textarea id="descripcion1" name="txtDescripcion1" rows="4" class="form-control" minlength="5" maxlength="80" required></textarea>
                            		<small id= "mensaje1" style="color:red"></small>	
                             </div>
+                            
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
                                 <div class="input-group mb-3">
@@ -70,15 +71,14 @@
                                         <span class="input-group-text">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input name="foto" type="file" class="custom-file-input" id="inputGroupFile01" onchange="readUrl(this);" accept="image/jpg" required>
-                                        <label class="custom-file-label" for="inputGroupFile01">Seleccionar el
-                                            archivo</label>
+                                        <input id="foto" name="foto" type="file" class="form-control" id="inputGroupFile01" onchange="readUrl(this);" accept="image/jpeg" required> 
                                     </div>
                                 </div>
                                 <div class="text-center">
                                 	<img class="rounded img-fluid" alt="Seleccione la imagen" src="" name="imagen" id="imagen" onchange="readUrl(this);">
                                 </div>
                             </div>
+                            
                             <div class="mb-3">
                                 <button id="btn" class="btn btn-primary" style="width: 100%;">Guardar</button>
                             </div>

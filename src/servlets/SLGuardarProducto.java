@@ -44,35 +44,41 @@ public class SLGuardarProducto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
-			Producto p = new Producto();
-			DTProducto dt = new DTProducto();
-			
-			String nombre = request.getParameter("nombre");
-			String descripcion = request.getParameter("descripcion");
-			Double precio = Double.parseDouble(request.getParameter("precio"));
-			int idTipoP = Integer.parseInt(request.getParameter("tipoP").trim());
-			Part part = request.getPart("foto");
-			InputStream in = part.getInputStream();
-			
-			p.setNombre(nombre);
-			p.setDescripcion(descripcion);
-			p.setPrecio(precio);
-			p.setIdTipoProducto(idTipoP);
-			
-			if(dt.guardarProducto(p, in))
-			{
-				response.sendRedirect("productgestion.jsp");
+		Producto p = new Producto();
+		DTProducto dt = new DTProducto();
+		
+		String nombre = request.getParameter("nombre");
+		String descripcion = request.getParameter("descripcion");
+		Double precio = Double.parseDouble(request.getParameter("precio"));
+		int idTipoP = Integer.parseInt(request.getParameter("tipoP").trim());
+		Part part = request.getPart("foto");
+		InputStream in = part.getInputStream();
+		
+		if(nombre.length()==0||descripcion.length()==0||precio.equals(null) || idTipoP == 0 || in.equals(null)) {
+			response.sendRedirect("productgestion.jsp?msj=error");
+		}else {
+		
+			try {
+				
+				p.setNombre(nombre);
+				p.setDescripcion(descripcion);
+				p.setPrecio(precio);
+				p.setIdTipoProducto(idTipoP);
+				
+				if(dt.guardarProducto(p, in))
+				{
+					response.sendRedirect("productgestion.jsp?msj=1");
+				}
+				else
+				{
+					response.sendRedirect("productgestion.jsp?msj=error");
+				}
+				
+			} catch (NotFoundException e) {
+				System.out.println(e);
+			}catch (Exception e) {
+				System.out.println(e);
 			}
-			else
-			{
-				response.sendRedirect("productgestion.jsp?error");
-			}
-			
-		} catch (NotFoundException e) {
-			System.out.println(e);
-		}catch (Exception e) {
-			System.out.println(e);
 		}
 	}
 

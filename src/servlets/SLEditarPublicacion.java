@@ -54,28 +54,32 @@ public class SLEditarPublicacion extends HttpServlet {
 		Publicacion pu = new Publicacion();
 		DTPublicacion dt = new DTPublicacion();
 		
-		pu.setIdPublicacion(id);
-		pu.setTitulo(titulo);
-		pu.setDescripcion(descripcion);
-		pu.setHipervinculo(hipervinculo);
-		
-		if(cambio.equals(v)) {
-			
-			Part part = request.getPart("imagen");
-			InputStream fin = part.getInputStream();
-			
-			if(dt.modificarPuConImg(pu, fin)) {
-				response.sendRedirect("publicationgestion.jsp");
-			}else {
-				response.sendRedirect("publicationgestion.jsp?error");
-			}
-			
+		if(titulo.length()==0||descripcion.length()==0||hipervinculo.length()==0) {
+			response.sendRedirect("publicationgestion.jsp?msj=error");
 		}else {
-			if(dt.modificarPuSinImg(pu)) {
-				response.sendRedirect("publicationgestion.jsp");
-			}else {
-				response.sendRedirect("publicationgestion.jsp?error");
-			}
+				pu.setIdPublicacion(id);
+				pu.setTitulo(titulo);
+				pu.setDescripcion(descripcion);
+				pu.setHipervinculo(hipervinculo);
+				
+				if(cambio.equals(v)) {
+					
+					Part part = request.getPart("imagen");
+					InputStream fin = part.getInputStream();
+					
+					if(dt.modificarPuConImg(pu, fin)) {
+						response.sendRedirect("publicationgestion.jsp?msj=3");
+					}else {
+						response.sendRedirect("publicationgestion.jsp?msj=error");
+					}
+					
+				}else {
+					if(dt.modificarPuSinImg(pu)) {
+						response.sendRedirect("publicationgestion.jsp?msj=3");
+					}else {
+						response.sendRedirect("publicationgestion.jsp?msj=error");
+					}
+				}
 		}
 	}
 

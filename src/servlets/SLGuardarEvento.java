@@ -42,44 +42,49 @@ public class SLGuardarEvento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		try {
+		Eventos ev = new Eventos();
+		DTEvento dt = new DTEvento();
+		
+		String fechaIn = fechaIn(request.getParameter("fechaInicio"));
+		String fechaFin = fechaFin(request.getParameter("fechaFin"));
+		String nombre = request.getParameter("nombre");
+		String descripcion = request.getParameter("descripcion");
+		String tipoEvento = request.getParameter("tipoEvento");
+		String ubicacion = request.getParameter("ubicacion");
+		String hipervinculo = request.getParameter("hipervinculo");
+		
+	
+		if(fechaIn.length()==0 || fechaFin.length()==0 || nombre.length()==0 || descripcion.length()==0 || tipoEvento.length()==0 || ubicacion.length()==0 || hipervinculo.length()==0) {
+			response.sendRedirect("eventgestion.jsp?msj=error");
+		}else {
 			
-			
-			Eventos ev = new Eventos();
-			DTEvento dt = new DTEvento();
-			
-			String fechaIn = fechaIn(request.getParameter("fechaInicio"));
-			String fechaFin = fechaFin(request.getParameter("fechaFin"));
-			String nombre = request.getParameter("nombre");
-			String descripcion = request.getParameter("descripcion");
-			String tipoEvento = request.getParameter("tipoEvento");
-			String ubicacion = request.getParameter("ubicacion");
-			String hipervinculo = request.getParameter("hipervinculo");
-			
-			ev.setNombre(nombre);
-			ev.setDescripcion(descripcion);
-			ev.setFechaInicio(fechaIn);
-			ev.setFechaFin(fechaFin);
-			ev.setTipoEvento(tipoEvento);
-			ev.setUbicacion(ubicacion);
-			ev.setHipervinculo(hipervinculo);
-			
-			if(validarFechas(fechaIn, fechaFin)) {
-				if(dt.guardarEvento(ev)) {
-					response.sendRedirect("eventgestion.jsp");
+			try {
+				
+				ev.setNombre(nombre);
+				ev.setDescripcion(descripcion);
+				ev.setFechaInicio(fechaIn);
+				ev.setFechaFin(fechaFin);
+				ev.setTipoEvento(tipoEvento);
+				ev.setUbicacion(ubicacion);
+				ev.setHipervinculo(hipervinculo);
+				
+				if(validarFechas(fechaIn, fechaFin)) {
+					if(dt.guardarEvento(ev)) {
+						response.sendRedirect("eventgestion.jsp?msj=1");
+					}else {
+						response.sendRedirect("eventgestion.jsp?msj=error");
+					}
 				}else {
-					response.sendRedirect("eventgestion.jsp?error");
+					System.out.println("nose");
+					response.sendRedirect("eventgestion.jsp?msj=error");
 				}
-			}else {
-				System.out.println("nose");
-				response.sendRedirect("eventgestion.jsp?error");
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
 		}
+		
 		
 		
 	}

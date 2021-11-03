@@ -30,8 +30,6 @@
         <title>Editar Distribución</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body onload="load();" class="sb-nav-fixed" style="background: #39603D;">
@@ -64,7 +62,7 @@
 					 %>
 
 
-                        <form  name="formDistribution" action="SLEditarDistribucion" method="Post" enctype="multipart/form-data" onsubmit="return validar_campos()">
+                        <form action="SLEditarDistribucion" method="Post" enctype="multipart/form-data">
                         	<input hidden="true" value="<%=d.getIdDistribucion() %>" name="idD">
                             <div class="form-group">
                                 <label>Nombre:</label>
@@ -81,7 +79,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Región:</label>
-                                <select name="idRegion" id="idRegion" class="form-control">
+                                <select name="idRegion" id="idRegion" class="form-control" required>
+                                <option value="" selected disabled>Seleccionar...</option>
                                 	<%
                                 		for(Region r: listarR){
                                 			if(r.getIdRegion()==d.getIdRegion()){
@@ -97,7 +96,6 @@
                                     		}
                                     	%>
                                 </select>
-                                <small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Editar</button>
@@ -123,9 +121,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="js/simple-datatables-latest.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="plugins/jAlert/dist/jAlert.min.js"></script>
-	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
-	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -161,22 +156,6 @@
 					var desp = descripcion.replaceAll("<br>", ("\n"));
 					$("#descripcion1").html(desp);
 		    	}
-		</script>
-		
-		<script>
-			function validar_campos(){
-         		nom = document.formDistribution.nombre.value;
-         		des = document.formDistribution.descripcion1.value;
-         		reg = document.formDistribution.idRegion.value;
-         		
-         		if (nom.length == 0 || des.length == 0 || reg == 0 || reg.lengt == 0){
-         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
-         			return false;
-         		}else{
-         			return true;
-         		}
-	         }
-
 		</script>
 		
 		<script>

@@ -60,7 +60,7 @@ public class SLGuardarBanner extends HttpServlet {
 			Banner b = new Banner();
 			DTBanner dt = new DTBanner();
 			
-			if(titulo.length()==0 || descripcion.length()==0 ) {
+			if(titulo.length()==0 || descripcion.length()==0 || fin.equals(null) ) {
 				response.sendRedirect("bannergestions.jsp?msj=error");
 			}
 			else {

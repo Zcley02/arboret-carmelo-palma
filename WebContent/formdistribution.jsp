@@ -31,8 +31,6 @@
         <title>Crear Distribución</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -52,7 +50,7 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form name="formDistribution" action="SLGuardarDistribucion" method="Post" onsubmit="return validar_campos()">
+                        <form action="SLGuardarDistribucion" method="Post">
                             <div class="form-group">
                                 <label>Nombre de la distribución:</label>
                                 <input id="nombreD" name="nombreD" class="form-control" minlength="1" maxlength="40" required>
@@ -73,9 +71,8 @@
                             %>
                             <div class="form-group">
                                 <label>Región:</label>
-                                <small id= "mensaje2" style="color:red"></small>
-                                <select id="region" name="region" class="form-control">
-                                <option value="0">Seleccionar...</option>
+                                <select id="region" name="region" class="form-control" required>
+                                <option value="" selected disabled>Seleccionar...</option> 
                                 
                                 <%for (Region r : listaRegiones) { %>
                                     <option value=" <%= r.getIdRegion() %> "><%= r.getNombre()%></option>
@@ -113,7 +110,6 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
-	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -143,22 +139,6 @@
 		    			$("#descripcion").html(textarea_line);
 		   			});
 				});
-		</script>
-		
-		<script>
-		function validar_campos(){
-         		nom = document.formDistribution.nombreD.value;
-         		des = document.formDistribution.descripcionD1.value;
-         		reg = document.formDistribution.region.value;
-         		
-         		if (nom.length == 0 || des.length == 0 || reg == 0 || reg.value == ""){
-         			alertify.alert("Alerta", "Tiene algunos campos vacios").set('label', 'Ok');
-         			return false;
-         		}else{
-         			return true;
-         		}
-	         }
-
 		</script>
 		
 		<script>

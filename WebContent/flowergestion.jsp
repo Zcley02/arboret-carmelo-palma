@@ -169,6 +169,10 @@
         	        {
         	            alertify.alert('');
         	        }
+        	        if(mensaje == "error")
+        	        {
+        	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
+        	        }
         	       
         	    });
 

@@ -48,14 +48,16 @@
                         <form action="SLGuardarEvento" method="post">
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Nombre:</label>
-                                <input name="nombre" type="text" class="form-control" id="formGroupExampleInput" required>
+                                <input id="nombre" name="nombre" type="text" class="form-control" id="formGroupExampleInput" minlength="1" maxlength="100" required>
+                            	<small id= "mensaje" style="color:red"></small>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>Descripción:</label>
-                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" required></textarea>
+                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="1" maxlength="260" required></textarea>
                                     <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
+                                	<small id= "mensaje1" style="color:red"></small>
                                 </div>
                             </div>
 
@@ -74,6 +76,7 @@
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Tipo de Evento</label>
                                     <select name="tipoEvento" class="form-control" required>
+                                     	<option value="" selected disabled>Seleccionar...</option>
                                         <option value="Agenda Pública">Agenda Pública</option>
                                         <option value="Agenda Privada">Agenda Privada</option>
                                     </select>
@@ -84,12 +87,14 @@
 
                             <div class="form-group ">
                                 <label for="formGroupExampleInput ">Ubicación</label>
-                                <input name="ubicacion" type="text" class="form-control " id="formGroupExampleInput " required>
+                                <input id="ubicacion" name="ubicacion" type="text" class="form-control " id="formGroupExampleInput " minlength="1" maxlength="170" required>
+                            	<small id= "mensaje2" style="color:red"></small>
                             </div>
 
                             <div class="form-group ">
                                 <label for="formGroupExampleInput ">Hipervinculo</label>
-                                <input name="hipervinculo" type="url" class="form-control " id="formGroupExampleInput " required>
+                                <input id="hipervinculo" name="hipervinculo" type="url" class="form-control " id="formGroupExampleInput " minlength="1" maxlength="170" required>
+                            	<small id= "mensaje3" style="color:red"></small>
                             </div>
                             <div class="mb-3">
                                 <button id="btn" type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
@@ -150,4 +155,83 @@
 			    			$("#descripcion").html(textarea_line);
 			   			});
 					});
+	        $('#nombre').on("keydown", function(e) {
+		        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+		        var maxValue = 100;
+		        
+		        console.log(e.keyCode);
+		        if (textLength > maxValue) {
+					if(e.keyCode != 8){
+					e.preventDefault();
+					}                     	
+		        }
+
+		     });
+		    $('#nombre').on("keyup", function(e) {
+		        var textLength = $('#nombre').val().replace(' ', '1').length;
+		        var maxValue = 100;
+
+		        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+		       
+		    });
+		    
+	        $('#descripcion1').on("keydown", function(e) {
+		        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+		        var maxValue = 260;
+		        
+		        console.log(e.keyCode);
+		        if (textLength > maxValue) {
+					if(e.keyCode != 8){
+					e.preventDefault();
+					}                     	
+		        }
+
+		     });
+		    $('#descripcion1').on("keyup", function(e) {
+		        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+		        var maxValue = 260;
+
+		        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+		       
+		    });
+		    
+	        $('#ubicacion').on("keydown", function(e) {
+		        var textLength = $('#ubicacion').val().replace(' ', '1').length + 1;
+		        var maxValue = 170;
+		        
+		        console.log(e.keyCode);
+		        if (textLength > maxValue) {
+					if(e.keyCode != 8){
+					e.preventDefault();
+					}                     	
+		        }
+
+		     });
+		    $('#ubicacion').on("keyup", function(e) {
+		        var textLength = $('#ubicacion').val().replace(' ', '1').length;
+		        var maxValue = 170;
+
+		        $("#mensaje2").text(textLength+" de "+maxValue+" carácteres permitidos");
+		       
+		    });
+		    
+	        $('#hipervinvulo').on("keydown", function(e) {
+		        var textLength = $('#hipervinvulo').val().replace(' ', '1').length + 1;
+		        var maxValue = 170;
+		        
+		        console.log(e.keyCode);
+		        if (textLength > maxValue) {
+					if(e.keyCode != 8){
+					e.preventDefault();
+					}                     	
+		        }
+
+		     });
+		    $('#hipervinvulo').on("keyup", function(e) {
+		        var textLength = $('#hipervinvulo').val().replace(' ', '1').length;
+		        var maxValue = 170;
+
+		        $("#mensaje3").text(textLength+" de "+maxValue+" carácteres permitidos");
+		       
+		    });
 		</script>

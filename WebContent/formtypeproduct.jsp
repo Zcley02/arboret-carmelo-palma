@@ -46,12 +46,13 @@
                         <form action="SLGuardarTipoProducto" method="Post" role="form">
                             <div class="form-group">
                                 <label>Nombre del tipo de producto</label>
-                                <input name="nombre" class="form-control">
-
+                                <input id="nombre" name="nombre" class="form-control" minlength="1" maxlength="100" required>
+								<small id= "mensaje" style="color:red"></small>
                                 <div class="form-group">
                                     <label>Descripción:</label>
                                     <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
-                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3"></textarea>
+                                    <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" minlength="10" maxlength="260" required></textarea>
+                                	<small id= "mensaje1" style="color:red"></small>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -109,4 +110,47 @@
 			    			$("#descripcion").html(textarea_line);
 			   			});
 					});
+		</script>
+		
+		<script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 100;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 100;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 260;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 260;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
 		</script>

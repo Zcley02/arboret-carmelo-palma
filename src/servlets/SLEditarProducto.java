@@ -55,30 +55,33 @@ public class SLEditarProducto extends HttpServlet {
 		Double precio = Double.parseDouble(request.getParameter("precio"));
 		int idTipoP = Integer.parseInt(request.getParameter("tipoP").trim());
 		
-		System.out.println(descripcion);
-		
-		p.setIdProducto(idP);
-		p.setNombre(nombre);
-		p.setDescripcion(descripcion);
-		p.setPrecio(precio);
-		p.setIdTipoProducto(idTipoP);
-		
-		if(cambio.equals(v)) {
-			
-			Part part = request.getPart("foto");
-			InputStream in = part.getInputStream();
-			
-			if(dt.editarPrConImagen(p, in)) {
-				response.sendRedirect("productgestion.jsp");
-			}else {
-				response.sendRedirect("productgestion.jsp?error");
-			}
-			
+		if(nombre.length()==0||descripcion.length()==0||precio.equals(null) || idTipoP == 0) {
+			response.sendRedirect("productgestion.jsp?msj=error");
 		}else {
-			if(dt.editarPrSinImagen(p)) {
-				response.sendRedirect("productgestion.jsp");
+		
+			p.setIdProducto(idP);
+			p.setNombre(nombre);
+			p.setDescripcion(descripcion);
+			p.setPrecio(precio);
+			p.setIdTipoProducto(idTipoP);
+			
+			if(cambio.equals(v)) {
+				
+				Part part = request.getPart("foto");
+				InputStream in = part.getInputStream();
+				
+				if(dt.editarPrConImagen(p, in)) {
+					response.sendRedirect("productgestion.jsp?msj=3");
+				}else {
+					response.sendRedirect("productgestion.jsp?msj=error");
+				}
+				
 			}else {
-				response.sendRedirect("productgestion.jsp?error");
+				if(dt.editarPrSinImagen(p)) {
+					response.sendRedirect("productgestion.jsp?msj=3");
+				}else {
+					response.sendRedirect("productgestion.jsp?msj=error");
+				}
 			}
 		}
 		

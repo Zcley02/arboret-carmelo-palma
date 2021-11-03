@@ -46,7 +46,7 @@ public class SLGuardarFlor extends HttpServlet {
 		
 		if(nombreComun.length()==0 || nombreCientifico.length()==0 || descripcion.length()==0 || temporada.length()==0) {
 			
-			response.sendRedirect("flowergestion.jsp?error");
+			response.sendRedirect("flowergestion.jsp?msj=error");
 			
 		}else {
 			
@@ -63,7 +63,7 @@ public class SLGuardarFlor extends HttpServlet {
 			if(resp==true) {
 				response.sendRedirect("flowergestion.jsp?msj=1");
 			}else {
-				response.sendRedirect("flowergestion.jsp?msj=2");
+				response.sendRedirect("flowergestion.jsp?msj=error");
 			}
 			
 			

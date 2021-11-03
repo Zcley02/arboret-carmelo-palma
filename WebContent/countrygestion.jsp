@@ -164,7 +164,11 @@
 	        	        }
 	        	        if(mensaje == "6")
 	        	        {
-	        	            alertify.alert('Error','Los datos de este País estan siendo utilizados por una Región');
+	        	            alertify.alert('Los elemento de este País estan siendo utilizados en un registro de Región');
+	        	        }
+	        	        if(mensaje == "error")
+	        	        {
+	        	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
 	        	        }
 	        	       
 	        	    });

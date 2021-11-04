@@ -20,6 +20,27 @@
 		{
 			response.sendRedirect("login.jsp");
 		}
+		
+		int rolUser = 0;
+		rolUser = (int)session.getAttribute("rol");
+		
+		Opciones op = new Opciones();
+		DTOpciones dtpo = new DTOpciones();
+		ArrayList<Opciones> listarOp = dtpo.listarOpciones(rolUser);
+		
+		String code = "";
+		
+		for(Opciones o: listarOp){
+			if(o.getNombre().equals("Crear")){
+				code+="1";
+			}
+			if(o.getNombre().equals("Editar")){
+				code+="2";
+			}
+			if(o.getNombre().equals("Eliminar")){
+				code+="3";
+			}
+		}
     %>
 
     <!DOCTYPE html>
@@ -37,6 +58,10 @@
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
         <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+        <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+        
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -52,11 +77,12 @@
                                 <h3>Tabla Evento</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered" id="datatablesSimple">
-                                	<div style="text-align:right;"><a href="formevent.jsp"><i
+                                <table class="table table-bordered" id="example1">
+                                	<div style="text-align:right;"><a class="disabled" href="formevent.jsp"><i
                                             class="fas fa-plus-square"></i>&nbsp; Nueva Evento</div>
                                         <thead>
                                             <tr>
+                                            	<th></th>
                                                 <th>Nombre</th>
                                                 <th>Descripción</th>
                                                 <th>Fecha de Inicio (Mes/Día/Año)</th>
@@ -69,6 +95,7 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
+                                            	<th></th>
                                                 <th>Nombre</th>
                                                 <th>Descripción</th>
                                                 <th>Fecha de Inicio (Mes/Día/Año)</th>
@@ -84,6 +111,7 @@
                                         	for(Eventos u: listarEventos){
                                         %>
                                             <tr>
+                                            	<td></td>
                                                 <td><%=u.getNombre() %></td>
                                                 <td><%=u.getDescripcion() %></td>
                                                 <td><%=u.getFechaInicio() %></td>
@@ -92,8 +120,8 @@
                                                 <td><%=u.getUbicacion() %></td>
                                                 <td><%=u.getHipervinculo() %></td>
                                                 <td>
-                                                    <a href="editevent.jsp?id=<%=u.getIdEvento()%>"><i class="fas fa-edit"></i></a>
-                                                    <a href="#" onclick="myDeleteEvent(<%=u.getIdEvento()%>)"><i class="far fa-trash-alt"></i></a>
+                                                    <a class="disabled2" href="editevent.jsp?id=<%=u.getIdEvento()%>"><i class="fas fa-edit"></i></a>
+                                                    <a class="disabled1" href="#" onclick="myDeleteEvent(<%=u.getIdEvento()%>)"><i class="far fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
                                          <%
@@ -138,6 +166,9 @@
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
 	    	    <script src="js/alertify.min.js" type="text/javascript"></script>
+	    	    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+	    
 	    
 	    <script>
 	
@@ -181,3 +212,42 @@
        	    });
 
    </script>
+   <script type="text/javascript">
+	    $(function () {
+        	$("#example1").DataTable({
+      	      "responsive": true, "lengthChange": false, "autoWidth": false,
+      	      "language": {    	
+      		      "search": "Buscar:",
+      		      "zeroRecords": "No hay registros disponibles.",
+      		      "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+      		      "infoEmpty": "Mostrando 0 de 0 registros",
+      		      paginate: {
+      		            previous: 'Atrás',
+      		            next:     'Siguiente'
+      		        }
+      	      }
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+	    </script>
+	    
+	    <script type="text/javascript">
+		    var code = "<%=code%>";
+		    if(!code.includes("3")){
+	        	$('.disabled1').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	       	if(!code.includes("2")){
+	        	$('.disabled2').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	       	if(!code.includes("1")){
+	        	$('.disabled').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	    </script>

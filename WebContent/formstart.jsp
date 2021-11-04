@@ -15,6 +15,8 @@
 		{
 			response.sendRedirect("login.jsp");
 		}
+		
+		
     %>
  
  <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>

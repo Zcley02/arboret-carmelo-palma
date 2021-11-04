@@ -1,4 +1,4 @@
-<%@page import="entidades.*, datos.*" %>
+<%@page import="entidades.*, datos.*, java.util.*" %>
 <%
  	
 	String id = request.getParameter("id")==null?"":request.getParameter("id");
@@ -6,6 +6,31 @@
 	
 	DTFlor dt = new DTFlor();
 	Flor f = dt.obtenerFlor(idF);
+	
+	int rolUser = 0;
+	rolUser = (int)session.getAttribute("rol");
+	
+	Opciones op = new Opciones();
+	DTOpciones dtpo = new DTOpciones();
+	ArrayList<Opciones> listarOp = dtpo.listarOpciones(rolUser);
+	
+	String code = "";
+	
+	for(Opciones o: listarOp){
+		if(o.getNombre().equals("Crear")){
+			code+="1";
+		}
+		if(o.getNombre().equals("Editar")){
+			code+="2";
+		}
+		if(o.getNombre().equals("Eliminar")){
+			code+="3";
+		}
+	}
+	
+	if(!code.contains("2")){
+		response.sendRedirect("management.jsp?msj=9");
+	}
 	
 %>
 <%

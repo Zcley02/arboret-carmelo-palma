@@ -28,6 +28,31 @@
 		{
 			response.sendRedirect("login.jsp");
 		}
+		
+		int rolUser = 0;
+		rolUser = (int)session.getAttribute("rol");
+		
+		Opciones op = new Opciones();
+		DTOpciones dtpo = new DTOpciones();
+		ArrayList<Opciones> listarOp = dtpo.listarOpciones(rolUser);
+		
+		String code = "";
+		
+		for(Opciones o: listarOp){
+			if(o.getNombre().equals("Crear")){
+				code+="1";
+			}
+			if(o.getNombre().equals("Editar")){
+				code+="2";
+			}
+			if(o.getNombre().equals("Eliminar")){
+				code+="3";
+			}
+		}
+		
+		if(!code.contains("2")){
+			response.sendRedirect("management.jsp?msj=9");
+		}
     %>
  <!DOCTYPE html>
 <html lang="es">
@@ -102,13 +127,14 @@
 							<div class="form-group">
                                 <label for="custom-file">Imagen:</label>
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Subir</span>
+                                    <div class="input-group-prepend" >
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="form-control" id="inputGroupFile01" onchange="readUrl(this);" accept="image/jpg"> 
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="readUrl(this);" accept="image/jpeg" required> 
+                                    	<label class="custom-file-label" for="inputGroupFile01">Buscar Archivo</label>
                                     </div>
-                                </div>
+                              	</div>
                                 <div class="text-center">
                                 	<img class="rounded img-fluid" alt="nose" src="<%=p.getFoto() %>" name="imagen" id="imagen">
                                 </div>

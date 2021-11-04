@@ -66,6 +66,9 @@
         	        {
              			alertify.success("Usuario autenticado correctamente");
         	        }
+        	        if(mensaje == "9"){
+        	        	alertify.alert('Alerta','No puede ingresar a esta página, su rol no tiene permiso');
+        	        }
         	        if(mensaje == "error")
         	        {
         	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');

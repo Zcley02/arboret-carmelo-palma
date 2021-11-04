@@ -20,6 +20,26 @@
 		{
 			response.sendRedirect("login.jsp");
 		}
+		int rolUser = 0;
+		rolUser = (int)session.getAttribute("rol");
+		
+		Opciones op = new Opciones();
+		DTOpciones dtpo = new DTOpciones();
+		ArrayList<Opciones> listarOp = dtpo.listarOpciones(rolUser);
+		
+		String code = "";
+		
+		for(Opciones o: listarOp){
+			if(o.getNombre().equals("Crear")){
+				code+="1";
+			}
+			if(o.getNombre().equals("Editar")){
+				code+="2";
+			}
+			if(o.getNombre().equals("Eliminar")){
+				code+="3";
+			}
+		}
     %>
 <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
 <!DOCTYPE html>
@@ -34,6 +54,10 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
+        <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+        <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+        
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -49,7 +73,7 @@
                                 <h3>Tabla Árbol</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered" id="datatablesSimple">
+                                <table class="table table-bordered" id="example1">
                                 <div class="dropdown" align="right">
 							        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 							            <span class="glyphicon glyphicon-download-alt" aria-hidden="true" style="float: left;  color: white"></span>
@@ -66,10 +90,11 @@
 							        
 							    </div>
 							    &nbsp;
-                                	<div style="text-align:right;"><a href="formtrees.jsp"><i class="fas fa-plus-square"></i>&nbsp; Nueva Árbol</div>
+                                	<div style="text-align:right;"><a class="disabled" href="formtrees.jsp"><i class="fas fa-plus-square"></i>&nbsp; Nueva Árbol</div>
 
                                 <thead>
                                     <tr>
+                                    	<th></th>
                                         <th>Nombre común</th>
                                         <th>Nombre científico</th>
                                         <th>Descripción</th>
@@ -83,6 +108,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                    <th></th>
                                         <th>Nombre común</th>
                                         <th>Nombre científico</th>
                                         <th>Descripción</th>
@@ -99,6 +125,7 @@
 					           		for(Vista_arbol u: listarArbol){
 					           	%>
                                     <tr>
+                                    <td></td>
                                         <td><%=u.getNombreComun() %></td>
                                         <td><%=u.getNombreCientifico() %></td>
                                         <td><%=u.getDescripcion() %></td>
@@ -107,9 +134,9 @@
                                         <td><%=u.getNombre_Flor() %></td>
                                         <td><%=u.getNombre_Distribucion() %></td>
                                         <td><img alt="Arbol" src="<%=u.getFoto()%>" width="200px" height="200px" class="img-thumbnail"></td>
-                                        <td>&nbsp;&nbsp;<a href="edittree.jsp?id=<%=u.getId()%>"><i
+                                        <td>&nbsp;&nbsp;<a class="disabled2" href="edittree.jsp?id=<%=u.getId()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                 href="#" onclick="myDeleteTree(<%=u.getId() %>)"><i class="far fa-trash-alt"></i></td>
+                                                class="disabled1" href="#" onclick="myDeleteTree(<%=u.getId() %>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                                 <%
 					           		}
@@ -135,6 +162,9 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+	    
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -200,3 +230,42 @@
        	    });
 
    </script>
+   <script type="text/javascript">
+	    $(function () {
+        	$("#example1").DataTable({
+      	      "responsive": true, "lengthChange": false, "autoWidth": false,
+      	      "language": {    	
+      		      "search": "Buscar:",
+      		      "zeroRecords": "No hay registros disponibles.",
+      		      "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+      		      "infoEmpty": "Mostrando 0 de 0 registros",
+      		      paginate: {
+      		            previous: 'Atrás',
+      		            next:     'Siguiente'
+      		        }
+      	      }
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+	    </script>
+	    
+	    <script type="text/javascript">
+		    var code = "<%=code%>";
+		    if(!code.includes("3")){
+	        	$('.disabled1').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	       	if(!code.includes("2")){
+	        	$('.disabled2').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	       	if(!code.includes("1")){
+	        	$('.disabled').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	    </script>

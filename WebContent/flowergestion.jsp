@@ -4,6 +4,7 @@
 	DTFlor dt = new DTFlor();
 	listarFlor = dt.listarFlor();
 	
+	
 %>
 
     <%
@@ -21,6 +22,27 @@
 		if(loginUser.equals(""))
 		{
 			response.sendRedirect("login.jsp");
+		}
+		
+		int rolUser = 0;
+		rolUser = (int)session.getAttribute("rol");
+		
+		Opciones op = new Opciones();
+		DTOpciones dtpo = new DTOpciones();
+		ArrayList<Opciones> listarOp = dtpo.listarOpciones(rolUser);
+		
+		String code = "";
+		
+		for(Opciones o: listarOp){
+			if(o.getNombre().equals("Crear")){
+				code+="1";
+			}
+			if(o.getNombre().equals("Editar")){
+				code+="2";
+			}
+			if(o.getNombre().equals("Eliminar")){
+				code+="3";
+			}
 		}
     %>
 
@@ -40,6 +62,10 @@
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
         <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+        <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+        
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed" style="background: #39603D;">
@@ -55,8 +81,8 @@
                                 <h3>Tabla Flor</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered" id="datatablesSimple">
-                                	<div style="text-align:right;"><a href="formflower.jsp"><i
+                                <table class="table table-bordered" id="example1">
+                                	<div style="text-align:right;"><a class="disabled" href="formflower.jsp"><i
                                             class="fas fa-plus-square"></i>&nbsp; Nueva flor</div>
                                 <thead>
                                     <tr>
@@ -86,9 +112,9 @@
                                         <td><%=fl.getNombreCientifico() %></td>
                                         <td><%=fl.getDescripcion() %></td>
                                         <td><%=fl.getTemporadaFloracion() %></td>          
-                                        <td>&nbsp;&nbsp;<a href="editflower.jsp?id=<%=fl.getIdFlor()%>"><i
+                                        <td>&nbsp;&nbsp;<a class="disabled2" href="editflower.jsp?id=<%=fl.getIdFlor()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                                    href="#" onclick="myDeleteFlower(<%=fl.getIdFlor()%>)"><i class="far fa-trash-alt"></i></td>
+                                                    class="disabled1" href="#" onclick="myDeleteFlower(<%=fl.getIdFlor()%>)"><i class="far fa-trash-alt"></i></td>
                                     </tr>
                             		<%
                                 		}
@@ -113,6 +139,9 @@
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
 	    <script src="js/alertify.min.js" type="text/javascript"></script>
+	     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+	    
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
@@ -177,3 +206,41 @@
         	    });
 
     </script>
+    <script type="text/javascript">
+	    $(function () {
+        	$("#example1").DataTable({
+      	      "responsive": true, "lengthChange": false, "autoWidth": false,
+      	      "language": {    	
+      		      "search": "Buscar:",
+      		      "zeroRecords": "No hay registros disponibles.",
+      		      "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+      		      "infoEmpty": "Mostrando 0 de 0 registros",
+      		      paginate: {
+      		            previous: 'Atrás',
+      		            next:     'Siguiente'
+      		        }
+      	      }
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+	    </script>
+	    <script type="text/javascript">
+		    var code = "<%=code%>";
+		    if(!code.includes("3")){
+	        	$('.disabled1').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	       	if(!code.includes("2")){
+	        	$('.disabled2').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	       	if(!code.includes("1")){
+	        	$('.disabled').css({'pointer-events':'none', 'cursor': 'not-allowed', 'color':'gray'});
+	        }
+	    </script>

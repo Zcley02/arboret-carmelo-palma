@@ -78,7 +78,7 @@
 	
 	var pop = L.popup({
 		  maxHeight: 300,
-		  maxWidth: 250,
+		  maxWidth: 300,
 		  autoClose: true,
 	}).setContent(html);
 	

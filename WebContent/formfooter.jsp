@@ -1,3 +1,4 @@
+<%@page import="entidades.*, datos.*, java.util.*"%>
 <%
     //Limpia la CACHE del navegador
 	    response.setHeader("Pragma", "no-cache");
@@ -13,6 +14,31 @@
 		if(loginUser.equals(""))
 		{
 			response.sendRedirect("login.jsp");
+		}
+		
+		int rolUser = 0;
+		rolUser = (int)session.getAttribute("rol");
+		
+		Opciones op = new Opciones();
+		DTOpciones dtpo = new DTOpciones();
+		ArrayList<Opciones> listarOp = dtpo.listarOpciones(rolUser);
+		
+		String code = "";
+		
+		for(Opciones o: listarOp){
+			if(o.getNombre().equals("Crear")){
+				code+="1";
+			}
+			if(o.getNombre().equals("Editar")){
+				code+="2";
+			}
+			if(o.getNombre().equals("Eliminar")){
+				code+="3";
+			}
+		}
+		
+		if(!code.contains("1")){
+			response.sendRedirect("management.jsp?msj=9");
 		}
 %>
 

@@ -99,6 +99,15 @@
 								<small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="form-group">
+                                <label>Estado:</label>
+                                <select id="estado" name="estado" class="form-control" required>
+                                <option value="" selected disabled>Seleccionar...</option> 
+                                 <option value="1">Visible</option> 
+                                  <option value="2">No Visible</option> 
+                                </select>
+                                
+                            </div>
+                            <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend" >

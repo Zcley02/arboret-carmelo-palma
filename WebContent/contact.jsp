@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Correo:</label>
                             <div class="col-sm-10">
-                                <input id="correo" type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" name="correo" minlength="3" maxlength="100">
+                                <input id="correo" type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" name="correo" minlength="3" maxlength="150">
                             	<small id= "mensaje2" style="color:red"></small>
                             </div>
                         </div>
@@ -125,8 +125,90 @@
          		}
 	         }
 	        
-
         </script>
+        
+        <script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 80;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 80;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#apellido').on("keydown", function(e) {
+	        var textLength = $('#apellido').val().replace(' ', '1').length + 1;
+	        var maxValue = 80;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#apellido').on("keyup", function(e) {
+	        var textLength = $('#apellido').val().replace(' ', '1').length;
+	        var maxValue = 80;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#correo').on("keydown", function(e) {
+	        var textLength = $('#correo').val().replace(' ', '1').length + 1;
+	        var maxValue = 150;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#correo').on("keyup", function(e) {
+	        var textLength = $('#correo').val().replace(' ', '1').length;
+	        var maxValue = 150;
+
+	        $("#mensaje2").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#mensaje').on("keydown", function(e) {
+	        var textLength = $('#mensaje').val().replace(' ', '1').length + 1;
+	        var maxValue = 500;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#mensaje').on("keyup", function(e) {
+	        var textLength = $('#mensaje').val().replace(' ', '1').length;
+	        var maxValue = 500;
+
+	        $("#mensaje3").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+		</script>
     </body>
 
 

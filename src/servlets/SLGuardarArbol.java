@@ -72,11 +72,11 @@ public class SLGuardarArbol extends HttpServlet {
 			
 			if(dta.guardarArbol(ar, in))
 			{
-				response.sendRedirect("treegestion.jsp");
+				response.sendRedirect("treegestion.jsp?msj=1");
 			}
 			else
 			{
-				response.sendRedirect("treegestion.jsp?error");
+				response.sendRedirect("treegestion.jsp?msj=error");
 			}
 			
 		} catch (NotFoundException e) {

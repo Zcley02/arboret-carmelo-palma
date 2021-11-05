@@ -60,6 +60,8 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
         <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
         
@@ -108,7 +110,7 @@
                                         <th>Familia</th>
                                         <th>Floración</th>
                                         <th>Distribución</th>
-                                        <th>Ubicación</th>
+                                        <th></th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -168,6 +170,7 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 	    
@@ -218,24 +221,24 @@
        	        
        	        if(mensaje == "1")
        	        {
-       	            successAlert('Exito', 'Los datos del Arbol han sido actualizados exitosamente');
+            			alertify.success("Árbol registrado");
        	        }
-       	        if(mensaje == "2")
+       	        if(mensaje == "3")
        	        {
-       	            errorAlert('Error', 'Revise los datos insertados');
+            			alertify.success("Árbol actualizado");
        	        }
        	        if(mensaje == "5")
        	        {
-       	            successAlert('Exito', 'Los datos del Arbol han sido eliminados exitosamente');
+       	            alertify.error('Se elimino correctamente');
        	        }
-       	        if(mensaje == "6")
+       	        if(mensaje == "error")
        	        {
-       	            errorAlert('Error', 'Los datos estan siendo usados en otros elemento. Por favor revisar');
+       	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
        	        }
        	       
        	    });
 
-   </script>
+	</script>
    <script type="text/javascript">
 	    $(function () {
         	$("#example1").DataTable({

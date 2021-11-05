@@ -95,7 +95,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Hipervinculo:</label>
-                                <input id="hipervinculo" name="hipervinculo" type="url" class="form-control"  minlength="5" maxlength="200" required>
+                                <input id="hipervinculo" name="hipervinculo" type="url" class="form-control"  minlength="5" maxlength="200">
 								<small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="form-group">

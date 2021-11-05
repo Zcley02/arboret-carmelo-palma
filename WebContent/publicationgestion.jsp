@@ -93,7 +93,7 @@
                                     	<th></th>
                                         <th>Título</th>    
                                         <th>Descripción</th>
-                                        <th>Fecha Publicación</th>
+                                        <th>Fecha Publicación Año/Mes/Día</th>
                                         <th>Hipervinculo</th>
                                         <th>Imagen</th>  
                                         <th>Opciones</th>              
@@ -104,7 +104,7 @@
                                     	<th></th>
                                         <th>Título</th>    
                                         <th>Descripción</th>
-                                        <th>Fecha Publicacion</th>
+                                        <th>Fecha Publicacion Año/Mes/Día</th>
                                         <th>Hipervinculo</th>
                                         <th>Imagen</th>  
                                         <th>Opciones</th>              

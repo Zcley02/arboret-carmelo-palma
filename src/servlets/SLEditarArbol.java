@@ -73,16 +73,16 @@ public class SLEditarArbol extends HttpServlet {
 			InputStream in = part.getInputStream();
 			
 			if(dta.editarArConImg(ar, in)) {
-				response.sendRedirect("treegestion.jsp?msj=1");
+				response.sendRedirect("treegestion.jsp?msj=3");
 			}else {
-				response.sendRedirect("treegestion.jsp?msj=2");
+				response.sendRedirect("treegestion.jsp?msj=error");
 			}
 			
 		}else {
 			if(dta.editarArSinImg(ar)) {
-				response.sendRedirect("treegestion.jsp?msj=1");
+				response.sendRedirect("treegestion.jsp?msj=3");
 			}else {
-				response.sendRedirect("treegestion.jsp?msj=2");
+				response.sendRedirect("treegestion.jsp?msj=error");
 			}
 		}
 	}

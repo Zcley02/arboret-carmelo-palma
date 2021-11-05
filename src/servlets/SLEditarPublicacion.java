@@ -50,6 +50,8 @@ public class SLEditarPublicacion extends HttpServlet {
 		String titulo = request.getParameter("titulo");
 		String descripcion = request.getParameter("descripcion");
 		String hipervinculo = request.getParameter("hipervinculo");
+		String est = request.getParameter("estado").trim();
+		int estado = Integer.parseInt(est);
 		
 		Publicacion pu = new Publicacion();
 		DTPublicacion dt = new DTPublicacion();
@@ -61,6 +63,7 @@ public class SLEditarPublicacion extends HttpServlet {
 				pu.setTitulo(titulo);
 				pu.setDescripcion(descripcion);
 				pu.setHipervinculo(hipervinculo);
+				pu.setEstado(estado);
 				
 				if(cambio.equals(v)) {
 					

@@ -2,7 +2,7 @@
 <%
 	ArrayList<Publicacion> listarPu = new ArrayList<Publicacion>();
 	DTPublicacion dt = new DTPublicacion();
-	listarPu = dt.listarPublicacion();
+	listarPu = dt.listarPublicacionV();
 %>
     <div class="card-group">
             	<%

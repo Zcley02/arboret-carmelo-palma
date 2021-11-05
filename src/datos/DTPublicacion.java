@@ -39,7 +39,52 @@ public class DTPublicacion {
 		ArrayList<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
 		try{
 			c = PoolConexion.getConnection();
-			ps = c.prepareStatement("select * from public.publicaciones where estado<>3", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("select * from public.publicaciones where estado <> 3", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Publicacion pu = new Publicacion();
+				pu.setIdPublicacion(rs.getInt("idPublicaciones"));
+				pu.setTitulo(rs.getString("titulo"));
+				pu.setDescripcion(rs.getString("descripcion"));
+				pu.setMultimedia("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("multimedia")));
+				pu.setFechaPublicacion(rs.getDate("fechaPublicacion").toString());
+				pu.setHipervinculo(rs.getString("hipervinculo"));
+				pu.setEstado(rs.getInt("estado"));
+				
+				listaPublicaciones.add(pu);
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return listaPublicaciones;
+	}
+	
+	public ArrayList<Publicacion> listarPublicacionV(){
+		ArrayList<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
+		try{
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.publicaciones where estado = 1", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
@@ -221,7 +266,7 @@ public class DTPublicacion {
 		boolean modificado = false;
 		
 		//PreparedStatement ps;
-		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, multimedia = ?, fechaPublicacion = current_date, estado = 2 where idPublicaciones = ?";
+		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, multimedia = ?, fechaPublicacion = current_date, estado = ? where idPublicaciones = ?";
 		
 		try {
 			c = PoolConexion.getConnection();
@@ -231,7 +276,9 @@ public class DTPublicacion {
 			ps.setString(2, pu.getDescripcion());
 			ps.setString(3, pu.getHipervinculo());
 			ps.setBinaryStream(4, fi);
-			ps.setInt(5, pu.getIdPublicacion());
+			
+			ps.setInt(5, pu.getEstado());
+			ps.setInt(6, pu.getIdPublicacion());
 			
 			ps.executeUpdate();
 			
@@ -268,7 +315,7 @@ public class DTPublicacion {
 		boolean modificado = false;
 		
 		//PreparedStatement ps;
-		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, fechaPublicacion = current_date, estado = 2 where idPublicaciones = ?";
+		String sql = "Update publicaciones set titulo = ?, descripcion = ?, hipervinculo = ?, fechaPublicacion = current_date, estado = ? where idPublicaciones = ?";
 		
 		try {
 			c = PoolConexion.getConnection();
@@ -277,7 +324,10 @@ public class DTPublicacion {
 			ps.setString(1, pu.getTitulo());
 			ps.setString(2, pu.getDescripcion());
 			ps.setString(3, pu.getHipervinculo());
-			ps.setInt(4, pu.getIdPublicacion());
+			
+			ps.setInt(4, pu.getEstado());
+			ps.setInt(5, pu.getIdPublicacion());
+			
 			
 			ps.executeUpdate();
 			

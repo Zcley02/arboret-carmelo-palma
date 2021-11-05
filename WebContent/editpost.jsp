@@ -2,7 +2,7 @@
 <%
 	String id = request.getParameter("id")==null?"":request.getParameter("id");
 	int idP = Integer.parseInt(id);
-	
+	String vis = "";
 	DTPublicacion dtp = new DTPublicacion();
 	Publicacion p = dtp.buscarPublicacion(idP);
 %>
@@ -106,18 +106,39 @@
 								<small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="form-group">
+                                <label>Estado:</label>
+                                <select id="estado" name="estado" class="form-control" required>
+                                <option value="" selected disabled>Seleccionar...</option> 
+                                <%if(p.getEstado()==1)
+                                {	
+                    				%><option selected="true" value="1">Visible</option>	
+                                	<option value="2">No Visible</option>
+                                <%
+                                }else{
+                    				%><option value="1">Visible</option>	
+                                	<option selected="true" value="2">No Visible</option>
+                                <%                               	
+                                }
+                                
+                                %>
+
+
+                                </select>
+                                
+                            </div>
+                            <div class="form-group">
                                 <label for="custom-file">Imagen:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend" >
                                         <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="readUrl(this);" accept="image/jpeg" required> 
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="readUrl(this);" accept="image/jpeg"> 
                                     	<label class="custom-file-label" for="inputGroupFile01">Buscar Archivo</label>
                                     </div>
                               	</div>
                                 <div class="text-center">
-                                	<img class="rounded img-fluid" alt="Seleccione la imagen" src="<%=p.getMultimedia() %>" name="imagen" id="imagen" onchange="readUrl(this);">
+                                	<img class="rounded img-fluid" alt="Seleccione la imagen" src="<%=p.getMultimedia()%>" name="imagen" id="imagen" onchange="readUrl(this);">
                                 </div>
                             </div>
                             <div class="mb-3">

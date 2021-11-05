@@ -48,11 +48,12 @@ public class SLGuardarPublicacion extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		String hipervinculo = request.getParameter("hipervinculo");
 		Part part = request.getPart("foto");
+		String est = request.getParameter("estado").trim();
+		int estado = Integer.parseInt(est);
 		
 		InputStream fin = part.getInputStream();
 		//byte [] imgBytea = Files.readAllBytes(file.toPath());
 		
-		int estado = 1;
 		boolean resp = false;
 		
 		Publicacion pu = new Publicacion();

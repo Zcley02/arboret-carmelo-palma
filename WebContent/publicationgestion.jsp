@@ -95,7 +95,8 @@
                                         <th>Descripción</th>
                                         <th>Fecha Publicación Año/Mes/Día</th>
                                         <th>Hipervinculo</th>
-                                        <th>Imagen</th>  
+                                        <th>Imagen</th> 
+                                        <th>Estado</th>
                                         <th>Opciones</th>              
                                     </tr>
                                 </thead>
@@ -106,13 +107,16 @@
                                         <th>Descripción</th>
                                         <th>Fecha Publicacion Año/Mes/Día</th>
                                         <th>Hipervinculo</th>
-                                        <th>Imagen</th>  
+                                        <th>Imagen</th> 
+                                        <th>Estado</th> 
                                         <th>Opciones</th>              
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                 	<%
 					            		for(Publicacion u: listarPu){
+					            			String est = "Visible";
+
 					            	%>
                                     <tr>
                                     	<td></td>
@@ -120,6 +124,12 @@
                                         <td><%=u.getDescripcion() %></td>
                                         <td><%=u.getFechaPublicacion() %></td>
                                         <td><%=u.getHipervinculo() %></td>
+                                       											<%
+											if(u.getEstado()== 2){
+												est = "No visible";
+											}
+											%>			
+										<td><%=est%></td>
                                         <td><img alt="ejemplo" src="<%=u.getMultimedia() %>" width="200px" height="200px" class="img-thumbnail"></td>
                                         <td>&nbsp;&nbsp;<a class="disabled2" href="editpost.jsp?id=<%=u.getIdPublicacion()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

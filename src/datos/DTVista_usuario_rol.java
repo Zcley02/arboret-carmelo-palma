@@ -34,6 +34,7 @@ public class DTVista_usuario_rol {
 				vur.setEmail(rs.getString("email"));
 				vur.setContrasenia(rs.getString("contrasenia"));
 				vur.setRol(rs.getString("rol"));
+				vur.setEstado(Integer.parseInt(rs.getString("estado")));
 				
 				listaUsuarioRol.add(vur);
 				

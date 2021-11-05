@@ -33,7 +33,7 @@ public class DTUsuario {
 		public boolean guardarUsuario(Usuario u){
 			boolean resp = false;
 			
-			if(buscarUsuario(u.getUsuario())) {
+			if(validarUsario_Email(u.getUsuario(), u.getEmail())) {
 				resp = false;
 			}else {
 				try{
@@ -87,16 +87,17 @@ public class DTUsuario {
 			return resp;
 		}
 		
-		public boolean buscarUsuario(String usuario) {
+		public boolean validarUsario_Email(String usuario, String correo) {
 			boolean existe = false;
 			
 			//PreparedStatement ps;
-			String sql = "Select * from public.usuario where usuario = ?";
+			String sql = "Select * from public.usuario where usuario = ? OR email = ?";
 			
 			try {
 				c = PoolConexion.getConnection();
 				ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 				ps.setString(1, usuario);
+				ps.setString(2, correo);
 				
 				rs = ps.executeQuery();
 				
@@ -330,7 +331,7 @@ public class DTUsuario {
 		{
 			ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 			
-			String sql = "SELECT * FROM PUBLIC.usurio";
+			String sql = "SELECT * FROM PUBLIC.usurio where estado <> 3";
 			
 			try 
 			{

@@ -8,12 +8,13 @@ public class Vista_usuario_rol {
 	private String email;
 	private String contrasenia;
 	private String rol;
+	private int estado;
 	
 	public Vista_usuario_rol() {
 		super();
 	}
 	public Vista_usuario_rol(int idusuario, String nombres, String apellidos, String usuario, String email,
-			String contrasenia, String rol) {
+			String contrasenia, String rol, int estado) {
 		super();
 		this.idusuario = idusuario;
 		this.nombres = nombres;
@@ -22,6 +23,7 @@ public class Vista_usuario_rol {
 		this.email = email;
 		this.contrasenia = contrasenia;
 		this.rol = rol;
+		this.estado = estado;
 	}
 	public int getIdusuario() {
 		return idusuario;
@@ -64,6 +66,12 @@ public class Vista_usuario_rol {
 	}
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	
 	

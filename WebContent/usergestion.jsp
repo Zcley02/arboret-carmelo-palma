@@ -3,6 +3,11 @@
 <%@page import= "entidades.*" %>
 <%@page import= "datos.*"%>
 <%@page import= "java.util.*"%>
+
+<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");
+String error = request.getParameter("error")==null?"":request.getParameter("error");%>
+
+
 <%
     //Limpia la CACHE del navegador
 	    response.setHeader("Pragma", "no-cache");
@@ -42,8 +47,6 @@
     %>
 <!DOCTYPE html>
 <html lang="es">
-<% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");
-String error = request.getParameter("error")==null?"":request.getParameter("error");%>
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -54,6 +57,8 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
+        <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
         <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
         
@@ -85,6 +90,7 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
                                         <th>Usuario</th>
                                         <th>Correo electrónico</th>
                                         <th>Rol</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
 
                                     </tr>
@@ -97,6 +103,7 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
                                         <th>Usuario</th>
                                         <th>Correo electrónico</th>
                                         <th>Rol</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
@@ -108,6 +115,7 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
 										listaU = dtp.listarUR();
 
 										for (Vista_usuario_rol vur : listaU) {
+											String est = "Inactivo";
 									 %>
 										<tr>
 										<td></td>
@@ -115,7 +123,13 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
 											<td><%=vur.getApellidos()%></td>
 											<td><%=vur.getUsuario()%></td>
 											<td><%=vur.getEmail()%></td>
-											<td><%=vur.getRol()%></td>
+											<td><%=vur.getRol()%></td>	
+											<%
+											if(vur.getEstado()!=0){
+												est = "Activo";
+											}
+											%>			
+											<td><%=est%></td>
 											<td>&nbsp;&nbsp;<a class="disabled2" href="#"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="disabled1" href="#" onclick="myDeletePub(<%=vur.getIdusuario()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
@@ -163,6 +177,7 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
         <script src="js/datatables-simple-demo.js"></script>
         <script src="plugins/jAlert/dist/jAlert.min.js"></script>
 	    <script src="plugins/jAlert/dist/jAlert-functions.min.js"></script>
+	    <script src="js/alertify.min.js" type="text/javascript"></script>
 	    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 	    
@@ -191,14 +206,18 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
 	        	        
 	        	        if(mensaje == "1")
 	        	        {
-	        	            successAlert('Exito', 'Usuario registrado con éxito, se ha enviado un correo para el proceso de verificación al usuario');
+	        	        	alertify.alert('Exito', 'Usuario registrado con éxito, se ha enviado un correo para el proceso de verificación al usuario');
+	        	        }
+	        	        if(mensaje == "5")
+	        	        {
+	        	        	alertify.error('Se elimino correctamente');
 	        	        }
 	        	        if(mensaje == "error")
 	        	        {
-	        	            errorAlert('Error', 'Ha ocurrido un error. Intente nuevamente');
+	        	            alertify.alert('Error', 'Ha ocurrido un error. Intente nuevamente');
 	        	        }
 	        	       	if(error == "1"){
-	        	       		errorAlert('Error', 'Error al agregar el usuario, nombre de usuario ya existe');
+	        	       		alertify.alert('Error', 'Error al agregar el usuario, nombre de usuario o el correo ya existen.');
 	        	       	}
 	        	    });
 	

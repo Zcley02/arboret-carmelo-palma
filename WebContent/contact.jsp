@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
  <% String varMsj = request.getParameter("msj")==null?"":request.getParameter("msj");%>
     <!DOCTYPE html>
@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Correo:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" name="correo" minlength="3" maxlength="100">
+                                <input id="correo" type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" name="correo" minlength="3" maxlength="100">
                             	<small id= "mensaje2" style="color:red"></small>
                             </div>
                         </div>
@@ -124,6 +124,8 @@
          			return true;
          		}
 	         }
+	        
+
         </script>
     </body>
 

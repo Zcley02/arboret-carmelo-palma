@@ -73,26 +73,31 @@
 
                     </div>
                     <div class="card-body bg-white rounded">
-                        <form action="SLGuardarUsuario" method="Post">
+                        <form name="formUser" action="SLGuardarUsuario" method="Post">
                             <div class="form-group">
                                 <label>Nombres:</label>
-                                <input name="txtNombres" class="form-control">
+                                <input id="nombre" name="txtNombres" class="form-control" minlength="3" maxlength="50" required>
+                                <small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="form-group">
                             	<label>Apellidos: </label>
-                            	<input name="txtApellidos" class="form-control">
+                            	<input id="apellido" name="txtApellidos" class="form-control" minlength="3" maxlength="50" required>
+                            	<small id= "mensaje1" style="color:red"></small>
                             </div>
                                 <div class="form-group">
                                 <label>Usuario:</label>
-                                <input name="txtUsuario" class="form-control">
+                                <input id="usuario" name="txtUsuario" class="form-control" minlength="5" maxlength="25" required>
+                                <small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="form-group">
                             	<label>Correo Electrónico: </label>
-                            	<input type="email" name="txtCorreo" class="form-control">
+                            	<input id="email" type="email" name="txtCorreo" class="form-control" maxlength="120" required>
+                            	<small id= "mensaje3" style="color:red"></small>
                             </div>
                                 <div class="form-group">
                             	<label>Contraseña: </label>
-                            	<input type="password" name="txtPassword" class="form-control">
+                            	<input id="pwd" type="password" name="txtPassword" class="form-control" minlength="8" maxlength="50" required>
+                            	<small id= "mensaje4" style="color:red"></small>
                             </div>
                             
                             <%
@@ -103,8 +108,8 @@
                             %>
                             <div class="form-group">
                                 <label>Rol:</label>
-                                <select name="cmbRol" class="form-control">
-                                
+                                <select name="cmbRol" class="form-control" required>
+                                <option value="" selected disabled>Seleccionar...</option> 
                                 <%for (Rol r : listaRoles) { %>
                                     <option value=" <%= r.getIdRol() %> "><%= r.getNombre()%></option>
                                 <% } %>
@@ -160,3 +165,111 @@
 
         })
          </script>
+         
+         
+         <script>
+        $('#nombre').on("keydown", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length + 1;
+	        var maxValue = 50;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombre').on("keyup", function(e) {
+	        var textLength = $('#nombre').val().replace(' ', '1').length;
+	        var maxValue = 50;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#apellido').on("keydown", function(e) {
+	        var textLength = $('#apellido').val().replace(' ', '1').length + 1;
+	        var maxValue = 50;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#apellido').on("keyup", function(e) {
+	        var textLength = $('#apellido').val().replace(' ', '1').length;
+	        var maxValue = 50;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#usuario').on("keydown", function(e) {
+	        var textLength = $('#apellido').val().replace(' ', '1').length + 1;
+	        var maxValue = 25;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#usuario').on("keyup", function(e) {
+	        var textLength = $('#usuario').val().replace(' ', '1').length;
+	        var maxValue = 25;
+
+	        $("#mensaje2").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#email').on("keydown", function(e) {
+	        var textLength = $('#email').val().replace(' ', '1').length + 1;
+	        var maxValue = 150;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#email').on("keyup", function(e) {
+	        var textLength = $('#email').val().replace(' ', '1').length;
+	        var maxValue = 150;
+
+	        $("#mensaje3").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#pwd').on("keydown", function(e) {
+	        var textLength = $('#pwd').val().replace(' ', '1').length + 1;
+	        var maxValue = 50;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#pwd').on("keyup", function(e) {
+	        var textLength = $('#pwd').val().replace(' ', '1').length;
+	        var maxValue = 50;
+
+	        $("#mensaje4").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+       
+		</script>
+		
+		
+		

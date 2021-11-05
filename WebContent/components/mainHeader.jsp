@@ -14,19 +14,19 @@
 		String loginUser = "";
 		loginUser = (String)session.getAttribute("login");
 		loginUser = loginUser==null?"":loginUser;
-		String sesion, titulo, imagen = "", nombre = "";
+		String sesion, titulo, imagen = "";
 		
 		if(loginUser.equals(""))
 		{
 			sesion = "login.jsp";
 			titulo = "Inicio Sesión";
-			imagen = "fas fa-user-circle";
+			imagen = "1";
 			
 		}else{
 		
 			sesion = "management.jsp";
 			titulo = "Administración";
-			imagen = "fas fa-user-circle";
+			imagen = "2";
 		}
 			
     %>
@@ -65,10 +65,11 @@
                         <a class="nav-link" href="contact.jsp">Contactos</a>
                     </li>
                     <li class="nav-item">
-                        <span title="<%=titulo%>"><a class="nav-link" href="<%=sesion%>"><%=nombre %> <i class="<%=imagen%>"></i></a></span>
+                        <span title="<%=titulo%>"><a class="nav-link" href="<%=sesion%>"><i class="icon"></i><%=titulo%></a></span>
                     </li>
 
             </div>
         </div>
     </nav>
+    
     <!-- End of Navbar -->

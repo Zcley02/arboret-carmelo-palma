@@ -58,7 +58,12 @@ public class SL_login extends HttpServlet {
 				System.out.println("EL USUARIO ES CORRECTO");
 				u1 = dt.dtGetUsuario(usuario);
 				String user = u1.getUsuario();
-				int rol = u1.getIdRol();
+				
+				
+				String rol = "";
+				
+				rol = String.valueOf(u1.getIdRol());
+				
 				HttpSession hts = request.getSession(true);
 				//HttpSession hts1 = request.getSession(true);
 				hts.setAttribute("login", user);

@@ -205,7 +205,7 @@
 			});
 	    	
 	    	function load(){
-	    		var descripcion = "<%=in.getHistoria()%>";
+	    		var descripcion = "<%=in.getVision()%>";
 				var desp = descripcion.replaceAll("<br>", ("\n"));
 				$("#descripcion").html(desp);
 	    	}

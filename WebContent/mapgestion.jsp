@@ -89,7 +89,6 @@
                                                 <th>Latitud</th>
                                                 <th>Longitud</th>
                                                 <th>Imagen</th>
-                                                <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -99,7 +98,6 @@
                                                 <th>Latitud</th>
                                                 <th>Longitud</th>
                                                 <th>Imagen</th>
-                                                <th>Opciones</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -112,10 +110,7 @@
                                                 <td><%=va.getLatitud() %></td>
                                                 <td><%=va.getLongitud() %></td>
                                                 <td><img src="<%=va.getFoto() %>" width="200px" height="200px" class="img-thumbnail"></td>
-                                                <td>
-                                                    <a class="disabled2" href="editproduct.jsp?id=<%=va.getIdCoordenadaArbol()%>"><i class="fas fa-edit"></i></a>
-                                                    <a class="disabled1" href="#" onclick="myDeletePr(<%=va.getIdCoordenadaArbol()%>)"><i class="far fa-trash-alt"></i></a>
-                                                </td>
+                                                
                                             </tr>
                                          	<%
                                         		}

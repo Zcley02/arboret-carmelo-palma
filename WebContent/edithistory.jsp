@@ -103,7 +103,7 @@
                                         <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input id="foto" name="foto" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="readUrl(this);" accept="image/jpeg" required> 
+                                        <input id="foto" name="foto" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="readUrl(this);" accept="image/jpeg"> 
                                     	<label class="custom-file-label" for="inputGroupFile01">Buscar Archivo</label>
                                     </div>
                               	</div>

@@ -107,23 +107,25 @@
                             <input hidden="true" value="false" id="cambio" name="cambio">
                             <div class="form-group">
                                 <label>Nombre común:</label>
-                                <input value="<%=a.getNombreComun() %>" name="nombreCo" id="nombreCo" class="form-control">
-
+                                <input value="<%=a.getNombreComun() %>" name="nombreCo" id="nombreCo" class="form-control" minlength="1" maxlength="100" required>
+								<small id= "mensaje" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Nombre científico:</label>
-                                <input value="<%=a.getNombreCientifico() %>" name="nombreCi" id="nombreCi" class="form-control">
-
+                                <input value="<%=a.getNombreCientifico() %>" name="nombreCi" id="nombreCi" class="form-control" minlength="1" maxlength="100" required>
+								<small id= "mensaje1" style="color:red"></small>
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea name="descripcion1" id="descripcion1" class="form-control" rows="3"></textarea>
+                                <textarea name="descripcion1" id="descripcion1" class="form-control" rows="3" minlength="10" maxlength="260" required></textarea>
                                 <textarea name="descripcion" id="descripcion" class="form-control" rows="3" hidden="true"></textarea>
+                            	<small id= "mensaje2" style="color:red"></small>
                             </div>
                             <div class="form-group">
                                 <label>Género del árbol:</label>
-                                <select name="genero" id="genero" class="form-control">
+                                <option value="" selected disabled>Seleccionar...</option>
+                                <select name="genero" id="genero" class="form-control" required>
                                 	<%
                                 		for(Genero g: listarG){
                                 			if(a.getIdGenero()==g.getIdGenero()){
@@ -141,7 +143,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Familia del árbol:</label>
-                                <select name="familia" id="familia" class="form-control">
+                                <option value="" selected disabled>Seleccionar...</option>
+                                <select name="familia" id="familia" class="form-control" required>
                                 	<%
                                 		for(Familiar f: listarFa){
                                 			if(a.getIdFamilia()==f.getIdFamilia()){
@@ -159,7 +162,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Floracion del árbol:</label>
-                                <select name="flor" id="flor" class="form-control">
+                                <option value="" selected disabled>Seleccionar...</option>
+                                <select name="flor" id="flor" class="form-control" required>
                                 	<%
                                 		for(Flor fl: listarFl){
                                 			if(a.getIdFlor()==fl.getIdFlor()){
@@ -179,7 +183,8 @@
 
                             <div class="form-group">
                                 <label>Distribución del árbol:</label>
-                                <select name="distribucion" id="distribucion" class="form-control">
+                                <option value="" selected disabled>Seleccionar...</option>
+                                <select name="distribucion" id="distribucion" class="form-control" required>
                                 	<%
                                 		for(Distribucion d: listarD){
                                 			if(a.getIdDistribucion()==d.getIdDistribucion()){
@@ -289,3 +294,67 @@
 				$("#descripcion1").html(desp);
 	    	}
 	</script>
+	
+		<script>
+        $('#nombreCo').on("keydown", function(e) {
+	        var textLength = $('#nombreCo').val().replace(' ', '1').length + 1;
+	        var maxValue = 100;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+        
+	    $('#nombreCo').on("keyup", function(e) {
+	        var textLength = $('#nombreCo').val().replace(' ', '1').length;
+	        var maxValue = 100;
+
+	        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#nombreCi').on("keydown", function(e) {
+	        var textLength = $('#nombreCi').val().replace(' ', '1').length + 1;
+	        var maxValue = 100;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#nombreCi').on("keyup", function(e) {
+	        var textLength = $('#nombreCi').val().replace(' ', '1').length;
+	        var maxValue = 100;
+
+	        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+	    
+        $('#descripcion1').on("keydown", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length + 1;
+	        var maxValue = 260;
+	        
+	        console.log(e.keyCode);
+	        if (textLength > maxValue) {
+				if(e.keyCode != 8){
+				e.preventDefault();
+				}                     	
+	        }
+
+	     });
+	    $('#descripcion1').on("keyup", function(e) {
+	        var textLength = $('#descripcion1').val().replace(' ', '1').length;
+	        var maxValue = 260;
+
+	        $("#mensaje2").text(textLength+" de "+maxValue+" carácteres permitidos");
+	       
+	    });
+		
+		</script>

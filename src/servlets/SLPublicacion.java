@@ -46,6 +46,9 @@ public class SLPublicacion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		Publicacion pu = new Publicacion();
+		DTPublicacion dt = new DTPublicacion();
+		
 		String titulo = request.getParameter("titulo");
 		String descripcion = request.getParameter("descripcion");
 		String hipervinculo = request.getParameter("hipervinculo");
@@ -57,10 +60,8 @@ public class SLPublicacion extends HttpServlet {
 		int estado = 1;
 		boolean resp = false;
 		
-		Publicacion pu = new Publicacion();
-		DTPublicacion dt = new DTPublicacion();
 		
-		if(titulo.length()==0||descripcion.length()==0||hipervinculo.length()==0 || fin.equals(null)) {
+		if(titulo.length()==0||descripcion.length()==0) {
 			response.sendRedirect("publicationgestion.jsp?msj=error");
 		}else {
 			

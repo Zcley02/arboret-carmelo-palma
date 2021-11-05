@@ -19,14 +19,11 @@
 		if(loginUser.equals(""))
 		{
 			sesion = "login.jsp";
-			titulo = "Inicio Sesión";
-			imagen = "1";
-			
+			titulo = "Inicio sesión";
 		}else{
 		
 			sesion = "management.jsp";
 			titulo = "Administración";
-			imagen = "2";
 		}
 			
     %>
@@ -65,7 +62,7 @@
                         <a class="nav-link" href="contact.jsp">Contactos</a>
                     </li>
                     <li class="nav-item">
-                        <span title="<%=titulo%>"><a class="nav-link" href="<%=sesion%>"><i class="icon"></i><%=titulo%></a></span>
+                        <span title="<%=titulo%>"><a class="nav-link" href="<%=sesion%>"><%=titulo%></a></span>
                     </li>
 
             </div>

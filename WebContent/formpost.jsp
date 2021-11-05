@@ -80,7 +80,7 @@
                     <div class="card-body bg-white rounded">
 
 
-                        <form  action="SLPublicacion" method="Post" enctype="multipart/form-data">
+                        <form action="SLGuardarPublicacion" method="Post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Título:</label>
                                 <input id="titulo" name="titulo" class="form-control" minlength="5" maxlength="100" required>

@@ -217,6 +217,90 @@ public class DTArbol {
 		return arbol;
 	}
 	
+	public DetalleArbol buscarDetalleArbol(int id) {
+		DetalleArbol arbol = new DetalleArbol();
+		
+		String consulta = "SELECT a.idarbol,\r\n"
+				+ "    a.nombrecomun,\r\n"
+				+ "    a.nombrecientifico,\r\n"
+				+ "    a.descripcion,\r\n"
+				+ "    a.foto,\r\n"
+				+ "    g.nombre AS nombreGenero,\r\n"
+				+ "	g.descripcion AS descripcionGenero,\r\n"
+				+ "    f.nombre AS nombrefamilia,\r\n"
+				+ "	f.descripcion AS descripcionFamilia,\r\n"
+				+ "    fl.nombrecomun AS nombreflor,\r\n"
+				+ "	fl.nombrecientifico AS nombrecientificoFlor,\r\n"
+				+ "	fl.descripcion AS descripcionFlor,\r\n"
+				+ "	fl.temporadafloracion AS temporadaFloracion,\r\n"
+				+ "    d.nombre AS nombreDistribucion,\r\n"
+				+ "	d.descripcion AS descripcionDistri,\r\n"
+				+ "	r.nombre as nombreRegion,\r\n"
+				+ "	r.descripcion as descripcionReg,\r\n"
+				+ "	p.nombre as pais\r\n"
+				+ "   FROM ((((arbol a\r\n"
+				+ "     JOIN genero g ON ((a.idgenero = g.idgenero)))\r\n"
+				+ "     JOIN familia f ON ((a.idfamilia = f.idfamilia)))\r\n"
+				+ "     JOIN flor fl ON ((a.idflor = fl.idflor)))\r\n"
+				+ "     JOIN distribucion d ON ((a.iddistribucion = d.iddistribucion))\r\n"
+				+ "	JOIN region r on((d.idregion = r.idregion))\r\n"
+				+ "		JOIN pais p on ((r.idpais = p.idpais)))\r\n"
+				+ "	 Where a.idarbol="+id;
+		
+		try {
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement(consulta, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			//ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.first()) {
+				arbol.setIdArbol(rs.getInt("idarbol")); 
+				arbol.setNombreComunArbol(rs.getString("nombrecomun"));
+				arbol.setNombreCientificoArbol(rs.getString("nombrecientifico"));
+				arbol.setDescripcionArbol(rs.getString("descripcion"));
+				arbol.setImgArbol("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
+				arbol.setNombreGenero(rs.getString("nombreGenero"));
+				arbol.setDescripcionGenero(rs.getString("descripcionGenero"));
+				arbol.setNombreFamilia(rs.getString("nombreFamilia"));
+				arbol.setDescripcionFamilia(rs.getString("descripcionFamilia"));
+				arbol.setNombreComunFlor(rs.getString("nombreflor"));
+				arbol.setNombreCientificoFlor(rs.getString("nombrecientificoflor"));
+				arbol.setDescripcionFlor(rs.getString("descripcionFlor"));
+				arbol.setTemporadaFloracion(rs.getString("temporadaFloracion"));
+				arbol.setNombreDistribucion(rs.getString("nombreDistribucion"));
+				arbol.setDescripcionDistribucion(rs.getString("descripcionDistri"));
+				arbol.setNombreRegion(rs.getString("nombreRegion"));
+				arbol.setDescripcionRegion(rs.getString("descripcionReg"));
+				arbol.setNombrePais(rs.getString("pais"));
+			}
+			
+		} 
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return arbol;
+	}
+	
 	public boolean editarArConImg(Arbol ar, InputStream fi) {
 		boolean editado = false;
 		

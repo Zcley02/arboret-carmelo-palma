@@ -4,7 +4,7 @@
 	int idT = Integer.parseInt(id);
 
 	DTArbol dtt = new DTArbol();
-	Arbol a = dtt.buscarArbol(idT);
+	DetalleArbol a = dtt.buscarDetalleArbol(idT);
 
     
 %>
@@ -50,13 +50,13 @@
            <div class="card mb-3">
 			  <div class="row g-0">
 			    <div class="col-md-4">
-			      <img src="<%=a.getImg() %>" class="img-fluid rounded" alt="...">
+			      <img src="<%=a.getImgArbol() %>" class="img-fluid rounded" alt="...">
 			    </div>
 			    <div class="col-md-8">
 			      <div class="card-body">
-			        <h3 class="card-title"><%=a.getNombreComun() %></h3>
-			        <h5 class="card-text"><%=a.getNombreCientifico() %></h5>
-			        <p class="card-text"><%=a.getDescripcion() %></p>
+			        <h3 class="card-title"><%=a.getNombreComunArbol() %></h3>
+			        <h5 class="card-text"><%=a.getNombreCientificoArbol() %></h5>
+			        <p class="card-text"><%=a.getDescripcionArbol() %></p>
 			        
 			      </div>
 			      
@@ -77,21 +77,53 @@
             <hr class="bg-dark">
 			<nav>
 					  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-					    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Familia</button>
-					    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Género</button>
-					    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Floración</button>
-					    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Distribución</button>
+					    <button class="nav-link active" id="nav-familia-tab" data-bs-toggle="tab" data-bs-target="#nav-familia" type="button" role="tab" aria-controls="nav-familia" aria-selected="true">Familia</button>
+					    <button class="nav-link" id="nav-genero-tab" data-bs-toggle="tab" data-bs-target="#nav-genero" type="button" role="tab" aria-controls="nav-genero" aria-selected="false">Género</button>
+					    <button class="nav-link" id="nav-floracion-tab" data-bs-toggle="tab" data-bs-target="#nav-floracion" type="button" role="tab" aria-controls="nav-floracion" aria-selected="false">Floración</button>
+					    <button class="nav-link" id="nav-distribucion-tab" data-bs-toggle="tab" data-bs-target="#nav-distribucion" type="button" role="tab" aria-controls="nav-distribucion" aria-selected="false">Distribución</button>
 					  </div>
 					</nav>
 					<div class="tab-content p-3" id="nav-tabContent" style="background-color:white">
-					  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-						
-					  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, culpa, esse, magni omnis blanditiis unde vitae in nobis fuga optio numquam at ipsum impedit perspiciatis quia rem consequatur recusandae repudiandae provident nemo voluptatibus corporis ab id iste pariatur ipsam vero porro eos eaque rerum nam dolorum mollitia adipisci. Quaerat, ullam!</p>
-					  	
+					  <div class="tab-pane fade show active" id="nav-familia" role="tabpanel" aria-labelledby="nav-familia-tab">
+							<h5>Nombre:</h5>
+					  		<p><%=a.getNombreFamilia() %></p>
+					  		<h5>Descripción:</h5>
+					  		<p><%=a.getDescripcionFamilia() %></p>
 					  </div>
-					  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-					  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
-					  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+					  <div class="tab-pane fade" id="nav-genero" role="tabpanel" aria-labelledby="nav-genero-tab">
+					  		<h5>Nombre:</h5>
+					  		<p><%=a.getNombreGenero() %></p>
+					  		<h5>Descripción:</h5>
+					  		<p><%=a.getDescripcionGenero() %></p>
+				
+					  </div>
+					  <div class="tab-pane fade" id="nav-floracion" role="tabpanel" aria-labelledby="nav-floracion-tab">
+					  
+					  		<h5>Nombre Comun:</h5>
+					  		<p><%=a.getNombreComunFlor() %></p>
+					  		<h5>Nombre Comun:</h5>
+					  		<p><%=a.getNombreCientificoFlor() %></p>
+					  		<h5>Descripción:</h5>
+					  		<p><%=a.getDescripcionFlor() %></p>
+					  		<h5>Temporada de Floración:</h5>
+					  		<p><%=a.getTemporadaFloracion() %></p>
+					  
+					  </div>
+					  <div class="tab-pane fade" id="nav-distribucion" role="tabpanel" aria-labelledby="nav-distribucion-tab">
+					  
+					  		<h5>Nombre:</h5>
+					  		<p><%=a.getNombreDistribucion() %></p>
+					  		<h5>Descripción:</h5>
+					  		<p><%=a.getDescripcionDistribucion() %></p>
+					  		<hr class="bg-dark">
+					  		<h5>Nombre de Región:</h5>
+					  		<p><%=a.getNombreRegion() %></p>
+					  		<h5>Descripción:</h5>
+					  		<p><%=a.getDescripcionRegion() %></p>
+					  		<hr class="bg-dark">
+					  		<h5>País:</h5>
+					  		<p><%=a.getNombrePais() %></p>
+					  </div>
 					</div>
 		</div>
 

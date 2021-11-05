@@ -7,7 +7,7 @@
 	    response.setDateHeader("Expires", -1);
 	      
 		
-		String loginUser = "";
+	    String loginUser = "";
 		loginUser = (String)session.getAttribute("login");
 		loginUser = loginUser==null?"":loginUser;
 		

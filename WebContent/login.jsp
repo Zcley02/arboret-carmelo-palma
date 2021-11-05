@@ -37,6 +37,7 @@
 		//DESTRUYE LA SESIÓN
 		HttpSession hts = request.getSession(false);
 		hts.removeAttribute("login");
+		hts.removeAttribute("rol");
 		hts.invalidate();
 	%>
 

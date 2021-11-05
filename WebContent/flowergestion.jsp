@@ -15,33 +15,38 @@
 	    response.setDateHeader("Expires", -1);
 	      
 		
-		String loginUser = "";
+	    String loginUser = "";
 		loginUser = (String)session.getAttribute("login");
 		loginUser = loginUser==null?"":loginUser;
 		
-		if(loginUser.equals(""))
-		{
-			response.sendRedirect("login.jsp");
-		}
-		
-		int rolUser = 0;
-		rolUser = (int)session.getAttribute("rol");
-		
 		Opciones op = new Opciones();
 		DTOpciones dtpo = new DTOpciones();
-		ArrayList<Opciones> listarOp = dtpo.listarOpciones(rolUser);
-		
+		ArrayList<Opciones> listarOp = new ArrayList<Opciones>();
 		String code = "";
 		
-		for(Opciones o: listarOp){
-			if(o.getNombre().equals("Crear")){
-				code+="1";
-			}
-			if(o.getNombre().equals("Editar")){
-				code+="2";
-			}
-			if(o.getNombre().equals("Eliminar")){
-				code+="3";
+		String rol = "";
+		rol = (String)session.getAttribute("rol");
+		rol = rol==null?"":rol;
+		
+		if(loginUser.equals("") || rol.equals(""))
+		{
+			response.sendRedirect("login.jsp");
+		}else{
+			int rolUser = Integer.parseInt(rol);
+			
+			listarOp = dtpo.listarOpciones(rolUser);
+			
+
+			for(Opciones o: listarOp){
+				if(o.getNombre().equals("Crear")){
+					code+="1";
+				}
+				if(o.getNombre().equals("Editar")){
+					code+="2";
+				}
+				if(o.getNombre().equals("Eliminar")){
+					code+="3";
+				}
 			}
 		}
     %>

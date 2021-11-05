@@ -54,7 +54,7 @@ public class SLArbolReport extends HttpServlet {
 			OutputStream otps = response.getOutputStream();
 			ServletContext context = getServletContext();
 			String path = context.getRealPath("/");
-			String template = "reportes\\arbolReporte.jasper";
+			String template = "reportes\\RptTree.jasper";
 			
 			Exporter exporter = new JRPdfExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template,hm,c);

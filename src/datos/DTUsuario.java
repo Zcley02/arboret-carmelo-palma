@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import entidades.Usuario;
 
@@ -381,6 +382,99 @@ public class DTUsuario {
 			return listaUsuario;
 		}
 		
+		public boolean validarEmail(String email){
+			boolean existe = false;
+			
+			String sql = "select * from public.usuario where email = ?";
+			
+			try {
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ps.setString(1, email);
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					existe = true;
+					
+					
+				}else {
+					existe = false;
+				}
+				
+			}catch (Exception e) 
+			{
+				System.err.println("DT Vista_Usuario_Rol: Error en listar los usuarios " + e.getMessage());
+				e.printStackTrace();
+			}
+			finally 
+			{
+				try 
+				{
+					if(rs != null)
+						rs.close();
+					
+					if(ps != null)
+						ps.close();
+					
+					if(c != null)
+						PoolConexion.closeConnection(c);
+				} 
+				catch (Exception e2) 
+				{
+					System.err.println("DT Vista_Usuario_Rol : Error en listar los usuarios" + e2.getMessage());
+					e2.printStackTrace();
+				}
+			}
+			
+			return existe;
+		}
+		
+		public boolean cambiarPass(String email, String password) {
+			String sql = "Update usuario set contrasenia = ? where email = ?";
+			boolean modificado = false;
+			
+			String enc = getMD5(password);
+			
+			
+			try {
+				
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql);
+				
+				ps.setString(1, enc);
+				ps.setString(2, email);
+				
+				ps.executeUpdate();
+				
+				modificado = true;
+				
+			}catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Elementos del Banner "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			return modificado;
+		}
+		
 		//Metodo para obtener un objeto de la vista rol usuario
 		public Usuario dtGetUsuario(String login)
 		{
@@ -426,6 +520,7 @@ public class DTUsuario {
 		}
 		return u;
 	}
+		
 		
 		//METODO PARA GENERAR UN CODIGO DE VERIFICACION //	
 		private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

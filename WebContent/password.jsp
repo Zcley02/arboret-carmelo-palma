@@ -28,18 +28,18 @@
                                     <div class="card-body">
                                         <div class="small mb-3 text-muted">Ingresa tu correo, el cual revisará una
                                             notificación para recuperar contraseña.</div>
-                                        <form>
+                                        <form action="SLRecuperarContrasenia" method="Post">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Correo:</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email"
+                                                <input class="form-control py-4" id="inputEmailAddress" type="email" name="email"
                                                     aria-describedby="emailHelp"
                                                     placeholder="Ingrese correo electronico" />
                                             </div>
                                             <div
                                                 class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small text-dark" href="login.jsp">Regresar</a>
-                                                <a class="btn btn-primary bg-success" href="login.jsp">Restaurar
-                                                    Contraseña</a>
+                                                <button class="btn btn-primary bg-success" type="submit">Restaurar
+                                                    Contraseña</button>
                                             </div>
                                         </form>
                                     </div>

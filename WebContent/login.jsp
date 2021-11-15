@@ -108,9 +108,7 @@
                 </footer>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-            crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js " crossorigin="anonymous "></script> 
         <script src="js/scripts.js"></script>
         <script src="js/alertify.min.js" type="text/javascript"></script>
         
@@ -127,7 +125,11 @@
 	        	        if(mensaje == "error")
 	        	        {
 	        	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
+	        	        }if(mensaje == "1"){
+	        	        	alertify.success("Se ha cambiado exitosamente la contraseña");
 	        	        }
+	        	        
+	        	    });
         </script>
     </body>
 

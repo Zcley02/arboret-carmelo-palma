@@ -11,6 +11,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
 public class DTEnviarEmailUsuario {
 	//ATRIBUTOS
 		/*---------------------- Configuración Localhost------------------------------*/
@@ -97,4 +98,6 @@ public class DTEnviarEmailUsuario {
 		      System.out.println("El mensaje fue enviado con éxito");
 		      return debug;
 		}
+	  
+	  
 }

@@ -475,6 +475,54 @@ public class DTUsuario {
 			return modificado;
 		}
 		
+		
+		public boolean cambiarContrasenia(String user, String pass) {
+			boolean verificado = false;
+			
+			String enc = getMD5(pass);
+			String sql = ("Update usuario set contrasenia = ? where usuario = ?");
+			
+			try {
+				
+				c = PoolConexion.getConnection();
+				ps = c.prepareStatement(sql);
+				
+				ps.setString(1, enc);
+				ps.setString(2, user);
+				
+				
+				
+				if(ps.executeUpdate()==1) {
+					verificado = true;
+				}
+				
+				
+				
+			} catch (Exception e){
+				System.out.println("DATOS: ERROR EN dtGetRU "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						PoolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return verificado;
+		}
+		
 		//Metodo para obtener un objeto de la vista rol usuario
 		public Usuario dtGetUsuario(String login)
 		{

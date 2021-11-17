@@ -74,8 +74,12 @@ public class SL_login extends HttpServlet {
 				if(dt.loginUsuario2(usuario,contrasenia,codigoV)) {
 					u1 = dt.dtGetUsuario(usuario);
 					String user = u1.getUsuario();
+					String rol = "";
+					rol = String.valueOf(u1.getIdRol());
+					
 					HttpSession hts = request.getSession(true);
 					hts.setAttribute("login", user);
+					hts.setAttribute("rol", rol);
 					response.sendRedirect("management.jsp?msj=1");
 				}else {
 					response.sendRedirect("login.jsp?msj=2");

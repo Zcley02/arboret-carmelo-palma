@@ -20,7 +20,7 @@
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <!-- <a class="dropdown-item" href="#">Settings</a> -->
-                        <a class="dropdown-item" href="password.jsp">Cambiar contraseña</a>
+                        <a class="dropdown-item" href="changepassword.jsp">Cambiar contraseña</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="login.jsp">Cerrar Sesión</a>
                     </div>

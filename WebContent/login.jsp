@@ -126,6 +126,8 @@
 	        	        {
 	        	            alertify.alert('Alerta','Ha ocurrido un error. Intente nuevamente.');
 	        	        }if(mensaje == "1"){
+	        	        	alertify.success("Se ha restablecido exitosamente la contraseña");
+	        	        }if(mensaje == "4"){
 	        	        	alertify.success("Se ha cambiado exitosamente la contraseña");
 	        	        }
 	        	        

@@ -22,7 +22,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <!-- <a class="dropdown-item" href="#">Settings</a> -->
-                        <a class="dropdown-item" href="password.jsp">Cambiar contraseña</a>
+                        <a class="dropdown-item" href="changepassword.jsp">Cambiar contraseña</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="login.jsp">Cerrar Sesión</a>
                     </div>

@@ -87,6 +87,7 @@
                                     <tr>
                                         <th>Nombre del servicio</th>
                                         <th>Descripción</th>
+                                        <th>Estado</th> 
                                         <th>Foto</th>
                                         <th>Opciones</th>
 
@@ -96,21 +97,31 @@
                                     <tr>
                                         <th>Nombre del servicio</th>
                                         <th>Descripción</th>
+                                        <th>Estado</th> 
                                         <th>Foto</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                 
+                                
                                 <%
 									ArrayList<Servicios> listarS = new ArrayList<Servicios>();
 									DTServicio dt = new DTServicio();
 									listarS = dt.listarServicios();
 					            	   for(Servicios s: listarS){
+					            		   String est = "Visible";
 					             %>
 										<tr>
 	                                        <td><%=s.getNombre()%></td>
 	                                        <td><%=s.getDescripcion()%></td>
+	                                                                               											<%
+											if(s.getEstado()== 2){
+												est = "No visible";
+											}
+											%>			
+											<td><%=est%></td>
+	                                        
 	                                        <td><img alt="ejemplo" src="<%=s.getFoto() %>" width="100px" height="100px"></td>
 											<td>&nbsp;&nbsp;<a class="disabled2" href="editservice.jsp?id=<%=s.getIdServicio()%>"><i
                                                     class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="disabled1" href="#" onclick="myDeletePub(<%=s.getIdServicio()%>)"

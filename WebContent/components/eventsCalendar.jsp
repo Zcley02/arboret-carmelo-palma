@@ -2,7 +2,7 @@
 <% 
 	ArrayList<Eventos> listarEventos = new ArrayList<Eventos>();
 	DTEvento dt = new DTEvento();
-	listarEventos = dt.listarEventos();
+	listarEventos = dt.listarEventosV();
 %>
 <script>
   	var fecha = "05/11/2021";

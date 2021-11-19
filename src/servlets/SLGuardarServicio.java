@@ -57,7 +57,8 @@ public class SLGuardarServicio extends HttpServlet {
 			
 			InputStream fin = part.getInputStream();
 			
-			int estado = 1;
+			String est = request.getParameter("estado").trim();
+			int estado = Integer.parseInt(est);
 			boolean resp = false;
 			
 			Servicios s = new Servicios();

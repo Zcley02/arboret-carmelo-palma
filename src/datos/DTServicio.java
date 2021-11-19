@@ -74,6 +74,50 @@ public class DTServicio {
 		return listaServicios;
 	}
 	
+	public ArrayList<Servicios> listarServiciosV(){
+		ArrayList<Servicios> listaServicios = new ArrayList<Servicios>();
+		try{
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.servicios where estado = 1", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Servicios s = new Servicios();
+				s.setIdServicio(Integer.parseInt(rs.getString("idServicio")));
+				s.setNombre(rs.getString("nombre"));
+				s.setDescripcion(rs.getString("descripcion"));
+				s.setFoto("data:image/jpg;base64," + Base64.getEncoder().encodeToString(rs.getBytes("foto")));
+				s.setEstado(Integer.parseInt(rs.getString("estado")));
+				
+				listaServicios.add(s);
+			}
+		}
+		catch (Exception e){
+			System.out.println("DT SERVICIO: ERROR EN LISTAR"+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return listaServicios;
+	}
+	
+	
 	public boolean guardarServicio(Servicios s, InputStream fis)
 	{
 		boolean guardado = false;
@@ -214,7 +258,7 @@ public class DTServicio {
 	public boolean editarSerConImagen(Servicios s, InputStream in) {
 		boolean editado = false;
 		//PreparedStatement ps;
-		String sql = "Update public.servicios set nombre = ?, descripcion = ?, foto = ?, estado = 2 where idServicio = ?";
+		String sql = "Update public.servicios set nombre = ?, descripcion = ?, foto = ?, estado = ? where idServicio = ?";
 		
 		try {
 			c = PoolConexion.getConnection();
@@ -223,7 +267,8 @@ public class DTServicio {
 			ps.setString(1, s.getNombre());
 			ps.setString(2, s.getDescripcion());
 			ps.setBinaryStream(3, in);
-			ps.setInt(4, s.getIdServicio());
+			ps.setInt(4, s.getEstado());
+			ps.setInt(5, s.getIdServicio());
 			
 			ps.executeUpdate();
 			
@@ -257,7 +302,7 @@ public class DTServicio {
 	public boolean editarSerSinImagen(Servicios s) {
 		boolean editado = false;
 		//PreparedStatement ps;
-		String sql = "Update public.servicios set nombre = ?, descripcion = ?, estado = 2 where idServicio = ?";
+		String sql = "Update public.servicios set nombre = ?, descripcion = ?, estado = ? where idServicio = ?";
 		
 		try {
 			c = PoolConexion.getConnection();
@@ -265,7 +310,8 @@ public class DTServicio {
 			
 			ps.setString(1, s.getNombre());
 			ps.setString(2, s.getDescripcion());
-			ps.setInt(3, s.getIdServicio());
+			ps.setInt(3, s.getEstado());
+			ps.setInt(4, s.getIdServicio());
 			
 			ps.executeUpdate();
 			

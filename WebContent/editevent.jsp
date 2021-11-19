@@ -138,14 +138,14 @@
                                     		if(ev.getTipoEvento().equals("Agenda Privada")){
                                     		
                                     	%>
-                                    		<option value="Agenda Pública">Agenda Pública</option>
+                                    		<option value="Agenda Visible">Agenda Pública</option>
                                         	<option value="Agenda Privada" selected>Agenda Privada</option>
                                     	<%
                                     	
                                     		}else{
                                     	%>
-                                    		<option value="Agenda Pública" selected>Agenda Pública</option>
-                                        	<option value="Agenda Privada" selected>Agenda Privada</option>
+                                    		<option value="Agenda Visible" selected>Agenda Pública</option>
+                                        	<option value="Agenda Privada" >Agenda Privada</option>
                                     	<%
                                     		}
                                     	%>

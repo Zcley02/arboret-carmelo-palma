@@ -2,7 +2,7 @@
 <%
 	ArrayList<Servicios> listarServicios = new ArrayList<Servicios>();
 	DTServicio dt = new DTServicio();
-	listarServicios = dt.listarServicios();
+	listarServicios = dt.listarServiciosV();
 	String msj = "hidden";
 	
 	if(listarServicios.isEmpty()){

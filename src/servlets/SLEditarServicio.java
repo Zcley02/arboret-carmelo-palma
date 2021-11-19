@@ -51,10 +51,13 @@ public class SLEditarServicio extends HttpServlet {
 			DTServicio dt = new DTServicio();
 			String nombre = request.getParameter("nombre").trim();
 			String descripcion = request.getParameter("descripcion").trim();
+			String est = request.getParameter("estado").trim();
+			int estado = Integer.parseInt(est);
 			
 			s.setIdServicio(idS);
 			s.setNombre(nombre);
 			s.setDescripcion(descripcion);
+			s.setEstado(estado);
 			
 			if(cambio.equals(v)) {
 				

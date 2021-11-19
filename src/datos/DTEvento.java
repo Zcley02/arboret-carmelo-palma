@@ -77,6 +77,52 @@ public class DTEvento {
 		return listaEventos;
 	}
 	
+	public ArrayList<Eventos> listarEventosV(){
+		ArrayList<Eventos> listaEventos = new ArrayList<Eventos>();
+		try{
+			c = PoolConexion.getConnection();
+			ps = c.prepareStatement("select * from public.eventos where tipoevento = 'Agenda Visible'", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Eventos evento = new Eventos();
+				evento.setIdEvento(rs.getInt("idEventos")); 
+				evento.setNombre(rs.getString("nombre"));
+				evento.setDescripcion(rs.getString("descripcion"));
+				evento.setTipoEvento(rs.getString("tipoEvento"));
+				evento.setHipervinculo(rs.getString("hipervinculo"));
+				evento.setFechaInicio(rs.getString("fechaInicio"));
+				evento.setFechaFin(rs.getString("fechaFin"));
+				evento.setUbicacion(rs.getString("ubicacion"));
+				evento.setEstado(rs.getInt("estado"));
+				//System.out.println(rs.getString("fechaInicio"));
+				listaEventos.add(evento);
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR LA CARRERA "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					PoolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return listaEventos;
+	}
+	
 	
 	public boolean guardarEvento(Eventos ev) {
 		boolean guardado = false;

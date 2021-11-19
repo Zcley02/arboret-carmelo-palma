@@ -108,6 +108,27 @@
                                 <textarea id="descripcion1" name="descripcion1" class="form-control" rows="3" required></textarea>
                                 <textarea id="descripcion" name="descripcion" class="form-control" rows="3" hidden="true"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label>Estado:</label>
+                                <select id="estado" name="estado" class="form-control" required>
+                                <option value="" selected disabled>Seleccionar...</option> 
+                                <%if(s.getEstado()==1)
+                                {	
+                    				%><option selected="true" value="1">Visible</option>	
+                                	<option value="2">No Visible</option>
+                                <%
+                                }else{
+                    				%><option value="1">Visible</option>	
+                                	<option selected="true" value="2">No Visible</option>
+                                <%                               	
+                                }
+                                
+                                %>
+
+
+                                </select>
+                                
+                            </div>
                             
                             <div class="form-group">
                                 <label for="custom-file">Imagen:</label>

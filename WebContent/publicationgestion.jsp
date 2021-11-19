@@ -95,8 +95,8 @@
                                         <th>Descripción</th>
                                         <th>Fecha Publicación Año/Mes/Día</th>
                                         <th>Hipervinculo</th>
-                                        <th>Imagen</th> 
-                                        <th>Estado</th>
+                                        <th>Estado</th> 
+                                        <th>Imagen</th>
                                         <th>Opciones</th>              
                                     </tr>
                                 </thead>
@@ -107,8 +107,8 @@
                                         <th>Descripción</th>
                                         <th>Fecha Publicacion Año/Mes/Día</th>
                                         <th>Hipervinculo</th>
-                                        <th>Imagen</th> 
                                         <th>Estado</th> 
+                                        <th>Imagen</th> 
                                         <th>Opciones</th>              
                                     </tr>
                                 </tfoot>

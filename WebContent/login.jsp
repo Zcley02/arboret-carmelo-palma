@@ -120,7 +120,7 @@
 	        	        
 	        	        if(mensaje == "2")
 	        	        {
-	        	            alertify.error('Los datos de Usuario son incorrectos');
+	        	            alertify.alert('Los datos del usuario son incorrectos');
 	        	        }
 	        	        if(mensaje == "error")
 	        	        {

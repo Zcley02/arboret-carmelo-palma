@@ -28,7 +28,6 @@
 		
 		listarOp = dtpo.listarOpciones(rolUser);
 		
-
 		for(Opciones o: listarOp){
 			if(o.getNombre().equals("Crear")){
 				code+="1";
@@ -108,7 +107,7 @@
                                     <label for="formGroupExampleInput">Tipo de Evento</label>
                                     <select name="tipoEvento" class="form-control" required>
                                      	<option value="" selected disabled>Seleccionar...</option>
-                                        <option value="Agenda Pública">Agenda Pública</option>
+                                        <option value="Agenda Visible">Agenda Pública</option>
                                         <option value="Agenda Privada">Agenda Privada</option>
                                     </select>
                                 </div>
@@ -160,7 +159,6 @@
 	    
 	    <script>
          window.addEventListener('DOMContentLoaded', event => {
-
             // Toggle the side navigation
             const sidebarToggle = document.body.querySelector('#sidebarToggle');
             if (sidebarToggle) {
@@ -174,7 +172,6 @@
                     localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
                 });
             }
-
         })
          </script>
          <script type="text/javascript">
@@ -196,12 +193,10 @@
 					e.preventDefault();
 					}                     	
 		        }
-
 		     });
 		    $('#nombre').on("keyup", function(e) {
 		        var textLength = $('#nombre').val().replace(' ', '1').length;
 		        var maxValue = 100;
-
 		        $("#mensaje").text(textLength+" de "+maxValue+" carácteres permitidos");
 		       
 		    });
@@ -216,12 +211,10 @@
 					e.preventDefault();
 					}                     	
 		        }
-
 		     });
 		    $('#descripcion1').on("keyup", function(e) {
 		        var textLength = $('#descripcion1').val().replace(' ', '1').length;
 		        var maxValue = 260;
-
 		        $("#mensaje1").text(textLength+" de "+maxValue+" carácteres permitidos");
 		       
 		    });
@@ -236,12 +229,10 @@
 					e.preventDefault();
 					}                     	
 		        }
-
 		     });
 		    $('#ubicacion').on("keyup", function(e) {
 		        var textLength = $('#ubicacion').val().replace(' ', '1').length;
 		        var maxValue = 170;
-
 		        $("#mensaje2").text(textLength+" de "+maxValue+" carácteres permitidos");
 		       
 		    });
@@ -256,12 +247,10 @@
 					e.preventDefault();
 					}                     	
 		        }
-
 		     });
 		    $('#hipervinvulo').on("keyup", function(e) {
 		        var textLength = $('#hipervinvulo').val().replace(' ', '1').length;
 		        var maxValue = 170;
-
 		        $("#mensaje3").text(textLength+" de "+maxValue+" carácteres permitidos");
 		       
 		    });

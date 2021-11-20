@@ -8,7 +8,7 @@
     int year=cal.get(Calendar.YEAR);
     %>
 <!-- Footer -->
-<div id="footer" class="footer-clean">
+<div id="footer" class="footer-clean" style="background-color:#001B36">
     <footer>
         <div class="container">
             <div class="row">

@@ -37,7 +37,7 @@
             <h1 class="my-4">
                 Contacto
                 <div class="float-end">
-                    <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image" />
+                    <img src="https://i.ibb.co/Kzs0FYc/correo-electronico-vacio-1.png" alt="image" />
                 </div>
             </h1>
 

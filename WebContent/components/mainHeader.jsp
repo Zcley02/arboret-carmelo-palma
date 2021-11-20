@@ -28,7 +28,7 @@
 			
     %>
     <!-- Navbar -->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#001B36">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.jsp">Arboreto Carmelo Palma</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

@@ -41,7 +41,7 @@
 		hts.invalidate();
 	%>
 
-    <body class="">
+    <body class="" style="background-color:#001B36">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -78,7 +78,7 @@
                                                 class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small text-dark" href="password.jsp">¿Olvidaste tu
                                                     contraseña?</a>
-                                                <input type="submit" class="btn btn-outline-success" value="Iniciar Sesión" />
+                                                <input type="submit" class="btn btn-outline-primary" value="Iniciar Sesión" />
                                               
                                             </div>&nbsp;
                                             <div style="text-align:center;"><a href="index.jsp"><i

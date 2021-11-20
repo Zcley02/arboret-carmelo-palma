@@ -27,7 +27,7 @@
         <link rel="stylesheet" type="text/css" href="css/calendar/evo-calendar.royal-navy.css" />
     </head>
 
-    <body data-simplebar>
+    <body data-simplebar style="background-color:#fff">
         <jsp:include page="components/mainHeader.jsp" />
 
         <!-- Calendar -->

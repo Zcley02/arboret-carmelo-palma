@@ -39,7 +39,7 @@
         <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css">
     </head>
 
-    <body data-simplebar>
+    <body data-simplebar style="background-color:#fff">
         <jsp:include page="components/mainHeader.jsp" />
 
         <!-- Services -->

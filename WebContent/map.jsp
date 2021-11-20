@@ -27,7 +27,7 @@
             crossorigin="" />
     </head>
 
-    <body data-simplebar>
+    <body data-simplebar style="background-color:#fff">
         <jsp:include page="components/mainHeader.jsp" />
 
         <!-- Map -->

@@ -37,7 +37,7 @@ public class DTEnviarEmailContact {
 				 boolean debug=false;
 					
 				   // Correo del solicitante
-					String email_solicitante = "elyscela2000@gmail.com";//SMTP_AUTH_USER; // Se debe buscar como agregar el correo del usuario principal
+					String email_solicitante = "gerenciaArboretoCP@gmail.com";//SMTP_AUTH_USER; // Se debe buscar como agregar el correo del usuario principal
 				
 				   // Correo del remitente
 					String email_remitente = SMTP_HOST_NAME;

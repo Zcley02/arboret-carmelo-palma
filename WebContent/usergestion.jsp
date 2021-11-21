@@ -136,8 +136,8 @@ String error = request.getParameter("error")==null?"":request.getParameter("erro
 											}
 											%>			
 											<td><%=est%></td>
-											<td>&nbsp;&nbsp;<a class="disabled2" href="#"><i
-                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="disabled1" href="#" onclick="myDeletePub(<%=vur.getIdusuario()%>)"
+											<td>&nbsp;&nbsp;<!-- <a class="disabled2" href="#"><i
+                                                    class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --><a class="disabled1" href="#" onclick="myDeletePub(<%=vur.getIdusuario()%>)"
                                                 ><i class="far fa-trash-alt"></i></td>
 										</tr>
 									 <%

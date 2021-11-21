@@ -18,6 +18,10 @@
 	}
 	
 %>
+    <%
+    Calendar cal=Calendar.getInstance();
+    int year=cal.get(Calendar.YEAR);
+    %>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -33,7 +37,7 @@
             crossorigin="anonymous"></script>
     </head>
 
-    <body class="bg-success">
+    <body style="background-color:#001B36">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -67,7 +71,7 @@
                                             <div
                                                 class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small text-dark" href="management.jsp">Regresar</a>
-                                                <button class="btn btn-primary bg-success" type="submit">Cambiar
+                                                <button class="btn btn-primary bg-primary" type="submit">Cambiar
                                                     Contraseña</button>
                                                     
                                             </div>
@@ -84,7 +88,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted ">Copyright &copy; Arboreto Carmelo Palma 2021</div>
+                            <div class="text-muted ">Copyright &copy; Arboreto Carmelo Palma <%=year %></div>
                             <div>
                                 <a class="text-dark" href="#">Privacy Policy</a> &middot;
                                 <a class="text-dark" href="#">Terms &amp; Conditions</a>

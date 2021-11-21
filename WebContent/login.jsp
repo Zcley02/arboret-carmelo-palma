@@ -65,6 +65,9 @@
                                                 <input name="password" class="form-control py-4" id="inputPassword" type="password"
                                                     placeholder="Ingresar contraseña" required />
                                             </div>
+                                            <div class="form-group">
+                                            	<input type="checkbox" onclick="myFunction()"> Mostrar Contraseñas
+                                            </div>
 <!-- 										<div class="form-group">
                                                 <div class="custom-control custom-checkbox">
                                                     <input class="custom-control-input" id="rememberPasswordCheck"
@@ -133,6 +136,22 @@
 	        	        
 	        	    });
         </script>
+        
+            <script>
+	    function myFunction() {
+	    	  var x = document.getElementById("inputPassword");
+	    	  if (x.type === "password") {
+	    	    x.type = "text";
+	    	  } else {
+	    	    x.type = "password";
+	    	  }
+	    	  
+
+	    	}
+	    
+	    
+	    
+    </script>
     </body>
 
     </html>
